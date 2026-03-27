@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cold Lava × TM Tarpaulins — AI-Powered Lead Generation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== FOUNDATION ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+:root {
+  --color-bg: #0a0e27;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #E5E7EB;
+  --color-text-muted: rgba(255,255,255,0.5);
+  --color-accent: #00d4ff;
+  --color-accent-rgb: 0,212,255;
+  --color-border: rgba(0,212,255,0.2);
+  --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body {
+  font-family: var(--font-primary);
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ===== SCROLL PROGRESS ===== */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: linear-gradient(to right, rgba(var(--color-accent-rgb),0.3), var(--color-accent));
+  z-index: 9998;
+  width: 0%;
+  transition: width 0.1s linear;
+  pointer-events: none;
+}
+
+/* ===== BACKGROUND EFFECTS ===== */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  background-image: url('data:image/svg+xml,<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23n)" opacity="0.04"/></svg>');
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== TICKER ===== */
+.ticker-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.8);
+  border-bottom: 1px solid rgba(var(--color-accent-rgb),0.15);
+  z-index: 9000;
+  padding: 0.75rem 0;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.ticker {
+  display: flex;
+  animation: tickerScroll 40s linear infinite;
+  white-space: nowrap;
+}
+
+@keyframes tickerScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-item {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ticker-dot {
+  width: 4px;
+  height: 4px;
+  background: var(--color-accent);
+  border-radius: 50%;
+}
+
+/* ===== SECTIONS ===== */
+.section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.section-inner {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(var(--color-accent-rgb),0.5);
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 1rem;
+}
+
+.lead {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  max-width: 800px;
+  margin-bottom: 2rem;
+}
+
+.thin {
+  font-weight: 300;
+  display: block;
+  color: rgba(255,255,255,0.5);
+}
+
+.accent-text {
+  color: var(--color-accent);
+}
+
+/* ===== ANIMATE ON SCROLL ===== */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s var(--ease-smooth), transform 0.8s var(--ease-smooth);
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== GRID ===== */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 3rem 0;
+}
+
+/* ===== CARDS ===== */
+.card {
+  position: relative;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid var(--color-border);
+  padding: 2rem;
+  backdrop-filter: blur(8px);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 12px; height: 12px;
+  border-left: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border);
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 12px; height: 12px;
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.card h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--color-accent);
+}
+
+.card p {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* ===== MOCKUP / DASHBOARD ===== */
+.mockup {
+  background: rgba(0,0,0,0.7);
+  border: 1px solid var(--color-border);
+  padding: 1.5rem;
+  margin: 2rem 0;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.7);
+}
+
+.mockup-header {
+  border-bottom: 1px solid rgba(var(--color-accent-rgb),0.2);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.mockup-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.mockup-label {
+  color: rgba(255,255,255,0.5);
+}
+
+.mockup-value {
+  color: rgba(255,255,255,0.8);
+  font-weight: 500;
+}
+
+.conversation {
+  background: rgba(0,0,0,0.6);
+  border-left: 2px solid var(--color-accent);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+}
+
+.conversation-lang {
+  font-size: 0.7rem;
+  color: rgba(var(--color-accent-rgb),0.7);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.conversation-text {
+  color: rgba(255,255,255,0.8);
+  line-height: 1.7;
+  margin-bottom: 0.5rem;
+}
+
+.conversation-translation {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* ===== FLOW DIAGRAM ===== */
+.flow {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 2.5rem 0;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.flow-step {
+  position: relative;
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(var(--color-accent-rgb),0.25);
+  padding: 1rem 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.7);
+  text-align: center;
+  white-space: nowrap;
+  min-width: 140px;
+}
+
+.flow-step::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 10px; height: 10px;
+  border-left: 1px solid rgba(var(--color-accent-rgb),0.3);
+  border-top: 1px solid rgba(var(--color-accent-rgb),0.3);
+}
+
+.flow-step::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 10px; height: 10px;
+  border-right: 1px solid rgba(var(--color-accent-rgb),0.3);
+  border-bottom: 1px solid rgba(var(--color-accent-rgb),0.3);
+}
+
+.flow-arrow {
+  color: rgba(var(--color-accent-rgb),0.5);
+  padding: 0 1rem;
+  font-size: 1.5rem;
+}
+
+/* ===== PRICING BOX ===== */
+.pricing-box {
+  background: rgba(var(--color-accent-rgb),0.05);
+  border: 1px solid rgba(var(--color-accent-rgb),0.3);
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+.pricing-box h4 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: var(--color-accent);
+}
+
+.pricing-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.pricing-row:last-child {
+  border-bottom: none;
+}
+
+.pricing-label {
+  font-weight: 500;
+  color: rgba(255,255,255,0.8);
+}
+
+.pricing-value {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.pricing-features {
+  list-style: none;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.pricing-features li {
+  padding: 0.5rem 0;
+  color: rgba(255,255,255,0.7);
+  font-size: 0.95rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.pricing-features li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+  font-weight: bold;
+}
+
+/* ===== STATS ===== */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 3rem 0;
+}
+
+.stat-card {
+  position: relative;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(var(--color-accent-rgb),0.2);
+  padding: 2rem;
+  text-align: center;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 12px; height: 12px;
+  border-left: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border);
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 12px; height: 12px;
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--color-accent);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+/* ===== QUOTE ===== */
+.quote {
+  border-left: 3px solid var(--color-accent);
+  padding: 2rem;
+  margin: 3rem 0;
+  background: rgba(var(--color-accent-rgb),0.03);
+}
+
+.quote-text {
+  font-size: 1.15rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.quote-author {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: rgba(var(--color-accent-rgb),0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ===== CAMPAIGN GRID ===== */
+.campaign-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.campaign-card {
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(var(--color-accent-rgb),0.2);
+  padding: 1.5rem;
+  text-align: center;
+  position: relative;
+}
+
+.campaign-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 10px; height: 10px;
+  border-left: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border);
+}
+
+.campaign-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 10px; height: 10px;
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.campaign-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.campaign-title {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+  margin-bottom: 0.5rem;
+}
+
+.campaign-desc {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 1rem;
+}
+
+.campaign-stats {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.6);
+}
+
+/* ===== TABLE ===== */
+.pricing-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.95rem;
+}
+
+.pricing-table th {
+  background: rgba(var(--color-accent-rgb),0.1);
+  border: 1px solid var(--color-border);
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pricing-table td {
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 1rem;
+  color: rgba(255,255,255,0.7);
+}
+
+.pricing-table tr:hover {
+  background: rgba(var(--color-accent-rgb),0.02);
+}
+
+/* ===== HERO ===== */
+#hero {
+  background: linear-gradient(135deg, rgba(10,14,39,1) 0%, rgba(3,6,15,1) 100%);
+  padding-top: 4rem;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 1.5rem;
+    min-height: auto;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .lead {
+    font-size: 1rem;
+  }
+
+  .grid-2, .grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-grid, .campaign-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .flow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .flow-arrow {
+    transform: rotate(90deg);
+  }
+
+  .pricing-table {
+    font-size: 0.8rem;
+  }
+
+  .pricing-table th, .pricing-table td {
+    padding: 0.75rem 0.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<div id="scroll-progress"></div>
+<div class="grain-overlay"></div>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <div class="ticker-item"><span class="ticker-dot"></span> Multi-Language Campaigns</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> LinkedIn Automation</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Email Sequences</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Database Reactivation</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Nurture Automation</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Google Reviews</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Built for Scandinavia</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> 7 Sectors Covered</div>
+    <!-- Duplicate for continuous scroll -->
+    <div class="ticker-item"><span class="ticker-dot"></span> Multi-Language Campaigns</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> LinkedIn Automation</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Email Sequences</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Database Reactivation</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Nurture Automation</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Google Reviews</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Built for Scandinavia</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> 7 Sectors Covered</div>
+  </div>
+</div>
+
+<!-- HERO SECTION -->
+<section id="hero" class="section">
+  <div class="section-inner animate-on-scroll">
+    <div class="section-label">Cold Lava × TM Tarpaulins</div>
+    <h1>
+      AI-Powered Lead Generation<br>
+      <span class="thin">For Industrial Tarpaulin Specialists</span>
+    </h1>
+    <p class="lead">
+      Custom-built systems to automate your Scandinavian expansion, generate qualified leads across 7 sectors, and free Marcus & Gary to do what they do best — close deals.
+    </p>
+  </div>
+</section>
+
+<!-- BOS PLATFORM (001) -->
+<section id="bos" class="section">
+  <div class="section-inner">
+    <div class="section-label animate-on-scroll">001</div>
+    <h2 class="animate-on-scroll">
+      One Dashboard.<br>
+      <span class="thin">Multilingual Intelligence.</span>
+    </h2>
+
+    <div class="animate-on-scroll">
+      <p class="lead">Every conversation in your customer's language. Every insight in English. Real-time translation across Norwegian, Swedish, Danish, and English — all in one dashboard.</p>
+
+      <div class="mockup">
+        <div class="mockup-header">🇳🇴 Live Conversation — Aqua Salmon AS</div>
+        
+        <div class="conversation">
+          <div class="conversation-lang">Norwegian → English</div>
+          <div class="conversation-text">
+            <strong>Customer:</strong> Hei, vi trenger presenning til våre oppdrettsanlegg. Kan dere levere til Norge?
+          </div>
+          <div class="conversation-translation">
+            "Hi, we need tarpaulins for our fish farms. Can you deliver to Norway?"
+          </div>
+        </div>
+
+        <div class="conversation">
+          <div class="conversation-lang">Norwegian → English</div>
+          <div class="conversation-text">
+            <strong>AI Assistant:</strong> Hei! Absolutt, vi leverer til Norge regelmessig. Hvor store anlegg har dere?
+          </div>
+          <div class="conversation-translation">
+            "Hi! Absolutely, we deliver to Norway regularly. How large are your facilities?"
+          </div>
+        </div>
+
+        <div class="mockup-row">
+          <span class="mockup-label">Status:</span>
+          <span class="mockup-value" style="color: var(--color-accent);">● Active Lead</span>
+        </div>
+        <div class="mockup-row">
+          <span class="mockup-label">Sector:</span>
+          <span class="mockup-value">Aquaculture</span>
+        </div>
+        <div class="mockup-row">
+          <span class="mockup-label">Location:</span>
+          <span class="mockup-value">Bergen, Norway</span>
+        </div>
+        <div class="mockup-row">
+          <span class="mockup-label">Est. Value:</span>
+          <span class="mockup-value">£8,400</span>
+        </div>
+      </div>
+
+      <p style="text-align: center; margin: 2rem 0; color: rgba(255,255,255,0.7); font-size: 1.1rem;">
+        <strong>Marcus and Gary see everything in English.<br>
+        Your prospects see everything in their native language.<br>
+        The AI handles translation in real-time.</strong>
+      </p>
+
+      <div class="pricing-box">
+        <h4>BOS Platform</h4>
+        <div class="pricing-row">
+          <span class="pricing-label">Setup</span>
+          <span class="pricing-value">£2,500</span>
+        </div>
+        <div class="pricing-row">
+          <span class="pricing-label">Monthly</span>
+          <span class="pricing-value">£250/mo</span>
+        </div>
+        <ul class="pricing-features">
+          <li>Multi-language support (4 languages)</li>
+          <li>Real-time translation dashboard</li>
+          <li>Lead pipeline management</li>
+          <li>Sector-specific tracking</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI LEAD GEN (002) -->
+<section id="lead-gen" class="section">
+  <div class="section-inner">
+    <div class="section-label animate-on-scroll">002</div>
+    <h2 class="animate-on-scroll">
+      AI Lead Generation<br>
+      <span class="thin">Automated Across 7 Sectors</span>
+    </h2>
+
+    <div class="animate-on-scroll">
+      <h3>LinkedIn Automation</h3>
+      <p class="lead">AI generates sector-specific posts, schedules them automatically, tracks engagement, and routes hot leads to Marcus & Gary.</p>
+
+      <div class="mockup">
+        <div class="mockup-header">📝 Post Draft — Aquaculture</div>
+        <p style="margin: 1rem 0; color: rgba(255,255,255,0.8); line-height: 1.7;">
+          "Norwegian salmon farms face unique challenges with cage protection in harsh weather conditions. Our heavy-duty aquaculture tarpaulins are engineered for extreme environments — from the fjords of Norway to the open waters of the North Sea..."
+        </p>
+        <div class="mockup-row">
+          <span class="mockup-label">Status:</span>
+          <span class="mockup-value" style="color: #00ff88;">✓ Approved</span>
+        </div>
+        <div class="mockup-row">
+          <span class="mockup-label">Scheduled:</span>
+          <span class="mockup-value">Tomorrow 9:00 AM</span>
+        </div>
+        <div class="mockup-row" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+          <span class="mockup-label">Results (after posting):</span>
+          <span class="mockup-value">487 views • 23 comments • 12 leads</span>
+        </div>
+      </div>
+
+      <h3 style="margin-top: 3rem;">7 Email Campaigns</h3>
+      <p class="lead">One campaign per sector. Tailored messaging. Multi-language support. Automated follow-up sequences.</p>
+
+      <div class="campaign-grid">
+        <div class="campaign-card">
+          <div class="campaign-icon">🐟</div>
+          <div class="campaign-title">Aquaculture</div>
+          <div class="campaign-desc">Norwegian fish farms</div>
+          <div class="campaign-stats">47 sent • 12 replied</div>
+        </div>
+
+        <div class="campaign-card">
+          <div class="campaign-icon">🏗️</div>
+          <div class="campaign-title">Construction</div>
+          <div class="campaign-desc">UK-focused site covers</div>
+          <div class="campaign-stats">31 sent • 8 replied</div>
+        </div>
+
+        <div class="campaign-card">
+          <div class="campaign-icon">⚓</div>
+          <div class="campaign-title">Marine</div>
+          <div class="campaign-desc">Yacht clubs & marinas</div>
+          <div class="campaign-stats">22 sent • 5 replied</div>
+        </div>
+
+        <div class="campaign-card">
+          <div class="campaign-icon">🚛</div>
+          <div class="campaign-title">Haulage</div>
+          <div class="campaign-desc">Fleet ops truck covers</div>
+          <div class="campaign-stats">19 sent • 4 replied</div>
+        </div>
+
+        <div class="campaign-card">
+          <div class="campaign-icon">⚡</div>
+          <div class="campaign-title">Energy</div>
+          <div class="campaign-desc">Wind/solar projects</div>
+          <div class="campaign-stats">15 sent • 3 replied</div>
+        </div>
+
+        <div class="campaign-card">
+          <div class="campaign-icon">🌾</div>
+          <div class="campaign-title">Agricultural</div>
+          <div class="campaign-desc">Silage cover suppliers</div>
+          <div class="campaign-stats">28 sent • 9 replied</div>
+        </div>
+
+        <div class="campaign-card">
+          <div class="campaign-icon">🏡</div>
+          <div class="campaign-title">Domestic</div>
+          <div class="campaign-desc">Garden center retailers</div>
+          <div class="campaign-stats">11 sent • 2 replied</div>
+        </div>
+      </div>
+
+      <div class="pricing-box">
+        <h4>AI Lead Gen — Full Suite</h4>
+        <div class="pricing-row">
+          <span class="pricing-label">Setup</span>
+          <span class="pricing-value">£5,000</span>
+        </div>
+        <div class="pricing-row">
+          <span class="pricing-label">Monthly</span>
+          <span class="pricing-value">£1,500/mo</span>
+        </div>
+        <ul class="pricing-features">
+          <li>LinkedIn automation (post creation + scheduling)</li>
+          <li>7 email campaigns (all sectors)</li>
+          <li>Multi-language outreach (4 languages)</li>
+          <li>Automated follow-up</li>
+          <li>Lead scoring & routing</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NURTURE SEQUENCES (003) -->
+<section id="nurture" class="section">
+  <div class="section-inner">
+    <div class="section-label animate-on-scroll">003</div>
+    <h2 class="animate-on-scroll">
+      Automated Follow-Up<br>
+      <span class="thin">That Converts</span>
+    </h2>
+
+    <div class="animate-on-scroll">
+      <p class="lead">Leads don't fall through the cracks. AI follows up automatically. Marcus & Gary only see the hot ones.</p>
+
+      <div class="flow">
+        <div class="flow-step">New Lead</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Auto-enters CRM</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Welcome email sent<br>(in their language)</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">⏱️ 2 hours later...</div>
+      </div>
+
+      <div style="text-align: center; margin: 2rem 0;">
+        <h3>Has the customer replied?</h3>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h4>✓ YES</h4>
+          <p>Tag as HOT<br>Route to Marcus & Gary</p>
+        </div>
+        <div class="card">
+          <h4>✗ NO</h4>
+          <p>Follow-up #2 sent (3 days later)<br><br>
+          Still no reply?<br>
+          Follow-up #3 (1 week later)<br><br>
+          Pause campaign or move to long-term nurture</p>
+        </div>
+      </div>
+
+      <div class="pricing-box">
+        <h4>Nurture Sequences</h4>
+        <div class="pricing-row">
+          <span class="pricing-label">Setup</span>
+          <span class="pricing-value">£1,500</span>
+        </div>
+        <div class="pricing-row">
+          <span class="pricing-label">Monthly</span>
+          <span class="pricing-value">£250/mo</span>
+        </div>
+        <ul class="pricing-features">
+          <li>Multi-channel (Email + WhatsApp)</li>
+          <li>Automated follow-ups</li>
+          <li>Performance monitoring</li>
+          <li>500 messages included (6p overage)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DATABASE REACTIVATION (004) -->
+<section id="database" class="section">
+  <div class="section-inner">
+    <div class="section-label animate-on-scroll">004</div>
+    <h2 class="animate-on-scroll">
+      Turn Dead Leads<br>
+      <span class="thin">Into Booked Appointments</span>
+    </h2>
+
+    <div class="animate-on-scroll">
+      <p class="lead">You have old leads sitting in spreadsheets. Enquiries from 60, 90, 120 days ago. Most businesses forget about them. We bring them back to life.</p>
+
+      <div class="mockup">
+        <div class="mockup-header">Database Reactivation Campaign — Aquaculture Sector</div>
+        <div class="mockup-row">
+          <span class="mockup-label">Total Leads:</span>
+          <span class="mockup-value">847</span>
+        </div>
+        <div class="mockup-row">
+          <span class="mockup-label">Contacted:</span>
+          <span class="mockup-value">521</span>
+        </div>
+        <div class="mockup-row">
+          <span class="mockup-label">Replied:</span>
+          <span class="mockup-value">73 (14% response rate)</span>
+        </div>
+        <div class="mockup-row">
+          <span class="mockup-label">Qualified:</span>
+          <span class="mockup-value">29</span>
+        </div>
+        <div class="mockup-row">
+          <span class="mockup-label">Appointments:</span>
+          <span class="mockup-value">11</span>
+        </div>
+        <div class="mockup-row">
+          <span class="mockup-label">Est. Pipeline Value:</span>
+          <span class="mockup-value" style="color: #00ff88; font-size: 1.3rem;">£47,300</span>
+        </div>
+
+        <div class="conversation" style="margin-top: 1.5rem;">
+          <div class="conversation-lang">🇳🇴 Olav Hansen — Fjord Aquaculture AS</div>
+          <div class="conversation-text">
+            "We spoke 3 months ago but timing wasn't right. Actually looking at new covers now — can we talk?"
+          </div>
+          <div style="margin-top: 0.5rem; color: #00ff88; font-weight: 600;">
+            ✓ Routed to Marcus
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-top: 3rem;">Tier Pricing</h3>
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th>Tier</th>
+            <th>Database</th>
+            <th>Setup</th>
+            <th>Monthly</th>
+            <th>Messages</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Starter</strong></td>
+            <td>Up to 1k</td>
+            <td>£1,500</td>
+            <td>£500</td>
+            <td>1,000</td>
+          </tr>
+          <tr>
+            <td><strong>Growth</strong></td>
+            <td>1k – 5k</td>
+            <td>£1,500</td>
+            <td>£1,000</td>
+            <td>3,000</td>
+          </tr>
+          <tr>
+            <td><strong>Scale</strong></td>
+            <td>5k+</td>
+            <td>Custom</td>
+            <td>Custom</td>
+            <td>Custom</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="text-align: center; color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-top: 1rem;">
+        6p/msg overage beyond allowance
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDY (005) -->
+<section id="case-study" class="section">
+  <div class="section-inner">
+    <div class="section-label animate-on-scroll">005</div>
+    <h2 class="animate-on-scroll">
+      Real Results.<br>
+      <span class="thin">Database Reactivation in Action.</span>
+    </h2>
+
+    <div class="animate-on-scroll">
+      <p class="lead">Fjord Marine Supplies ran 950 dormant leads through our Database Reactivation campaign — enquiries from marine sector clients across Norway & Sweden.</p>
+      <p class="lead" style="font-weight: 600; color: var(--color-accent);">All results achieved within 45 days.</p>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-number">28</div>
+          <div class="stat-label">Appointments<br>Booked</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-number">£67,400</div>
+          <div class="stat-label">Revenue<br>Generated</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-number">£3,890</div>
+          <div class="stat-label">Total Outlay<br>(leads + comms)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-number">17x</div>
+          <div class="stat-label">Return on<br>Investment</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-number">2.9%</div>
+          <div class="stat-label">Conversion<br>Rate</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-number">45 Days</div>
+          <div class="stat-label">Time to<br>Results</div>
+        </div>
+      </div>
+
+      <div class="quote">
+        <div class="quote-text">
+          "We thought these leads were dead. Cold Lava brought them back to life and generated more revenue in 6 weeks than we'd seen in 4 months of cold calling."
+        </div>
+        <div class="quote-author">— Henrik Larsen, Operations Director</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GOOGLE REVIEWS (006) -->
+<section id="reviews" class="section">
+  <div class="section-inner">
+    <div class="section-label animate-on-scroll">006</div>
+    <h2 class="animate-on-scroll">
+      Automated Reviews<br>
+      <span class="thin">From Job to 5 Stars</span>
+    </h2>
+
+    <div class="animate-on-scroll">
+      <div class="flow">
+        <div class="flow-step">Step 1:<br>Job completed</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Step 2:<br>Auto review request</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Step 3:<br>Customer leaves review</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Step 4:<br>AI auto-responds</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Step 5:<br>Notification sent</div>
+      </div>
+
+      <div class="mockup" style="margin-top: 2rem;">
+        <div class="mockup-header">📧 Email sent to customer (Norwegian)</div>
+        <p style="margin: 1rem 0; color: rgba(255,255,255,0.8); line-height: 1.7;">
+          <strong>Hei!</strong><br><br>
+          Takk for at du valgte TM Tarpaulins. Vi vil gjerne høre om din opplevelse!<br><br>
+          ⭐ <a href="#" style="color: var(--color-accent);">Legg igjen en anmeldelse</a>
+        </p>
+        <p style="margin: 1rem 0; color: rgba(255,255,255,0.5); font-size: 0.85rem; font-style: italic;">
+          Translation: "Hi! Thank you for choosing TM Tarpaulins. We'd love to hear about your experience! ⭐ Leave a review"
+        </p>
+      </div>
+
+      <div class="mockup">
+        <div class="mockup-header">⭐⭐⭐⭐⭐ New Review from Aqua Salmon AS</div>
+        <p style="margin: 1rem 0; color: rgba(255,255,255,0.8); line-height: 1.7;">
+          "Excellent service, fast delivery to our fish farm in Bergen. The tarpaulins are high quality and exactly what we needed. Will definitely order again!"
+        </p>
+        <div class="mockup-row" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+          <span class="mockup-label">AI Auto-Response:</span>
+          <span class="mockup-value">"Thank you for your kind words! We're thrilled we could help..."</span>
+        </div>
+        <div class="mockup-row">
+          <span class="mockup-label">Notification:</span>
+          <span class="mockup-value" style="color: #00ff88;">🔔 New 5-star review from Aqua Salmon AS</span>
+        </div>
+      </div>
+
+      <div class="pricing-box">
+        <h4>Google Reviews + Auto-Response</h4>
+        <div class="pricing-row">
+          <span class="pricing-label">Setup</span>
+          <span class="pricing-value">Free</span>
+        </div>
+        <div class="pricing-row">
+          <span class="pricing-label">Monthly</span>
+          <span class="pricing-value">£150/mo</span>
+        </div>
+        <ul class="pricing-features">
+          <li>Automated review requests (multi-language)</li>
+          <li>AI-powered auto-replies</li>
+          <li>Real-time notifications</li>
+          <li>SEO boost tracking</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT STEPS (007) -->
+<section id="next-steps" class="section" style="min-height: 60vh;">
+  <div class="section-inner">
+    <div class="section-label animate-on-scroll">007</div>
+    <h2 class="animate-on-scroll">
+      Ready to Get Started?
+    </h2>
+    <div class="animate-on-scroll">
+      <p class="lead">Let's automate your Scandinavian expansion and turn your 7 sectors into revenue-generating machines.</p>
+      <p style="margin-top: 2rem; color: rgba(255,255,255,0.6);">
+        <strong>Next steps:</strong><br>
+        Review this deck with Marcus & Gary<br>
+        Schedule a call with Cold Lava<br>
+        Choose your modules<br>
+        Launch in 2-4 weeks
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+// Scroll progress bar
+window.addEventListener('scroll', () => {
+  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  document.getElementById('scroll-progress').style.width = scrolled + '%';
+});
+
+// Intersection Observer for scroll animations
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -100px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
