@@ -880,10 +880,7 @@ h2 {
         <li><a href="#s005" data-section="s005"><span class="nav-num">005</span>Case Study</a></li>
         <li><a href="#s006" data-section="s006"><span class="nav-num">006</span>Google Reviews</a></li>
         <li><a href="#s007" data-section="s007"><span class="nav-num">007</span>Bolt-On Services</a></li>
-        <li><a href="#s009" data-section="s009"><span class="nav-num">009</span>Partnership Model</a></li>
-        <li><a href="#s010" data-section="s010"><span class="nav-num">010</span>Client Portal</a></li>
         <li><a href="#s011" data-section="s011"><span class="nav-num">011</span>Pain Points</a></li>
-        <li><a href="#s012" data-section="s012"><span class="nav-num">012</span>Portal Architecture</a></li>
         <li><a href="#s014" data-section="s014"><span class="nav-num">015</span>Pricing Summary</a></li>
         <li><a href="#s015" data-section="s015"><span class="nav-num">016</span>Next Steps</a></li>
       </ul>
@@ -915,6 +912,11 @@ h2 {
       <div class="fade-in d2">
         <p class="lead" style="margin-bottom:3rem;">Custom-built systems to streamline your operations and unlock new revenue for your clients.</p>
       </div>
+      <div class="fade-in d3">
+        <a href="#s001" style="display:inline-flex;align-items:center;gap:0.75rem;background:white;color:black;padding:0.9rem 2rem;text-decoration:none;font-weight:600;font-size:0.9rem;border:2px solid white;transition:all 0.3s var(--ease-smooth);" onmouseover="this.style.background='transparent';this.style.color='white'" onmouseout="this.style.background='white';this.style.color='black'">
+          Explore the Partnership <span style="font-size:1.1rem;">→</span>
+        </a>
+      </div>
       <div class="fade-in d4" style="margin-top:4rem;">
         <span style="font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.15);">Cold Lava × TM Tarpaulins</span>
       </div>
@@ -932,6 +934,7 @@ h2 {
       <span class="ticker-item">Nurture Sequences</span><span class="ticker-dot">■</span>
       <span class="ticker-item">AI Chatbots</span><span class="ticker-dot">■</span>
       <span class="ticker-item">Missed Call Recovery</span><span class="ticker-dot">■</span>
+      <span class="ticker-item">Premium Websites</span><span class="ticker-dot">■</span>
       <span class="ticker-item">White-Label Ready</span><span class="ticker-dot">■</span>
       <span class="ticker-item">Built In The UK</span><span class="ticker-dot">■</span>
       <span class="ticker-item">Recurring Revenue</span><span class="ticker-dot">■</span>
@@ -943,6 +946,7 @@ h2 {
       <span class="ticker-item">Nurture Sequences</span><span class="ticker-dot">■</span>
       <span class="ticker-item">AI Chatbots</span><span class="ticker-dot">■</span>
       <span class="ticker-item">Missed Call Recovery</span><span class="ticker-dot">■</span>
+      <span class="ticker-item">Premium Websites</span><span class="ticker-dot">■</span>
       <span class="ticker-item">White-Label Ready</span><span class="ticker-dot">■</span>
       <span class="ticker-item">Built In The UK</span><span class="ticker-dot">■</span>
       <span class="ticker-item">Recurring Revenue</span><span class="ticker-dot">■</span>
@@ -986,6 +990,317 @@ h2 {
           <li>Locked features visible in sidebar — constant upsell triggers</li>
           <li>Clean, premium interface</li>
         </ul>
+      </div>
+      <div class="fade-in d3">
+        <!-- BOS Platform Sidebar Animation — self-contained div -->
+<div id="bos-sidebar" style="width:100%;display:flex;justify-content:center;padding:2rem 1rem;box-sizing:border-box;">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    /* ── Scoped variables ── */
+    #bos-sidebar {
+      --bos-font-sans: 'Inter', system-ui, sans-serif;
+      --bos-font-mono: 'JetBrains Mono', monospace;
+      --bos-cyan: #00e5c7;
+      --bos-cyan-dim: rgba(0, 229, 199, 0.25);
+      --bos-cyan-glow: 0 0 18px rgba(0, 229, 199, 0.35);
+      --bos-locked-opacity: 0.35;
+      --bos-transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ── Panel ── */
+    #bos-sidebar .bos-panel {
+      width: 100%;
+      max-width: 500px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 28px 24px;
+      font-family: var(--bos-font-sans);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    #bos-sidebar .bos-panel.bos-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Header ── */
+    #bos-sidebar .bos-header {
+      font-size: 11px;
+      font-family: var(--bos-font-mono);
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* ── Row ── */
+    #bos-sidebar .bos-row {
+      display: flex;
+      align-items: center;
+      padding: 13px 14px;
+      border-radius: 10px;
+      margin-bottom: 6px;
+      transition: background var(--bos-transition), opacity var(--bos-transition);
+      opacity: var(--bos-locked-opacity);
+      background: transparent;
+    }
+    #bos-sidebar .bos-row:last-child { margin-bottom: 0; }
+
+    #bos-sidebar .bos-row.bos-active {
+      opacity: 1;
+      background: rgba(0, 229, 199, 0.06);
+    }
+
+    /* ── Icon ── */
+    #bos-sidebar .bos-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 14px;
+      transition: background var(--bos-transition), box-shadow var(--bos-transition), transform 0.4s ease;
+      background: rgba(255,255,255,0.06);
+      box-shadow: none;
+    }
+    #bos-sidebar .bos-row.bos-active .bos-icon {
+      background: rgba(0, 229, 199, 0.15);
+      box-shadow: var(--bos-cyan-glow);
+    }
+
+    /* Icon inner SVGs */
+    #bos-sidebar .bos-icon-check,
+    #bos-sidebar .bos-icon-lock {
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      position: absolute;
+    }
+    #bos-sidebar .bos-icon-wrap {
+      position: relative;
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Locked: show lock, hide check */
+    #bos-sidebar .bos-row .bos-icon-check { opacity: 0; transform: scale(0.5); }
+    #bos-sidebar .bos-row .bos-icon-lock  { opacity: 1; transform: scale(1); }
+
+    /* Active: show check, hide lock */
+    #bos-sidebar .bos-row.bos-active .bos-icon-check { opacity: 1; transform: scale(1); }
+    #bos-sidebar .bos-row.bos-active .bos-icon-lock  { opacity: 0; transform: scale(0.5); }
+
+    /* Pulse on unlock */
+    #bos-sidebar .bos-icon.bos-pulse {
+      transform: scale(1.25);
+    }
+
+    /* ── Name ── */
+    #bos-sidebar .bos-name {
+      flex: 1;
+      margin-left: 14px;
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.55);
+      transition: color var(--bos-transition);
+    }
+    #bos-sidebar .bos-row.bos-active .bos-name {
+      color: rgba(255,255,255,0.92);
+    }
+
+    /* ── Status label ── */
+    #bos-sidebar .bos-status {
+      font-family: var(--bos-font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      padding: 3px 10px;
+      border-radius: 6px;
+      flex-shrink: 0;
+      transition: color var(--bos-transition), background var(--bos-transition);
+      color: rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.04);
+    }
+    #bos-sidebar .bos-row.bos-active .bos-status {
+      color: var(--bos-cyan);
+      background: rgba(0, 229, 199, 0.1);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 520px) {
+      #bos-sidebar .bos-panel { padding: 20px 14px; }
+      #bos-sidebar .bos-name { font-size: 13px; }
+      #bos-sidebar .bos-status { font-size: 10px; padding: 2px 8px; }
+    }
+  </style>
+
+  <div class="bos-panel">
+    <div class="bos-header">Service Modules</div>
+
+    <!-- 1. Google Reviews — starts active -->
+    <div class="bos-row bos-active" data-bos-index="0">
+      <div class="bos-icon">
+        <div class="bos-icon-wrap">
+          <svg class="bos-icon-check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4" stroke="#00e5c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg class="bos-icon-lock" width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="6" width="10" height="7" rx="1.5" stroke="rgba(255,255,255,0.4)" stroke-width="1.4"/><path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="rgba(255,255,255,0.4)" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+      <span class="bos-name">Google Reviews</span>
+      <span class="bos-status">active</span>
+    </div>
+
+    <!-- 2. Database Reactivation — starts active -->
+    <div class="bos-row bos-active" data-bos-index="1">
+      <div class="bos-icon">
+        <div class="bos-icon-wrap">
+          <svg class="bos-icon-check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4" stroke="#00e5c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg class="bos-icon-lock" width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="6" width="10" height="7" rx="1.5" stroke="rgba(255,255,255,0.4)" stroke-width="1.4"/><path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="rgba(255,255,255,0.4)" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+      <span class="bos-name">Database Reactivation</span>
+      <span class="bos-status">active</span>
+    </div>
+
+    <!-- 3. Lead Nurture — starts locked, unlocks at 3s -->
+    <div class="bos-row" data-bos-index="2" data-bos-unlock="3000">
+      <div class="bos-icon">
+        <div class="bos-icon-wrap">
+          <svg class="bos-icon-check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4" stroke="#00e5c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg class="bos-icon-lock" width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="6" width="10" height="7" rx="1.5" stroke="rgba(255,255,255,0.4)" stroke-width="1.4"/><path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="rgba(255,255,255,0.4)" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+      <span class="bos-name">Lead Nurture</span>
+      <span class="bos-status">locked</span>
+    </div>
+
+    <!-- 4. Chatbot — starts locked, unlocks at 5s -->
+    <div class="bos-row" data-bos-index="3" data-bos-unlock="5000">
+      <div class="bos-icon">
+        <div class="bos-icon-wrap">
+          <svg class="bos-icon-check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4" stroke="#00e5c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg class="bos-icon-lock" width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="6" width="10" height="7" rx="1.5" stroke="rgba(255,255,255,0.4)" stroke-width="1.4"/><path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="rgba(255,255,255,0.4)" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+      <span class="bos-name">Chatbot</span>
+      <span class="bos-status">locked</span>
+    </div>
+
+    <!-- 5. Missed Call Recovery — starts locked, unlocks at 7s -->
+    <div class="bos-row" data-bos-index="4" data-bos-unlock="7000">
+      <div class="bos-icon">
+        <div class="bos-icon-wrap">
+          <svg class="bos-icon-check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4" stroke="#00e5c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg class="bos-icon-lock" width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="6" width="10" height="7" rx="1.5" stroke="rgba(255,255,255,0.4)" stroke-width="1.4"/><path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="rgba(255,255,255,0.4)" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+      <span class="bos-name">Missed Call Recovery</span>
+      <span class="bos-status">locked</span>
+    </div>
+
+    <!-- 6. Analytics Dashboard — stays locked (upsell) -->
+    <div class="bos-row" data-bos-index="5">
+      <div class="bos-icon">
+        <div class="bos-icon-wrap">
+          <svg class="bos-icon-check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4" stroke="#00e5c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg class="bos-icon-lock" width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="6" width="10" height="7" rx="1.5" stroke="rgba(255,255,255,0.4)" stroke-width="1.4"/><path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="rgba(255,255,255,0.4)" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+      <span class="bos-name">Analytics Dashboard</span>
+      <span class="bos-status">locked</span>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const root = document.getElementById('bos-sidebar');
+      if (!root) return;
+
+      const panel = root.querySelector('.bos-panel');
+      const rows = root.querySelectorAll('.bos-row');
+      let timers = [];
+      let loopTimer = null;
+      let running = false;
+
+      function unlockRow(row) {
+        row.classList.add('bos-active');
+        row.querySelector('.bos-status').textContent = 'active';
+        const icon = row.querySelector('.bos-icon');
+        icon.classList.add('bos-pulse');
+        setTimeout(() => icon.classList.remove('bos-pulse'), 400);
+      }
+
+      function resetAll() {
+        timers.forEach(t => clearTimeout(t));
+        timers = [];
+        if (loopTimer) clearTimeout(loopTimer);
+
+        rows.forEach(row => {
+          const idx = parseInt(row.dataset.bosIndex);
+          if (idx >= 2) {
+            row.classList.remove('bos-active');
+            row.querySelector('.bos-status').textContent = 'locked';
+            row.querySelector('.bos-icon').classList.remove('bos-pulse');
+          }
+        });
+      }
+
+      function startSequence() {
+        if (running) return;
+        running = true;
+        resetAll();
+        panel.classList.add('bos-visible');
+
+        // Schedule unlocks for rows with data-bos-unlock
+        rows.forEach(row => {
+          const delay = row.dataset.bosUnlock;
+          if (delay) {
+            timers.push(setTimeout(() => unlockRow(row), parseInt(delay)));
+          }
+        });
+
+        // Loop: reset at 15s, restart at 16s (brief fade)
+        loopTimer = setTimeout(() => {
+          panel.classList.remove('bos-visible');
+          setTimeout(() => {
+            resetAll();
+            running = false;
+            startSequence();
+          }, 600);
+        }, 15000);
+      }
+
+      function stopSequence() {
+        running = false;
+        resetAll();
+        panel.classList.remove('bos-visible');
+      }
+
+      // IntersectionObserver — 20% threshold, loops
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            startSequence();
+          } else {
+            stopSequence();
+          }
+        });
+      }, { threshold: 0.2 });
+
+      observer.observe(root);
+    })();
+  </script>
+</div>
+
+
       </div>
       <div class="fade-in d4">
         <div class="quote-block">
@@ -2023,11 +2338,63 @@ h2 {
           <li>Intelligent follow-up sequences</li>
           <li>Qualified appointment booking</li>
           <li>Live dashboard with real-time reporting</li>
+          <li>Comms included (overage at 6p/msg)</li>
         </ul>
       </div>
+      <div class="fade-in d3">
+        <table class="premium-table">
+          <thead>
+            <tr>
+              <th>Tier</th>
+              <th>Database Size</th>
+              <th>Setup</th>
+              <th>Monthly</th>
+              <th>Messages</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Starter</td>
+              <td>Up to 1,000</td>
+              <td>£1,500</td>
+              <td>£500</td>
+              <td>1,000</td>
+            </tr>
+            <tr>
+              <td>Growth</td>
+              <td>1,000 – 5,000</td>
+              <td>£1,500</td>
+              <td>£1,000</td>
+              <td>3,000</td>
+            </tr>
+            <tr>
+              <td>Enterprise</td>
+              <td>5,000+</td>
+              <td>Custom</td>
+              <td>Custom</td>
+              <td>Custom</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-family:var(--font-mono);font-size:0.55rem;color:rgba(var(--color-accent-rgb),0.3);letter-spacing:0.08em;margin-top:0.75rem;">ALL TIERS INCLUDE DEDICATED CLIENT DASHBOARD · 6P/MSG OVERAGE BEYOND ALLOWANCE</p>
+      </div>
+
       <div class="fade-in d4" style="margin-top:3rem;">
-        <div style="display:flex; justify-content:center;">
-          <div style="max-width:400px; width:100%;">
+        <div style="display:flex; gap:2rem; align-items:flex-start;">
+          <div style="flex:1; min-width:0;">
+            <div class="label" style="margin-bottom:1rem;">Live Platform — Conversation Tracking</div>
+            <div class="card" style="padding:0.75rem; position:relative; cursor:pointer;" onclick="document.getElementById('dbr-lightbox').style.display='flex'">
+              <img src="dbr-conversations-real.jpg" alt="Live Conversations Dashboard" style="width:100%; display:block; border-radius:6px;">
+              <div style="position:absolute; bottom:1rem; right:1rem; background:rgba(6,182,212,0.15); border:1px solid rgba(6,182,212,0.3); border-radius:50%; width:36px; height:36px; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(8px);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+              </div>
+            </div>
+            <!-- Lightbox -->
+            <div id="dbr-lightbox" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.92); align-items:center; justify-content:center; cursor:pointer; backdrop-filter:blur(4px);" onclick="this.style.display='none'">
+              <img src="dbr-conversations-real.jpg" style="max-width:95vw; max-height:95vh; border-radius:8px; box-shadow:0 0 60px rgba(6,182,212,0.2);">
+            </div>
+          </div>
+          <div style="flex:0 0 340px;">
             <div class="label" style="margin-bottom:1rem;">Live Conversation — Real AI Outreach</div>
         <div id="dbr-sms" style="width:100%;display:flex;justify-content:center;align-items:center;padding:40px 16px;box-sizing:border-box;">
 
@@ -2422,19 +2789,23 @@ h2 {
   if (!container || !messagesEl) return;
 
   const convo = [
-    { type:'ai', text:"Hi, is this James from Atlantic Aquaculture?", time:"14:32" },
-    { type:'customer', text:"Yes, speaking. Who's this?", time:"14:33" },
-    { type:'ai', text:"Hi James, it's Marcus from TM Tarpaulins. I saw you attended Aquaculture UK last month - thought it'd make sense to reach out given the interest you showed in protective covers.", time:"14:34" },
-    { type:'customer', text:"Oh yes, I remember the stand. We've been looking at options for our new fish farm site.", time:"14:36" },
-    { type:'ai', text:"Perfect timing then! We specialise in heavy-duty tarpaulins for aquaculture - pond covers, containment systems, weather protection. Are you the decision maker for equipment purchases?", time:"14:37" },
-    { type:'customer', text:"Yes, I handle all procurement for the operation.", time:"14:39" },
-    { type:'ai', text:"Excellent. What size operation are we talking about, and what's your main concern - weather protection, containment, or both?", time:"14:40" },
-    { type:'customer', text:"We're running 8 large ponds, about 2000m² total. Main issue is winter weather and debris contamination.", time:"14:42" },
-    { type:'ai', text:"Right, so you need full-cover solutions that can handle Scottish winters. We've done several similar setups in the Highlands. Would you be available for a quick call next week to discuss spec and pricing?", time:"14:44" },
-    { type:'customer', text:"Yeah, that works. Tuesday or Wednesday would be best.", time:"14:46" },
-    { type:'ai', text:"Perfect! How about Tuesday at 10am? I'll bring some examples from similar jobs we've done.", time:"14:47" },
-    { type:'customer', text:"Tuesday 10am works. Thanks Marcus.", time:"14:49" },
-    { type:'ai', text:"Brilliant, James. I'll send a calendar invite now. Look forward to speaking then!", time:"14:50" }
+    { type:'ai', text:"Hi, is this the same Tom who recently enquired about solar panels?", time:"08:20" },
+    { type:'customer', text:"Hi there. Yes I've enquired about solar panels. What company are you from?", time:"08:21" },
+    { type:'ai', text:"It's Sophie from The Solar Group. I had a note to message you about your solar inquiry. Just a couple of quick questions if that's okay?", time:"08:22" },
+    { type:'customer', text:"Of course. I can't answer the phone but happy to message 👍", time:"08:24" },
+    { type:'ai', text:"Great, thanks Tom! Just so you're aware, we offer a straightforward solar installation option. Are you the homeowner?", time:"08:25" },
+    { type:'customer', text:"Yes", time:"08:26" },
+    { type:'ai', text:"Perfect! What's the house name or number and how many people live at the property?", time:"08:27" },
+    { type:'customer', text:"14 Park Lane", time:"08:29" },
+    { type:'customer', text:"2 people", time:"08:29", consecutive:true },
+    { type:'ai', text:"Thanks for that, Tom! What's your rough monthly cost for electricity?", time:"08:30" },
+    { type:'customer', text:"£120 per month", time:"08:32" },
+    { type:'ai', text:"Great, thank you! Are you available in the next five days for us to pop over and complete your free, no obligation survey?", time:"08:33" },
+    { type:'customer', text:"Could we do a quick call first? I've got some questions I'd like answered before booking.", time:"08:36" },
+    { type:'ai', text:"Absolutely fine, Tom. The team can go through all the details and tailor everything to your situation. Available later today or tomorrow for a quick call?", time:"08:37" },
+    { type:'customer', text:"Would 1pm today be a good time?", time:"08:40" },
+    { type:'ai', text:"Perfect, Tom! I'll arrange for our team to call you at 1pm today. If you have any other questions, feel free to let me know!", time:"08:41" },
+    { type:'customer', text:"Thanks Sophie", time:"08:46" }
   ];
 
   // Timing: ~35s total, 17 messages + notification + pause
@@ -2476,12 +2847,12 @@ h2 {
     const notif = document.createElement('div');
     notif.className = 'dbr-notification';
     notif.innerHTML = `
-      <div class="dbr-notif-header">🔔 Appointment Booked</div>
-      <div class="dbr-notif-name">James — Atlantic Aquaculture</div>
+      <div class="dbr-notif-header">🔔 Call Booked</div>
+      <div class="dbr-notif-name">Tom — 14 Park Lane</div>
       <div class="dbr-notif-details">
-        <span>📞 Tuesday 10:00 AM</span>
-        <span>🐟 8 ponds, 2000m² coverage</span>
-        <span>✅ Decision maker confirmed</span>
+        <span>📞 1:00 PM Today</span>
+        <span>💰 £120/mo electricity</span>
+        <span>🏠 Homeowner, 2 people</span>
       </div>
     `;
     return notif;
@@ -2490,7 +2861,7 @@ h2 {
   function createTimeline() {
     const tl = document.createElement('div');
     tl.className = 'dbr-timeline';
-    tl.innerHTML = '14:32 → 14:50 · Fully automated · Appointment booked in <em>18 minutes</em>';
+    tl.innerHTML = '08:20 → 08:46 · Fully automated · Call booked in <em>26 minutes</em>';
     return tl;
   }
 
@@ -2605,6 +2976,22 @@ h2 {
       </div>
       <div class="fade-in d2">
         <p class="lead" style="margin-bottom:1.5rem;">Greenstar Solar ran <strong>1,000 dormant leads</strong> — enquiries from 60 to 120 days old — through our <strong>Database Reactivation</strong> campaign. All results achieved within <strong>one month</strong>.</p>
+      </div>
+      <div class="fade-in d3">
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-value">37</div>
+            <div class="stat-label">Appointments Booked</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">£84,160</div>
+            <div class="stat-label">Revenue Generated</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">£4,226</div>
+            <div class="stat-label">Total Outlay (inc. leads & comms)</div>
+          </div>
+        </div>
       </div>
       <div class="fade-in d4">
         <div class="stat-grid" style="margin-top:1.5rem;">
@@ -6668,58 +7055,9 @@ h2 {
   
 
   <!-- ==================== 010 / PARTNERSHIP MODEL ==================== -->
-  <section class="section" id="s009">
-    <div class="section-inner">
-      <div class="fade-in">
-        <div class="label">Partnership Model / 009</div>
-      </div>
-      <div class="fade-in d1">
-        <h2>Partnership<br><span class="thin">Model</span></h2>
-      </div>
-      <div class="fade-in d2">
-        <div class="quote-block" style="margin-bottom:2rem;">
-          <p class="quote-text">"The prices in this presentation are our standard rates. You earn commission on every client you bring in."</p>
-        </div>
-      </div>
-      <div class="fade-in d4" style="margin-top:2.5rem;">
-        <h3 style="font-size:1.1rem;margin-bottom:1.5rem;color:rgba(255,255,255,0.9);">Client Communication</h3>
-        <ul class="arrow-list">
-          <li>Happy to work through you, or deal with clients directly — your call</li>
-          <li>Everything can be white-labelled under your brand if preferred</li>
-          <li>Your clients, your relationships — we're the engine behind the scenes</li>
-        </ul>
-      </div>
-      <div class="fade-in d5">
-        <div class="pill-row" style="margin-top:2.5rem;">
-          <span class="pill">Earn on Setup</span>
-          <span class="pill">Earn on Recurring</span>
-          <span class="pill">We Build, You Grow</span>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <div class="section-divider"></div>
 
-  <section class="section" id="s010">
-    <div class="section-inner">
-      <div class="fade-in">
-        <div class="label">Client Portal / 010</div>
-      </div>
-      <div class="fade-in d1">
-        <h2>TM Tarpaulins<br><span class="thin">Client Portal</span></h2>
-      </div>
-      <div class="fade-in d2">
-        <p class="lead" style="margin-bottom:2rem;">Everything from here focuses on your specific inquiry — a centralised client portal for TM Tarpaulins.</p>
-      </div>
-      <div class="fade-in d4">
-        <div class="quote-block">
-          <p class="quote-text">"It's all about speeding up the process, using our time. And that's something that would immediately alleviate that pain point at the very beginning."</p>
-          <p class="quote-author">— Marcus, TM Tarpaulins</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <div class="section-divider"></div>
 
@@ -6727,39 +7065,6 @@ h2 {
   
 
   <!-- ==================== 013 / QUESTIONS ==================== -->
-  <section class="section" id="s012">
-    <div class="section-inner">
-      <div class="fade-in">
-        <div class="label">Portal Architecture / 012</div>
-      </div>
-      <div class="fade-in d1">
-        <h2>Portal<br><span class="thin">Architecture</span></h2>
-      </div>
-      <div class="fade-in d2">
-        <ul class="arrow-list">
-          <li>Branded portal on the back of your website</li>
-          <li>Clients log in → select the right brief/questionnaire → fill it in online</li>
-          <li>On submit: live document auto-created in Google Drive</li>
-          <li>Image/asset upload → auto-routed to correct Drive folder</li>
-          <li>Marcus and Gary see everything instantly — no hunting, no manual uploads</li>
-          <li>Centralise. Standardise. Automate.</li>
-        </ul>
-      </div>
-      <div class="fade-in d4">
-        <div class="service-pricing-card">
-          <div class="spc-title">Client Portal + Drive</div>
-          <div class="spc-row"><span class="spc-key">Setup</span><span class="spc-val">£2,500</span></div>
-          <div class="spc-row"><span class="spc-key">Monthly</span><span class="spc-val">£150/mo</span></div>
-          <div class="spc-features">
-            <div class="spc-feature">Branded client portal</div>
-            <div class="spc-feature">Form builder & to-do lists</div>
-            <div class="spc-feature">Google Drive integration</div>
-            <div class="spc-feature">Real-time notifications</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <div class="section-divider"></div>
 
@@ -6860,6 +7165,36 @@ h2 {
             </tr>
           </tbody>
         </table>
+      </div>
+      <div class="fade-in d3">
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem;">
+          <div class="pill">Message allowances included per service · 6p/msg overage</div>
+          <div class="pill">All services include dedicated client dashboard</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  
+
+  
+
+  <!-- ==================== NEXT STEPS / LET'S BUILD ==================== -->
+  <section class="section cta-section" id="s015">
+    <div class="section-inner">
+      <div class="fade-in">
+        <div class="label" style="justify-content:center;">Next Steps / 016</div>
+      </div>
+      <div class="fade-in d1">
+        <h2 style="text-align:center;">Ready to<br>Get Started?</h2>
+      </div>
+      <div class="fade-in d2">
+        <p class="lead" style="text-align:center;margin-left:auto;margin-right:auto;">Let's get the portal underway and start generating revenue for your clients.</p>
+      </div>
+      <div class="fade-in d3">
+        <a href="https://coldlava.ai" class="cta-link" target="_blank">coldlava.ai <span style="font-size:1.1rem;">→</span></a>
       </div>
       <div class="fade-in d4">
         <div class="cta-footer">Cold Lava × TM Tarpaulins / 2026</div>
