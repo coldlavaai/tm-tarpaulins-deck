@@ -5,294 +5,957 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cold Lava × TM Tarpaulins — Partnership Deck</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0a0e27;
-            color: #fff;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #0066FF;
+            --dark: #0A0E27;
+            --gray: #8B92A8;
+            --light-gray: #F5F7FA;
+            --green: #00C853;
+            --red: #FF3B30;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: #fff;
             overflow-x: hidden;
         }
-        .sidebar {
-            position: fixed;
-            left: 0;
+        
+        .header {
+            background: var(--dark);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
             top: 0;
-            width: 280px;
-            height: 100vh;
-            background: #1a1f3a;
-            padding: 40px 30px;
-            overflow-y: auto;
             z-index: 100;
-            border-right: 1px solid #2a2f4a;
+            border-bottom: 2px solid var(--primary);
         }
-        .logo { font-size: 20px; font-weight: 700; margin-bottom: 50px; color: #fff; line-height: 1.4; }
-        .nav-item {
-            padding: 12px 0;
-            cursor: pointer;
-            opacity: 0.5;
-            transition: all 0.3s;
-            font-size: 15px;
-            margin-bottom: 8px;
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .nav-item:hover, .nav-item.active {
-            opacity: 1;
-            color: #4f9eff;
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
         }
-        .content {
-            margin-left: 280px;
-            padding: 0;
+        
+        .subtitle {
+            color: var(--gray);
+            font-size: 0.9rem;
         }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--dark) 0%, #1a1f3a 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero .tagline {
+            font-size: 1.5rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .marquee-container {
+            overflow: hidden;
+            background: rgba(255,255,255,0.05);
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .marquee {
+            display: flex;
+            gap: 3rem;
+            animation: scroll 30s linear infinite;
+            width: fit-content;
+        }
+        
+        .marquee span {
+            white-space: nowrap;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        .marquee span::before {
+            content: "■ ";
+            color: var(--primary);
+            margin-right: 0.5rem;
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
         .section {
-            min-height: 100vh;
-            padding: 80px 100px;
-            display: none;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
         }
-        .section.active { display: block; }
-        .section-label {
-            font-size: 11px;
-            letter-spacing: 3px;
-            opacity: 0.4;
-            margin-bottom: 40px;
+        
+        .section-header {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            align-items: flex-start;
+        }
+        
+        .section-number {
+            font-size: 0.9rem;
+            color: var(--gray);
             text-transform: uppercase;
+            letter-spacing: 0.1em;
+            white-space: nowrap;
         }
-        h1 { font-size: 72px; font-weight: 700; line-height: 1.1; margin-bottom: 30px; }
-        h2 { font-size: 56px; font-weight: 700; line-height: 1.2; margin-bottom: 25px; }
-        h2 span { color: #6b7280; font-weight: 400; display: block; }
-        h3 { font-size: 28px; margin-bottom: 15px; font-weight: 600; }
-        p { font-size: 20px; opacity: 0.8; line-height: 1.7; margin-bottom: 20px; max-width: 900px; }
-        .highlight { color: #4f9eff; font-weight: 600; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin: 50px 0; }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
         .card {
-            background: rgba(26, 31, 58, 0.4);
-            padding: 35px;
+            background: var(--light-gray);
+            padding: 2rem;
             border-radius: 12px;
-            border: 1px solid rgba(79, 158, 255, 0.1);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
         }
-        .card h3 { font-size: 22px; margin-bottom: 15px; }
-        .card p { font-size: 17px; opacity: 0.85; }
-        table { width: 100%; margin: 50px 0; border-collapse: collapse; }
-        th, td { padding: 22px 20px; text-align: left; border-bottom: 1px solid #2a2f4a; }
-        th { background: #1a1f3a; font-weight: 700; color: #4f9eff; font-size: 16px; }
-        td { font-size: 17px; }
-        td.highlight { color: #4f9eff; font-weight: 600; }
-        .price-box {
-            background: linear-gradient(135deg, rgba(26, 31, 58, 0.8) 0%, rgba(42, 47, 74, 0.6) 100%);
-            padding: 40px;
-            border-radius: 16px;
-            margin: 25px 0;
-            border: 2px solid rgba(79, 158, 255, 0.3);
+        
+        .card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,102,255,0.15);
         }
-        .price-box h3 { font-size: 26px; margin-bottom: 15px; color: #fff; }
-        .price { font-size: 56px; color: #4f9eff; font-weight: 700; margin: 25px 0; }
-        ul { margin: 35px 0; padding-left: 25px; }
-        li { font-size: 19px; margin-bottom: 14px; line-height: 1.6; opacity: 0.9; }
-        li strong { color: #fff; font-weight: 600; }
-        .subtitle { font-size: 22px; opacity: 0.5; margin-top: 30px; line-height: 1.5; }
+        
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .card ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+        
+        .card ul li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .card ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--green);
+            font-weight: bold;
+        }
+        
+        .pricing-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .pricing-box .label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: var(--gray);
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pricing-box .price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .pricing-box .detail {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 2rem;
+            background: var(--light-gray);
+            border-radius: 12px;
+        }
+        
+        .stat .number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat .label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .testimonial {
+            background: var(--light-gray);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            margin: 2rem 0;
+        }
+        
+        .testimonial-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        
+        .testimonial-author {
+            color: var(--gray);
+            font-weight: 600;
+        }
+        
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .comparison-box {
+            padding: 2rem;
+            border-radius: 12px;
+            position: relative;
+        }
+        
+        .comparison-box.old {
+            background: #fff5f5;
+            border: 2px solid var(--red);
+        }
+        
+        .comparison-box.new {
+            background: #f0fff4;
+            border: 2px solid var(--green);
+        }
+        
+        .comparison-box h3 {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .comparison-box.old h3::before {
+            content: "❌";
+        }
+        
+        .comparison-box.new h3::before {
+            content: "✅";
+        }
+        
+        .flow {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .flow-step {
+            background: var(--light-gray);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .flow-arrow {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .pricing-table thead {
+            background: var(--dark);
+            color: white;
+        }
+        
+        .pricing-table th,
+        .pricing-table td {
+            padding: 1rem;
+            text-align: left;
+        }
+        
+        .pricing-table tr:nth-child(even) {
+            background: var(--light-gray);
+        }
+        
+        .pricing-table .price-cell {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .cta {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .cta:hover {
+            background: #0052cc;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,102,255,0.3);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, var(--primary) 0%, #0052cc 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        
+        .highlight-box h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .highlight-box p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero .tagline {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .flow {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <div class="logo">Cold Lava ×<br>TM Tarpaulins</div>
-        <div class="nav-item active" data-slide="1">Overview</div>
-        <div class="nav-item" data-slide="2">The Challenge</div>
-        <div class="nav-item" data-slide="3">The Solution</div>
-        <div class="nav-item" data-slide="4">How It Works</div>
-        <div class="nav-item" data-slide="5">ROI Comparison</div>
-        <div class="nav-item" data-slide="6">Investment</div>
-        <div class="nav-item" data-slide="7">Next Steps</div>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">Partnership Deck / 2026</div>
+            <div class="subtitle">Cold Lava × TM Tarpaulins</div>
+        </div>
     </div>
 
-    <div class="content">
-        <div class="section active" id="slide-1">
-            <div class="section-label">Partnership Deck / 2026</div>
-            <h1>Intelligence<br>& Automation<br>For TM Tarpaulins</h1>
-            <p class="subtitle">Custom-built AI system to scale your business development across 7 sectors and international markets — without hiring a single BDM.</p>
+    <div class="hero">
+        <h1>Intelligence & Automation<br>For TM Tarpaulins</h1>
+        <p class="tagline">Replace a £45k/year BDM with a systematic lead generation engine. Built for trades, designed to close.</p>
+        
+        <div class="marquee-container">
+            <div class="marquee">
+                <span>Lead Generation System</span>
+                <span>Database Reactivation</span>
+                <span>Multi-Channel Outreach</span>
+                <span>Nurture Sequences</span>
+                <span>Missed Call Recovery</span>
+                <span>Google Review Automation</span>
+                <span>Website Enhancement</span>
+                <span>Built In The UK</span>
+                <span>Recurring Revenue</span>
+                <span>Full Support</span>
+                <!-- Duplicate for seamless loop -->
+                <span>Lead Generation System</span>
+                <span>Database Reactivation</span>
+                <span>Multi-Channel Outreach</span>
+                <span>Nurture Sequences</span>
+                <span>Missed Call Recovery</span>
+                <span>Google Review Automation</span>
+                <span>Website Enhancement</span>
+                <span>Built In The UK</span>
+                <span>Recurring Revenue</span>
+                <span>Full Support</span>
+            </div>
         </div>
+    </div>
 
-        <div class="section" id="slide-2">
-            <div class="section-label">The Challenge / 002</div>
-            <h2>You Can Close Deals.<span>You Can't Find Them.</span></h2>
-            <p>Marcus and Gary are elite closers. Award-winning reputation (2× Aquaculture Supplier of the Year). Capital available. Moving to a larger facility. But growth is bottlenecked:</p>
-            <div class="grid">
-                <div class="card">
-                    <h3>🎯 No BD Function</h3>
-                    <p>You excel at closing deals once conversations start — but have no time or inclination for lead sourcing, nurturing, or business development.</p>
-                </div>
-                <div class="card">
-                    <h3>🌍 7 Sectors, Multiple Countries</h3>
-                    <p>Agricultural, Aquaculture, Construction, Energy, Marine, Haulage, Domestic — across Scandinavia and beyond. One BDM can't cover that.</p>
-                </div>
-                <div class="card">
-                    <h3>🗣️ Language Barriers</h3>
-                    <p>Scandinavian markets require multilingual outreach (Norwegian, Swedish, Danish). A single hire can't do it.</p>
-                </div>
-                <div class="card">
-                    <h3>📊 No CRM</h3>
-                    <p>Communications scattered across email, phone, WhatsApp. No centralized system to manage leads or pipeline.</p>
-                </div>
+    <div class="section">
+        <div class="section-header">
+            <div class="section-number">Who We Are / 001</div>
+            <div>
+                <h2 class="section-title">UK-Based Automation Consultancy</h2>
+                <p style="color: var(--gray); margin-top: 1rem; font-size: 1.1rem;">We build bespoke systems that run businesses — not templates, not off-the-shelf. Every system custom-built by our in-house team.</p>
             </div>
         </div>
 
-        <div class="section" id="slide-3">
-            <div class="section-label">The Solution / 003</div>
-            <h2>AI-Powered<span>Business Operating System</span></h2>
-            <p>A bespoke system designed specifically for TM Tarpaulins. Lead sourcing, multi-channel outreach, CRM, and appointment booking — all automated.</p>
+        <div class="testimonial">
+            <p class="testimonial-text">"We recently worked with Cold Lava to develop a new website and explore AI solutions for our telesales business and the experience has been exceptional from start to finish. Oli and Jacob are incredibly efficient, knowledgeable, and easy to work with. They took the time to understand our needs, offered creative and practical solutions, and delivered everything on time. Their professionalism and attention to detail have made a real difference to our business. I can't recommend them highly enough."</p>
+            <p class="testimonial-author">— Jack Castle · ⭐⭐⭐⭐⭐ Trustpilot</p>
+        </div>
+    </div>
+
+    <div class="section" style="background: var(--light-gray);">
+        <div class="section-header">
+            <div class="section-number">The Problem / 002</div>
+            <div>
+                <h2 class="section-title">What You're Facing</h2>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h3>❌ No Systematic Lead Gen</h3>
+                <p>Business does well financially, but no repeatable system bringing in new opportunities. Growth is reactive, not proactive.</p>
+            </div>
+
+            <div class="card">
+                <h3>❌ Can't Find Reliable People</h3>
+                <p>Tried LinkedIn, email campaigns — couldn't find staff in Inverness to execute properly. Been ripped off by agencies. Deep mistrust.</p>
+            </div>
+
+            <div class="card">
+                <h3>❌ Time Wasted on Admin</h3>
+                <p>Marcus and Gary are brilliant in front of prospects — but stuck doing manual outreach, data entry, and follow-ups instead of closing deals.</p>
+            </div>
+
+            <div class="card">
+                <h3>❌ Data Just Sits There</h3>
+                <p>Aquaculture UK event attendees (~4,500 leads) ready to buy — but no system to turn them into meetings and revenue.</p>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 3rem;">
+            <h3>You need a replacement for a £45k/year + car BDM.</h3>
+            <p>A system that works 24/7. No sick days. No excuses. Just results.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <div class="section-number">The Solution / 003</div>
+            <div>
+                <h2 class="section-title">The Pathway System</h2>
+                <p style="color: var(--gray); margin-top: 1rem; font-size: 1.1rem;">Structured, multi-channel outreach that turns cold data into warm conversations — automatically.</p>
+            </div>
+        </div>
+
+        <div class="comparison">
+            <div class="comparison-box old">
+                <h3>The Old Way</h3>
+                <ul>
+                    <li>Hire a BDM for £45k + car</li>
+                    <li>Hope they actually work</li>
+                    <li>Manually chase leads</li>
+                    <li>Inconsistent follow-up</li>
+                    <li>Data in Excel sheets, emails, nowhere</li>
+                    <li>Leads fall through cracks</li>
+                </ul>
+            </div>
+
+            <div class="comparison-box new">
+                <h3>The New Way</h3>
+                <ul>
+                    <li>Automated multi-channel outreach (Email + LinkedIn + SMS)</li>
+                    <li>Intelligent follow-up sequences</li>
+                    <li>CRM integration — all leads tracked</li>
+                    <li>24/7 operation, no sick days</li>
+                    <li>Real-time dashboard reporting</li>
+                    <li>Year 1: £49k total — Year 2+: £24k/year</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="flow">
+            <div class="flow-step">Purchase Data (Aquaculture UK)</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">System Ingests & Enriches</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">Multi-Channel Outreach Begins</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">Automated Follow-Up</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">Qualified Meetings Booked</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">Marcus & Gary Close</div>
+        </div>
+    </div>
+
+    <div class="section" style="background: var(--light-gray);">
+        <div class="section-header">
+            <div class="section-number">Database Reactivation / 004</div>
+            <div>
+                <h2 class="section-title">Turn Dead Data Into Booked Appointments</h2>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h3>📧 Multi-Channel Outreach</h3>
+                <p>Email, LinkedIn, SMS — all coordinated, all automated. Reach prospects where they actually respond.</p>
+            </div>
+
+            <div class="card">
+                <h3>🔄 Intelligent Follow-Up</h3>
+                <p>Automated sequences that adapt based on engagement. No manual chasing. No missed opportunities.</p>
+            </div>
+
+            <div class="card">
+                <h3>📊 Live Dashboard</h3>
+                <p>See exactly what's happening in real-time. Replies, opens, clicks, meetings booked — all visible.</p>
+            </div>
+
+            <div class="card">
+                <h3>✅ Qualified Appointments</h3>
+                <p>System pre-qualifies leads before they reach you. Only talk to prospects ready to buy.</p>
+            </div>
+        </div>
+
+        <div class="stats-grid" style="margin-top: 3rem;">
+            <div class="stat">
+                <div class="number">4,500</div>
+                <div class="label">Aquaculture UK Leads Ready</div>
+            </div>
+            <div class="stat">
+                <div class="number">24/7</div>
+                <div class="label">System Operation</div>
+            </div>
+            <div class="stat">
+                <div class="number">3-5%</div>
+                <div class="label">Typical Conversion Rate</div>
+            </div>
+            <div class="stat">
+                <div class="number">£400</div>
+                <div class="label">Data Acquisition Cost</div>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <h3>Conservative Projection: 135-225 Qualified Appointments</h3>
+            <p>From your aquaculture data alone. That's 2-4 appointments per week for an entire year.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <div class="section-number">Nurture Sequences / 005</div>
+            <div>
+                <h2 class="section-title">Automated Follow-Up That Converts</h2>
+            </div>
+        </div>
+
+        <div class="comparison">
+            <div class="comparison-box old">
+                <h3>Without Nurture</h3>
+                <ul>
+                    <li>Lead comes in → manually email them</li>
+                    <li>Remember to follow up in 2 days</li>
+                    <li>Forget. Chase manually a week later.</li>
+                    <li>Lead went cold or bought elsewhere</li>
+                    <li>Repeat. Lose money.</li>
+                </ul>
+            </div>
+
+            <div class="comparison-box new">
+                <h3>With Nurture</h3>
+                <ul>
+                    <li>Lead comes in → auto-enters CRM</li>
+                    <li>Welcome email sent instantly</li>
+                    <li>2 hours later: automated check-in</li>
+                    <li>Day 2: case study or testimonial</li>
+                    <li>Day 5: offer or next step</li>
+                    <li>Consistent, reliable, converts</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 2rem;">
+            <h3>Included in Your System</h3>
             <ul>
-                <li><strong>Lead Sourcing & Data Enrichment</strong> — AI finds prospects across your 7 sectors from industry databases and social platforms. Cleans, scores, and qualifies automatically.</li>
-                <li><strong>Multi-Channel Outreach Engine</strong> — LinkedIn + Email + WhatsApp. Multilingual messaging (Norwegian, Swedish, Danish, English). Personalized at scale.</li>
-                <li><strong>Bespoke Mini-CRM</strong> — Unified dashboard for all leads, pipeline stages, and communications. Phone, email, WhatsApp — all in one place.</li>
-                <li><strong>Appointment Booking</strong> — Qualified prospects land directly on your desk. Marcus and Gary close, the system sources.</li>
+                <li>Multi-channel (Email + SMS + WhatsApp)</li>
+                <li>Automated follow-ups based on behavior</li>
+                <li>Performance monitoring in real-time</li>
+                <li>Custom sequences for different lead types</li>
+                <li>Seamless CRM integration</li>
             </ul>
         </div>
+    </div>
 
-        <div class="section" id="slide-4">
-            <div class="section-label">How It Works / 004</div>
-            <h2>From Lead<span>To Booked Appointment</span></h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>1. Lead Sourcing</h3>
-                    <p>AI identifies prospects across your 7 sectors — fish farms, construction firms, haulage companies, energy projects, marine operations.</p>
-                </div>
-                <div class="card">
-                    <h3>2. Data Enrichment</h3>
-                    <p>Cleans and scores leads. Decision-maker identification. Engagement likelihood. Only quality leads make it through.</p>
-                </div>
-                <div class="card">
-                    <h3>3. Multi-Channel Outreach</h3>
-                    <p>LinkedIn + Email + WhatsApp. Multilingual, personalized at scale. System handles initial contact and qualification.</p>
-                </div>
-                <div class="card">
-                    <h3>4. Appointment Booking</h3>
-                    <p>Qualified prospects delivered via email, SMS, or WhatsApp. Ready for Marcus and Gary to close.</p>
-                </div>
+    <div class="section" style="background: var(--light-gray);">
+        <div class="section-header">
+            <div class="section-number">Missed Call Text-Back / 006</div>
+            <div>
+                <h2 class="section-title">Never Lose a Lead Again</h2>
             </div>
-            <p style="margin-top: 40px; font-size: 20px; color: #4f9eff;">The system learns from every interaction — continuously refining targeting based on what works.</p>
         </div>
 
-        <div class="section" id="slide-5">
-            <div class="section-label">ROI Comparison / 005</div>
-            <h2>AI System vs.<span>Traditional BDM</span></h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Factor</th>
-                        <th>AI System</th>
-                        <th>Traditional BDM</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Cost Year 1</strong></td>
-                        <td class="highlight">£49,000</td>
-                        <td>£55,000+</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Cost Year 2+</strong></td>
-                        <td class="highlight">£24,000/year</td>
-                        <td>£45,000+/year</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Geographic Reach</strong></td>
-                        <td class="highlight">Unlimited, international</td>
-                        <td>Limited by travel/budget</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Language Capability</strong></td>
-                        <td class="highlight">Multilingual by design</td>
-                        <td>Limited to BDM's languages</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Sector Coverage</strong></td>
-                        <td class="highlight">All 7 sectors simultaneously</td>
-                        <td>1-2 sectors max</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Scalability</strong></td>
-                        <td class="highlight">Turn on/off as needed</td>
-                        <td>Fixed cost regardless</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Hours</strong></td>
-                        <td class="highlight">24/7 continuous</td>
-                        <td>9-5 availability</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Training</strong></td>
-                        <td class="highlight">Ready to deploy</td>
-                        <td>3-6 months ramp-up</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p style="margin-top: 40px; font-size: 22px; color: #4f9eff;"><strong>This isn't just cost replacement — it's a competitive advantage.</strong> Reach Scandinavian aquaculture, Norwegian construction, Swedish energy — markets a single BDM could never cover.</p>
-        </div>
-
-        <div class="section" id="slide-6">
-            <div class="section-label">Investment / 006</div>
-            <h2>Pricing</h2>
-            <div class="price-box">
-                <h3>Upfront Build Cost</h3>
-                <div class="price">£25,000</div>
-                <p>One-time setup including:</p>
-                <ul style="padding-left: 20px; margin-top: 15px;">
-                    <li>Bespoke AI system development</li>
-                    <li>CRM customization (TM Tarpaulins branded)</li>
-                    <li>Data enrichment engine</li>
-                    <li>Multi-channel outreach integration</li>
-                    <li>Multilingual configuration (4 languages)</li>
-                    <li>7-sector targeting setup</li>
+        <div class="comparison">
+            <div class="comparison-box old">
+                <h3>What Happens Now</h3>
+                <ul>
+                    <li>Customer calls while you're on-site</li>
+                    <li>Goes to voicemail</li>
+                    <li>They call your competitor next</li>
+                    <li>You lose the job</li>
+                    <li>Happens 62% of the time</li>
                 </ul>
             </div>
-            <div class="price-box">
-                <h3>Monthly Recurring</h3>
-                <div class="price">£2,000/month</div>
-                <p>Ongoing support including:</p>
-                <ul style="padding-left: 20px; margin-top: 15px;">
-                    <li>System maintenance & updates</li>
-                    <li>AI token/API costs</li>
-                    <li>Campaign management</li>
-                    <li>Lead qualification & outreach</li>
-                    <li>Continuous optimization</li>
+
+            <div class="comparison-box new">
+                <h3>With Text-Back</h3>
+                <ul>
+                    <li>Customer calls while you're on-site</li>
+                    <li>Instant SMS sent within 30 seconds</li>
+                    <li>"Thanks for calling! We're with a client. When's best to call you back?"</li>
+                    <li>Lead saved. Appointment set.</li>
+                    <li>Zero effort. Automated.</li>
                 </ul>
             </div>
-            <p style="margin-top: 50px; font-size: 32px; font-weight: 700;">Year 1 Total: £49,000 <span style="font-size: 18px; font-weight: 400; opacity: 0.5;">(build + 12 months)</span></p>
-            <p style="font-size: 32px; font-weight: 700;">Year 2+ Annual: £24,000 <span style="font-size: 18px; font-weight: 400; opacity: 0.5;">(monthly support only)</span></p>
         </div>
 
-        <div class="section" id="slide-7">
-            <div class="section-label">Next Steps / 007</div>
-            <h2>Ready to<span>Scale Without Hiring?</span></h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>1. Technical Walkthrough</h3>
-                    <p>30-minute call to confirm requirements, answer questions, and show exactly how the system works.</p>
-                </div>
-                <div class="card">
-                    <h3>2. Formal Proposal</h3>
-                    <p>Detailed scope with phased rollout options, timelines, deliverables, and terms.</p>
-                </div>
-                <div class="card">
-                    <h3>3. Build Phase</h3>
-                    <p>2-2.5 days development. You'll see the system live before launch.</p>
-                </div>
-                <div class="card">
-                    <h3>4. Go Live</h3>
-                    <p>System deployed. Leads flowing across 7 sectors. Marcus and Gary close deals.</p>
-                </div>
-            </div>
-            <p style="margin-top: 70px; font-size: 22px;">Replace the £45k+ BD manager with a system that works 24/7, speaks 4 languages, and covers 7 sectors across multiple countries.</p>
-            <p style="margin-top: 30px; font-size: 17px; opacity: 0.4;">Contact: Jacob Stray | Cold Lava</p>
+        <div class="pricing-box" style="max-width: 500px; margin: 3rem auto;">
+            <div class="label">Missed Call Text-Back</div>
+            <div class="price">Included</div>
+            <div class="detail">In your £2k/month package</div>
+            <ul style="text-align: left; margin-top: 1.5rem;">
+                <li>Instant automated SMS within 30 seconds</li>
+                <li>Customisable message templates</li>
+                <li>Lead notifications in real-time</li>
+                <li>Works with any phone number</li>
+            </ul>
         </div>
     </div>
 
-    <script>
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', () => {
-                const slideNum = item.getAttribute('data-slide');
-                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-                document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-                document.getElementById('slide-' + slideNum).classList.add('active');
-                item.classList.add('active');
-            });
-        });
-    </script>
+    <div class="section">
+        <div class="section-header">
+            <div class="section-number">Google Review Automation / 007</div>
+            <div>
+                <h2 class="section-title">Automated Reviews from Job to 5 Stars</h2>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h3>📧 Automated Review Requests</h3>
+                <p>Job marked complete → system sends review request automatically. No manual work.</p>
+            </div>
+
+            <div class="card">
+                <h3>🤖 AI-Powered Auto-Replies</h3>
+                <p>Every review gets a response — positive or negative. Builds trust, improves SEO.</p>
+            </div>
+
+            <div class="card">
+                <h3>🔔 Real-Time Notifications</h3>
+                <p>New review comes in → instant notification. Stay on top of your reputation.</p>
+            </div>
+
+            <div class="card">
+                <h3>📈 SEO Boost Tracking</h3>
+                <p>More reviews = higher Google ranking = more organic leads. System tracks it all.</p>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 3rem;">
+            <h3>Trades businesses live or die by reviews.</h3>
+            <p>This system makes sure you're always collecting them — automatically.</p>
+        </div>
+    </div>
+
+    <div class="section" style="background: var(--light-gray);">
+        <div class="section-header">
+            <div class="section-number">Website Enhancement / 008</div>
+            <div>
+                <h2 class="section-title">Your Shop Site Needs More Work</h2>
+                <p style="color: var(--gray); margin-top: 1rem; font-size: 1.1rem;">We'll fix it. Custom-coded, high-performance, built to convert.</p>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h3>🎨 Custom Design</h3>
+                <p>Not templates. Not Squarespace. Bespoke design that represents your brand properly.</p>
+            </div>
+
+            <div class="card">
+                <h3>📱 Mobile Responsive</h3>
+                <p>60%+ of your traffic is mobile. Your site will work perfectly on every device.</p>
+            </div>
+
+            <div class="card">
+                <h3>🔍 SEO Optimized</h3>
+                <p>Built-in SEO best practices. Technical SEO, on-page optimization, schema markup — all included.</p>
+            </div>
+
+            <div class="card">
+                <h3>⚡ Fast & Secure</h3>
+                <p>Lightning-fast load times. SSL included. Hosting managed. Zero downtime.</p>
+            </div>
+        </div>
+
+        <div class="pricing-box" style="max-width: 500px; margin: 3rem auto;">
+            <div class="label">Website Enhancement</div>
+            <div class="price">Included</div>
+            <div class="detail">In your setup package</div>
+            <ul style="text-align: left; margin-top: 1.5rem;">
+                <li>Custom design & development</li>
+                <li>Mobile responsive</li>
+                <li>SEO optimized</li>
+                <li>Hosting included</li>
+                <li>Ongoing maintenance</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <div class="section-number">Full System Overview / 009</div>
+            <div>
+                <h2 class="section-title">What You're Getting</h2>
+            </div>
+        </div>
+
+        <table class="pricing-table">
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>What It Does</th>
+                    <th>Included</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Pathway Lead Gen System</strong></td>
+                    <td>Multi-channel outreach (Email + LinkedIn + SMS), automated sequences, CRM integration</td>
+                    <td class="price-cell">✓</td>
+                </tr>
+                <tr>
+                    <td><strong>Database Reactivation</strong></td>
+                    <td>Ingest aquaculture data, enrich, qualify, book appointments automatically</td>
+                    <td class="price-cell">✓</td>
+                </tr>
+                <tr>
+                    <td><strong>Nurture Sequences</strong></td>
+                    <td>Automated follow-up across email, SMS, WhatsApp based on behavior</td>
+                    <td class="price-cell">✓</td>
+                </tr>
+                <tr>
+                    <td><strong>Missed Call Text-Back</strong></td>
+                    <td>Instant SMS within 30 seconds of missed call</td>
+                    <td class="price-cell">✓</td>
+                </tr>
+                <tr>
+                    <td><strong>Google Review Automation</strong></td>
+                    <td>Automated review requests + AI-powered replies</td>
+                    <td class="price-cell">✓</td>
+                </tr>
+                <tr>
+                    <td><strong>Website Enhancement</strong></td>
+                    <td>Custom design, mobile responsive, SEO optimized, hosting included</td>
+                    <td class="price-cell">✓</td>
+                </tr>
+                <tr>
+                    <td><strong>Full SEO Management</strong></td>
+                    <td>Technical SEO, on-page optimization, keyword research, backlink strategy</td>
+                    <td class="price-cell">✓</td>
+                </tr>
+                <tr>
+                    <td><strong>Live Dashboard</strong></td>
+                    <td>Real-time reporting on all campaigns, leads, appointments, ROI</td>
+                    <td class="price-cell">✓</td>
+                </tr>
+                <tr>
+                    <td><strong>Full Support</strong></td>
+                    <td>Direct access to Cold Lava team, ongoing optimization, strategy calls</td>
+                    <td class="price-cell">✓</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section" style="background: var(--dark); color: white;">
+        <div class="section-header">
+            <div class="section-number" style="color: var(--gray);">Investment / 010</div>
+            <div>
+                <h2 class="section-title" style="color: white;">Simple, Transparent Pricing</h2>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="pricing-box" style="border-color: white;">
+                <div class="label" style="color: var(--gray);">Setup</div>
+                <div class="price" style="color: white;">£25,000</div>
+                <div class="detail" style="color: var(--gray);">One-time build + integration</div>
+                <ul style="text-align: left; margin-top: 1.5rem; color: white;">
+                    <li>Full Pathway system build</li>
+                    <li>Website enhancement</li>
+                    <li>CRM integration</li>
+                    <li>Data migration</li>
+                    <li>Team training</li>
+                    <li>Go-live support</li>
+                </ul>
+            </div>
+
+            <div class="pricing-box" style="border-color: white;">
+                <div class="label" style="color: var(--gray);">Monthly</div>
+                <div class="price" style="color: white;">£2,000/mo</div>
+                <div class="detail" style="color: var(--gray);">All-inclusive management</div>
+                <ul style="text-align: left; margin-top: 1.5rem; color: white;">
+                    <li>System management & optimization</li>
+                    <li>Full SEO (technical + content)</li>
+                    <li>Campaign management</li>
+                    <li>Performance reporting</li>
+                    <li>Ongoing support</li>
+                    <li>Strategy & growth consulting</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="stats-grid" style="margin-top: 4rem;">
+            <div class="stat" style="background: rgba(255,255,255,0.1);">
+                <div class="number" style="color: white;">£49,000</div>
+                <div class="label" style="color: var(--gray);">Year 1 Total Cost</div>
+            </div>
+            <div class="stat" style="background: rgba(255,255,255,0.1);">
+                <div class="number" style="color: white;">£24,000</div>
+                <div class="label" style="color: var(--gray);">Year 2+ Annual Cost</div>
+            </div>
+            <div class="stat" style="background: rgba(255,255,255,0.1);">
+                <div class="number" style="color: white;">£45,000+</div>
+                <div class="label" style="color: var(--gray);">BDM Salary + Car (avoided)</div>
+            </div>
+            <div class="stat" style="background: rgba(255,255,255,0.1);">
+                <div class="number" style="color: white;">24/7</div>
+                <div class="label" style="color: var(--gray);">No Sick Days. No Holidays.</div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 4rem; padding: 3rem; background: rgba(255,255,255,0.05); border-radius: 12px;">
+            <h3 style="font-size: 2rem; margin-bottom: 1rem;">Tax-Efficient Investment</h3>
+            <p style="font-size: 1.2rem; color: var(--gray); margin-bottom: 2rem;">Your accountant told you: "You need to spend money before next week." This qualifies. Capital investment that generates recurring revenue.</p>
+            <a href="#contact" class="cta" style="font-size: 1.1rem; padding: 1.25rem 3rem;">Let's Get Started →</a>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <div class="section-number">Why Cold Lava / 011</div>
+            <div>
+                <h2 class="section-title">UK-Based. Reliable. Built for Trades.</h2>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h3>🇬🇧 Built In The UK</h3>
+                <p>No outsourcing. No offshore teams. Everything built in-house by our UK-based team.</p>
+            </div>
+
+            <div class="card">
+                <h3>🛠️ Designed for Trades</h3>
+                <p>We understand trades businesses. Tarpaulins, construction, plumbing — we've worked with them all.</p>
+            </div>
+
+            <div class="card">
+                <h3>📊 Results-Driven</h3>
+                <p>We don't care about vanity metrics. We care about appointments booked, deals closed, revenue generated.</p>
+            </div>
+
+            <div class="card">
+                <h3>🤝 Full Support</h3>
+                <p>Direct access to our team. Strategy calls. Ongoing optimization. We're invested in your success.</p>
+            </div>
+        </div>
+
+        <div class="testimonial" style="margin-top: 3rem;">
+            <p class="testimonial-text">"Things have completely changed for the better. They helped us automate our whole sales process and built us a website that represents the business brilliantly."</p>
+            <p class="testimonial-author">— Client Testimonial</p>
+        </div>
+    </div>
+
+    <div class="section" style="background: linear-gradient(135deg, var(--primary) 0%, #0052cc 100%); color: white; text-align: center; padding: 6rem 2rem;" id="contact">
+        <h2 style="font-size: 3rem; margin-bottom: 1rem;">Ready to Replace Your BDM?</h2>
+        <p style="font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.9;">Let's get the Pathway system underway and start generating qualified appointments.</p>
+        <p style="font-size: 1.1rem; opacity: 0.8; margin-bottom: 3rem;">Contact: jacob@coldlava.ai | oli@coldlava.ai</p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="mailto:jacob@coldlava.ai" class="cta" style="background: white; color: var(--primary);">Email Jacob</a>
+            <a href="mailto:oli@coldlava.ai" class="cta" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid white;">Email Oli</a>
+        </div>
+    </div>
+
+    <div style="background: var(--dark); color: var(--gray); text-align: center; padding: 2rem;">
+        <p>© 2026 Cold Lava. UK-based automation consultancy.</p>
+    </div>
 </body>
 </html>
