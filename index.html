@@ -1829,6 +1829,13 @@ h2 {
               }
             }
 
+            function resetAnimation(element) {
+              // Trigger reflow to restart animation
+              if (element) {
+                void element.offsetHeight;
+              }
+            }
+
             function showStage(idx) {
               stages.forEach((stage, i) => {
                 stage.classList.toggle('active', i === idx);
@@ -1837,10 +1844,66 @@ h2 {
               prevBtn.disabled = current === 0;
               nextBtn.disabled = current === stages.length - 1;
 
-              // Start scanning animation only for stage 1
+              // Trigger animations based on stage
               if (idx === 0) {
+                // Stage 1: Start scanning animation
                 stopScanning();
                 setTimeout(startScanning, 500);
+              } else if (idx === 1) {
+                // Stage 2: Animate data fields
+                stopScanning();
+                const dataFields = document.querySelectorAll('.lead-gen-stage.active .data-field');
+                dataFields.forEach((field) => {
+                  field.style.animation = 'none';
+                  resetAnimation(field);
+                  // Use setTimeout to ensure the reflow happened before re-applying animation
+                  setTimeout(() => {
+                    field.style.animation = '';
+                  }, 10);
+                });
+              } else if (idx === 2) {
+                // Stage 3: Animate email compose
+                stopScanning();
+                const emailCompose = document.querySelector('.lead-gen-stage.active .email-compose');
+                const sendButton = document.querySelector('.lead-gen-stage.active .send-button');
+                if (emailCompose) {
+                  emailCompose.style.animation = 'none';
+                  resetAnimation(emailCompose);
+                  setTimeout(() => {
+                    emailCompose.style.animation = '';
+                  }, 10);
+                }
+                if (sendButton) {
+                  sendButton.style.animation = 'none';
+                  resetAnimation(sendButton);
+                  setTimeout(() => {
+                    sendButton.style.animation = '';
+                  }, 10);
+                }
+              } else if (idx === 3) {
+                // Stage 4: Animate message bubbles sequentially
+                stopScanning();
+                const messageBubbles = document.querySelectorAll('.lead-gen-stage.active .message-bubble');
+                messageBubbles.forEach((bubble, i) => {
+                  bubble.style.animation = 'none';
+                  bubble.style.opacity = '0';
+                  resetAnimation(bubble);
+                  setTimeout(() => {
+                    bubble.style.animation = '';
+                    bubble.style.opacity = '';
+                  }, 10 + (i * 50));
+                });
+              } else if (idx === 4) {
+                // Stage 5: Animate calendar event
+                stopScanning();
+                const calendarEvent = document.querySelector('.lead-gen-stage.active .calendar-event');
+                if (calendarEvent) {
+                  calendarEvent.style.animation = 'none';
+                  resetAnimation(calendarEvent);
+                  setTimeout(() => {
+                    calendarEvent.style.animation = '';
+                  }, 10);
+                }
               } else {
                 stopScanning();
               }
