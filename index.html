@@ -1170,6 +1170,113 @@ h2 {
   transform: scale(0.95);
 }
 
+/* ===== ENLARGEMENT MODAL ===== */
+.enlarge-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.95);
+  z-index: 9999;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.enlarge-modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.enlarge-modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  background: rgba(0,0,0,0.8);
+  border: 1px solid rgba(0,212,255,0.2);
+  border-radius: 12px;
+  padding: 2rem;
+  overflow: auto;
+}
+
+.enlarge-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(0,212,255,0.1);
+  border: 1px solid rgba(0,212,255,0.3);
+  color: #00d4ff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.enlarge-modal-close:hover {
+  background: rgba(0,212,255,0.2);
+  border-color: #00d4ff;
+}
+
+.enlarge-modal-nav {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+  z-index: 10001;
+}
+
+.enlarge-modal-nav button {
+  background: rgba(0,212,255,0.1);
+  border: 1px solid rgba(0,212,255,0.3);
+  color: #00d4ff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+
+.enlarge-modal-nav button:hover {
+  background: rgba(0,212,255,0.2);
+  border-color: #00d4ff;
+}
+
+.enlarge-modal-nav button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.enlarge-trigger {
+  cursor: zoom-in;
+  position: relative;
+}
+
+.enlarge-trigger::after {
+  content: '🔍';
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.enlarge-trigger:hover::after {
+  opacity: 1;
+}
+
 </style>
 </head>
 <body>
@@ -3666,6 +3773,116 @@ navLinks.forEach(link => {
       sidebarToggle.textContent = '☰';
     }
   });
+});
+
+// ===== ENLARGEMENT MODAL =====
+const modal = document.createElement('div');
+modal.className = 'enlarge-modal';
+modal.innerHTML = `
+  <div class="enlarge-modal-content" id="modalContent">
+    <button class="enlarge-modal-close">&times;</button>
+    <div id="modalBody"></div>
+    <div class="enlarge-modal-nav">
+      <button id="modalPrev">← PREVIOUS</button>
+      <button id="modalNext">NEXT →</button>
+    </div>
+  </div>
+`;
+document.body.appendChild(modal);
+
+let enlargeableItems = [];
+let currentEnlargedIndex = -1;
+
+function initEnlargeables() {
+  // Add class to stage demo boxes
+  document.querySelectorAll('.lead-gen-stage.active').forEach(el => {
+    if (!el.classList.contains('enlarge-trigger')) {
+      el.classList.add('enlarge-trigger');
+    }
+  });
+
+  // Add class to email viewers
+  document.querySelectorAll('.email-viewer').forEach(el => {
+    if (!el.classList.contains('enlarge-trigger')) {
+      el.classList.add('enlarge-trigger');
+    }
+  });
+
+  // Add class to comparison cards
+  document.querySelectorAll('.bdm-column, .bdm-cap-row').forEach(el => {
+    if (!el.closest('.enlarge-trigger') && !el.classList.contains('enlarge-trigger')) {
+      el.classList.add('enlarge-trigger');
+    }
+  });
+
+  enlargeableItems = document.querySelectorAll('.enlarge-trigger');
+
+  enlargeableItems.forEach((item, index) => {
+    item.addEventListener('click', (e) => {
+      if (e.target.closest('button') || e.target.closest('a')) return;
+      enlargeContent(item, index);
+    });
+  });
+}
+
+function enlargeContent(item, index) {
+  currentEnlargedIndex = index;
+  const clone = item.cloneNode(true);
+  clone.classList.remove('enlarge-trigger');
+  clone.style.maxWidth = '100%';
+
+  const modalBody = document.getElementById('modalBody');
+  modalBody.innerHTML = '';
+  modalBody.appendChild(clone);
+
+  modal.classList.add('active');
+  updateNavButtons();
+}
+
+function updateNavButtons() {
+  document.getElementById('modalPrev').disabled = currentEnlargedIndex <= 0;
+  document.getElementById('modalNext').disabled = currentEnlargedIndex >= enlargeableItems.length - 1;
+}
+
+document.querySelector('.enlarge-modal-close').addEventListener('click', () => {
+  modal.classList.remove('active');
+  currentEnlargedIndex = -1;
+});
+
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.classList.remove('active');
+    currentEnlargedIndex = -1;
+  }
+});
+
+document.getElementById('modalPrev').addEventListener('click', () => {
+  if (currentEnlargedIndex > 0) {
+    enlargeContent(enlargeableItems[currentEnlargedIndex - 1], currentEnlargedIndex - 1);
+  }
+});
+
+document.getElementById('modalNext').addEventListener('click', () => {
+  if (currentEnlargedIndex < enlargeableItems.length - 1) {
+    enlargeContent(enlargeableItems[currentEnlargedIndex + 1], currentEnlargedIndex + 1);
+  }
+});
+
+// Initialize on load and when stages change
+initEnlargeables();
+const observer = new MutationObserver(() => initEnlargeables());
+observer.observe(document.body, { subtree: true, attributes: true, attributeFilter: ['class'] });
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (!modal.classList.contains('active')) return;
+  if (e.key === 'ArrowLeft' && currentEnlargedIndex > 0) {
+    document.getElementById('modalPrev').click();
+  } else if (e.key === 'ArrowRight' && currentEnlargedIndex < enlargeableItems.length - 1) {
+    document.getElementById('modalNext').click();
+  } else if (e.key === 'Escape') {
+    modal.classList.remove('active');
+  }
 });
 </script>
 </body>
