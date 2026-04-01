@@ -1,0 +1,3975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cold Lava × TM Tarpaulins — Partnership Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== FOUNDATION ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+:root {
+  --color-bg: #030305;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #E5E7EB;
+  --color-text-muted: rgba(255,255,255,0.7);
+  --color-accent: #00d4ff;
+  --color-accent-rgb: 6,182,212;
+  --color-border: rgba(6,182,212,0.2);
+  --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --sidebar-width: 260px;
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Light mode */
+:root[data-theme="light"] {
+  --color-bg: #FFFFFF;
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #333333;
+  --color-text-muted: rgba(0,0,0,0.6);
+  --color-accent: #0086b3;
+  --color-accent-rgb: 0,134,179;
+  --color-border: rgba(0,134,179,0.15);
+}
+
+body {
+  font-family: var(--font-primary);
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ===== SCROLL PROGRESS ===== */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: linear-gradient(to right, rgba(var(--color-accent-rgb),0.3), var(--color-accent));
+  z-index: 9998;
+  width: 0%;
+  transition: width 0.1s linear;
+  pointer-events: none;
+}
+
+/* ===== BACKGROUND EFFECTS ===== */
+.bg-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+@keyframes streamFlow {
+  0%, 100% { opacity: 0.15; transform: translateY(0); }
+  50% { opacity: 0.4; transform: translateY(-12vh); }
+}
+
+.light-stream {
+  position: absolute;
+  width: 1px;
+  height: 40vh;
+  background: linear-gradient(to bottom, transparent 0%, rgba(var(--color-accent-rgb),0.25) 50%, transparent 100%);
+  animation: streamFlow var(--dur, 7s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  opacity: 0.3;
+}
+
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  background-image: url('data:image/svg+xml,<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23n)" opacity="0"/></svg>');
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== LEFT SIDEBAR NAV ===== */
+.sidebar-nav {
+  position: fixed;
+  left: 0; top: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: rgba(3,3,5,0.95);
+  border-right: 1px solid rgba(var(--color-accent-rgb),0.1);
+  backdrop-filter: blur(20px);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0;
+  overflow-y: auto;
+}
+
+:root[data-theme="light"] .sidebar-nav {
+  background: #f5f5f5;
+  border-right-color: rgba(0,134,179,0.15);
+}
+
+.sidebar-brand {
+  padding: 0 1.5rem 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  margin-bottom: 1rem;
+}
+
+.sidebar-brand-text {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(var(--color-accent-rgb),0.5);
+}
+
+.sidebar-prepared {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.2);
+  margin-top: 0.5rem;
+}
+
+.sidebar-prepared span {
+  display: block;
+  color: rgba(var(--color-accent-rgb),0.8);
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  letter-spacing: 0.1em;
+}
+
+.sidebar-links {
+  list-style: none;
+  padding: 0.5rem 0;
+  flex: 1;
+}
+
+.sidebar-links li {
+  position: relative;
+}
+
+.sidebar-links a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.8rem 1.5rem;
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.98);
+  transition: all 0.3s var(--ease-smooth);
+  border-left: 3px solid transparent;
+}
+
+.sidebar-links a:hover {
+  color: rgba(255,255,255,0.6);
+  background: rgba(var(--color-accent-rgb),0.03);
+}
+
+.sidebar-links a.active {
+  color: var(--color-accent);
+  border-left-color: var(--color-accent);
+  background: rgba(var(--color-accent-rgb),0.05);
+}
+
+.sidebar-links .nav-num {
+  font-size: 0.7rem;
+  color: rgba(var(--color-accent-rgb),0.3);
+  min-width: 1.5rem;
+}
+
+.sidebar-links a.active .nav-num {
+  color: rgba(var(--color-accent-rgb),0.7);
+}
+
+.sidebar-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.15);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ===== MOBILE SIDEBAR TOGGLE ===== */
+.sidebar-toggle {
+  display: none;
+  position: fixed;
+  top: 1rem; left: 1rem;
+  z-index: 1000;
+  background: rgba(var(--color-accent-rgb),0.1);
+  border: 1px solid rgba(var(--color-accent-rgb),0.2);
+  color: var(--color-accent);
+  width: 40px; height: 40px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== HUD OVERLAYS ===== */
+.hud-coords {
+  position: fixed;
+  top: 2rem;
+  left: calc(var(--sidebar-width) + 2rem);
+  z-index: 800;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.25);
+  pointer-events: none;
+}
+.hud-coords .val { color: rgba(var(--color-accent-rgb),0.6); }
+
+.hud-time {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 800;
+  text-align: right;
+  font-family: var(--font-mono);
+  pointer-events: none;
+}
+.hud-time .location { font-size: 0.7rem; color: rgba(255,255,255,0.3); letter-spacing: 0.05em; }
+.hud-time .dot { margin: 0 0.5rem; color: rgba(255,255,255,0.2); }
+.hud-time .clock { font-size: 0.7rem; color: rgba(255,255,255,0.4); }
+.hud-time .date { font-size: 0.7rem; color: rgba(255,255,255,0.2); margin-top: 0.2rem; letter-spacing: 0.08em; }
+
+/* ===== MAIN CONTENT ===== */
+.main-content {
+  margin-left: var(--sidebar-width);
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== SECTIONS ===== */
+.section {
+  position: relative;
+  padding: 6rem 4rem;
+}
+
+.section-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(var(--color-accent-rgb),0.4);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.label::before {
+  content: '';
+  width: 2rem;
+  height: 1px;
+  background: rgba(var(--color-accent-rgb),0.3);
+}
+
+h1 {
+  font-size: clamp(3rem, 7vw, 5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+}
+
+.lead {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.95);
+  line-height: 1.8;
+  max-width: 650px;
+}
+
+.thin { font-weight: 300; color: rgba(255,255,255,0.6); }
+.accent-text { color: var(--color-accent); }
+
+/* ===== ARCH-BOX (Corner bracket cards) ===== */
+.arch-box {
+  position: relative;
+  padding: 2rem;
+  background: rgba(var(--color-accent-rgb),0.02);
+  margin-bottom: 1rem;
+}
+.arch-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 16px; height: 16px;
+  border-left: 1px solid rgba(var(--color-accent-rgb),0.35);
+  border-top: 1px solid rgba(var(--color-accent-rgb),0.35);
+  pointer-events: none;
+}
+.arch-box::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 16px; height: 16px;
+  border-right: 1px solid rgba(var(--color-accent-rgb),0.35);
+  border-bottom: 1px solid rgba(var(--color-accent-rgb),0.35);
+  pointer-events: none;
+}
+.arch-box .corner-tr {
+  position: absolute; top: 0; right: 0;
+  width: 16px; height: 16px;
+  border-right: 1px solid rgba(var(--color-accent-rgb),0.2);
+  border-top: 1px solid rgba(var(--color-accent-rgb),0.2);
+}
+.arch-box .corner-bl {
+  position: absolute; bottom: 0; left: 0;
+  width: 16px; height: 16px;
+  border-left: 1px solid rgba(var(--color-accent-rgb),0.2);
+  border-bottom: 1px solid rgba(var(--color-accent-rgb),0.2);
+}
+
+/* ===== CARD ===== */
+.card {
+  position: relative;
+  background: rgba(0,0,0,0.6);
+  border: 1px solid var(--color-border);
+  padding: 2rem;
+  backdrop-filter: blur(8px);
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 12px; height: 12px;
+  border-left: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border);
+}
+.card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 12px; height: 12px;
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* ===== ARROW LIST ===== */
+.arrow-list {
+  list-style: none;
+  margin: 2rem 0;
+}
+.arrow-list li {
+  padding: 0.9rem 0 0.9rem 2rem;
+  position: relative;
+  color: #FFFFFF;
+  font-size: 1.35rem;
+  line-weight: 500;
+  line-height: 1.6;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.arrow-list li:last-child { border-bottom: none; }
+.arrow-list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: rgba(var(--color-accent-rgb),0.4);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+/* ===== QUOTE BLOCK ===== */
+.quote-block {
+  border-left: 2px solid rgba(var(--color-accent-rgb),0.4);
+  padding: 1.5rem 2rem;
+  margin: 2.5rem 0;
+  background: rgba(var(--color-accent-rgb),0.03);
+}
+.quote-text {
+  font-size: 1.4rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.95);
+  line-height: 1.8;
+  font-weight: 400;
+}
+.quote-author {
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #00d4ff;
+}
+
+/* ===== FLOW DIAGRAM ===== */
+.flow {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 2.5rem 0;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.flow-step {
+  position: relative;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(var(--color-accent-rgb),0.2);
+  padding: 0.8rem 1.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  white-space: nowrap;
+}
+.flow-step::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 8px; height: 8px;
+  border-left: 1px solid rgba(var(--color-accent-rgb),0.3);
+  border-top: 1px solid rgba(var(--color-accent-rgb),0.3);
+}
+.flow-step::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 8px; height: 8px;
+  border-right: 1px solid rgba(var(--color-accent-rgb),0.3);
+  border-bottom: 1px solid rgba(var(--color-accent-rgb),0.3);
+}
+.flow-arrow {
+  color: rgba(var(--color-accent-rgb),0.3);
+  padding: 0 0.5rem;
+}
+.flow-arrow svg {
+  width: 20px; height: 20px;
+}
+
+/* ===== INVESTMENT BADGE ===== */
+.investment {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(var(--color-accent-rgb),0.06);
+  border: 1px solid rgba(var(--color-accent-rgb),0.2);
+  padding: 0.8rem 1.5rem;
+  margin-top: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.05em;
+}
+.investment .dot {
+  width: 6px; height: 6px;
+  background: var(--color-accent);
+  border-radius: 50%;
+}
+
+/* ===== STAT CARDS ===== */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.stat-card {
+  position: relative;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(var(--color-accent-rgb),0.15);
+  padding: 1.5rem;
+  text-align: center;
+}
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 10px; height: 10px;
+  border-left: 1px solid rgba(var(--color-accent-rgb),0.3);
+  border-top: 1px solid rgba(var(--color-accent-rgb),0.3);
+}
+.stat-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 10px; height: 10px;
+  border-right: 1px solid rgba(var(--color-accent-rgb),0.3);
+  border-bottom: 1px solid rgba(var(--color-accent-rgb),0.3);
+}
+.stat-value {
+  font-family: var(--font-mono);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: rgba(var(--color-accent-rgb),0.45);
+  margin-bottom: 0.5rem;
+}
+.stat-label {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.6);
+}
+
+/* ===== PREMIUM TABLE ===== */
+.premium-table {
+  width: 100%;
+  margin: 2rem 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(var(--color-accent-rgb),0.15);
+  overflow: hidden;
+}
+.premium-table thead th {
+  background: rgba(var(--color-accent-rgb),0.08);
+  padding: 1.2rem 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #00d4ff;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: left;
+  border-bottom: 2px solid rgba(var(--color-accent-rgb),0.3);
+}
+.premium-table tbody td {
+  padding: 1.2rem 1.5rem;
+  font-size: 1.15rem;
+  color: rgba(255,255,255,0.95);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.premium-table tbody tr:last-child td { border-bottom: none; }
+.premium-table tbody td:first-child {
+  color: rgba(255,255,255,0.9);
+  font-weight: 500;
+}
+
+/* ===== QUESTION LIST ===== */
+.question-list {
+  list-style: none;
+  margin: 2rem 0;
+  counter-reset: q;
+}
+.question-list li {
+  padding: 1.25rem 0 1.25rem 3.5rem;
+  position: relative;
+  color: rgba(255,255,255,0.6);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  counter-increment: q;
+}
+.question-list li:last-child { border-bottom: none; }
+.question-list li::before {
+  content: counter(q, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(var(--color-accent-rgb),0.15);
+}
+
+/* ===== SIDEBAR MOCKUP ===== */
+.sidebar-mockup {
+  position: relative;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(var(--color-accent-rgb),0.15);
+  padding: 1.5rem;
+  margin: 2rem 0;
+  max-width: 400px;
+}
+.sidebar-mockup::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 12px; height: 12px;
+  border-left: 1px solid rgba(var(--color-accent-rgb),0.3);
+  border-top: 1px solid rgba(var(--color-accent-rgb),0.3);
+}
+.sidebar-mockup::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 12px; height: 12px;
+  border-right: 1px solid rgba(var(--color-accent-rgb),0.3);
+  border-bottom: 1px solid rgba(var(--color-accent-rgb),0.3);
+}
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 0.85rem;
+}
+.sidebar-item:last-child { border-bottom: none; }
+.sidebar-item.active { color: rgba(255,255,255,0.7); }
+.sidebar-item.locked { color: rgba(255,255,255,0.2); }
+.sidebar-icon { font-size: 1rem; width: 1.5rem; text-align: center; flex-shrink: 0; }
+.sidebar-status {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ===== PILL TAGS ===== */
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 2rem 0;
+}
+.pill {
+  position: relative;
+  background: rgba(var(--color-accent-rgb),0.04);
+  border: 1px solid rgba(var(--color-accent-rgb),0.15);
+  padding: 0.6rem 1.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.45);
+}
+
+/* ===== SECTION DIVIDER ===== */
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(var(--color-accent-rgb),0.1), transparent);
+}
+
+/* ===== TICKER ===== */
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ticker-wrap {
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 0.8rem 0;
+  position: relative;
+}
+.ticker-fade-l {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 5rem;
+  background: linear-gradient(to right, var(--color-bg), transparent);
+  z-index: 10;
+}
+.ticker-fade-r {
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 5rem;
+  background: linear-gradient(to left, var(--color-bg), transparent);
+  z-index: 10;
+}
+.ticker-track {
+  display: flex;
+  animation: ticker 40s linear infinite;
+  width: max-content;
+}
+.ticker-item {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.2);
+  white-space: nowrap;
+  padding: 0 1.5rem;
+}
+.ticker-dot {
+  color: rgba(var(--color-accent-rgb),0.3);
+  font-size: 0.4rem;
+  display: flex;
+  align-items: center;
+}
+
+/* ===== CTA SECTION ===== */
+.cta-section { text-align: center; }
+.cta-section h2, .cta-section .lead { text-align: center; margin-left: auto; margin-right: auto; }
+.cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 2.5rem;
+  padding: 1rem 2.5rem;
+  background: white;
+  color: black;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  border: 2px solid white;
+  transition: all 0.3s var(--ease-smooth);
+}
+.cta-link:hover {
+  background: transparent;
+  color: white;
+}
+.cta-footer {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: rgba(255,255,255,0.15);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 5rem;
+}
+
+/* ===== FADE-IN ANIMATIONS ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.7s var(--ease-smooth), transform 0.7s var(--ease-smooth);
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-in.d1 { transition-delay: 0.1s; }
+.fade-in.d2 { transition-delay: 0.2s; }
+.fade-in.d3 { transition-delay: 0.3s; }
+.fade-in.d4 { transition-delay: 0.4s; }
+
+/* Center sections 3-8 */
+#s003 .fade-in.d3,
+#s004 .fade-in.d3,
+#s005 .fade-in.d3,
+#s006 .fade-in.d3,
+#s007 .fade-in.d3,
+#s008 .fade-in.d3 {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+#s003 .fade-in.d3 > *,
+#s004 .fade-in.d3 > *,
+#s005 .fade-in.d3 > *,
+#s006 .fade-in.d3 > *,
+#s007 .fade-in.d3 > *,
+#s008 .fade-in.d3 > * {
+  max-width: 960px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .sidebar-nav { display: none; }
+  .sidebar-nav.open { display: flex; z-index: 1001; }
+  .sidebar-toggle { display: flex; }
+  .main-content { margin-left: 0; }
+  .hud-coords { left: 2rem; }
+}
+
+@media (max-width: 768px) {
+  .section { padding: 4rem 1.5rem; }
+  .hud-coords, .hud-time { display: none; }
+  .flow { flex-direction: column; gap: 0; }
+  .flow-arrow svg { transform: rotate(90deg); }
+  .flow-arrow { padding: 0.25rem 0; }
+  .card-grid { grid-template-columns: 1fr; }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .premium-table thead th, .premium-table tbody td { padding: 0.75rem 1rem; }
+  .sidebar-mockup { max-width: 100%; }
+  .device-grid { grid-template-columns: 1fr !important; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: rgba(var(--color-accent-rgb),0.15); }
+::-webkit-scrollbar-thumb:hover { background: rgba(var(--color-accent-rgb),0.3); }
+
+/* Light mode overrides */
+:root[data-theme="light"] .light-stream {
+  display: none;
+}
+
+:root[data-theme="light"] .sidebar-brand-text {
+  color: rgba(0,134,179,0.6);
+}
+
+:root[data-theme="light"] .sidebar-links a {
+  color: rgba(0,0,0,0.7);
+}
+
+:root[data-theme="light"] .sidebar-links a:hover {
+  color: rgba(0,0,0,0.4);
+  background: rgba(0,134,179,0.08);
+}
+
+:root[data-theme="light"] .sidebar-links a.active {
+  color: #0086b3;
+  border-left-color: #0086b3;
+  background: rgba(0,134,179,0.08);
+}
+
+:root[data-theme="light"] .hud-coords .val {
+  color: rgba(0,134,179,0.7);
+}
+
+:root[data-theme="light"] .hud-coords {
+  color: rgba(0,0,0,0.4);
+}
+
+:root[data-theme="light"] .hud-time .clock,
+:root[data-theme="light"] .hud-time .location {
+  color: rgba(0,0,0,0.5);
+}
+
+:root[data-theme="light"] .hud-time .date {
+  color: rgba(0,0,0,0.4);
+}
+
+:root[data-theme="light"] .label {
+  color: rgba(0,134,179,0.5);
+}
+
+:root[data-theme="light"] .label::before {
+  background: rgba(0,134,179,0.3);
+}
+
+:root[data-theme="light"] .thin {
+  color: rgba(0,0,0,0.5);
+}
+
+:root[data-theme="light"] .card {
+  background: rgba(0,134,179,0.04);
+  border-color: rgba(0,134,179,0.15);
+}
+
+:root[data-theme="light"] .quote-block {
+  border-left-color: rgba(0,134,179,0.5);
+  background: rgba(0,134,179,0.05);
+}
+
+:root[data-theme="light"] .quote-text {
+  color: rgba(0,0,0,0.8);
+}
+
+:root[data-theme="light"] .quote-author {
+  color: #0086b3;
+}
+
+:root[data-theme="light"] .section-divider {
+  background: linear-gradient(90deg, transparent, rgba(0,134,179,0.1), transparent);
+}
+
+:root[data-theme="light"] .premium-table {
+  background: rgba(0,134,179,0.02);
+  border-color: rgba(0,134,179,0.15);
+}
+
+:root[data-theme="light"] .premium-table thead th {
+  background: rgba(0,134,179,0.08);
+  color: #0086b3;
+  border-bottom-color: rgba(0,134,179,0.3);
+}
+
+:root[data-theme="light"] .premium-table tbody td {
+  color: rgba(0,0,0,0.85);
+  border-bottom-color: rgba(0,0,0,0.08);
+}
+
+:root[data-theme="light"] .pill {
+  background: rgba(0,134,179,0.05);
+  border-color: rgba(0,134,179,0.15);
+  color: rgba(0,0,0,0.5);
+}
+
+:root[data-theme="light"] .cta-link {
+  background: #0086b3;
+  color: white;
+  border-color: #0086b3;
+}
+
+:root[data-theme="light"] .cta-link:hover {
+  background: transparent;
+  color: #0086b3;
+}
+
+/* Light mode overrides for hardcoded colors */
+:root[data-theme="light"] .arch-box {
+  background: rgba(0,134,179,0.04);
+}
+
+:root[data-theme="light"] .arch-box::before,
+:root[data-theme="light"] .arch-box::after,
+:root[data-theme="light"] .arch-box .corner-tr,
+:root[data-theme="light"] .arch-box .corner-bl {
+  border-color: rgba(0,134,179,0.3);
+}
+
+:root[data-theme="light"] .card::before,
+:root[data-theme="light"] .card::after {
+  border-color: rgba(0,134,179,0.15);
+}
+
+:root[data-theme="light"] .stat-card {
+  background: rgba(0,134,179,0.04);
+  border-color: rgba(0,134,179,0.15);
+}
+
+:root[data-theme="light"] .stat-card::before,
+:root[data-theme="light"] .stat-card::after {
+  border-color: rgba(0,134,179,0.3);
+}
+
+:root[data-theme="light"] .stat-value {
+  color: #0086b3;
+}
+
+:root[data-theme="light"] .stat-label {
+  color: rgba(0,0,0,0.6);
+}
+
+:root[data-theme="light"] h1,
+:root[data-theme="light"] h2,
+:root[data-theme="light"] h3,
+:root[data-theme="light"] h4 {
+  color: #1a1a1a;
+}
+
+:root[data-theme="light"] .lead {
+  color: rgba(0,0,0,0.7);
+}
+
+:root[data-theme="light"] .arrow-list li {
+  color: #1a1a1a;
+  border-bottom-color: rgba(0,0,0,0.08);
+}
+
+:root[data-theme="light"] .arrow-list li::before {
+  color: #0086b3;
+}
+
+:root[data-theme="light"] .investment {
+  background: rgba(0,134,179,0.08);
+  border-color: rgba(0,134,179,0.2);
+  color: rgba(0,0,0,0.6);
+}
+
+:root[data-theme="light"] .investment .dot {
+  background: #0086b3;
+}
+
+:root[data-theme="light"] #themeToggle {
+  border-color: rgba(0,134,179,0.4);
+  color: #0086b3;
+  background: rgba(0,134,179,0.05);
+}
+
+:root[data-theme="light"] #themeToggle:hover {
+  border-color: #0086b3;
+  background: rgba(0,134,179,0.15);
+}
+
+:root[data-theme="light"] .email-viewer {
+  background: rgba(0,134,179,0.04);
+  border-color: rgba(0,134,179,0.15);
+}
+
+:root[data-theme="light"] .email-header {
+  border-bottom-color: rgba(0,134,179,0.15);
+  color: #1a1a1a;
+}
+
+:root[data-theme="light"] .email-day-label {
+  color: #0086b3;
+}
+
+:root[data-theme="light"] .email-from-to {
+  color: rgba(0,0,0,0.6);
+}
+
+:root[data-theme="light"] .email-from-to strong {
+  color: #1a1a1a;
+}
+
+:root[data-theme="light"] .email-subject {
+  color: #1a1a1a;
+}
+
+:root[data-theme="light"] .email-body {
+  color: rgba(0,0,0,0.75);
+}
+
+:root[data-theme="light"] .email-body strong {
+  color: #1a1a1a;
+}
+
+:root[data-theme="light"] .email-highlight {
+  background: rgba(0,134,179,0.08);
+  border-left-color: #0086b3;
+  color: rgba(0,0,0,0.75);
+}
+
+:root[data-theme="light"] .email-nav-btn {
+  border-color: rgba(0,134,179,0.4);
+  color: #0086b3;
+}
+
+:root[data-theme="light"] .email-nav-btn:hover {
+  background: rgba(0,134,179,0.1);
+  border-color: #0086b3;
+}
+
+:root[data-theme="light"] .lead-gen-container {
+  background: rgba(0,134,179,0.04);
+  border-color: rgba(0,134,179,0.15);
+}
+
+:root[data-theme="light"] .stage-title {
+  color: #1a1a1a;
+}
+
+:root[data-theme="light"] .stage-counter {
+  color: rgba(0,134,179,0.6);
+}
+
+:root[data-theme="light"] .stage-content {
+  color: rgba(0,0,0,0.75);
+}
+
+:root[data-theme="light"] .stage-highlight {
+  background: rgba(0,134,179,0.08);
+  border-left-color: #0086b3;
+  color: rgba(0,0,0,0.75);
+}
+
+:root[data-theme="light"] .nav-btn {
+  border-color: rgba(0,134,179,0.4);
+  color: #0086b3;
+}
+
+:root[data-theme="light"] .nav-btn:hover {
+  background: rgba(0,134,179,0.1);
+  border-color: #0086b3;
+}
+
+/* ===== GENERIC SERVICE PRICING CARD ===== */
+.service-pricing-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 1.8rem;
+  max-width: 420px;
+  margin-top: 2rem;
+  transition: border-color 0.3s ease;
+}
+.service-pricing-card:hover {
+  border-color: rgba(var(--color-accent-rgb), 0.3);
+}
+.service-pricing-card .spc-title {
+  font-family: var(--font-primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.4rem;
+}
+.service-pricing-card .spc-desc {
+  font-family: var(--font-primary);
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 1.2rem;
+  line-height: 1.5;
+}
+.service-pricing-card .spc-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.service-pricing-card .spc-row:last-of-type { border-bottom: none; }
+.service-pricing-card .spc-key {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.service-pricing-card .spc-val {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+.service-pricing-card .spc-features {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.service-pricing-card .spc-feature {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.4);
+  padding: 0.25rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.service-pricing-card .spc-feature::before {
+  content: '✓';
+  color: rgba(var(--color-accent-rgb), 0.5);
+  font-size: 0.6rem;
+}
+
+/* ===== THEME TOGGLE BUTTON ===== */
+#themeToggle {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 950;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid rgba(var(--color-accent-rgb), 0.3);
+  color: var(--color-accent);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  padding: 0;
+  pointer-events: auto;
+}
+
+#themeToggle:hover {
+  border-color: var(--color-accent);
+  background: rgba(var(--color-accent-rgb), 0.05);
+}
+
+#themeToggle:active {
+  transform: scale(0.95);
+}
+
+/* ===== ENLARGEMENT MODAL ===== */
+.enlarge-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.95);
+  z-index: 9999;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.enlarge-modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.enlarge-modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  background: rgba(0,0,0,0.8);
+  border: 1px solid rgba(0,212,255,0.2);
+  border-radius: 12px;
+  padding: 2rem;
+  overflow: auto;
+}
+
+.enlarge-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(0,212,255,0.1);
+  border: 1px solid rgba(0,212,255,0.3);
+  color: #00d4ff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.enlarge-modal-close:hover {
+  background: rgba(0,212,255,0.2);
+  border-color: #00d4ff;
+}
+
+.enlarge-modal-nav {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+  z-index: 10001;
+}
+
+.enlarge-modal-nav button {
+  background: rgba(0,212,255,0.1);
+  border: 1px solid rgba(0,212,255,0.3);
+  color: #00d4ff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+
+.enlarge-modal-nav button:hover {
+  background: rgba(0,212,255,0.2);
+  border-color: #00d4ff;
+}
+
+.enlarge-modal-nav button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.enlarge-trigger {
+  cursor: zoom-in;
+  position: relative;
+}
+
+.enlarge-trigger::after {
+  content: '🔍';
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.enlarge-trigger:hover::after {
+  opacity: 1;
+}
+
+</style>
+</head>
+<body>
+
+<!-- Scroll Progress -->
+<div id="scroll-progress"></div>
+
+<!-- Background Atmosphere -->
+<div class="bg-atmosphere">
+  <div class="light-stream" style="left:12%;--dur:7s;--delay:0s;"></div>
+  <div class="light-stream" style="left:25%;--dur:9s;--delay:2s;"></div>
+  <div class="light-stream" style="left:40%;--dur:6s;--delay:4s;"></div>
+  <div class="light-stream" style="left:58%;--dur:8s;--delay:1s;"></div>
+  <div class="light-stream" style="left:75%;--dur:7s;--delay:3s;"></div>
+  <div class="light-stream" style="left:90%;--dur:9s;--delay:5s;"></div>
+</div>
+<div class="grain-overlay"></div>
+
+<!-- HUD Overlays -->
+<div class="hud-coords">
+  <span style="color:rgba(255,255,255,0.3)">X</span> <span class="val" id="coordX">0000</span>
+  <span style="margin-left:1.5rem;color:rgba(255,255,255,0.3)">Y</span> <span class="val" id="coordY">0000</span>
+</div>
+<div class="hud-time">
+  <span class="location">London</span>
+  <span class="dot">·</span>
+  <span class="clock" id="clock">--:--:--</span>
+  <div class="date" id="dateText"></div>
+  <button id="themeToggle" title="Toggle light/dark mode">☀️</button>
+</div>
+
+<!-- Mobile Sidebar Toggle -->
+<button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu">☰</button>
+
+<!-- LEFT SIDEBAR NAVIGATION -->
+<nav class="sidebar-nav" id="sidebarNav">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-text">Cold Lava / 2026</div>
+    <div class="sidebar-prepared">Prepared for<span>TM Tarpaulins</span></div>
+  </div>
+  <ul class="sidebar-links" id="sidebarLinks">
+        <li><a href="#hero" data-section="hero"><span class="nav-num">—</span>Overview</a></li>
+        <li><a href="#s011" data-section="s011"><span class="nav-num">001</span>Your Problems</a></li>
+        <li><a href="#s_cost" data-section="s_cost"><span class="nav-num">002</span>The Cost Right Now</a></li>
+        <li><a href="#s006" data-section="s006"><span class="nav-num">003</span>Why You're Stuck</a></li>
+        <li><a href="#s002" data-section="s002"><span class="nav-num">004</span>The Solution</a></li>
+        <li><a href="#s013" data-section="s013"><span class="nav-num">005</span>How It Works</a></li>
+        <li><a href="#s005b" data-section="s005b"><span class="nav-num">006</span>Why It's Better</a></li>
+        <li><a href="#s003" data-section="s003"><span class="nav-num">007</span>Nurture & Follow-up</a></li>
+        <li><a href="#s001" data-section="s001"><span class="nav-num">008</span>Who We Are</a></li>
+        <li><a href="#s014" data-section="s014"><span class="nav-num">009</span>Your Investment</a></li>
+        <li><a href="#s_summary" data-section="s_summary"><span class="nav-num">010</span>What You're Getting</a></li>
+        <li><a href="#s015" data-section="s015"><span class="nav-num">011</span>Next Steps</a></li>
+      </ul>
+  <div class="sidebar-footer">Cold Lava × TM Tarpaulins</div>
+</nav>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="main-content">
+
+  <!-- ==================== HERO ==================== -->
+  <section class="section" id="hero" style="min-height:100vh;position:relative;overflow:hidden;">
+    <!-- Corner brackets -->
+    <div style="position:absolute;top:1.5rem;left:1.5rem;width:20px;height:20px;border-left:1px solid rgba(255,255,255,0.08);border-top:1px solid rgba(255,255,255,0.08);pointer-events:none;"></div>
+    <div style="position:absolute;top:1.5rem;right:1.5rem;width:20px;height:20px;border-right:1px solid rgba(255,255,255,0.08);border-top:1px solid rgba(255,255,255,0.08);pointer-events:none;"></div>
+    <div style="position:absolute;bottom:1.5rem;left:1.5rem;width:20px;height:20px;border-left:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.08);pointer-events:none;"></div>
+    <div style="position:absolute;bottom:1.5rem;right:1.5rem;width:20px;height:20px;border-right:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.08);pointer-events:none;"></div>
+
+    <div class="section-inner">
+      <div class="fade-in">
+        <div class="label">Partnership Deck / 2026</div>
+      </div>
+      <div class="fade-in d1">
+        <h1 style="margin-bottom:2rem;">
+          <span style="display:block;">Intelligence</span>
+          <span style="display:block;"><span class="thin">&</span> <span class="accent-text">Automation</span></span>
+          <span style="display:block;"><span class="thin">For TM Tarpaulins</span></span>
+        </h1>
+      </div>
+      <div class="fade-in d2">
+        <p class="lead" style="margin-bottom:3rem;">Custom-built systems to streamline your operations and unlock new revenue for your clients.</p>
+      </div>
+      <div class="fade-in d3">
+        <a href="#s001" style="display:inline-flex;align-items:center;gap:0.75rem;background:white;color:black;padding:0.9rem 2rem;text-decoration:none;font-weight:600;font-size:0.9rem;border:2px solid white;transition:all 0.3s var(--ease-smooth);" onmouseover="this.style.background='transparent';this.style.color='white'" onmouseout="this.style.background='white';this.style.color='black'">
+          Explore the Partnership <span style="font-size:1.1rem;">→</span>
+        </a>
+      </div>
+      <div class="fade-in d4" style="margin-top:4rem;">
+        <span style="font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.15);">Cold Lava × TM Tarpaulins</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker-fade-l"></div>
+    <div class="ticker-fade-r"></div>
+    <div class="ticker-track">
+      <span class="ticker-item">Client Portals</span><span class="ticker-dot">■</span>
+      <span class="ticker-item">Database Reactivation</span><span class="ticker-dot">■</span>
+      <span class="ticker-item">Google Review Automation</span><span class="ticker-dot">■</span>
+      <span class="ticker-item">Nurture Sequences</span><span class="ticker-dot">■</span>
+      <span class="ticker-item">AI Chatbots</span><span class="ticker-dot">■</span>
+      <span class="ticker-item">Missed Call Recovery</span><span class="ticker-dot">■</span>
+      <span class="ticker-item">Premium Websites</span><span class="ticker-dot">■</span>
+      <span class="ticker-item">White-Label Ready</span><span class="ticker-dot">■</span>
+      <span class="ticker-item">Built In The UK</span><span class="ticker-dot">■</span>
+      <span class="ticker-item">Recurring Revenue</span><span class="ticker-dot">■</span>
+      <span class="ticker-item">Full Support</span><span class="ticker-dot">■</span>
+      <!-- duplicate for seamless loop -->
+      <span class="ticker-item">Client Portals</span><span class="ticker-dot">■</span>
+      <span class="ticker-item">Database Reactivation</span><span class="ticker-dot">■</span>
+      <span class="ticker-item">Google Review Automation</span><span class="ticker-dot">■</span>
+      <span class="ticker-item">Nurture Sequences</span><span class="ticker-dot">■</span>
+      <span class="ticker-item">AI Chatbots</span><span class="ticker-dot">■</span>
+      <span class="ticker-item">Missed Call Recovery</span><span class="ticker-dot">■</span>
+      <span class="ticker-item">Premium Websites</span><span class="ticker-dot">■</span>
+      <span class="ticker-item">White-Label Ready</span><span class="ticker-dot">■</span>
+      <span class="ticker-item">Built In The UK</span><span class="ticker-dot">■</span>
+      <span class="ticker-item">Recurring Revenue</span><span class="ticker-dot">■</span>
+      <span class="ticker-item">Full Support</span><span class="ticker-dot">■</span>
+    </div>
+  </div>
+
+
+  <!-- ==================== WHO IS COLD LAVA ==================== -->
+  <section class="section" id="s011">
+    <div class="section-inner">
+      <div class="fade-in" style="text-align:center;">
+        <div class="label" style="justify-content:center;">Your Pain Points / 001</div>
+      </div>
+      <div class="fade-in d1" style="text-align:center;">
+        <h2 style="text-align:center;">We've Listened.<br><span class="thin">Here's What's Holding You Back.</span></h2>
+        <p style="font-size:1.2rem;color:rgba(255,255,255,0.5);max-width:600px;margin:0 auto;">Every one of these problems has a solution. That's why we're here.</p>
+      </div>
+
+      <!-- PROBLEM-SOLUTION PAIRS -->
+      <div class="fade-in d2" style="margin-top:3rem;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:960px;margin:0 auto;">
+
+          <!-- Problem 1 -->
+          <div style="background:rgba(255,60,60,0.04);border:1px solid rgba(255,60,60,0.12);border-radius:8px;padding:2rem;">
+            <div style="font-size:0.85rem;color:rgba(255,100,100,0.6);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;font-weight:600;">The Problem</div>
+            <div style="font-size:1.2rem;font-weight:600;color:#ff6666;margin-bottom:1rem;">Manual Lead Generation</div>
+            <div style="font-size:1rem;color:rgba(255,255,255,0.7);line-height:1.7;">~1% success rate. Emotionally draining. Hours spent sending emails to unqualified prospects.</div>
+          </div>
+
+          <!-- Solution 1 -->
+          <div style="background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.12);border-radius:8px;padding:2rem;">
+            <div style="font-size:0.85rem;color:rgba(0,212,255,0.6);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;font-weight:600;">The Solution</div>
+            <div style="font-size:1.2rem;font-weight:600;color:#00d4ff;margin-bottom:1rem;">Automated Research + Targeting</div>
+            <div style="font-size:1rem;color:rgba(255,255,255,0.7);line-height:1.7;">5% response rate. AI identifies decision-makers, researches companies, personalizes every email. You only review warm leads.</div>
+          </div>
+
+          <!-- Problem 2 -->
+          <div style="background:rgba(255,60,60,0.04);border:1px solid rgba(255,60,60,0.12);border-radius:8px;padding:2rem;">
+            <div style="font-size:0.85rem;color:rgba(255,100,100,0.6);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;font-weight:600;">The Problem</div>
+            <div style="font-size:1.2rem;font-weight:600;color:#ff6666;margin-bottom:1rem;">No Automated Follow-up</div>
+            <div style="font-size:1rem;color:rgba(255,255,255,0.7);line-height:1.7;">Leads go cold. Long sales cycles with manual nurturing. You're too busy in the workshop.</div>
+          </div>
+
+          <!-- Solution 2 -->
+          <div style="background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.12);border-radius:8px;padding:2rem;">
+            <div style="font-size:0.85rem;color:rgba(0,212,255,0.6);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;font-weight:600;">The Solution</div>
+            <div style="font-size:1.2rem;font-weight:600;color:#00d4ff;margin-bottom:1rem;">3x Automated Follow-ups</div>
+            <div style="font-size:1rem;color:rgba(255,255,255,0.7);line-height:1.7;">System sends follow-ups automatically over 2 weeks. Keeps your voice in the conversation. Only alerts you when they're hot.</div>
+          </div>
+
+          <!-- Problem 3 -->
+          <div style="background:rgba(255,60,60,0.04);border:1px solid rgba(255,60,60,0.12);border-radius:8px;padding:2rem;">
+            <div style="font-size:0.85rem;color:rgba(255,100,100,0.6);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;font-weight:600;">The Problem</div>
+            <div style="font-size:1.2rem;font-weight:600;color:#ff6666;margin-bottom:1rem;">Fear of Sounding Robotic</div>
+            <div style="font-size:1rem;color:rgba(255,255,255,0.7);line-height:1.7;">Worried AI will break the trust relationships you've built. Prospects will know it's not you.</div>
+          </div>
+
+          <!-- Solution 3 -->
+          <div style="background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.12);border-radius:8px;padding:2rem;">
+            <div style="font-size:0.85rem;color:rgba(0,212,255,0.6);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;font-weight:600;">The Solution</div>
+            <div style="font-size:1.2rem;font-weight:600;color:#00d4ff;margin-bottom:1rem;">Your Voice. Your Email. Your LinkedIn.</div>
+            <div style="font-size:1rem;color:rgba(255,255,255,0.7);line-height:1.7;">Trained on your exact language, tone, and personality. Every prospect thinks they're talking directly to you. Sends from your email, uses your LinkedIn.</div>
+          </div>
+
+          <!-- Problem 4 -->
+          <div style="background:rgba(255,60,60,0.04);border:1px solid rgba(255,60,60,0.12);border-radius:8px;padding:2rem;">
+            <div style="font-size:0.85rem;color:rgba(255,100,100,0.6);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;font-weight:600;">The Problem</div>
+            <div style="font-size:1.2rem;font-weight:600;color:#ff6666;margin-bottom:1rem;">Can't Break Into New Markets</div>
+            <div style="font-size:1rem;color:rgba(255,255,255,0.7);line-height:1.7;">Quite a lot of "who you know." Can't reach decision-makers you don't have relationships with.</div>
+          </div>
+
+          <!-- Solution 4 -->
+          <div style="background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.12);border-radius:8px;padding:2rem;">
+            <div style="font-size:0.85rem;color:rgba(0,212,255,0.6);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;font-weight:600;">The Solution</div>
+            <div style="font-size:1.2rem;font-weight:600;color:#00d4ff;margin-bottom:1rem;">Intelligent Market Prospecting</div>
+            <div style="font-size:1rem;color:rgba(255,255,255,0.7);line-height:1.7;">AI finds decision-makers across new markets. Researches their companies. Identifies the perfect time to reach out. You don't need "who you know."</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="fade-in d4" style="margin-top:3rem;text-align:center;">
+        <div style="background:rgba(0,0,0,0.5);border-left:3px solid rgba(0,212,255,0.5);padding:2rem 2.5rem;border-radius:0 8px 8px 0;max-width:700px;margin:0 auto;text-align:left;">
+          <p style="font-size:1.4rem;font-style:italic;color:rgba(255,255,255,0.9);line-height:1.7;">"It's hard and quite demoralising when you're putting out so many emails and not getting much back."</p>
+          <p style="font-family:var(--font-mono);font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;color:#00d4ff;margin-top:1rem;">— Marcus, TM Tarpaulins</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ==================== 008 / BOLT-ONS ==================== -->
+  <!-- ==================== 005 / MISSED CALL TEXT-BACK — ANIMATED DEMO ==================== -->
+
+  <!-- ==================== 006 / PREMIUM WEBSITES ==================== -->
+
+  <div class="section-divider"></div>
+
+  <!-- ==================== GF JOB WEBSITE TOOL ==================== -->
+  
+
+  <!-- ==================== 010 / PARTNERSHIP MODEL ==================== -->
+
+  <div class="section-divider"></div>
+
+
+  <div class="section-divider"></div>
+
+  <!-- ==================== 012 / CASE STUDY ==================== -->
+  
+
+  <!-- ==================== 013 / QUESTIONS ==================== -->
+
+  <div class="section-divider"></div>
+
+  <!-- ==================== 003 / WHAT WE NEED ==================== -->
+
+  <div class="section-divider"></div>
+
+  <!-- ==================== HOW OUR AI WORKS ==================== -->
+  <section class="section" id="s_cost">
+    <div class="section-inner">
+      <div class="fade-in" style="text-align:center;">
+        <div class="label" style="justify-content:center;">The Cost / Your Reality Right Now</div>
+      </div>
+      <div class="fade-in d1" style="text-align:center;">
+        <h2 style="text-align:center;">What This Month Is Actually Costing You<br><span class="thin" style="color:#ff6666;">If You Do Nothing</span></h2>
+      </div>
+
+      <!-- The numbers -->
+      <div class="fade-in d2" style="margin-top:3rem;text-align:center;">
+        <div style="max-width:960px;margin:0 auto;">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;margin-bottom:3rem;">
+
+            <!-- Lost deals -->
+            <div style="background:rgba(255,60,60,0.06);border:1px solid rgba(255,60,60,0.2);border-radius:10px;padding:2.5rem;text-align:center;">
+              <div style="font-size:3.5rem;font-weight:800;color:#ff6666;line-height:1;margin-bottom:0.5rem;">?</div>
+              <div style="font-size:1.1rem;color:rgba(255,255,255,0.9);margin-bottom:0.5rem;font-weight:600;">Deals You Don't Know About</div>
+              <div style="font-size:0.95rem;color:rgba(255,255,255,0.6);line-height:1.6;">Prospects you never reached because you're too busy. Decision-makers who moved to competitors. You'll never know they existed.</div>
+            </div>
+
+            <!-- Time wasted -->
+            <div style="background:rgba(255,60,60,0.06);border:1px solid rgba(255,60,60,0.2);border-radius:10px;padding:2.5rem;text-align:center;">
+              <div style="font-size:2.8rem;font-weight:800;color:#ff6666;line-height:1;margin-bottom:0.5rem;">50+ hrs</div>
+              <div style="font-size:1.1rem;color:rgba(255,255,255,0.9);margin-bottom:0.5rem;font-weight:600;">Per Month. Manual Outreach.</div>
+              <div style="font-size:0.95rem;color:rgba(255,255,255,0.6);line-height:1.6;">Writing emails. Following up manually. Chasing dead leads. Time you can't get back.</div>
+            </div>
+
+            <!-- Opportunity cost -->
+            <div style="background:rgba(255,60,60,0.06);border:1px solid rgba(255,60,60,0.2);border-radius:10px;padding:2.5rem;text-align:center;">
+              <div style="font-size:2.8rem;font-weight:800;color:#ff6666;line-height:1;margin-bottom:0.5rem;">£?</div>
+              <div style="font-size:1.1rem;color:rgba(255,255,255,0.9);margin-bottom:0.5rem;font-weight:600;">Revenue Just... Gone.</div>
+              <div style="font-size:0.95rem;color:rgba(255,255,255,0.6);line-height:1.6;">Not just lost this month. Lost next month too. And the next. It compounds.</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- The reality -->
+      <div class="fade-in d3" style="margin-top:3rem;text-align:center;">
+        <div style="background:rgba(255,60,60,0.08);border:1px solid rgba(255,60,60,0.15);border-radius:10px;padding:3rem;max-width:800px;margin:0 auto;">
+          <div style="font-size:1.2rem;color:rgba(255,255,255,0.9);line-height:1.8;">
+            <p style="margin-bottom:1rem;">
+              <strong>You're manually sending 100 emails per month.</strong> Maybe getting 1 conversation. Spending 50+ hours on it.
+            </p>
+            <p style="margin-bottom:1rem;">
+              <strong>In 12 months, that's 600 hours.</strong> That's 15 full work weeks. Gone.
+            </p>
+            <p style="color:rgba(255,100,100,0.8);font-size:1.1rem;font-weight:600;">
+              And you're still broke relative to what you could be.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- The path forward -->
+      <div class="fade-in d4" style="margin-top:3rem;text-align:center;">
+        <p style="font-size:1.1rem;color:rgba(0,212,255,0.7);max-width:700px;margin:0 auto;">
+          <strong>That changes.</strong> But only if you change how you do outreach.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ==================== THE 1% PROBLEM ==================== -->
+  <section class="section" id="s006">
+    <div class="section-inner">
+      <div class="fade-in" style="text-align:center;">
+        <div class="label" style="justify-content:center;">The 1% Problem / 003</div>
+      </div>
+      <div class="fade-in d1" style="text-align:center;">
+        <h2 style="text-align:center;">Why Manual Outreach<br><span class="thin">Is Costing You Everything</span></h2>
+      </div>
+
+      <!-- Big stat hero -->
+      <div class="fade-in d2" style="text-align:center;margin-top:3rem;">
+        <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:2rem;align-items:center;max-width:960px;margin:0 auto;">
+          <!-- Manual column -->
+          <div style="background:rgba(255,60,60,0.06);border:1px solid rgba(255,60,60,0.2);border-radius:12px;padding:2.5rem 2rem;text-align:center;">
+            <div style="font-family:var(--font-mono);font-size:0.85rem;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,100,100,0.7);margin-bottom:1.5rem;font-weight:600;">Manual Outreach</div>
+            <div style="font-size:3.5rem;font-weight:800;color:#ff4444;line-height:1;margin-bottom:0.5rem;">100</div>
+            <div style="font-size:1.1rem;color:rgba(255,255,255,0.6);margin-bottom:2rem;">emails sent</div>
+            <div style="border-top:1px solid rgba(255,60,60,0.15);padding-top:1.5rem;">
+              <div style="font-size:2.5rem;font-weight:700;color:#ff6666;">~1</div>
+              <div style="font-size:1rem;color:rgba(255,255,255,0.5);">meaningful conversation</div>
+            </div>
+          </div>
+
+          <!-- VS divider -->
+          <div style="font-family:var(--font-mono);font-size:1.2rem;font-weight:700;color:rgba(255,255,255,0.15);letter-spacing:0.1em;">VS</div>
+
+          <!-- System column -->
+          <div style="background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.25);border-radius:12px;padding:2.5rem 2rem;text-align:center;">
+            <div style="font-family:var(--font-mono);font-size:0.85rem;text-transform:uppercase;letter-spacing:0.15em;color:rgba(0,212,255,0.8);margin-bottom:1.5rem;font-weight:600;">With Our System</div>
+            <div style="font-size:3.5rem;font-weight:800;color:#00d4ff;line-height:1;margin-bottom:0.5rem;">1,000</div>
+            <div style="font-size:1.1rem;color:rgba(255,255,255,0.6);margin-bottom:2rem;">emails sent</div>
+            <div style="border-top:1px solid rgba(0,212,255,0.15);padding-top:1.5rem;">
+              <div style="font-size:2.5rem;font-weight:700;color:#00d4ff;">~50</div>
+              <div style="font-size:1rem;color:rgba(255,255,255,0.5);">warm conversations</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Process comparison -->
+      <div class="fade-in d3" style="margin-top:3rem;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:960px;margin:0 auto;">
+          <div style="background:rgba(0,0,0,0.4);border:1px solid rgba(255,60,60,0.12);border-radius:8px;padding:2rem;">
+            <div style="font-family:var(--font-mono);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,100,100,0.6);margin-bottom:1.5rem;font-weight:600;">Marcus Today</div>
+            <div style="font-size:1.1rem;color:rgba(255,255,255,0.85);line-height:2.2;">
+              <div style="display:flex;gap:0.8rem;align-items:baseline;"><span style="color:rgba(255,100,100,0.5);font-family:var(--font-mono);font-size:0.8rem;">01</span> Write email manually — 15 mins</div>
+              <div style="display:flex;gap:0.8rem;align-items:baseline;"><span style="color:rgba(255,100,100,0.5);font-family:var(--font-mono);font-size:0.8rem;">02</span> Send to 1 prospect</div>
+              <div style="display:flex;gap:0.8rem;align-items:baseline;"><span style="color:rgba(255,100,100,0.5);font-family:var(--font-mono);font-size:0.8rem;">03</span> Wait… rarely hear back</div>
+              <div style="display:flex;gap:0.8rem;align-items:baseline;"><span style="color:rgba(255,100,100,0.5);font-family:var(--font-mono);font-size:0.8rem;">04</span> Chase manually if time allows</div>
+              <div style="display:flex;gap:0.8rem;align-items:baseline;margin-top:0.5rem;padding-top:0.5rem;border-top:1px solid rgba(255,60,60,0.1);"><span style="color:#ff4444;font-weight:700;font-size:1.05rem;">→ 1% of 100 = ~1 conversation</span></div>
+            </div>
+          </div>
+
+          <div style="background:rgba(0,0,0,0.4);border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:2rem;">
+            <div style="font-family:var(--font-mono);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(0,212,255,0.7);margin-bottom:1.5rem;font-weight:600;">With Our System</div>
+            <div style="font-size:1.1rem;color:rgba(255,255,255,0.85);line-height:2.2;">
+              <div style="display:flex;gap:0.8rem;align-items:baseline;"><span style="color:rgba(0,212,255,0.5);font-family:var(--font-mono);font-size:0.8rem;">01</span> Researches 1,000 prospects automatically</div>
+              <div style="display:flex;gap:0.8rem;align-items:baseline;"><span style="color:rgba(0,212,255,0.5);font-family:var(--font-mono);font-size:0.8rem;">02</span> Writes 1,000 personalised emails</div>
+              <div style="display:flex;gap:0.8rem;align-items:baseline;"><span style="color:rgba(0,212,255,0.5);font-family:var(--font-mono);font-size:0.8rem;">03</span> Auto-follows up 3× over 2 weeks</div>
+              <div style="display:flex;gap:0.8rem;align-items:baseline;"><span style="color:rgba(0,212,255,0.5);font-family:var(--font-mono);font-size:0.8rem;">04</span> Only alerts Marcus when lead is HOT</div>
+              <div style="display:flex;gap:0.8rem;align-items:baseline;margin-top:0.5rem;padding-top:0.5rem;border-top:1px solid rgba(0,212,255,0.1);"><span style="color:#00d4ff;font-weight:700;font-size:1.05rem;">→ 5% of 1,000 = ~50 conversations</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Time savings callout -->
+      <div class="fade-in d4" style="margin-top:2.5rem;text-align:center;">
+        <div style="background:linear-gradient(135deg,rgba(0,212,255,0.12),rgba(0,212,255,0.04));border:1px solid rgba(0,212,255,0.25);border-radius:10px;padding:2rem 3rem;max-width:700px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:3rem;">
+          <div>
+            <div style="font-size:0.85rem;color:rgba(255,255,255,0.5);margin-bottom:0.3rem;">Manual Effort</div>
+            <div style="font-size:2rem;font-weight:700;color:#ff6666;text-decoration:line-through;text-decoration-color:rgba(255,100,100,0.4);">250+ hours</div>
+            <div style="font-size:0.9rem;color:rgba(255,255,255,0.4);">for 50 conversations</div>
+          </div>
+          <div style="font-size:2.5rem;color:rgba(0,212,255,0.6);">→</div>
+          <div>
+            <div style="font-size:0.85rem;color:rgba(255,255,255,0.5);margin-bottom:0.3rem;">Automated</div>
+            <div style="font-size:2rem;font-weight:700;color:#00d4ff;">2–3 hours</div>
+            <div style="font-size:0.9rem;color:rgba(255,255,255,0.4);">reviewing 50 warm leads</div>
+          </div>
+        </div>
+        <div style="font-size:0.9rem;color:rgba(0,212,255,0.5);margin-top:1.5rem;font-style:italic;">*Conservative estimate: 5% engagement. Actual results: 5–15% depending on targeting and industry.</div>
+      </div>
+
+      <!-- Voice section -->
+      <div class="fade-in d4" style="margin-top:3.5rem;text-align:center;">
+        <h3 style="font-size:1.8rem;margin-bottom:1rem;font-weight:700;text-align:center;">It Doesn't Replace You.<br><span style="color:#00d4ff;">It Amplifies Your Voice.</span></h3>
+        <p style="font-size:1.2rem;color:rgba(255,255,255,0.6);max-width:650px;margin:0 auto 2rem;line-height:1.7;">Trained on your exact language, tone, and expertise. Every prospect thinks they're talking directly to you.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;max-width:800px;margin:0 auto;">
+          <div style="background:rgba(0,0,0,0.4);border:1px solid rgba(0,212,255,0.12);border-radius:8px;padding:1.5rem;text-align:center;">
+            <div style="font-size:1.8rem;margin-bottom:0.5rem;">💬</div>
+            <div style="font-size:1rem;color:rgba(255,255,255,0.8);font-style:italic;">"We can make it happen"</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.4);border:1px solid rgba(0,212,255,0.12);border-radius:8px;padding:1.5rem;text-align:center;">
+            <div style="font-size:1.8rem;margin-bottom:0.5rem;">🎯</div>
+            <div style="font-size:1rem;color:rgba(255,255,255,0.8);font-style:italic;">"Custom bespoke solutions"</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.4);border:1px solid rgba(0,212,255,0.12);border-radius:8px;padding:1.5rem;text-align:center;">
+            <div style="font-size:1.8rem;margin-bottom:0.5rem;">🤝</div>
+            <div style="font-size:1rem;color:rgba(255,255,255,0.8);font-style:italic;">"We're solving your problems"</div>
+          </div>
+        </div>
+        <p style="font-size:1.1rem;color:rgba(255,255,255,0.5);margin-top:2rem;line-height:1.7;">Sends from <strong style="color:#fff;">your email</strong>. Uses <strong style="color:#fff;">your LinkedIn</strong>. Works while you're in the workshop. Scales your voice to <strong style="color:#00d4ff;">thousands of prospects simultaneously</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ==================== PAIN POINTS ==================== -->
+  <section class="section" id="s002">
+    <div class="section-inner">
+      <div class="fade-in">
+        <div class="label">AI Lead Generation Engine / 004</div>
+      </div>
+      <div class="fade-in d1">
+        <h2>How It Works:<br><span class="thin">5 Simple Stages</span></h2>
+        <p class="lead" style="margin-top:1rem;">Click through each stage to see exactly how the AI finds, nurtures, and books appointments for you.</p>
+      </div>
+      <div class="fade-in d3" style="margin-top:2rem;">
+        <!-- Lead Generation Walkthrough — Click Through -->
+        <style>
+          .lead-gen-container {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(0,212,255,0.15);
+            border-radius: 12px;
+            padding: 3rem 2.5rem;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+          }
+          .lead-gen-stage {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            pointer-events: none;
+            position: absolute;
+            width: 100%;
+            padding: 3rem 2.5rem;
+          }
+          .lead-gen-stage.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            position: relative;
+            width: auto;
+            padding: 0;
+          }
+          .stage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2rem;
+          }
+          .stage-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #fff;
+          }
+          .stage-counter {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: rgba(0,212,255,0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+          }
+          .stage-content {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.8;
+          }
+          .stage-content ul {
+            list-style: none;
+            margin: 1.5rem 0;
+          }
+          .stage-content li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+          }
+          .stage-content li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #00d4ff;
+            font-weight: 700;
+            font-size: 1.2rem;
+          }
+          .stage-highlight {
+            background: rgba(0,212,255,0.08);
+            border-left: 3px solid #00d4ff;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 6px;
+            font-size: 1rem;
+            line-height: 1.8;
+          }
+          .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 3rem;
+          }
+          .nav-btn {
+            background: transparent;
+            border: 1px solid rgba(0,212,255,0.4);
+            color: #00d4ff;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+          }
+          .nav-btn:hover {
+            background: rgba(0,212,255,0.1);
+            border-color: #00d4ff;
+          }
+          .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+          }
+          .nav-btn:disabled:hover {
+            background: transparent;
+          }
+
+          /* Company card animations */
+          @keyframes scanIn {
+            from {
+              opacity: 0;
+              transform: translateY(-40px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          @keyframes scanOut {
+            from {
+              opacity: 1;
+              transform: translateY(0);
+            }
+            to {
+              opacity: 0;
+              transform: translateY(40px);
+            }
+          }
+
+          .company-scanner {
+            position: relative;
+            height: 350px;
+            background: linear-gradient(180deg, rgba(0,212,255,0.08) 0%, rgba(0,0,0,0.2) 100%);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 2rem 0;
+          }
+
+          .scan-feed {
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .company-card {
+            position: absolute;
+            width: 90%;
+            max-width: 500px;
+            background: rgba(0,0,0,0.6);
+            border: 1px solid rgba(0,212,255,0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            animation: scanOut 3s ease-in-out forwards;
+          }
+
+          .company-card.active {
+            animation: scanIn 0.6s ease-out forwards;
+            z-index: 10;
+          }
+
+          .company-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+          }
+
+          .company-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+          }
+
+          .company-industry {
+            font-size: 0.8rem;
+            color: #00d4ff;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-family: var(--font-mono);
+          }
+
+          .company-details {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+          }
+
+          .company-detail-row {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 0.5rem;
+          }
+
+          .company-detail-label {
+            color: rgba(255,255,255,0.5);
+            min-width: 100px;
+          }
+
+          .decision-maker {
+            background: rgba(0,212,255,0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+          }
+
+          .decision-maker-label {
+            font-size: 0.8rem;
+            color: #00d4ff;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+          }
+
+          .decision-maker-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+          }
+
+          .decision-maker-title {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+          }
+
+          .scan-indicator {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 0.8rem;
+            color: #00d4ff;
+            font-family: var(--font-mono);
+            animation: pulse 2s ease-in-out infinite;
+          }
+
+          @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+          }
+
+          /* Stage 2: Enrich - Data Fields Animation */
+          @keyframes dataReveal {
+            from {
+              opacity: 0;
+              transform: translateX(-20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+
+          .data-field {
+            background: rgba(0,212,255,0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 1rem;
+            margin: 0.8rem 0;
+            border-radius: 4px;
+            opacity: 0;
+            transform: translateX(-20px);
+          }
+
+          .data-field:nth-child(1) { }
+          .data-field:nth-child(2) { }
+          .data-field:nth-child(3) { }
+
+          /* Stage 3: Outreach - Email Animation */
+          @keyframes emailSlideIn {
+            from {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          @keyframes emailSend {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0.7; transform: translateY(-5px); }
+          }
+
+          .email-compose {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(0,212,255,0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+          }
+
+          .email-field {
+            margin-bottom: 1rem;
+          }
+
+          .email-field-label {
+            font-size: 0.8rem;
+            color: #00d4ff;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+          }
+
+          .email-field-content {
+            background: rgba(255,255,255,0.05);
+            padding: 0.8rem;
+            border-radius: 4px;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.95rem;
+          }
+
+          .send-button {
+            background: linear-gradient(135deg, #00d4ff, #0086b3);
+            color: #fff;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            opacity: 0;
+            transform: translateY(-5px);
+          }
+
+          /* Stage 4: Engage - Reply Animation */
+          @keyframes messageIn {
+            from {
+              opacity: 0;
+              transform: translateX(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+
+          .message-bubble {
+            background: rgba(0,212,255,0.15);
+            border-left: 3px solid #00d4ff;
+            padding: 1.2rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+            opacity: 0;
+            transform: translateX(30px);
+          }
+
+          .message-sender {
+            font-size: 0.85rem;
+            color: #00d4ff;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+          }
+
+          .message-text {
+            color: rgba(255,255,255,0.85);
+            font-size: 1rem;
+            line-height: 1.6;
+          }
+
+          /* Stage 5: Book - Calendar Animation */
+          @keyframes calendarPop {
+            from {
+              opacity: 0;
+              transform: scale(0.8);
+            }
+            to {
+              opacity: 1;
+              transform: scale(1);
+            }
+          }
+
+          .calendar-event {
+            background: linear-gradient(135deg, rgba(34,197,94,0.2), rgba(34,197,94,0.05));
+            border: 2px solid #22c55e;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            opacity: 0;
+            transform: scale(0.8);
+          }
+
+          .calendar-time {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #22c55e;
+            margin-bottom: 0.5rem;
+          }
+
+          .calendar-title {
+            font-size: 1.1rem;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+          }
+
+          .calendar-details {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.95rem;
+            line-height: 1.7;
+          }
+
+          /* Stage Summary Box */
+          .stage-summary {
+            background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(0,212,255,0.02));
+            border: 1px solid rgba(0,212,255,0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+          }
+
+          .stage-summary-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+          }
+
+          .stage-summary-content {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.8;
+          }
+        </style>
+
+        <div class="lead-gen-container">
+          <div style="position: relative; min-height: 450px;">
+
+            <!-- STAGE 1: FIND -->
+            <div class="lead-gen-stage active">
+              <div class="stage-header">
+                <div class="stage-title">Stage 1: Finding The Right Companies</div>
+                <div class="stage-counter">1 / 5</div>
+              </div>
+
+              <p style="color: rgba(255,255,255,0.85); margin-bottom: 1rem;">The AI scans LinkedIn, industry databases, and Companies House records to find aquaculture farms matching your ideal customer profile. Watch as it identifies decision-makers:</p>
+
+              <div class="company-scanner">
+                <div class="scan-feed" id="scanFeed">
+                  <!-- Companies will be animated here -->
+                </div>
+                <div class="scan-indicator">▼ SCANNING...</div>
+              </div>
+
+              <div class="stage-highlight">
+                <strong>What Happens Next:</strong> The AI continues this process, scanning hundreds of companies in minutes. It identifies decision-makers, their contact info, and key company details automatically.
+              </div>
+            </div>
+
+            <!-- STAGE 2: ENRICH -->
+            <div class="lead-gen-stage">
+              <div class="stage-header">
+                <div class="stage-title">Stage 2: Understanding Their Needs</div>
+                <div class="stage-counter">2 / 5</div>
+              </div>
+              <p style="color: rgba(255,255,255,0.85); margin-bottom: 1rem;">The AI researches the company using public sources. Watch as it discovers key intelligence:</p>
+              <div style="margin: 2rem 0;">
+                <div class="data-field">
+                  <div style="color: #00d4ff; font-weight: 600; margin-bottom: 0.5rem;">📰 Recent Activity Found</div>
+                  <div style="color: rgba(255,255,255,0.85);">LinkedIn: "Investing in new equipment and expanding operations across all sites"</div>
+                </div>
+                <div class="data-field">
+                  <div style="color: #00d4ff; font-weight: 600; margin-bottom: 0.5rem;">🔍 Current Suppliers Identified</div>
+                  <div style="color: rgba(255,255,255,0.85);">Website lists current supplier partnerships; industry news mentions recent equipment upgrades</div>
+                </div>
+                <div class="data-field">
+                  <div style="color: #00d4ff; font-weight: 600; margin-bottom: 0.5rem;">💼 Business Growth Signal</div>
+                  <div style="color: rgba(255,255,255,0.85);">Press release: "Expansion plans announced; actively seeking new partners for operational improvements"</div>
+                </div>
+              </div>
+              <div class="stage-summary">
+                <div class="stage-summary-title">✓ Intelligence Gathered from Public Sources</div>
+                <div class="stage-summary-content">
+                  The AI has researched Highland Fish Farm using public information: LinkedIn posts, company website, press releases, and news articles. It identified they're expanding and investing in new equipment—the perfect time to reach out.
+                </div>
+              </div>
+            </div>
+
+            <!-- STAGE 3: OUTREACH -->
+            <div class="lead-gen-stage">
+              <div class="stage-header">
+                <div class="stage-title">Stage 3: Sending The First Email</div>
+                <div class="stage-counter">3 / 5</div>
+              </div>
+              <p style="color: rgba(255,255,255,0.85); margin-bottom: 1rem;">The AI composes and sends a personalized email from Marcus. Watch as it appears:</p>
+              <div class="email-compose">
+                <div class="email-field">
+                  <div class="email-field-label">From:</div>
+                  <div class="email-field-content">marcus@tmtarpaulins.co.uk</div>
+                </div>
+                <div class="email-field">
+                  <div class="email-field-label">To:</div>
+                  <div class="email-field-content">james.mitchell@highlandfishfarm.co.uk</div>
+                </div>
+                <div class="email-field">
+                  <div class="email-field-label">Subject:</div>
+                  <div class="email-field-content">Quick thought on your expansion plans</div>
+                </div>
+                <div class="email-field">
+                  <div class="email-field-label">Message:</div>
+                  <div class="email-field-content">Hi James,<br><br>Saw your recent announcement about expanding operations — congratulations! We work with aquaculture operations across Scotland on custom equipment solutions that improve operational efficiency and reduce costs.<br><br>Given your expansion plans, there might be value in a quick conversation about how we've helped other farms optimize their setups. No pressure — just a 15-minute chat if it makes sense.<br><br>Cheers,<br>Marcus<br>TM Tarpaulins</div>
+                </div>
+                <button class="send-button">→ SEND</button>
+              </div>
+              <div class="stage-summary">
+                <div class="stage-summary-title">✓ Email Sent Personalized</div>
+                <div class="stage-summary-content">
+                  The AI has written and sent an email that sounds exactly like Marcus. It uses his tone, personality, and references specific intelligence from Stage 2. James receives what looks like a personal outreach—not a generic blast email. The AI now monitors for his reply automatically.
+                </div>
+              </div>
+            </div>
+
+            <!-- STAGE 4: ENGAGE -->
+            <div class="lead-gen-stage">
+              <div class="stage-header">
+                <div class="stage-title">Stage 4: When They Reply</div>
+                <div class="stage-counter">4 / 5</div>
+              </div>
+              <p style="color: rgba(255,255,255,0.85); margin-bottom: 1rem;">The AI detects James's reply and responds as Marcus. Watch the conversation unfold:</p>
+              <div style="margin: 2rem 0;">
+                <div class="message-bubble">
+                  <div class="message-sender">🔔 New Reply from James</div>
+                  <div class="message-text">"Your timing is spot on. We've been looking at replacing our covers on ponds 3-7. The lice treatment costs are killing us this year. What's the typical turnaround?"</div>
+                </div>
+                <div class="message-bubble" style="animation-delay: 0.4s; opacity: 0;">
+                  <div class="message-sender">✉ AI Response (as Marcus)</div>
+                  <div class="message-text">"Great to hear, James! Typical turnaround is 2-3 weeks from measurement to install — we handle everything on-site, no disruption. 5 ponds is no problem. Happy to jump on a quick call to run through options? I'm free Thursday afternoon."</div>
+                </div>
+                <div class="message-bubble" style="animation-delay: 0.8s; opacity: 0;">
+                  <div class="message-sender">✓ James Confirms</div>
+                  <div class="message-text">"Perfect, Thursday at 2pm works for us. Looking forward to it."</div>
+                </div>
+              </div>
+              <div class="stage-summary">
+                <div class="stage-summary-title">✓ Conversation Engaged</div>
+                <div class="stage-summary-content">
+                  James replied with genuine interest. The AI instantly detected his reply and responded as Marcus—naturally, conversationally, without delay. The lead went from cold email to confirmed meeting in just hours. Now James is committed to a call.
+                </div>
+              </div>
+            </div>
+
+            <!-- STAGE 5: BOOK -->
+            <div class="lead-gen-stage">
+              <div class="stage-header">
+                <div class="stage-title">Stage 5: Appointment Booked</div>
+                <div class="stage-counter">5 / 5</div>
+              </div>
+              <p style="color: rgba(255,255,255,0.85); margin-bottom: 1rem;">The appointment lands on your calendar with everything you need. Watch it appear:</p>
+              <div class="calendar-event">
+                <div class="calendar-time">Thursday 2:00 PM — 2:30 PM</div>
+                <div class="calendar-title">Highland Fish Farm — James Mitchell</div>
+                <div class="calendar-details">
+                  📍 Video Call (Teams link sent)<br>
+                  📋 Lice Screen Covers Discussion
+                </div>
+              </div>
+              <div style="background: rgba(0,212,255,0.08); border-left: 3px solid #00d4ff; padding: 1.5rem; border-radius: 6px; margin-top: 1.5rem;">
+                <div style="font-size: 0.9rem; color: #00d4ff; font-weight: 600; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.1em;">📋 AI-Generated Call Prep Notes</div>
+                <div style="font-size: 0.95rem; color: rgba(255,255,255,0.85); line-height: 1.8;">
+                  • <strong>Company:</strong> Highland Fish Farm (45 employees)<br>
+                  • <strong>Contact:</strong> James Mitchell, Operations Manager<br>
+                  • <strong>Pain Point:</strong> Lice treatment costs are rising sharply<br>
+                  • <strong>Buying Signal:</strong> Active equipment investment + expansion = perfect timing<br>
+                  • <strong>Talking Points:</strong> Reference their expansion news, mention cost-efficiency of our solution
+                </div>
+              </div>
+              <div class="stage-summary">
+                <div class="stage-summary-title">✓ Warm Lead On Your Calendar</div>
+                <div class="stage-summary-content">
+                  The AI has done everything. 7 days of research, personalization, follow-up, and engagement — all automated. James is now on your calendar, warm and interested. The AI has prepared everything you need. You just show up and talk.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="nav-buttons">
+            <button class="nav-btn" id="crmPrev">← Previous</button>
+            <button class="nav-btn" id="crmNext">Next →</button>
+          </div>
+        </div>
+
+        <!-- SUMMARY SLIDE - Journey Diagram -->
+        <div style="margin-top: 4rem; padding: 2.5rem; background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(0,212,255,0.04)); border: 1px solid rgba(0,212,255,0.15); border-radius: 12px; max-width: 960px; margin-left: auto; margin-right: auto;">
+          <h3 style="text-align: center; font-size: 1.6rem; margin-bottom: 3rem; color: #fff;">The Complete Lead Generation Journey</h3>
+
+          <!-- Horizontal Journey Diagram -->
+          <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; max-width: 960px; margin: 0 auto 3rem; flex-wrap: wrap;">
+
+            <!-- Stage 1: Find -->
+            <div style="flex: 1; min-width: 140px; text-align: center;">
+              <div style="width: 70px; height: 70px; background: linear-gradient(135deg, rgba(0,212,255,0.3), rgba(0,212,255,0.1)); border: 2px solid #00d4ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #00d4ff; font-size: 1.4rem;">1</div>
+              <div style="font-weight: 600; color: #fff; margin-bottom: 0.5rem; font-size: 1rem;">Find</div>
+              <div style="font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6;">Scan databases,<br>identify decision-makers</div>
+            </div>
+
+            <!-- Arrow 1 -->
+            <div style="flex: 0.4; text-align: center; color: #00d4ff; font-size: 1.8rem; margin-bottom: 2rem;">→</div>
+
+            <!-- Stage 2: Enrich -->
+            <div style="flex: 1; min-width: 140px; text-align: center;">
+              <div style="width: 70px; height: 70px; background: linear-gradient(135deg, rgba(0,212,255,0.3), rgba(0,212,255,0.1)); border: 2px solid #00d4ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #00d4ff; font-size: 1.4rem;">2</div>
+              <div style="font-weight: 600; color: #fff; margin-bottom: 0.5rem; font-size: 1rem;">Enrich</div>
+              <div style="font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6;">Research pain points<br>& insights</div>
+            </div>
+
+            <!-- Arrow 2 -->
+            <div style="flex: 0.4; text-align: center; color: #00d4ff; font-size: 1.8rem; margin-bottom: 2rem;">→</div>
+
+            <!-- Stage 3: Outreach -->
+            <div style="flex: 1; min-width: 140px; text-align: center;">
+              <div style="width: 70px; height: 70px; background: linear-gradient(135deg, rgba(0,212,255,0.3), rgba(0,212,255,0.1)); border: 2px solid #00d4ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #00d4ff; font-size: 1.4rem;">3</div>
+              <div style="font-weight: 600; color: #fff; margin-bottom: 0.5rem; font-size: 1rem;">Outreach</div>
+              <div style="font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6;">Send personalized<br>emails</div>
+            </div>
+
+            <!-- Arrow 3 -->
+            <div style="flex: 0.4; text-align: center; color: #00d4ff; font-size: 1.8rem; margin-bottom: 2rem;">→</div>
+
+            <!-- Stage 4: Engage -->
+            <div style="flex: 1; min-width: 140px; text-align: center;">
+              <div style="width: 70px; height: 70px; background: linear-gradient(135deg, rgba(0,212,255,0.3), rgba(0,212,255,0.1)); border: 2px solid #00d4ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #00d4ff; font-size: 1.4rem;">4</div>
+              <div style="font-weight: 600; color: #fff; margin-bottom: 0.5rem; font-size: 1rem;">Engage</div>
+              <div style="font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6;">Monitor replies,<br>continue conversation</div>
+            </div>
+
+            <!-- Arrow 4 -->
+            <div style="flex: 0.4; text-align: center; color: #22c55e; font-size: 1.8rem; margin-bottom: 2rem;">→</div>
+
+            <!-- Stage 5: Book -->
+            <div style="flex: 1; min-width: 140px; text-align: center;">
+              <div style="width: 70px; height: 70px; background: linear-gradient(135deg, rgba(34,197,94,0.3), rgba(34,197,94,0.1)); border: 2px solid #22c55e; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #22c55e; font-size: 1.4rem;">✓</div>
+              <div style="font-weight: 600; color: #fff; margin-bottom: 0.5rem; font-size: 1rem;">Book</div>
+              <div style="font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6;">Appointment<br>confirmed</div>
+            </div>
+
+          </div>
+
+          <!-- Summary bullets -->
+          <div style="margin-top: 2.5rem; max-width: 960px; margin-left: auto; margin-right: auto;">
+            <div style="background: rgba(0,0,0,0.3); border-left: 3px solid #00d4ff; padding: 2rem; border-radius: 6px;">
+              <div style="font-size: 1.1rem; color: rgba(255,255,255,0.85); line-height: 2;">
+                <div style="margin-bottom: 0.8rem;"><strong style="color: #00d4ff;">→</strong> All 5 stages automated and running in parallel</div>
+                <div style="margin-bottom: 0.8rem;"><strong style="color: #00d4ff;">→</strong> Hundreds of prospects processed simultaneously</div>
+                <div style="margin-bottom: 0.8rem;"><strong style="color: #00d4ff;">→</strong> Only warm, qualified leads reach your calendar</div>
+                <div style="margin-bottom: 0.8rem;"><strong style="color: #00d4ff;">→</strong> You spend 30 mins closing, not 25 hours finding</div>
+                <div><strong style="color: #22c55e;">✓</strong> System works 24/7 while you focus on closing</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+        <script>
+          (function() {
+            const stages = document.querySelectorAll('.lead-gen-stage');
+            const prevBtn = document.getElementById('crmPrev');
+            const nextBtn = document.getElementById('crmNext');
+            let current = 0;
+            let scanInterval = null;
+
+            // Sample companies for the scanner
+            const sampleCompanies = [
+              { name: 'Highland Fish Farm', industry: 'Aquaculture', ponds: '12', staff: '45', revenue: '£3.2M', decision: { name: 'James Mitchell', title: 'Operations Manager' } },
+              { name: 'Loch Duart Ltd', industry: 'Fish Farming', ponds: '8', staff: '32', revenue: '£2.1M', decision: { name: 'Sarah Robertson', title: 'Farm Manager' } },
+              { name: 'Scottish Sea Farms', industry: 'Aquaculture', ponds: '15', staff: '58', revenue: '£4.8M', decision: { name: 'David MacLeod', title: 'Operations Director' } },
+              { name: 'Cairn Aquaculture', industry: 'Fish Farms', ponds: '6', staff: '28', revenue: '£1.8M', decision: { name: 'Emma Watson', title: 'Procurement Lead' } },
+              { name: 'Celtic Seafood', industry: 'Aquaculture', ponds: '10', staff: '40', revenue: '£2.9M', decision: { name: 'Michael Flynn', title: 'Site Manager' } }
+            ];
+
+            function createCompanyCard(company) {
+              return `
+                <div class="company-card active">
+                  <div class="company-card-header">
+                    <div>
+                      <div class="company-name">${company.name}</div>
+                      <div class="company-industry">${company.industry}</div>
+                    </div>
+                  </div>
+                  <div class="company-details">
+                    <div class="company-detail-row">
+                      <div class="company-detail-label">Locations:</div>
+                      <div>${company.ponds} ponds</div>
+                    </div>
+                    <div class="company-detail-row">
+                      <div class="company-detail-label">Staff:</div>
+                      <div>${company.staff} employees</div>
+                    </div>
+                    <div class="company-detail-row">
+                      <div class="company-detail-label">Revenue:</div>
+                      <div>${company.revenue}</div>
+                    </div>
+                  </div>
+                  <div class="decision-maker">
+                    <div class="decision-maker-label">Decision Maker</div>
+                    <div class="decision-maker-name">${company.decision.name}</div>
+                    <div class="decision-maker-title">${company.decision.title}</div>
+                  </div>
+                </div>
+              `;
+            }
+
+            function startScanning() {
+              const scanFeed = document.getElementById('scanFeed');
+              if (!scanFeed) return;
+
+              let companyIndex = 0;
+              scanFeed.innerHTML = '';
+
+              scanInterval = setInterval(() => {
+                if (companyIndex >= sampleCompanies.length) {
+                  companyIndex = 0;
+                }
+
+                scanFeed.innerHTML = createCompanyCard(sampleCompanies[companyIndex]);
+                companyIndex++;
+              }, 3500); // Show each company for 3.5s
+            }
+
+            function stopScanning() {
+              if (scanInterval) {
+                clearInterval(scanInterval);
+                scanInterval = null;
+              }
+            }
+
+            function resetAnimation(element) {
+              // Trigger reflow to restart animation
+              if (element) {
+                void element.offsetHeight;
+              }
+            }
+
+            function showStage(idx) {
+              stages.forEach((stage, i) => {
+                stage.classList.toggle('active', i === idx);
+              });
+              current = idx;
+              prevBtn.disabled = current === 0;
+              nextBtn.disabled = current === stages.length - 1;
+
+              // Trigger animations based on stage
+              if (idx === 0) {
+                // Stage 1: Start scanning animation
+                stopScanning();
+                setTimeout(startScanning, 500);
+              } else if (idx === 1) {
+                // Stage 2: Animate data fields
+                stopScanning();
+                setTimeout(() => {
+                  const dataFields = document.querySelectorAll('.lead-gen-stage.active .data-field');
+                  const delays = [0.2, 0.6, 1.0];
+                  dataFields.forEach((field, fieldIdx) => {
+                    field.style.animation = 'dataReveal 0.8s ease-out forwards';
+                    field.style.animationDelay = delays[fieldIdx] + 's';
+                  });
+                }, 550);
+              } else if (idx === 2) {
+                // Stage 3: Animate email compose
+                stopScanning();
+                setTimeout(() => {
+                  const emailCompose = document.querySelector('.lead-gen-stage.active .email-compose');
+                  const sendButton = document.querySelector('.lead-gen-stage.active .send-button');
+                  if (emailCompose) {
+                    emailCompose.style.animation = 'emailSlideIn 0.8s ease-out forwards';
+                  }
+                  if (sendButton) {
+                    sendButton.style.animation = 'emailSend 1.2s ease-out forwards';
+                  }
+                }, 550);
+              } else if (idx === 3) {
+                // Stage 4: Animate message bubbles sequentially
+                stopScanning();
+                setTimeout(() => {
+                  const messageBubbles = document.querySelectorAll('.lead-gen-stage.active .message-bubble');
+                  messageBubbles.forEach((bubble, bubbleIdx) => {
+                    bubble.style.animation = 'messageIn 0.8s ease-out forwards';
+                    bubble.style.animationDelay = (bubbleIdx * 0.4) + 's';
+                  });
+                }, 550);
+              } else if (idx === 4) {
+                // Stage 5: Animate calendar event
+                stopScanning();
+                setTimeout(() => {
+                  const calendarEvent = document.querySelector('.lead-gen-stage.active .calendar-event');
+                  if (calendarEvent) {
+                    calendarEvent.style.animation = 'calendarPop 0.8s ease-out forwards';
+                  }
+                }, 550);
+              } else {
+                stopScanning();
+              }
+            }
+
+            prevBtn.addEventListener('click', () => {
+              if (current > 0) showStage(current - 1);
+            });
+
+            nextBtn.addEventListener('click', () => {
+              if (current < stages.length - 1) showStage(current + 1);
+            });
+
+            showStage(0);
+          })();
+        </script>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ==================== 006 / NURTURE SEQUENCES ==================== -->
+  <!-- ==================== 003 / NURTURE SEQUENCES — ANIMATED DEMO ==================== -->
+  <section class="section" id="s013">
+    <div class="section-inner">
+      <div class="fade-in" style="text-align:center;">
+        <div class="label" style="justify-content:center;">How This Works / 005</div>
+      </div>
+
+      <!-- PART 1: WHAT IT ISN'T -->
+      <div class="fade-in d1" style="margin-top:2rem;">
+        <h2 style="text-align:center;margin-bottom:2rem;">You're Probably Thinking This Is<br><span class="thin" style="color:#ff6666;">ChatGPT With A Sales Skin.</span></h2>
+
+        <div style="background:rgba(255,60,60,0.04);border:1px solid rgba(255,60,60,0.12);border-radius:10px;padding:3rem;max-width:800px;margin:0 auto;margin-bottom:3rem;">
+          <div style="font-size:1.15rem;color:rgba(255,255,255,0.92);line-height:1.8;margin-bottom:1.5rem;">
+            <strong>ChatGPT</strong> is a generic tool trained on the internet. You chat with it, it responds. But it doesn't know YOUR business. It doesn't learn from what works for YOU. Every new conversation it's the same generic ChatGPT — not smarter, not adapted to your market, not getting better because of your results.
+          </div>
+          <div style="font-size:1.05rem;color:rgba(255,100,100,0.9);font-style:italic;">
+            → That's a chatbot. Not a business system built for you.
+          </div>
+        </div>
+      </div>
+
+      <!-- PART 2: WHAT IT ACTUALLY IS -->
+      <div class="fade-in d2" style="margin-top:3rem;">
+        <h2 style="text-align:center;margin-bottom:3rem;">What This Actually Is:<br><span class="thin" style="color:#00d4ff;">A Business Operating System</span></h2>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;max-width:960px;margin:0 auto;">
+
+          <!-- Left side: What we built -->
+          <div>
+            <div style="font-size:1.3rem;font-weight:700;color:#00d4ff;margin-bottom:1.5rem;">Built By Real Software Teams</div>
+            <div style="font-size:1.05rem;color:rgba(255,255,255,0.92);line-height:1.8;">
+              <p style="margin-bottom:1rem;">Your system was built by professional software developers who specialize in building business systems for companies. Not a trick. Not a template. Custom-made for how your business works.</p>
+              <p style="margin-bottom:1rem;color:rgba(255,255,255,0.85);font-style:italic;">It's actual software, not just a chatbot with some tricks.</p>
+            </div>
+          </div>
+
+          <!-- Right side: How it works -->
+          <div>
+            <div style="font-size:1.3rem;font-weight:700;color:#00d4ff;margin-bottom:1.5rem;">It Learns. It Remembers. It Grows.</div>
+            <div style="font-size:1.05rem;color:rgba(255,255,255,0.92);line-height:1.8;">
+              <p style="margin-bottom:1rem;">Every email sent, every response you get, every change in your business — the system remembers it all. It doesn't forget. It learns what works and gets better at it over time.</p>
+              <p style="margin-bottom:1rem;color:rgba(255,255,255,0.85);font-style:italic;">The longer you use it, the smarter it becomes.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PART 3: THE PARTNERSHIP JOURNEY -->
+      <div class="fade-in d3" style="margin-top:4rem;">
+        <h2 style="text-align:center;margin-bottom:3rem;">The Partnership Model:<br><span class="thin">We Grow With You</span></h2>
+
+        <div style="max-width:960px;margin:0 auto;">
+          <div style="display:grid;grid-template-columns:1fr;gap:1.5rem;">
+
+            <!-- Weeks 1-2 -->
+            <div style="background:rgba(0,212,255,0.08);border-left:4px solid rgba(0,212,255,0.3);border-radius:8px;padding:2rem;border-radius:8px;">
+              <div style="font-size:1.1rem;font-weight:700;color:#00d4ff;margin-bottom:0.8rem;">Weeks 1–2: Setup & Training</div>
+              <div style="font-size:1.1rem;color:rgba(255,255,255,0.95);line-height:1.7;">
+                System setup, integration with your data, training on your communication style, market positioning, and business logic. We're getting everything ready so campaigns can launch immediately. <span style="color:rgba(0,212,255,0.85);font-style:italic;">Setup fee due now. Monthly billing begins when campaigns go live.</span>
+              </div>
+            </div>
+
+            <!-- Weeks 2-4 -->
+            <div style="background:rgba(0,212,255,0.08);border-left:4px solid rgba(0,212,255,0.3);border-radius:8px;padding:2rem;border-radius:8px;">
+              <div style="font-size:1.1rem;font-weight:700;color:#00d4ff;margin-bottom:0.8rem;">Weeks 2–4: First Campaigns & Early Optimization</div>
+              <div style="font-size:1.1rem;color:rgba(255,255,255,0.95);line-height:1.7;">
+                Campaigns launch. You get real data immediately. We analyze results weekly — what messaging works, which industries respond, what timing matters. First optimizations happen in week 3. This is active collaboration from day one.
+              </div>
+            </div>
+
+            <!-- Months 2-3 -->
+            <div style="background:rgba(0,212,255,0.08);border-left:4px solid rgba(0,212,255,0.3);border-radius:8px;padding:2rem;border-radius:8px;">
+              <div style="font-size:1.1rem;font-weight:700;color:#00d4ff;margin-bottom:0.8rem;">Months 2–3: Deeper Optimization</div>
+              <div style="font-size:1.1rem;color:rgba(255,255,255,0.95);line-height:1.7;">
+                System sees clear patterns now. We refine messaging, test new approaches, identify your highest-response industries. By month 3, you're seeing strong results and the system is dialed in for your market.
+              </div>
+            </div>
+
+            <!-- Month 3+ -->
+            <div style="background:rgba(0,212,255,0.08);border-left:4px solid rgba(0,212,255,0.3);border-radius:8px;padding:2rem;border-radius:8px;">
+              <div style="font-size:1.1rem;font-weight:700;color:#00d4ff;margin-bottom:0.8rem;">Month 3+: Scaling With Confidence</div>
+              <div style="font-size:1.1rem;color:rgba(255,255,255,0.95);line-height:1.7;">
+                Your business changes. New products. New markets. New positioning. The system evolves with you. It remembers what worked, applies lessons to new contexts, and scales automatically. This is the living partnership.
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- PART 4: MEMORY & INTELLIGENCE -->
+      <div class="fade-in d4" style="margin-top:4rem;">
+        <h2 style="text-align:center;margin-bottom:3rem;">Why Memory Matters:<br><span class="thin">The System Gets Smarter</span></h2>
+
+        <div style="max-width:960px;margin:0 auto;background:rgba(0,0,0,0.4);border:1px solid rgba(0,212,255,0.15);border-radius:10px;padding:3rem;text-align:center;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:2rem;">
+
+            <div>
+              <div style="font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:1rem;">It Remembers</div>
+              <div style="font-size:1.05rem;color:rgba(255,255,255,0.92);line-height:1.7;">
+                <p>Every email sent. Every response received. Every conversation. When a prospect replies 3 weeks later, the system knows the full context — what you said, why you said it, what they cared about.</p>
+              </div>
+            </div>
+
+            <div>
+              <div style="font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:1rem;">It Evolves</div>
+              <div style="font-size:1.05rem;color:rgba(255,255,255,0.92);line-height:1.7;">
+                <p>When your business grows into new markets or changes position, the system doesn't reset. It references what worked before and applies it to new contexts. It gets smarter with every campaign.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div style="margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(0,212,255,0.1);">
+            <div style="font-size:1.05rem;color:rgba(0,212,255,0.9);font-style:italic;">
+              Unlike ChatGPT, which is the same generic tool for everyone, this system learns from YOUR business. It gets smarter the longer you use it.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PART 5: WHAT THIS MEANS -->
+      <div class="fade-in d4" style="margin-top:4rem;text-align:center;">
+        <h2 style="margin-bottom:3rem;"><span style="color:#00d4ff;">The Bottom Line:</span><br>You're Not Buying A Tool.</h2>
+        <p style="font-size:1.25rem;color:rgba(255,255,255,0.9);max-width:700px;margin:0 auto;line-height:1.8;">
+          You're building a system that grows with your business. A partner that learns your market, remembers every lesson, and evolves as you evolve. It compounds in value over time — the longer you use it, the smarter it becomes, and the better it performs.
+        </p>
+        <p style="font-size:1.05rem;color:rgba(0,212,255,0.85);margin-top:2rem;font-style:italic;">
+          That's how you scale beyond any human capacity.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ==================== PRICING SUMMARY ==================== -->
+
+  <div class="section-divider"></div>
+
+
+
+  <section class="section" id="s005b">
+    <div class="section-inner">
+      <style>
+        .bdm-vs {
+          max-width: 920px;
+          margin: 0 auto;
+        }
+        .bdm-hero-grid {
+          display: grid;
+          grid-template-columns: 1fr 60px 1fr;
+          gap: 0;
+          align-items: stretch;
+          margin: 2.5rem 0;
+        }
+        .bdm-column {
+          padding: 2rem;
+          border-radius: 12px;
+          position: relative;
+        }
+        .bdm-column-bad {
+          background: rgba(239,68,68,0.04);
+          border: 1px solid rgba(239,68,68,0.2);
+        }
+        .bdm-column-good {
+          background: rgba(0,212,255,0.04);
+          border: 1px solid rgba(0,212,255,0.25);
+          box-shadow: 0 0 30px rgba(0,212,255,0.06);
+        }
+        .bdm-column-header {
+          font-family: var(--font-mono);
+          font-size: 0.9rem;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          margin-bottom: 1.25rem;
+          padding-bottom: 0.75rem;
+          border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .bdm-column-bad .bdm-column-header { color: rgba(239,68,68,0.8); }
+        .bdm-column-good .bdm-column-header { color: #00d4ff; }
+        .bdm-vs-divider {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .bdm-vs-badge {
+          width: 52px;
+          height: 52px;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.04);
+          border: 1px solid rgba(255,255,255,0.15);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: var(--font-mono);
+          font-size: 0.8rem;
+          font-weight: 700;
+          color: rgba(255,255,255,0.5);
+          letter-spacing: 0.05em;
+        }
+        .bdm-stat-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0.8rem 0;
+          border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .bdm-stat-row:last-child { border-bottom: none; }
+        .bdm-stat-label {
+          font-size: 1.05rem;
+          color: rgba(255,255,255,0.7);
+        }
+        .bdm-stat-value {
+          font-family: var(--font-mono);
+          font-size: 1.05rem;
+          font-weight: 600;
+        }
+        .bdm-column-bad .bdm-stat-value { color: #ef4444; }
+        .bdm-column-good .bdm-stat-value { color: #00d4ff; }
+        .bdm-big-number {
+          font-family: var(--font-mono);
+          font-size: 3.2rem;
+          font-weight: 800;
+          line-height: 1;
+          margin: 0.75rem 0 0.25rem;
+        }
+        .bdm-big-label {
+          font-size: 1rem;
+          color: rgba(255,255,255,0.55);
+          margin-bottom: 1.25rem;
+        }
+        .bdm-verdict {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1rem;
+          margin-top: 2.5rem;
+        }
+        .bdm-verdict-card {
+          padding: 1.5rem;
+          border-radius: 8px;
+          text-align: center;
+        }
+        .bdm-verdict-bad {
+          background: rgba(239,68,68,0.06);
+          border: 1px solid rgba(239,68,68,0.15);
+        }
+        .bdm-verdict-good {
+          background: rgba(0,212,255,0.06);
+          border: 1px solid rgba(0,212,255,0.2);
+        }
+        .bdm-verdict-number {
+          font-family: var(--font-mono);
+          font-size: 2.8rem;
+          font-weight: 800;
+          line-height: 1.1;
+        }
+        .bdm-verdict-bad .bdm-verdict-number { color: #ef4444; }
+        .bdm-verdict-good .bdm-verdict-number { color: #00d4ff; }
+        .bdm-verdict-label {
+          font-size: 1rem;
+          color: rgba(255,255,255,0.6);
+          margin-top: 0.5rem;
+          line-height: 1.5;
+        }
+        .bdm-savings-bar {
+          margin: 2.5rem 0 1rem;
+          background: rgba(0,0,0,0.3);
+          border: 1px solid rgba(0,212,255,0.15);
+          border-radius: 8px;
+          padding: 1.75rem 2rem;
+          text-align: center;
+          position: relative;
+          overflow: hidden;
+        }
+        .bdm-savings-bar::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, rgba(0,212,255,0.05), transparent 60%);
+          pointer-events: none;
+        }
+        .bdm-savings-amount {
+          font-family: var(--font-mono);
+          font-size: 3.5rem;
+          font-weight: 800;
+          color: #00d4ff;
+          line-height: 1;
+          text-shadow: 0 0 30px rgba(0,212,255,0.3);
+        }
+        .bdm-savings-subtitle {
+          font-size: 1.1rem;
+          color: rgba(255,255,255,0.75);
+          margin-top: 0.6rem;
+        }
+        .bdm-savings-note {
+          font-family: var(--font-mono);
+          font-size: 0.75rem;
+          color: rgba(0,212,255,0.6);
+          letter-spacing: 0.1em;
+          margin-top: 0.75rem;
+        }
+        .bdm-capability-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 0;
+          margin: 2rem 0;
+          border: 1px solid rgba(255,255,255,0.06);
+          border-radius: 8px;
+          overflow: hidden;
+        }
+        .bdm-cap-header {
+          padding: 1rem 1.25rem;
+          font-family: var(--font-mono);
+          font-size: 0.8rem;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          border-bottom: 1px solid rgba(255,255,255,0.06);
+          text-align: center;
+        }
+        .bdm-cap-header:first-child { text-align: left; background: rgba(255,255,255,0.02); }
+        .bdm-cap-header.cap-bad { color: rgba(239,68,68,0.7); background: rgba(239,68,68,0.03); text-align: left; }
+        .bdm-cap-header.cap-good { color: rgba(0,212,255,0.8); background: rgba(0,212,255,0.03); text-align: left; }
+        .bdm-cap-row {
+          display: contents;
+        }
+        .bdm-cap-cell {
+          padding: 0.9rem 1.25rem;
+          font-size: 1.05rem;
+          border-bottom: 1px solid rgba(255,255,255,0.03);
+          display: flex;
+          align-items: center;
+        }
+        .bdm-cap-cell:first-child {
+          color: rgba(255,255,255,0.8);
+          font-weight: 500;
+          background: rgba(255,255,255,0.01);
+        }
+        .bdm-cap-cell.cell-bad {
+          color: #ef4444;
+          justify-content: flex-start;
+          background: rgba(239,68,68,0.02);
+        }
+        .bdm-cap-cell.cell-good {
+          color: #00d4ff;
+          justify-content: flex-start;
+          background: rgba(0,212,255,0.02);
+        }
+      </style>
+
+      <div class="fade-in">
+        <div class="label">The BDM Question / 006</div>
+      </div>
+      <div class="fade-in d1">
+        <h2>Hiring a BDM<br><span class="thin">vs. AI That Sounds Like You</span></h2>
+      </div>
+
+      <div class="fade-in d2">
+        <div class="quote-block">
+          <p class="quote-text">"People trust ME, not TM Tarpaulins. They know me, they trust me, and that's why they keep coming back."</p>
+          <p class="quote-author">— Marcus, TM Tarpaulins</p>
+        </div>
+        <p class="lead" style="margin-top:1.5rem;">That's the problem. You can't bottle 45 years of tarpaulin expertise and hand it to a new hire. But you <em>can</em> train an AI on it.</p>
+      </div>
+
+      <div class="fade-in d3">
+        <div class="bdm-vs">
+          <!-- Side-by-side hero comparison -->
+          <div class="bdm-hero-grid">
+            <div class="bdm-column bdm-column-bad">
+              <div class="bdm-column-header">Hiring a BDM</div>
+              <div class="bdm-big-number" style="color:rgba(239,68,68,0.6);">£65k+</div>
+              <div class="bdm-big-label">Year 1 total cost</div>
+              <div class="bdm-stat-row"><span class="bdm-stat-label">Ramp-up time</span><span class="bdm-stat-value">6-12 months</span></div>
+              <div class="bdm-stat-row"><span class="bdm-stat-label">Daily outreach</span><span class="bdm-stat-value">20-30 emails</span></div>
+              <div class="bdm-stat-row"><span class="bdm-stat-label">Year 2 cost</span><span class="bdm-stat-value">£65-70k+</span></div>
+              <div class="bdm-stat-row"><span class="bdm-stat-label">Sick days / holidays</span><span class="bdm-stat-value">28+ days</span></div>
+              <div class="bdm-stat-row"><span class="bdm-stat-label">Sounds like you</span><span class="bdm-stat-value">Never</span></div>
+            </div>
+
+            <div class="bdm-vs-divider">
+              <div class="bdm-vs-badge">VS</div>
+            </div>
+
+            <div class="bdm-column bdm-column-good">
+              <div class="bdm-column-header">AI System (Pilot)</div>
+              <div class="bdm-big-number" style="color:#00d4ff;">£28k</div>
+              <div class="bdm-big-label">Year 1 total cost</div>
+              <div class="bdm-stat-row"><span class="bdm-stat-label">Ramp-up time</span><span class="bdm-stat-value">2 weeks</span></div>
+              <div class="bdm-stat-row"><span class="bdm-stat-label">Daily outreach</span><span class="bdm-stat-value">100-200 emails</span></div>
+              <div class="bdm-stat-row"><span class="bdm-stat-label">Year 2 cost</span><span class="bdm-stat-value">£18k</span></div>
+              <div class="bdm-stat-row"><span class="bdm-stat-label">Sick days / holidays</span><span class="bdm-stat-value">Zero</span></div>
+              <div class="bdm-stat-row"><span class="bdm-stat-label">Sounds like you</span><span class="bdm-stat-value">From day 1</span></div>
+            </div>
+          </div>
+
+          <!-- Capability comparison grid -->
+          <div class="bdm-capability-grid">
+            <div class="bdm-cap-header">Capability</div>
+            <div class="bdm-cap-header cap-bad">BDM</div>
+            <div class="bdm-cap-header cap-good">AI System</div>
+
+            <div class="bdm-cap-cell">Learns your voice</div>
+            <div class="bdm-cap-cell cell-bad">❌ 6-12 months (if ever)</div>
+            <div class="bdm-cap-cell cell-good">✅ Trained from day 1</div>
+
+            <div class="bdm-cap-cell">45 years expertise</div>
+            <div class="bdm-cap-cell cell-bad">❌ Not teachable</div>
+            <div class="bdm-cap-cell cell-good">✅ Embedded in AI</div>
+
+            <div class="bdm-cap-cell">Works 24/7</div>
+            <div class="bdm-cap-cell cell-bad">❌ 40hrs/week max</div>
+            <div class="bdm-cap-cell cell-good">✅ Never stops</div>
+
+            <div class="bdm-cap-cell">Automated follow-ups</div>
+            <div class="bdm-cap-cell cell-bad">❌ Manual, inconsistent</div>
+            <div class="bdm-cap-cell cell-good">✅ Every lead, every time</div>
+
+            <div class="bdm-cap-cell">Multi-channel outreach</div>
+            <div class="bdm-cap-cell cell-bad">❌ Email only (mostly)</div>
+            <div class="bdm-cap-cell cell-good">✅ Email, LinkedIn, SMS, WhatsApp</div>
+
+            <div class="bdm-cap-cell">Scales with demand</div>
+            <div class="bdm-cap-cell cell-bad">❌ Hire another BDM</div>
+            <div class="bdm-cap-cell cell-good">✅ Instant</div>
+
+            <div class="bdm-cap-cell">Builds trust like Marcus</div>
+            <div class="bdm-cap-cell cell-bad">❌ "Just a salesperson"</div>
+            <div class="bdm-cap-cell cell-good">✅ IS Marcus (to them)</div>
+          </div>
+
+          <!-- Savings callout -->
+          <div class="bdm-savings-bar">
+            <div class="bdm-savings-amount">£37,000+</div>
+            <div class="bdm-savings-subtitle">Year 1 savings with the Pilot system vs. hiring a BDM</div>
+            <div class="bdm-savings-note">AI KEEPS IMPROVING · BDM COSTS STAY AT £65K+ FOREVER</div>
+          </div>
+
+          <!-- Bottom verdict cards -->
+          <div class="bdm-verdict">
+            <div class="bdm-verdict-card bdm-verdict-bad">
+              <div class="bdm-verdict-number">£130k+</div>
+              <div class="bdm-verdict-label">BDM cost over 2 years<br>Still won't sound like Marcus</div>
+            </div>
+            <div class="bdm-verdict-card bdm-verdict-good">
+              <div class="bdm-verdict-number">£46k</div>
+              <div class="bdm-verdict-label">AI system over 2 years<br>Sounds like you from week 1</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ==================== COST OF DOING NOTHING ==================== -->
+<section class="section" id="s003">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="label">Nurture Sequences / 007</div>
+    </div>
+    <div class="fade-in d1">
+      <h2>Nurture Sequences:<br><span class="thin">From First Email to Booked Call</span></h2>
+      <p class="lead" style="margin-top:1rem;">Click through to see how the AI nurtures leads over 7 days. Each email is automatically timed and personalized.</p>
+    </div>
+
+    <div class="fade-in d3" style="margin-top:2rem;">
+      <style>
+        .email-viewer {
+          background: rgba(0,0,0,0.3);
+          border: 1px solid rgba(0,212,255,0.15);
+          border-radius: 12px;
+          padding: 2.5rem;
+          min-height: 700px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .email-stage {
+          opacity: 0;
+          transform: translateY(20px);
+          transition: opacity 0.5s ease, transform 0.5s ease;
+          pointer-events: none;
+          position: absolute;
+          width: 100%;
+        }
+        .email-stage.active {
+          opacity: 1;
+          transform: translateY(0);
+          pointer-events: auto;
+          position: relative;
+          width: auto;
+        }
+        .email-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 2rem;
+          padding-bottom: 1.5rem;
+          border-bottom: 1px solid rgba(0,212,255,0.15);
+        }
+        .email-day-label {
+          font-family: var(--font-mono);
+          font-size: 0.95rem;
+          font-weight: 700;
+          color: #00d4ff;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+        }
+        .email-from-to {
+          font-size: 1rem;
+          color: rgba(255,255,255,0.6);
+          margin-bottom: 0.5rem;
+        }
+        .email-from-to strong {
+          color: #fff;
+        }
+        .email-subject {
+          font-size: 1.6rem;
+          font-weight: 700;
+          color: #fff;
+          margin-top: 0.5rem;
+        }
+        .email-body {
+          font-size: 1.1rem;
+          color: rgba(255,255,255,0.8);
+          line-height: 1.85;
+          margin-bottom: 1.5rem;
+        }
+        .email-body p {
+          margin-bottom: 1rem;
+        }
+        .email-highlight {
+          background: rgba(0,212,255,0.08);
+          border-left: 3px solid #00d4ff;
+          padding: 1.5rem;
+          margin: 1.5rem 0;
+          border-radius: 6px;
+          font-size: 1rem;
+          line-height: 1.8;
+        }
+        .email-nav-buttons {
+          display: flex;
+          gap: 1rem;
+          justify-content: center;
+          margin-top: 3rem;
+        }
+        .email-nav-btn {
+          background: transparent;
+          border: 1px solid rgba(0,212,255,0.4);
+          color: #00d4ff;
+          padding: 0.8rem 2rem;
+          font-size: 1rem;
+          font-weight: 600;
+          border-radius: 6px;
+          cursor: pointer;
+          transition: all 0.3s;
+          font-family: var(--font-mono);
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+        }
+        .email-nav-btn:hover {
+          background: rgba(0,212,255,0.1);
+          border-color: #00d4ff;
+        }
+        .email-nav-btn:disabled {
+          opacity: 0.3;
+          cursor: not-allowed;
+        }
+        .email-nav-btn:disabled:hover {
+          background: transparent;
+        }
+      </style>
+
+      <div class="email-viewer">
+        <div style="position: relative; min-height: 500px;">
+
+          <!-- STAGE 1: Day 1 Initial Outreach -->
+          <div class="email-stage active">
+            <div class="email-header">
+              <div>
+                <div class="email-day-label">Day 1 · Initial Outreach</div>
+                <div class="email-from-to"><strong>Marcus</strong> (marcus@tmtarpaulins.co.uk) → James Mitchell</div>
+                <div class="email-subject">Quick thought on your lice screen setup</div>
+              </div>
+              <div style="font-size: 0.9rem; color: rgba(255,255,255,0.5);">Mon 7 Apr · 09:14</div>
+            </div>
+
+            <div class="email-highlight">
+              <strong>What's happening:</strong> The AI writes an email as Marcus, personalized to James based on company research (Highland is expanding). It mentions the 40% cost savings benefit that would appeal to them. The email sounds natural — like Marcus actually wrote it.
+            </div>
+
+            <div class="email-body">
+              <p><strong>Hi James,</strong></p>
+              <p>I noticed Highland has been expanding — congratulations on the new ponds. We work with fish farms across Scotland on custom lice screen covers that cut treatment costs by up to 40%.</p>
+              <p>I've got a quick case study from a farm similar to yours if you'd be interested. Just a 15-min chat — no pressure at all.</p>
+              <p style="margin-top: 1.5rem;"><strong>Cheers,<br>Marcus<br>TM Tarpaulins</strong></p>
+            </div>
+
+            <div style="font-size: 0.9rem; color: #fbbf24; margin-top: 1.5rem; padding: 1rem; background: rgba(251,191,36,0.08); border-radius: 6px; border-left: 3px solid #fbbf24;">
+              ✓ Email sent automatically<br>
+              ✓ Personalized to James<br>
+              ✓ AI is monitoring for replies
+            </div>
+          </div>
+
+          <!-- STAGE 2: Day 4 Follow-up -->
+          <div class="email-stage">
+            <div class="email-header">
+              <div>
+                <div class="email-day-label">Day 4 · Follow-up (No Reply)</div>
+                <div class="email-from-to"><strong>Marcus</strong> (AI Auto Follow-up) → James Mitchell</div>
+                <div class="email-subject">Re: Quick thought on your lice screen setup</div>
+              </div>
+              <div style="font-size: 0.9rem; color: rgba(255,255,255,0.5);">Thu 10 Apr · 08:30</div>
+            </div>
+
+            <div class="email-highlight">
+              <strong>What's happening:</strong> 3 days have passed with no reply. The AI automatically sends a friendly follow-up. It's respectful of James's time (running a farm is busy), references the case study, and keeps the tone low-pressure. It still sounds like Marcus, not a robot.
+            </div>
+
+            <div class="email-body">
+              <p><strong>James,</strong></p>
+              <p>Just a quick follow-up on my note from Monday. I know you're busy — running a farm doesn't leave much desk time.</p>
+              <p>I put together a short case study from another Highland farm that cut their lice treatment costs by 40% with our custom screens. Happy to send it across if useful?</p>
+              <p>Either way, no worries at all.</p>
+              <p style="margin-top: 1.5rem;"><strong>Cheers,<br>Marcus</strong></p>
+            </div>
+
+            <div style="font-size: 0.9rem; color: #fbbf24; margin-top: 1.5rem; padding: 1rem; background: rgba(251,191,36,0.08); border-radius: 6px; border-left: 3px solid #fbbf24;">
+              ✓ Automated 3 days after initial<br>
+              ✓ Still no response from James<br>
+              ✓ AI continues monitoring
+            </div>
+          </div>
+
+          <!-- STAGE 3: Day 5 James Replies -->
+          <div class="email-stage">
+            <div class="email-header">
+              <div>
+                <div class="email-day-label">Day 5 · James Replies!</div>
+                <div class="email-from-to"><strong>James Mitchell</strong> → Marcus</div>
+                <div class="email-subject">Re: Quick thought on your lice screen setup</div>
+              </div>
+              <div style="font-size: 0.9rem; color: rgba(255,255,255,0.5);">Fri 11 Apr · 14:22</div>
+            </div>
+
+            <div class="email-highlight">
+              <strong>What's happening:</strong> James replies! The AI detects his email immediately and responds as Marcus — addressing his questions, mentioning the 2-3 week turnaround, and suggesting a call. The AI doesn't wait for Marcus to manually respond.
+            </div>
+
+            <div class="email-body">
+              <p><strong>James:</strong></p>
+              <p>Actually, your timing is spot on — we've been looking at replacing our covers on ponds 3-7. The lice treatment costs are killing us this year.</p>
+              <p>What's the typical turnaround from order to install? And could you handle all 5 ponds?</p>
+
+              <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(0,212,255,0.06); border: 1px solid rgba(0,212,255,0.2); border-radius: 6px;">
+                <div style="font-size: 0.85rem; color: #00d4ff; font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.1em;">AI Auto-Response (as Marcus)</div>
+                <p style="font-size: 1rem; color: rgba(255,255,255,0.85);">
+                  "Great to hear, James. Typical turnaround is 2-3 weeks from measurement to install — we handle everything on-site, no disruption to your stock. 5 ponds is no problem at all. Happy to jump on a quick call to run through options? I'm free Thursday afternoon if that works?"
+                </p>
+              </div>
+            </div>
+
+            <div style="font-size: 0.9rem; color: #22c55e; margin-top: 1.5rem; padding: 1rem; background: rgba(34,197,94,0.08); border-radius: 6px; border-left: 3px solid #22c55e;">
+              ✓ James replied with interest<br>
+              ✓ AI detected and responded immediately<br>
+              ✓ Lead is now warm and qualified
+            </div>
+          </div>
+
+          <!-- STAGE 4: Day 7 Appointment Booked -->
+          <div class="email-stage">
+            <div class="email-header">
+              <div>
+                <div class="email-day-label">Day 7 · Appointment Booked!</div>
+                <div class="email-from-to"><strong>System Confirmation</strong> → Marcus</div>
+                <div class="email-subject">Meeting Confirmed: Highland Fish Farm</div>
+              </div>
+              <div style="font-size: 0.9rem; color: rgba(255,255,255,0.5);">Fri 11 Apr · 14:41</div>
+            </div>
+
+            <div class="email-highlight">
+              <strong>What's happening:</strong> James confirmed a meeting time. The AI automatically sent the calendar invite, and now it's preparing everything Marcus needs: company background, James's pain points, budget info, and conversation starters. Marcus just needs to show up and close.
+            </div>
+
+            <div style="padding: 2rem; background: rgba(0,212,255,0.05); border: 1px solid rgba(0,212,255,0.2); border-radius: 8px; margin: 1.5rem 0;">
+              <div style="font-size: 0.85rem; color: #00d4ff; font-weight: 600; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.1em;">📅 Meeting Confirmed</div>
+              <p style="font-size: 1.2rem; font-weight: 600; color: #fff; margin-bottom: 0.5rem;">Thursday, 17 Apr · 2:00 PM — 2:30 PM</p>
+              <p style="color: rgba(255,255,255,0.7);">Highland Fish Farm with James Mitchell<br>📍 Video Call (Teams link auto-sent)</p>
+
+              <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(0,212,255,0.15);">
+                <div style="font-size: 0.85rem; color: #00d4ff; font-weight: 600; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.1em;">📋 AI-Generated Call Prep</div>
+                <ul style="list-style: none; font-size: 0.95rem; color: rgba(255,255,255,0.8); line-height: 1.8;">
+                  <li>• 5 ponds need new covers (ponds 3-7), currently using competitor covers</li>
+                  <li>• Main pain point: Lice treatment costs are rising sharply this year</li>
+                  <li>• Responded strongly to 40% cost savings stat — use case study as anchor</li>
+                  <li>• Authority to approve: up to £15k without board sign-off</li>
+                  <li>• Tone preference: Friendly, pragmatic, wants fast turnaround</li>
+                </ul>
+              </div>
+            </div>
+
+            <div style="text-align: center; font-size: 0.95rem; color: #00d4ff; margin-top: 1.5rem; font-weight: 600;">
+              AI spent 7 days finding, researching, and nurturing James.<br>
+              You spend 30 minutes closing a warm, qualified lead.
+            </div>
+          </div>
+
+        </div>
+
+        <div class="email-nav-buttons">
+          <button class="email-nav-btn" id="emailPrev">← Previous</button>
+          <button class="email-nav-btn" id="emailNext">Next →</button>
+        </div>
+
+        <!-- SUMMARY SLIDE - Nurture Sequence Timeline -->
+        <div style="margin-top: 4rem; padding: 2.5rem; background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(0,212,255,0.04)); border: 1px solid rgba(0,212,255,0.15); border-radius: 12px;">
+          <h3 style="text-align: center; font-size: 1.6rem; margin-bottom: 3rem; color: #fff;">7-Day Nurture Sequence Timeline</h3>
+
+          <!-- Timeline -->
+          <div style="position: relative; max-width: 960px; margin: 0 auto 3rem;">
+            <!-- Timeline Line -->
+            <div style="position: absolute; top: 30px; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #fbbf24, #00d4ff, #22c55e); z-index: 0;"></div>
+
+            <!-- Timeline Points -->
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; position: relative; z-index: 1;">
+
+              <!-- Day 1 -->
+              <div style="text-align: center;">
+                <div style="width: 60px; height: 60px; background: #1a1a1a; border: 3px solid #fbbf24; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #fbbf24; font-size: 1.1rem;">📧</div>
+                <div style="font-weight: 600; color: #fff; margin-bottom: 0.5rem;">Day 1</div>
+                <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.5;">Initial Email Sent</div>
+              </div>
+
+              <!-- Day 4 -->
+              <div style="text-align: center;">
+                <div style="width: 60px; height: 60px; background: #1a1a1a; border: 3px solid #fbbf24; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #fbbf24; font-size: 1.1rem;">↻</div>
+                <div style="font-weight: 600; color: #fff; margin-bottom: 0.5rem;">Day 4</div>
+                <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.5;">Follow-up Email</div>
+              </div>
+
+              <!-- Day 5 -->
+              <div style="text-align: center;">
+                <div style="width: 60px; height: 60px; background: #1a1a1a; border: 3px solid #22c55e; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #22c55e; font-size: 1.1rem;">✓</div>
+                <div style="font-weight: 600; color: #fff; margin-bottom: 0.5rem;">Day 5</div>
+                <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.5;">Lead Replies!</div>
+              </div>
+
+              <!-- Day 7 -->
+              <div style="text-align: center;">
+                <div style="width: 60px; height: 60px; background: #1a1a1a; border: 3px solid #22c55e; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #22c55e; font-size: 1.1rem;">📅</div>
+                <div style="font-weight: 600; color: #fff; margin-bottom: 0.5rem;">Day 7</div>
+                <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.5;">Call Booked</div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Summary bullets -->
+          <div style="max-width: 960px; margin: 0 auto;">
+            <div style="background: rgba(0,0,0,0.3); border-left: 3px solid #00d4ff; padding: 2rem; border-radius: 6px;">
+              <div style="font-size: 1.1rem; color: rgba(255,255,255,0.85); line-height: 2;">
+                <div style="margin-bottom: 0.8rem;"><strong style="color: #fbbf24;">→</strong> Emails sent automatically on schedule (Day 1, 4, 7)</div>
+                <div style="margin-bottom: 0.8rem;"><strong style="color: #fbbf24;">→</strong> AI monitors for replies and responds in real-time</div>
+                <div style="margin-bottom: 0.8rem;"><strong style="color: #fbbf24;">→</strong> Natural, conversational tone — sounds like you</div>
+                <div style="margin-bottom: 0.8rem;"><strong style="color: #22c55e;">→</strong> Warm leads reach your calendar automatically</div>
+                <div><strong style="color: #00d4ff;">✓</strong> Everything happens while you focus on closing</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        (function() {
+          const stages = document.querySelectorAll('.email-stage');
+          const prevBtn = document.getElementById('emailPrev');
+          const nextBtn = document.getElementById('emailNext');
+          let current = 0;
+          let typingTimeout = null;
+
+          // Typing animation effect
+          function typeText(element, speed = 20) {
+            if (!element) return;
+
+            const paragraphs = element.querySelectorAll('p');
+            paragraphs.forEach((p, idx) => {
+              const originalText = p.textContent;
+              p.textContent = '';
+              p.style.minHeight = p.offsetHeight + 'px';
+
+              setTimeout(() => {
+                let charIndex = 0;
+                const type = () => {
+                  if (charIndex < originalText.length) {
+                    p.textContent += originalText[charIndex];
+                    charIndex++;
+                    typingTimeout = setTimeout(type, speed);
+                  }
+                };
+                type();
+              }, idx * 200);
+            });
+          }
+
+          function showStage(idx) {
+            // Clear previous typing animations
+            if (typingTimeout) clearTimeout(typingTimeout);
+
+            stages.forEach((stage, i) => {
+              stage.classList.toggle('active', i === idx);
+
+              // Start typing animation for email body when stage becomes active
+              if (i === idx) {
+                setTimeout(() => {
+                  const emailBody = stage.querySelector('.email-body');
+                  if (emailBody) {
+                    typeText(emailBody, 15);
+                  }
+                }, 300);
+              } else {
+                // Reset text for inactive stages
+                const emailBody = stage.querySelector('.email-body');
+                if (emailBody) {
+                  const paragraphs = emailBody.querySelectorAll('p');
+                  // Store original text if not already stored
+                  paragraphs.forEach(p => {
+                    if (!p.dataset.originalText) {
+                      p.dataset.originalText = p.textContent;
+                    }
+                  });
+                }
+              }
+            });
+
+            current = idx;
+            prevBtn.disabled = current === 0;
+            nextBtn.disabled = current === stages.length - 1;
+          }
+
+          prevBtn.addEventListener('click', () => {
+            if (current > 0) showStage(current - 1);
+          });
+
+          nextBtn.addEventListener('click', () => {
+            if (current < stages.length - 1) showStage(current + 1);
+          });
+
+          showStage(0);
+        })();
+      </script>
+    </div>
+  </div>
+</section>
+
+
+
+  <div class="section-divider"></div>
+
+
+  <!-- ==================== NEW SECTION: BDM PROBLEM ==================== -->
+  <section class="section" id="s001">
+    <div class="section-inner">
+      <div class="fade-in">
+        <div class="label">Who We Are / 008</div>
+        <h2 class="section-title" style="color:var(--color-accent); font-family:'Montserrat',sans-serif; text-transform:uppercase; letter-spacing:0.1em; font-weight:700;">Cold Lava</h2>
+        <p class="section-desc" style="max-width:700px; font-size:1.3rem; line-height:1.7; margin-bottom:2.5rem;">
+          UK-based software and automation consultancy. We build bespoke systems that run businesses — not templates, not off-the-shelf. Every system custom-built by our in-house team.
+        </p>
+        <div class="card fade-in" style="border-left:3px solid var(--color-accent); padding:1.5rem 2rem;">
+          <p style="font-size:1.1rem; font-style:italic; line-height:1.7; color:rgba(255,255,255,0.85); margin-bottom:0.75rem;">"We recently worked with Cold Lava to develop a new website and explore AI solutions for our telesales business and the experience has been exceptional from start to finish. Oli and Jacob are incredibly efficient, knowledgeable, and easy to work with. They took the time to understand our needs, offered creative and practical solutions, and delivered everything on time. Their professionalism and attention to detail have made a real difference to our business. I can't recommend them highly enough."</p>
+          <p style="font-family:var(--font-mono); font-size:0.8rem; color:var(--color-accent);">— Jack Castle · ⭐⭐⭐⭐⭐ Trustpilot</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ==================== 001 / BOS PLATFORM ==================== -->
+  <section class="section" id="s014">
+    <div class="section-inner">
+      <div class="fade-in" style="text-align:center;">
+        <div class="label" style="justify-content:center;">Pricing Summary / 009</div>
+      </div>
+      <div class="fade-in d1" style="text-align:center;">
+        <h2 style="text-align:center;">Your Investment.<br><span class="thin">Choose Your Growth Path.</span></h2>
+      </div>
+
+      <!-- Three pricing cards -->
+      <div class="fade-in d2" style="margin-top:3rem;">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;max-width:960px;margin:0 auto;">
+
+          <!-- PILOT -->
+          <div style="background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:2.5rem 2rem;position:relative;">
+            <div style="font-family:var(--font-mono);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.4);margin-bottom:1rem;">Pilot</div>
+            <div style="font-size:2.8rem;font-weight:800;color:#fff;line-height:1;margin-bottom:0.3rem;">£10k</div>
+            <div style="font-size:1rem;color:rgba(255,255,255,0.4);margin-bottom:2rem;">setup <span style="color:rgba(255,255,255,0.25);">+</span> £1,500<span style="color:rgba(255,255,255,0.3);">/mo</span></div>
+            <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:1.5rem;">
+              <div style="font-size:1rem;color:rgba(255,255,255,0.7);line-height:2.2;">
+                <div>1 product (Aquaculture)</div>
+                <div>UK / Scotland</div>
+                <div>Email + LinkedIn</div>
+                <div>Basic CRM integration</div>
+                <div>Weekly reports</div>
+              </div>
+            </div>
+            <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.08);text-align:center;">
+              <div style="font-size:0.85rem;color:rgba(255,255,255,0.4);margin-bottom:0.3rem;">Year 1 Total</div>
+              <div style="font-size:1.8rem;font-weight:700;color:#fff;">£28,000</div>
+            </div>
+          </div>
+
+          <!-- DUAL SECTOR — RECOMMENDED -->
+          <div style="background:rgba(0,212,255,0.06);border:2px solid rgba(0,212,255,0.35);border-radius:12px;padding:2.5rem 2rem;position:relative;transform:scale(1.03);">
+            <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:#00d4ff;color:#000;font-family:var(--font-mono);font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;padding:0.3rem 1.2rem;border-radius:20px;">Recommended</div>
+            <div style="font-family:var(--font-mono);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;color:#00d4ff;margin-bottom:1rem;">Dual Sector</div>
+            <div style="font-size:2.8rem;font-weight:800;color:#fff;line-height:1;margin-bottom:0.3rem;">£18k</div>
+            <div style="font-size:1rem;color:rgba(255,255,255,0.4);margin-bottom:2rem;">setup <span style="color:rgba(255,255,255,0.25);">+</span> £2,000<span style="color:rgba(255,255,255,0.3);">/mo</span></div>
+            <div style="border-top:1px solid rgba(0,212,255,0.15);padding-top:1.5rem;">
+              <div style="font-size:1rem;color:rgba(255,255,255,0.7);line-height:2.2;">
+                <div>2 products (Aquaculture + Oil &amp; Gas)</div>
+                <div>UK/Scotland + Norway</div>
+                <div>Email + LinkedIn</div>
+                <div>Full CRM integration</div>
+                <div>Bi-weekly optimisation</div>
+              </div>
+            </div>
+            <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(0,212,255,0.15);text-align:center;">
+              <div style="font-size:0.85rem;color:rgba(0,212,255,0.6);margin-bottom:0.3rem;">Year 1 Total</div>
+              <div style="font-size:1.8rem;font-weight:700;color:#00d4ff;">£42,000</div>
+            </div>
+          </div>
+
+          <!-- FULL DEPLOYMENT -->
+          <div style="background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:2.5rem 2rem;position:relative;">
+            <div style="font-family:var(--font-mono);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.4);margin-bottom:1rem;">Full Deployment</div>
+            <div style="font-size:2.8rem;font-weight:800;color:#fff;line-height:1;margin-bottom:0.3rem;">£25k</div>
+            <div style="font-size:1rem;color:rgba(255,255,255,0.4);margin-bottom:2rem;">setup <span style="color:rgba(255,255,255,0.25);">+</span> £3,000<span style="color:rgba(255,255,255,0.3);">/mo</span></div>
+            <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:1.5rem;">
+              <div style="font-size:1rem;color:rgba(255,255,255,0.7);line-height:2.2;">
+                <div>3+ products (All sectors)</div>
+                <div>UK + Norway + Chile + USA/Canada</div>
+                <div>Email + LinkedIn</div>
+                <div>Full CRM + Lead scoring</div>
+                <div>Weekly optimisation + Account manager</div>
+              </div>
+            </div>
+            <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.08);text-align:center;">
+              <div style="font-size:0.85rem;color:rgba(255,255,255,0.4);margin-bottom:0.3rem;">Year 1 Total</div>
+              <div style="font-size:1.8rem;font-weight:700;color:#fff;">£61,000</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ROI Summary Cards -->
+      <div class="fade-in d2" style="margin-top:1.5rem;">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;max-width:960px;margin:0 auto;">
+
+          <!-- PILOT ROI -->
+          <div style="background:rgba(255,100,100,0.05);border:1px solid rgba(255,100,100,0.15);border-radius:12px;padding:2rem;text-align:center;">
+            <div style="font-size:0.95rem;color:rgba(255,255,255,0.85);line-height:1.7;">Aquaculture—lice screens, treatment tarps. Margins typically 20–40%. The system gets you known. Hundreds of personalized emails + video social proof. First 6 months: 1–2 deals. By month 12: <strong style="color:#fff;">3–5 deals</strong>. One lice screen contract covers your entire year's investment.</div>
+          </div>
+
+          <!-- DUAL SECTOR ROI -->
+          <div style="background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.25);border-radius:12px;padding:2rem;text-align:center;">
+            <div style="font-size:0.95rem;color:rgba(255,255,255,0.85);line-height:1.7;">You're pushing into oil & gas and more fish farming. This system targets both. Video content from your facilities shows real work. First 6 months: 2–3 deals. By month 12: <strong style="color:#00d4ff;">4–7 deals</strong> across sectors. One contract covers your year's cost. Momentum builds from month 6 onward.</div>
+          </div>
+
+          <!-- FULL DEPLOYMENT ROI -->
+          <div style="background:rgba(100,200,100,0.05);border:1px solid rgba(100,200,100,0.15);border-radius:12px;padding:2rem;text-align:center;">
+            <div style="font-size:0.95rem;color:rgba(255,255,255,0.85);line-height:1.7;">Everything in between—all sectors, all products, global reach. Multilingual outreach. Video social proof across every market. First 6 months: building pipeline and early wins. By month 12: <strong style="color:#fff;">6–10+ deals</strong> across sectors. Month 6+ is where scaling accelerates. One high-value contract covers 3–5x your investment.</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Key guarantee -->
+      <div class="fade-in d3" style="margin-top:2rem;text-align:center;">
+        <div style="background:linear-gradient(135deg,rgba(0,212,255,0.15),rgba(0,212,255,0.08));border:2px solid rgba(0,212,255,0.4);border-radius:12px;padding:2.5rem;max-width:960px;margin:0 auto;">
+          <div style="font-size:1.3rem;font-weight:700;color:#00d4ff;margin-bottom:1rem;">No Matter Which Tier You Choose</div>
+          <div style="font-size:1.1rem;color:rgba(255,255,255,0.92);line-height:1.8;">
+            <strong>Cheaper than a BDM.</strong> No sick days. No annual leave. No headaches. Never misses a day. Works while you sleep. Learns while you work. This is a no-brainer in a world where AI is already reshaping how winners compete.
+          </div>
+        </div>
+      </div>
+
+      <!-- Savings comparison -->
+      <div class="fade-in d3" style="margin-top:3rem;text-align:center;">
+        <div style="background:linear-gradient(135deg,rgba(0,212,255,0.08),rgba(0,212,255,0.02));border:1px solid rgba(0,212,255,0.2);border-radius:12px;padding:2.5rem;max-width:800px;margin:0 auto;">
+          <div style="display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:1.5rem;align-items:center;text-align:center;">
+            <div>
+              <div style="font-size:2.5rem;font-weight:800;color:#ff6666;margin-bottom:0.3rem;">£65k+</div>
+              <div style="font-size:1rem;color:rgba(255,255,255,0.5);">Traditional BDM<br>Year 1 Cost</div>
+            </div>
+            <div style="font-size:1.5rem;color:rgba(255,255,255,0.15);">vs</div>
+            <div>
+              <div style="font-size:2.5rem;font-weight:800;color:#00d4ff;margin-bottom:0.3rem;">£28k</div>
+              <div style="font-size:1rem;color:rgba(255,255,255,0.5);">AI Pilot System<br>Year 1 Cost</div>
+            </div>
+            <div style="font-size:1.5rem;color:rgba(255,255,255,0.15);">=</div>
+            <div>
+              <div style="font-size:2.5rem;font-weight:800;color:#00ff88;margin-bottom:0.3rem;">£37k+</div>
+              <div style="font-size:1rem;color:rgba(255,255,255,0.5);">Year 1<br>Savings</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recommendation -->
+      <div class="fade-in d4" style="margin-top:2.5rem;text-align:center;">
+        <div style="background:rgba(0,0,0,0.4);border-left:3px solid rgba(0,212,255,0.5);padding:2rem 2.5rem;border-radius:0 8px 8px 0;max-width:700px;margin:0 auto;text-align:left;">
+          <p style="font-size:1.2rem;color:rgba(255,255,255,0.85);line-height:1.7;">Start with <strong style="color:#00d4ff;">Dual Sector</strong> to prove ROI faster across your two highest-margin sectors. Once results land, expand to Full Deployment for international growth.</p>
+        </div>
+      </div>
+
+      <div class="fade-in d4" style="text-align:center;margin-top:2rem;">
+        <div style="background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.3);padding:1.5rem 2rem;border-radius:8px;max-width:500px;margin:0 auto;">
+          <div style="font-size:1.1rem;font-weight:600;color:#00d4ff;">All Services Include Dedicated Client Dashboard</div>
+          <div style="font-size:0.95rem;color:rgba(255,255,255,0.85);margin-top:0.5rem;">Real-time campaign tracking, lead monitoring, and performance insights built specifically for your business.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ==================== SUMMARY / THE REAL PITCH ==================== -->
+  <section class="section" id="s_summary">
+    <div class="section-inner">
+      <div class="fade-in" style="text-align:center;">
+        <div class="label" style="justify-content:center;">What You're Actually Getting</div>
+      </div>
+
+      <div class="fade-in d1" style="text-align:center;">
+        <h2 style="text-align:center;">You're Not Buying Software.<br><span class="thin" style="color:#00d4ff;">You're Hiring a Business Development Manager.</span></h2>
+      </div>
+
+      <!-- Three core truths -->
+      <div class="fade-in d2" style="margin-top:3rem;text-align:center;">
+        <div style="max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:2rem;">
+
+          <div style="background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.15);border-radius:10px;padding:2.5rem;text-align:center;">
+            <div style="font-size:1.1rem;font-weight:600;color:#00d4ff;margin-bottom:1rem;">This Is Not ChatGPT</div>
+            <div style="font-size:1rem;color:rgba(255,255,255,0.8);line-height:1.8;">
+              ChatGPT is generic. This is custom-built for your business. ChatGPT is the same for everyone. This learns from YOUR market, YOUR customers, YOUR approach. ChatGPT doesn't get better because of you. This system improves every day you use it.
+            </div>
+          </div>
+
+          <div style="background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.15);border-radius:10px;padding:2.5rem;text-align:center;">
+            <div style="font-size:1.1rem;font-weight:600;color:#00d4ff;margin-bottom:1rem;">Your AI-Powered BDM</div>
+            <div style="font-size:1rem;color:rgba(255,255,255,0.85);line-height:1.8;">
+              This works 24/7. Never takes holidays. Doesn't get tired. Remembers every lead. Learns your market faster than any human ever could. Gets smarter every single week. This is the new standard for business development.
+            </div>
+          </div>
+
+          <div style="background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.15);border-radius:10px;padding:2.5rem;text-align:center;">
+            <div style="font-size:1.1rem;font-weight:600;color:#00d4ff;margin-bottom:1rem;">Human BDMs Are Yesterday's Problem</div>
+            <div style="font-size:1rem;color:rgba(255,255,255,0.85);line-height:1.8;">
+              A human BDM costs £65k+ per year, takes 6-12 months to ramp up, takes holidays, and leaves when they find a better opportunity. The big players have already moved to AI. You can too. Same results. Better. Faster. Forever.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- The realisation -->
+      <div class="fade-in d3" style="margin-top:3.5rem;text-align:center;">
+        <div style="background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.15);border-radius:10px;padding:3rem;max-width:800px;margin:0 auto;">
+          <div style="font-size:1.2rem;color:rgba(255,255,255,0.9);line-height:1.9;font-weight:500;">
+            <p style="margin-bottom:1rem;">
+              Your new business development manager is <strong>Cold Lava.</strong>
+            </p>
+            <p>
+              It does what a BDM does. Better. Cheaper. Faster. And it never stops.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ==================== NEXT STEPS / LET'S BUILD ==================== -->
+  <section class="section cta-section" id="s015">
+    <div class="section-inner">
+      <div class="fade-in">
+        <div class="label" style="justify-content:center;">Next Steps / 011</div>
+      </div>
+      <div class="fade-in d1">
+        <h2 style="text-align:center;">Let's Build<br><span class="thin">Your Growth Engine.</span></h2>
+        <p style="font-size:1.2rem;color:rgba(255,255,255,0.5);max-width:550px;margin:1rem auto 0;text-align:center;">Three steps to getting started. We handle everything else.</p>
+      </div>
+
+      <!-- Steps -->
+      <div class="fade-in d2" style="margin-top:3rem;">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;max-width:800px;margin:0 auto;">
+          <div style="background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.15);border-radius:10px;padding:2rem;text-align:center;">
+            <div style="font-family:var(--font-mono);font-size:2.5rem;font-weight:800;color:rgba(0,212,255,0.3);margin-bottom:1rem;">01</div>
+            <div style="font-size:1.15rem;font-weight:700;color:#fff;margin-bottom:0.5rem;">Choose Your Plan</div>
+            <div style="font-size:0.95rem;color:rgba(255,255,255,0.5);line-height:1.5;">Pilot, Dual Sector, or Full Deployment</div>
+          </div>
+          <div style="background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.15);border-radius:10px;padding:2rem;text-align:center;">
+            <div style="font-family:var(--font-mono);font-size:2.5rem;font-weight:800;color:rgba(0,212,255,0.3);margin-bottom:1rem;">02</div>
+            <div style="font-size:1.15rem;font-weight:700;color:#fff;margin-bottom:0.5rem;">We Build Your System</div>
+            <div style="font-size:0.95rem;color:rgba(255,255,255,0.5);line-height:1.5;">AI training, CRM setup, campaign strategy</div>
+          </div>
+          <div style="background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.15);border-radius:10px;padding:2rem;text-align:center;">
+            <div style="font-family:var(--font-mono);font-size:2.5rem;font-weight:800;color:rgba(0,212,255,0.3);margin-bottom:1rem;">03</div>
+            <div style="font-size:1.15rem;font-weight:700;color:#fff;margin-bottom:0.5rem;">Leads Start Flowing</div>
+            <div style="font-size:0.95rem;color:rgba(255,255,255,0.5);line-height:1.5;">Warm leads in your inbox within weeks</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 1 Onboarding -->
+      <div class="fade-in d2" style="margin-top:4rem;">
+        <div style="background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.25);border-radius:12px;padding:3rem;max-width:800px;margin:0 auto;">
+          <div style="font-size:1.3rem;font-weight:700;color:#00d4ff;margin-bottom:2rem;text-align:center;">Here's What Happens Day 1</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+            <div>
+              <div style="font-size:1.1rem;font-weight:600;color:#fff;margin-bottom:0.8rem;">Day 1</div>
+              <div style="font-size:0.95rem;color:rgba(255,255,255,0.85);line-height:1.8;">Contract signed. We pull your data, set up your CRM integration, begin learning your communication style and market positioning.</div>
+            </div>
+            <div>
+              <div style="font-size:1.1rem;font-weight:600;color:#fff;margin-bottom:0.8rem;">Week 1</div>
+              <div style="font-size:0.95rem;color:rgba(255,255,255,0.85);line-height:1.8;">System is trained on your business. We build your campaigns. Everything is ready for launch with your approval.</div>
+            </div>
+            <div>
+              <div style="font-size:1.1rem;font-weight:600;color:#fff;margin-bottom:0.8rem;">Week 2</div>
+              <div style="font-size:0.95rem;color:rgba(255,255,255,0.85);line-height:1.8;">Campaigns go live. Personalized emails begin reaching the right decision-makers. You get your first qualified leads.</div>
+            </div>
+            <div>
+              <div style="font-size:1.1rem;font-weight:600;color:#fff;margin-bottom:0.8rem;">Month 1+</div>
+              <div style="font-size:0.95rem;color:rgba(255,255,255,0.85);line-height:1.8;">System optimizes based on real results. Weekly reports show what's working. You focus on closing the deals we find.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-in d3" style="margin-top:3rem;">
+        <a href="https://coldlava.ai" class="cta-link" target="_blank" style="padding:1.2rem 3rem;font-size:1.1rem;border-radius:6px;">coldlava.ai <span style="font-size:1.2rem;">→</span></a>
+      </div>
+      <div class="fade-in d4">
+        <div class="cta-footer" style="margin-top:4rem;">Cold Lava × TM Tarpaulins / 2026</div>
+      </div>
+    </div>
+  </section>
+
+
+  <div style="height:4rem;"></div>
+
+</div><!-- /main-content -->
+
+<script>
+// ===== THEME TOGGLE =====
+const themeToggle = document.getElementById('themeToggle');
+const root = document.documentElement;
+const currentTheme = localStorage.getItem('theme') || 'dark';
+root.setAttribute('data-theme', currentTheme);
+themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+
+themeToggle.addEventListener('click', () => {
+  const newTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+  themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+});
+
+// ===== CLOCK =====
+function updateClock() {
+  const now = new Date();
+  const opts = { timeZone: 'Europe/London', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+  document.getElementById('clock').textContent = now.toLocaleTimeString('en-GB', opts);
+  const dateOpts = { timeZone: 'Europe/London', weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
+  document.getElementById('dateText').textContent = now.toLocaleDateString('en-GB', dateOpts).toUpperCase();
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+// ===== COORDINATES =====
+document.addEventListener('mousemove', (e) => {
+  document.getElementById('coordX').textContent = String(e.clientX).padStart(4, '0');
+  document.getElementById('coordY').textContent = String(e.clientY).padStart(4, '0');
+});
+
+// ===== SCROLL PROGRESS =====
+window.addEventListener('scroll', () => {
+  const scrollTop = document.documentElement.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const progress = (scrollTop / scrollHeight) * 100;
+  document.getElementById('scroll-progress').style.width = progress + '%';
+});
+
+// ===== FADE-IN ON SCROLL =====
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+// ===== SIDEBAR ACTIVE LINK =====
+const sections = document.querySelectorAll('.section[id]');
+const navLinks = document.querySelectorAll('.sidebar-links a');
+
+// Use scroll position to determine active section
+let clickedSection = null;
+let clickTimeout = null;
+
+function updateActiveNav() {
+  // If user just clicked a nav link, keep that one highlighted
+  if (clickedSection) {
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('data-section') === clickedSection);
+    });
+    return;
+  }
+  
+  let currentSection = 'hero';
+  const scrollY = window.scrollY;
+  
+  sections.forEach(section => {
+    const top = section.offsetTop - 200;
+    const bottom = top + section.offsetHeight;
+    if (scrollY >= top && scrollY < bottom) {
+      currentSection = section.id;
+    }
+  });
+  
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('data-section') === currentSection);
+  });
+}
+
+window.addEventListener('scroll', updateActiveNav);
+updateActiveNav();
+
+// When clicking a nav link, force-highlight it for 1.5s then resume scroll tracking
+navLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const sectionId = link.getAttribute('data-section');
+    const targetElement = document.getElementById(sectionId);
+
+    if (targetElement) {
+      // Calculate scroll position with offset for proper viewport positioning
+      const offset = 150; // Pixels from top of viewport
+      const targetPosition = targetElement.offsetTop - offset;
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
+    }
+
+    clickedSection = sectionId;
+    if (clickTimeout) clearTimeout(clickTimeout);
+    clickTimeout = setTimeout(() => { clickedSection = null; }, 1500);
+    updateActiveNav();
+  });
+});
+
+// ===== MOBILE SIDEBAR =====
+const sidebarToggle = document.getElementById('sidebarToggle');
+const sidebarNav = document.getElementById('sidebarNav');
+sidebarToggle.addEventListener('click', () => {
+  sidebarNav.classList.toggle('open');
+  sidebarToggle.textContent = sidebarNav.classList.contains('open') ? '✕' : '☰';
+});
+
+// Close sidebar on nav click (mobile)
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth <= 1024) {
+      sidebarNav.classList.remove('open');
+      sidebarToggle.textContent = '☰';
+    }
+  });
+});
+
+// ===== ENLARGEMENT MODAL =====
+const modal = document.createElement('div');
+modal.className = 'enlarge-modal';
+modal.innerHTML = `
+  <div class="enlarge-modal-content" id="modalContent">
+    <button class="enlarge-modal-close">&times;</button>
+    <div id="modalBody"></div>
+    <div class="enlarge-modal-nav">
+      <button id="modalPrev">← PREVIOUS</button>
+      <button id="modalNext">NEXT →</button>
+    </div>
+  </div>
+`;
+document.body.appendChild(modal);
+
+let currentEnlargedIndex = -1;
+let currentGroup = [];
+let currentGroupType = null;
+
+function initEnlargeables() {
+  // Add class to stage demo boxes
+  document.querySelectorAll('.lead-gen-stage').forEach(el => {
+    if (!el.classList.contains('enlarge-trigger')) {
+      el.classList.add('enlarge-trigger');
+      el.dataset.enlargeGroup = 'stage';
+    }
+  });
+
+  // Add class to email stages (within email-viewers)
+  document.querySelectorAll('.email-stage').forEach(el => {
+    if (!el.classList.contains('enlarge-trigger')) {
+      el.classList.add('enlarge-trigger');
+      el.dataset.enlargeGroup = 'email';
+    }
+  });
+
+  // Add class to comparison cards (both columns and rows)
+  document.querySelectorAll('.bdm-column').forEach(el => {
+    if (!el.classList.contains('enlarge-trigger')) {
+      el.classList.add('enlarge-trigger');
+      el.dataset.enlargeGroup = 'comparison';
+    }
+  });
+}
+
+function enlargeContent(item, index) {
+  const groupType = item.dataset.enlargeGroup || 'other';
+
+  // Get all items of the same type
+  currentGroup = Array.from(document.querySelectorAll(`.enlarge-trigger[data-enlarge-group="${groupType}"]`));
+  currentGroupType = groupType;
+  currentEnlargedIndex = currentGroup.indexOf(item);
+
+  // If this is a stage, activate it in the background
+  if (groupType === 'stage') {
+    document.querySelectorAll('.lead-gen-stage').forEach(el => el.classList.remove('active'));
+    item.classList.add('active');
+  }
+
+  // If this is an email stage, activate it in the background
+  if (groupType === 'email') {
+    document.querySelectorAll('.email-stage').forEach(el => el.classList.remove('active'));
+    item.classList.add('active');
+  }
+
+  const clone = item.cloneNode(true);
+  clone.classList.remove('enlarge-trigger');
+  clone.style.maxWidth = '100%';
+
+  const modalBody = document.getElementById('modalBody');
+  modalBody.innerHTML = '';
+  modalBody.appendChild(clone);
+
+  modal.classList.add('active');
+  updateNavButtons();
+}
+
+function updateNavButtons() {
+  document.getElementById('modalPrev').disabled = currentEnlargedIndex <= 0;
+  document.getElementById('modalNext').disabled = currentEnlargedIndex >= currentGroup.length - 1;
+}
+
+document.querySelector('.enlarge-modal-close').addEventListener('click', () => {
+  modal.classList.remove('active');
+  currentEnlargedIndex = -1;
+});
+
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.classList.remove('active');
+    currentEnlargedIndex = -1;
+  }
+});
+
+document.getElementById('modalPrev').addEventListener('click', () => {
+  if (currentEnlargedIndex > 0) {
+    enlargeContent(currentGroup[currentEnlargedIndex - 1], currentEnlargedIndex - 1);
+  }
+});
+
+document.getElementById('modalNext').addEventListener('click', () => {
+  if (currentEnlargedIndex < currentGroup.length - 1) {
+    enlargeContent(currentGroup[currentEnlargedIndex + 1], currentEnlargedIndex + 1);
+  }
+});
+
+// Initialize and setup click handlers
+function setupClickHandlers() {
+  document.querySelectorAll('.enlarge-trigger').forEach((item) => {
+    item.removeEventListener('click', handleEnlargeClick);
+    item.addEventListener('click', handleEnlargeClick);
+  });
+}
+
+function handleEnlargeClick(e) {
+  if (e.target.closest('button') || e.target.closest('a')) return;
+  enlargeContent(this, -1);
+}
+
+initEnlargeables();
+setupClickHandlers();
+
+const observer = new MutationObserver(() => {
+  initEnlargeables();
+  setupClickHandlers();
+});
+observer.observe(document.body, { subtree: true, attributes: true, attributeFilter: ['class'] });
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (!modal.classList.contains('active')) return;
+  if (e.key === 'ArrowLeft' && currentEnlargedIndex > 0) {
+    document.getElementById('modalPrev').click();
+  } else if (e.key === 'ArrowRight' && currentEnlargedIndex < currentGroup.length - 1) {
+    document.getElementById('modalNext').click();
+  } else if (e.key === 'Escape') {
+    modal.classList.remove('active');
+  }
+});
+
+</script>
+</body>
+</html>
