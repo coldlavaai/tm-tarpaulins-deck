@@ -3807,8 +3807,8 @@ function initEnlargeables() {
     }
   });
 
-  // Add class to email viewers
-  document.querySelectorAll('.email-viewer').forEach(el => {
+  // Add class to email stages (within email-viewers)
+  document.querySelectorAll('.email-stage').forEach(el => {
     if (!el.classList.contains('enlarge-trigger')) {
       el.classList.add('enlarge-trigger');
       el.dataset.enlargeGroup = 'email';
@@ -3835,6 +3835,12 @@ function enlargeContent(item, index) {
   // If this is a stage, activate it in the background
   if (groupType === 'stage') {
     document.querySelectorAll('.lead-gen-stage').forEach(el => el.classList.remove('active'));
+    item.classList.add('active');
+  }
+
+  // If this is an email stage, activate it in the background
+  if (groupType === 'email') {
+    document.querySelectorAll('.email-stage').forEach(el => el.classList.remove('active'));
     item.classList.add('active');
   }
 
