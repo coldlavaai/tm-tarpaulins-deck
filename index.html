@@ -1353,153 +1353,357 @@ h2 {
 
     <div class="fade-in d3" style="margin-top:3rem;">
       <style>
-        #email-sequence {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 2rem;
-          max-width: 1200px;
+        .email-client {
+          max-width: 920px;
           margin: 0 auto;
+          background: #0a0e17;
+          border: 1px solid rgba(0,212,255,0.15);
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 25px 80px rgba(0,0,0,0.6), 0 0 40px rgba(0,212,255,0.08);
         }
-
-        .email-step {
+        .ec-titlebar {
           display: flex;
-          flex-direction: column;
-          gap: 1rem;
-          align-items: flex-start;
-          opacity: 0.5;
-          transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-          padding: 1.5rem;
-          border: 2px solid rgba(0, 212, 255, 0.2);
-          border-radius: 8px;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.75rem 1.25rem;
+          background: rgba(0,212,255,0.04);
+          border-bottom: 1px solid rgba(0,212,255,0.1);
         }
-
-        .email-step.active {
-          opacity: 1;
-          border-color: #00d4ff;
-          background: rgba(0, 212, 255, 0.08);
-          box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+        .ec-titlebar-text {
+          margin-left: 1rem;
+          font-family: var(--font-mono);
+          font-size: 0.7rem;
+          color: rgba(255,255,255,0.35);
+          letter-spacing: 0.08em;
         }
-
-        .step-num {
-          font-size: 1.2rem;
-          font-weight: 800;
-          color: rgba(0, 212, 255, 0.4);
-          transition: color 0.6s ease;
+        .ec-body {
+          display: grid;
+          grid-template-columns: 200px 1fr;
+          min-height: 440px;
         }
-
-        .email-step.active .step-num {
-          color: #00d4ff;
-          text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        .ec-inbox {
+          background: rgba(0,0,0,0.4);
+          border-right: 1px solid rgba(0,212,255,0.08);
+          padding: 0.5rem 0;
         }
-
-        .email-content h4 {
-          font-size: 1.2rem;
+        .ec-inbox-header {
+          font-family: var(--font-mono);
+          font-size: 0.6rem;
+          color: rgba(0,212,255,0.4);
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          padding: 0.6rem 1rem 0.4rem;
+        }
+        .ec-thread {
+          padding: 0.7rem 1rem;
+          cursor: default;
+          border-left: 2px solid transparent;
+          transition: all 0.4s ease;
+        }
+        .ec-thread.thread-active {
+          background: rgba(0,212,255,0.08);
+          border-left-color: #00d4ff;
+        }
+        .ec-thread-from {
+          font-size: 0.72rem;
           font-weight: 600;
+          color: rgba(255,255,255,0.4);
+          transition: color 0.4s ease;
+        }
+        .ec-thread.thread-active .ec-thread-from { color: #fff; }
+        .ec-thread-subject {
+          font-size: 0.65rem;
+          color: rgba(255,255,255,0.25);
+          margin-top: 0.15rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          transition: color 0.4s ease;
+        }
+        .ec-thread.thread-active .ec-thread-subject { color: rgba(0,212,255,0.7); }
+        .ec-thread-time {
+          font-family: var(--font-mono);
+          font-size: 0.55rem;
+          color: rgba(255,255,255,0.15);
+          margin-top: 0.15rem;
+        }
+        .ec-main {
+          padding: 1.5rem;
+          position: relative;
+          overflow: hidden;
+        }
+        .ec-view {
+          position: absolute;
+          inset: 1.5rem;
+          opacity: 0;
+          transform: translateY(10px);
+          transition: opacity 0.5s ease, transform 0.5s ease;
+          pointer-events: none;
+          overflow-y: auto;
+        }
+        .ec-view.view-active {
+          opacity: 1;
+          transform: translateY(0);
+          pointer-events: auto;
+        }
+        .ec-email-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          margin-bottom: 1rem;
+          padding-bottom: 0.75rem;
+          border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .ec-email-header-left { flex: 1; }
+        .ec-from-line {
+          font-size: 0.78rem;
+          color: rgba(255,255,255,0.5);
+        }
+        .ec-from-line strong { color: #fff; }
+        .ec-to-line {
+          font-size: 0.7rem;
+          color: rgba(255,255,255,0.3);
+          margin-top: 0.2rem;
+        }
+        .ec-subject-line {
+          font-size: 1rem;
+          font-weight: 700;
           color: #fff;
+          margin-top: 0.4rem;
+        }
+        .ec-date-stamp {
+          font-family: var(--font-mono);
+          font-size: 0.6rem;
+          color: rgba(255,255,255,0.2);
+          white-space: nowrap;
+        }
+        .ec-email-body {
+          font-size: 0.88rem;
+          color: rgba(255,255,255,0.75);
+          line-height: 1.7;
+        }
+        .ec-email-body p { margin-bottom: 0.8rem; }
+        .ec-email-body .signature {
+          margin-top: 1rem;
+          padding-top: 0.75rem;
+          border-top: 1px solid rgba(255,255,255,0.06);
+          color: rgba(255,255,255,0.4);
+          font-size: 0.8rem;
+        }
+        .ec-reply-box {
+          margin-top: 1.25rem;
+          background: rgba(0,212,255,0.04);
+          border: 1px solid rgba(0,212,255,0.15);
+          border-radius: 6px;
+          padding: 1rem;
+        }
+        .ec-reply-label {
+          font-family: var(--font-mono);
+          font-size: 0.6rem;
+          color: rgba(0,212,255,0.5);
+          letter-spacing: 0.08em;
           margin-bottom: 0.5rem;
         }
-
-        .email-step.active .email-content h4 {
-          color: #00d4ff;
-        }
-
-        .email-text {
-          font-size: 1rem;
-          color: rgba(255, 255, 255, 0.85);
+        .ec-reply-body {
+          font-size: 0.85rem;
+          color: rgba(255,255,255,0.7);
           line-height: 1.6;
-          background: rgba(0, 0, 0, 0.3);
-          padding: 1rem;
-          border-radius: 6px;
-          border-left: 2px solid rgba(0, 212, 255, 0.3);
         }
-
-        .email-step.active .email-text {
-          border-left-color: #00d4ff;
-          background: rgba(0, 212, 255, 0.08);
+        .ec-status-bar {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          margin-top: 1rem;
+          font-family: var(--font-mono);
+          font-size: 0.6rem;
+          letter-spacing: 0.06em;
         }
-
-        .email-status {
-          font-size: 0.9rem;
-          color: rgba(255, 255, 255, 0.6);
-          margin-top: 0.5rem;
-          font-style: italic;
+        .ec-status-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
         }
-
-        .email-step.active .email-status {
-          color: rgba(255, 255, 255, 0.8);
+        .ec-nurture-progress {
+          display: flex;
+          gap: 0.25rem;
+          margin-top: 1.25rem;
         }
+        .ec-nurture-step {
+          flex: 1;
+          height: 3px;
+          background: rgba(255,255,255,0.08);
+          border-radius: 2px;
+          transition: background 0.5s ease;
+        }
+        .ec-nurture-step.step-done { background: #00d4ff; }
       </style>
 
-      <div id="email-sequence">
-        <!-- Step 1: Initial Email -->
-        <div class="email-step active">
-          <div class="step-num">1</div>
-          <div class="email-content">
-            <h4>📧 Initial Email</h4>
-            <div class="email-text">
-              <strong>To:</strong> James Mitchell, Highland Fish Farm<br><br>
-              "Hi James,<br><br>We work with fish farms across the UK helping reduce costs on maintenance covers. I noticed Highland has several ponds that could benefit from our lice screen solutions.<br><br>Would love to chat about it — no pressure, just a 15-min call?<br><br>Cheers,<br>Marcus"
-            </div>
-            <div class="email-status">❌ No response (waiting 3 days...)</div>
-          </div>
+      <div class="email-client">
+        <div class="ec-titlebar">
+          <div class="crm-dot red"></div>
+          <div class="crm-dot yellow"></div>
+          <div class="crm-dot green"></div>
+          <div class="ec-titlebar-text">MARCUS@TMTARPAULINS.CO.UK — AI OUTREACH MANAGER</div>
         </div>
-
-        <!-- Step 2: Follow-up Email -->
-        <div class="email-step">
-          <div class="step-num">2</div>
-          <div class="email-content">
-            <h4>📧 Follow-Up Email</h4>
-            <div class="email-text">
-              <strong>To:</strong> James Mitchell, Highland Fish Farm<br><br>
-              "James,<br><br>Just checking in — did you get my last email? I know you're busy managing the farm.<br><br>I've got a quick case study from another farm in your region that cut their lice treatment costs by 40%.<br><br>Worth a 15-min chat?<br><br>Marcus"
+        <div class="ec-body">
+          <div class="ec-inbox">
+            <div class="ec-inbox-header">Nurture Sequence</div>
+            <div class="ec-thread thread-active" data-ec-thread="0">
+              <div class="ec-thread-from">James Mitchell</div>
+              <div class="ec-thread-subject">Quick thought on your lice screens</div>
+              <div class="ec-thread-time">Day 1 · Initial</div>
             </div>
-            <div class="email-status">✅ They respond: "Actually, this sounds interesting!"</div>
+            <div class="ec-thread" data-ec-thread="1">
+              <div class="ec-thread-from">James Mitchell</div>
+              <div class="ec-thread-subject">Re: Quick thought on your lice screens</div>
+              <div class="ec-thread-time">Day 4 · Follow-up</div>
+            </div>
+            <div class="ec-thread" data-ec-thread="2">
+              <div class="ec-thread-from">James Mitchell</div>
+              <div class="ec-thread-subject">Re: Quick thought on your lice screens</div>
+              <div class="ec-thread-time">Day 5 · Reply received</div>
+            </div>
+            <div class="ec-thread" data-ec-thread="3">
+              <div class="ec-thread-from">James Mitchell</div>
+              <div class="ec-thread-subject">Meeting: Lice Screen Discussion</div>
+              <div class="ec-thread-time">Day 7 · Booked</div>
+            </div>
           </div>
-        </div>
+          <div class="ec-main">
 
-        <!-- Step 3: Conversation -->
-        <div class="email-step">
-          <div class="step-num">3</div>
-          <div class="email-content">
-            <h4>💬 Conversation Starts</h4>
-            <div class="email-text">
-              <strong>James:</strong> "What's the timeline for implementation?"<br><br>
-              <strong>Marcus (AI):</strong> "We can have lice screens installed within 2 weeks. No downtime for your ponds. Which sections are most critical?"<br><br>
-              <strong>James:</strong> "Can we discuss pricing?"<br><br>
-              <strong>Marcus (AI):</strong> "Absolutely. Let's jump on a call Thursday — I'll have a custom quote ready based on your setup."
+            <!-- VIEW 1: Initial Email -->
+            <div class="ec-view view-active" data-ec-view="0">
+              <div class="ec-email-header">
+                <div class="ec-email-header-left">
+                  <div class="ec-from-line"><strong>Marcus</strong> (marcus@tmtarpaulins.co.uk)</div>
+                  <div class="ec-to-line">To: james.mitchell@highlandfishfarm.co.uk</div>
+                  <div class="ec-subject-line">Quick thought on your lice screen setup</div>
+                </div>
+                <div class="ec-date-stamp">Mon 7 Apr · 09:14</div>
+              </div>
+              <div class="ec-email-body">
+                <p>Hi James,</p>
+                <p>I noticed Highland has been expanding — congratulations on the new ponds. We work with fish farms across Scotland on custom lice screen covers that cut treatment costs by up to 40%.</p>
+                <p>I've got a quick case study from a farm similar to yours if you'd be interested. Just a 15-min chat — no pressure at all.</p>
+                <div class="signature">Cheers,<br>Marcus<br>TM Tarpaulins · 01onal custom fabrication</div>
+              </div>
+              <div class="ec-status-bar">
+                <div class="ec-status-dot" style="background:#fbbf24;"></div>
+                <span style="color:#fbbf24;">SENT — AWAITING RESPONSE</span>
+              </div>
+              <div class="ec-nurture-progress"><div class="ec-nurture-step step-done"></div><div class="ec-nurture-step"></div><div class="ec-nurture-step"></div><div class="ec-nurture-step"></div></div>
             </div>
-            <div class="email-status">🔥 Engagement building — they're clearly interested</div>
-          </div>
-        </div>
 
-        <!-- Step 4: Appointment Booked -->
-        <div class="email-step">
-          <div class="step-num">4</div>
-          <div class="email-content">
-            <h4>📅 Appointment Booked</h4>
-            <div class="email-text">
-              <strong>Your Calendar:</strong><br><br>
-              🗓️ Thursday, 2:00 PM - 2:30 PM<br>
-              <strong>Highland Fish Farm — James Mitchell</strong><br>
-              Lice Screen Solution Discussion<br><br>
-              Status: ✅ <strong>WARM LEAD - Ready to close</strong>
+            <!-- VIEW 2: Follow-up Email -->
+            <div class="ec-view" data-ec-view="1">
+              <div class="ec-email-header">
+                <div class="ec-email-header-left">
+                  <div class="ec-from-line"><strong>Marcus</strong> (AI Auto Follow-up)</div>
+                  <div class="ec-to-line">To: james.mitchell@highlandfishfarm.co.uk</div>
+                  <div class="ec-subject-line">Re: Quick thought on your lice screen setup</div>
+                </div>
+                <div class="ec-date-stamp">Thu 10 Apr · 08:30</div>
+              </div>
+              <div class="ec-email-body">
+                <p>James,</p>
+                <p>Just a quick follow-up on my note from Monday. I know you're busy — running a farm doesn't leave much desk time.</p>
+                <p>I put together a short case study from another Highland farm that cut their lice treatment costs by 40% with our custom screens. Happy to send it across if useful?</p>
+                <p>Either way, no worries at all.</p>
+                <div class="signature">Cheers,<br>Marcus</div>
+              </div>
+              <div class="ec-status-bar">
+                <div class="ec-status-dot" style="background:#fbbf24;"></div>
+                <span style="color:#fbbf24;">FOLLOW-UP #1 SENT — 3 DAYS AFTER INITIAL</span>
+              </div>
+              <div class="ec-nurture-progress"><div class="ec-nurture-step step-done"></div><div class="ec-nurture-step step-done"></div><div class="ec-nurture-step"></div><div class="ec-nurture-step"></div></div>
             </div>
-            <div class="email-status">You spend 30 mins closing. AI spent the last 7 days nurturing.</div>
+
+            <!-- VIEW 3: They Reply + AI Responds -->
+            <div class="ec-view" data-ec-view="2">
+              <div class="ec-email-header">
+                <div class="ec-email-header-left">
+                  <div class="ec-from-line"><strong>James Mitchell</strong> (highlandfishfarm.co.uk)</div>
+                  <div class="ec-to-line">To: marcus@tmtarpaulins.co.uk</div>
+                  <div class="ec-subject-line">Re: Quick thought on your lice screen setup</div>
+                </div>
+                <div class="ec-date-stamp">Fri 11 Apr · 14:22</div>
+              </div>
+              <div class="ec-email-body">
+                <p>Hi Marcus,</p>
+                <p>Actually, your timing is spot on — we've been looking at replacing our covers on ponds 3-7. The lice treatment costs are killing us this year.</p>
+                <p>What's the typical turnaround from order to install? And could you handle all 5 ponds?</p>
+                <p>James</p>
+              </div>
+              <div class="ec-reply-box">
+                <div class="ec-reply-label">AI AUTO-REPLY (Marcus's voice)</div>
+                <div class="ec-reply-body">
+                  "Great to hear, James. Typical turnaround is 2-3 weeks from measurement to install — we handle everything on-site, no disruption to your stock. 5 ponds is no problem at all. Happy to jump on a quick call to run through the options? I'm free Thursday afternoon if that works?"
+                </div>
+              </div>
+              <div class="ec-status-bar">
+                <div class="ec-status-dot" style="background:#22c55e;"></div>
+                <span style="color:#22c55e;">PROSPECT REPLIED — AI ENGAGING AUTOMATICALLY</span>
+              </div>
+              <div class="ec-nurture-progress"><div class="ec-nurture-step step-done"></div><div class="ec-nurture-step step-done"></div><div class="ec-nurture-step step-done"></div><div class="ec-nurture-step"></div></div>
+            </div>
+
+            <!-- VIEW 4: Appointment Booked -->
+            <div class="ec-view" data-ec-view="3">
+              <div class="ec-email-header">
+                <div class="ec-email-header-left">
+                  <div class="ec-from-line"><strong>System</strong> — Calendar Notification</div>
+                  <div class="ec-to-line">marcus@tmtarpaulins.co.uk</div>
+                  <div class="ec-subject-line">Meeting Confirmed: Highland Fish Farm</div>
+                </div>
+                <div class="ec-date-stamp">Fri 11 Apr · 14:41</div>
+              </div>
+              <div class="crm-appt-card">
+                <div class="appt-header">
+                  <span class="appt-badge">CONFIRMED</span>
+                  <span class="appt-time">Thursday 17 Apr · 2:00 PM — 2:30 PM</span>
+                </div>
+                <h4>Highland Fish Farm — James Mitchell</h4>
+                <div class="appt-detail">
+                  📍 Video Call (Teams link auto-sent)<br>
+                  📋 Lice Screen Covers — 5 ponds, quote discussion
+                </div>
+                <div class="appt-notes">
+                  <div class="appt-notes-label">AI-Generated Call Prep</div>
+                  <p>• 5 ponds need new covers (ponds 3-7), current ones from competitor<br>
+                  • Main pain: lice treatment costs rising sharply this year<br>
+                  • Responded to 40% cost reduction stat — lead with case study<br>
+                  • Can approve up to £15k without board — likely within budget<br>
+                  • Tone: friendly, pragmatic, wants fast turnaround</p>
+                </div>
+              </div>
+              <div style="text-align:center;margin-top:1rem;font-family:var(--font-mono);font-size:0.65rem;color:rgba(0,212,255,0.6);letter-spacing:0.1em;">AI NURTURED FOR 7 DAYS · MARCUS STEPS IN TO CLOSE</div>
+              <div class="ec-nurture-progress"><div class="ec-nurture-step step-done"></div><div class="ec-nurture-step step-done"></div><div class="ec-nurture-step step-done"></div><div class="ec-nurture-step step-done"></div></div>
+            </div>
+
           </div>
         </div>
       </div>
 
       <script>
         (function() {
-          const steps = document.querySelectorAll('.email-step');
-          let current = 0;
+          const threads = document.querySelectorAll('[data-ec-thread]');
+          const views = document.querySelectorAll('[data-ec-view]');
+          let ecCurrent = 0;
+          const ecTotal = 4;
 
-          function cycle() {
-            steps.forEach((s, i) => s.classList.toggle('active', i === current));
-            current = (current + 1) % steps.length;
+          function ecGoTo(idx) {
+            threads.forEach((t, i) => t.classList.toggle('thread-active', i === idx));
+            views.forEach((v, i) => v.classList.toggle('view-active', i === idx));
+            ecCurrent = idx;
           }
 
-          setInterval(cycle, 4000);
+          function ecCycle() {
+            ecCurrent = (ecCurrent + 1) % ecTotal;
+            ecGoTo(ecCurrent);
+          }
+
+          setInterval(ecCycle, 6000);
         })();
       </script>
     </div>
