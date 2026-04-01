@@ -2841,6 +2841,12 @@ document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
 const sections = document.querySelectorAll('.section[id]');
 const navLinks = document.querySelectorAll('.sidebar-links a');
 
+// Debug: Check if all sections exist
+console.log('Checking section elements:');
+console.log('s001:', document.getElementById('s001') ? 'EXISTS' : 'MISSING');
+console.log('s006:', document.getElementById('s006') ? 'EXISTS' : 'MISSING');
+console.log('s011:', document.getElementById('s011') ? 'EXISTS' : 'MISSING');
+
 // Use scroll position to determine active section
 let clickedSection = null;
 let clickTimeout = null;
