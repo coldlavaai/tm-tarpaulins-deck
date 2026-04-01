@@ -2411,56 +2411,57 @@ h2 {
       <div class="fade-in">
         <div class="label">The 1% Problem / 005</div>
       </div>
+
       <div class="fade-in d1">
-        <h2>The 1% Problem<br><span class="thin">Why Manual Outreach Fails</span></h2>
+        <h2>The 1% Problem<br><span class="thin">Why Manual Lead Generation Fails</span></h2>
       </div>
 
       <div class="fade-in d2">
+        <h3 style="font-size:1.5rem;margin:2rem 0 1.5rem;font-weight:600;">The Reality of Manual Outreach</h3>
+
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin:2rem 0;">
           <div class="card">
-            <h4 style="margin-bottom:1rem;color:var(--color-accent);">Marcus's Current Process (1% response)</h4>
-            <ol style="list-style:decimal;margin-left:1.5rem;line-height:1.8;">
-              <li>Manually write email → 15 mins</li>
+            <h4 style="margin-bottom:1rem;color:var(--color-accent);">Marcus's Current Process</h4>
+            <ol style="list-style:decimal;margin-left:1.5rem;line-height:1.8;font-size:1rem;">
+              <li>Manually write email → 15 minutes</li>
               <li>Send to 1 prospect</li>
               <li>Wait (rarely hear back)</li>
               <li>Chase manually if time allows</li>
-              <li><strong>Result: 1 conversation per 100 emails = 25 hours per lead</strong></li>
+              <li><strong>Result: 1% response = 25 hours per lead</strong></li>
             </ol>
           </div>
 
           <div class="card">
-            <h4 style="margin-bottom:1rem;color:var(--color-accent);">AI System (5-15% response)</h4>
-            <ol style="list-style:decimal;margin-left:1.5rem;line-height:1.8;">
+            <h4 style="margin-bottom:1rem;color:var(--color-accent);">AI System (Trained on Marcus)</h4>
+            <ol style="list-style:decimal;margin-left:1.5rem;line-height:1.8;font-size:1rem;">
               <li>AI researches 100 prospects overnight</li>
               <li>Writes 100 personalized emails (in Marcus's voice)</li>
               <li>Sends all 100 in minutes</li>
               <li>Auto-follows up 3x over 2 weeks</li>
-              <li>Auto-responds to inquiries</li>
-              <li>Only alerts Marcus when lead is HOT</li>
-              <li><strong>Result: 5-15 conversations per 100 emails</strong></li>
+              <li><strong>Result: 5-15% response = 30 mins to review warm leads</strong></li>
             </ol>
           </div>
         </div>
 
-        <div class="highlight-box" style="background:linear-gradient(135deg,#00d4ff,#0099cc);padding:2rem;border-radius:8px;text-align:center;margin:2rem 0;">
-          <p style="font-size:1.3rem;font-weight:600;margin-bottom:0.5rem;">Marcus's Time:</p>
-          <p style="font-size:1rem;opacity:0.9;">Before: <strong>25 hours</strong> grinding for 1 lead</p>
-          <p style="font-size:1rem;opacity:0.9;">After: <strong>30 mins</strong> closing 5-15 warm leads</p>
+        <div style="background:linear-gradient(135deg,#00d4ff,#0099cc);padding:2rem;border-radius:8px;text-align:center;margin:2rem 0;">
+          <p style="font-size:1.3rem;font-weight:600;margin-bottom:1rem;color:white;">Marcus's Time Freed Up</p>
+          <p style="font-size:1.1rem;opacity:0.95;color:white;margin-bottom:0.5rem;"><strong>Before:</strong> 25 hours per lead</p>
+          <p style="font-size:1.1rem;opacity:0.95;color:white;"><strong>After:</strong> 30 mins to review 5-15 warm leads</p>
         </div>
       </div>
 
       <div class="fade-in d3">
-        <h3 style="font-size:1.5rem;margin:3rem 0 1.5rem;font-weight:600;">"No Human Can Replicate You"</h3>
+        <h3 style="font-size:1.5rem;margin:2rem 0 1.5rem;font-weight:600;">Why This Matters</h3>
         <div class="quote-block">
-          <p class="quote-text">The AI doesn't replace Marcus. It AMPLIFIES him.</p>
+          <p class="quote-text">The AI doesn't replace Marcus. It AMPLIFIES him—sending from his email, using his voice, with his expertise.</p>
         </div>
-        <p class="lead" style="margin:2rem 0;">Trained on Marcus's exact language:</p>
+        <p class="lead" style="margin:1.5rem 0;">Trained on Marcus's exact language:</p>
         <ul class="arrow-list">
           <li>"We can make it happen"</li>
           <li>"Custom bespoke solutions to suit your needs"</li>
           <li>"We're not just selling products, we're solving your problems"</li>
         </ul>
-        <p class="lead" style="margin:2rem 0;">Sends from HIS email/LinkedIn. Uses HIS expertise. Works while he's in the workshop. Scales Marcus's voice to 100s of prospects simultaneously.</p>
+        <p class="lead" style="margin:1.5rem 0;">The system works 24/7 in Marcus's voice while he focuses on closing deals and running the business.</p>
       </div>
     </div>
   </section>
@@ -2841,12 +2842,6 @@ document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
 const sections = document.querySelectorAll('.section[id]');
 const navLinks = document.querySelectorAll('.sidebar-links a');
 
-// Debug: Check if all sections exist
-console.log('Checking section elements:');
-console.log('s001:', document.getElementById('s001') ? 'EXISTS' : 'MISSING');
-console.log('s006:', document.getElementById('s006') ? 'EXISTS' : 'MISSING');
-console.log('s011:', document.getElementById('s011') ? 'EXISTS' : 'MISSING');
-
 // Use scroll position to determine active section
 let clickedSection = null;
 let clickTimeout = null;
@@ -2887,15 +2882,11 @@ navLinks.forEach(link => {
     const targetElement = document.getElementById(sectionId);
 
     if (targetElement) {
-      // Scroll to element's position with offset
-      const targetPosition = Math.max(0, targetElement.offsetTop - 100);
-      console.log(`Scrolling to ${sectionId}: offsetTop=${targetElement.offsetTop}, targetPosition=${targetPosition}`);
+      // Scroll to element with offset from top
       window.scrollTo({
-        top: targetPosition,
+        top: targetElement.offsetTop - 100,
         behavior: 'smooth'
       });
-    } else {
-      console.log(`Element not found: ${sectionId}`);
     }
 
     clickedSection = sectionId;
