@@ -3800,7 +3800,7 @@ let currentGroupType = null;
 
 function initEnlargeables() {
   // Add class to stage demo boxes
-  document.querySelectorAll('.lead-gen-stage.active').forEach(el => {
+  document.querySelectorAll('.lead-gen-stage').forEach(el => {
     if (!el.classList.contains('enlarge-trigger')) {
       el.classList.add('enlarge-trigger');
       el.dataset.enlargeGroup = 'stage';
@@ -3831,6 +3831,12 @@ function enlargeContent(item, index) {
   currentGroup = Array.from(document.querySelectorAll(`.enlarge-trigger[data-enlarge-group="${groupType}"]`));
   currentGroupType = groupType;
   currentEnlargedIndex = currentGroup.indexOf(item);
+
+  // If this is a stage, activate it in the background
+  if (groupType === 'stage') {
+    document.querySelectorAll('.lead-gen-stage').forEach(el => el.classList.remove('active'));
+    item.classList.add('active');
+  }
 
   const clone = item.cloneNode(true);
   clone.classList.remove('enlarge-trigger');
