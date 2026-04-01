@@ -1718,99 +1718,312 @@ h2 {
   <!-- ==================== NEW SECTION: BDM PROBLEM ==================== -->
   <section class="section" id="s005b">
     <div class="section-inner">
+      <style>
+        .bdm-vs {
+          max-width: 920px;
+          margin: 0 auto;
+        }
+        .bdm-hero-grid {
+          display: grid;
+          grid-template-columns: 1fr 60px 1fr;
+          gap: 0;
+          align-items: stretch;
+          margin: 2.5rem 0;
+        }
+        .bdm-column {
+          padding: 2rem;
+          border-radius: 12px;
+          position: relative;
+        }
+        .bdm-column-bad {
+          background: rgba(239,68,68,0.04);
+          border: 1px solid rgba(239,68,68,0.2);
+        }
+        .bdm-column-good {
+          background: rgba(0,212,255,0.04);
+          border: 1px solid rgba(0,212,255,0.25);
+          box-shadow: 0 0 30px rgba(0,212,255,0.06);
+        }
+        .bdm-column-header {
+          font-family: var(--font-mono);
+          font-size: 0.65rem;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          margin-bottom: 1.25rem;
+          padding-bottom: 0.75rem;
+          border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .bdm-column-bad .bdm-column-header { color: rgba(239,68,68,0.6); }
+        .bdm-column-good .bdm-column-header { color: rgba(0,212,255,0.7); }
+        .bdm-vs-divider {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .bdm-vs-badge {
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.04);
+          border: 1px solid rgba(255,255,255,0.1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: var(--font-mono);
+          font-size: 0.6rem;
+          font-weight: 700;
+          color: rgba(255,255,255,0.3);
+          letter-spacing: 0.05em;
+        }
+        .bdm-stat-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0.65rem 0;
+          border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .bdm-stat-row:last-child { border-bottom: none; }
+        .bdm-stat-label {
+          font-size: 0.82rem;
+          color: rgba(255,255,255,0.5);
+        }
+        .bdm-stat-value {
+          font-family: var(--font-mono);
+          font-size: 0.85rem;
+          font-weight: 600;
+        }
+        .bdm-column-bad .bdm-stat-value { color: rgba(239,68,68,0.8); }
+        .bdm-column-good .bdm-stat-value { color: #00d4ff; }
+        .bdm-big-number {
+          font-family: var(--font-mono);
+          font-size: 2.8rem;
+          font-weight: 800;
+          line-height: 1;
+          margin: 0.75rem 0 0.25rem;
+        }
+        .bdm-big-label {
+          font-size: 0.8rem;
+          color: rgba(255,255,255,0.4);
+          margin-bottom: 1.25rem;
+        }
+        .bdm-verdict {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1rem;
+          margin-top: 2.5rem;
+        }
+        .bdm-verdict-card {
+          padding: 1.5rem;
+          border-radius: 8px;
+          text-align: center;
+        }
+        .bdm-verdict-bad {
+          background: rgba(239,68,68,0.06);
+          border: 1px solid rgba(239,68,68,0.15);
+        }
+        .bdm-verdict-good {
+          background: rgba(0,212,255,0.06);
+          border: 1px solid rgba(0,212,255,0.2);
+        }
+        .bdm-verdict-number {
+          font-family: var(--font-mono);
+          font-size: 2rem;
+          font-weight: 800;
+          line-height: 1.1;
+        }
+        .bdm-verdict-bad .bdm-verdict-number { color: rgba(239,68,68,0.7); }
+        .bdm-verdict-good .bdm-verdict-number { color: #00d4ff; }
+        .bdm-verdict-label {
+          font-size: 0.75rem;
+          color: rgba(255,255,255,0.4);
+          margin-top: 0.4rem;
+        }
+        .bdm-savings-bar {
+          margin: 2.5rem 0 1rem;
+          background: rgba(0,0,0,0.3);
+          border: 1px solid rgba(0,212,255,0.15);
+          border-radius: 8px;
+          padding: 1.75rem 2rem;
+          text-align: center;
+          position: relative;
+          overflow: hidden;
+        }
+        .bdm-savings-bar::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, rgba(0,212,255,0.05), transparent 60%);
+          pointer-events: none;
+        }
+        .bdm-savings-amount {
+          font-family: var(--font-mono);
+          font-size: 2.5rem;
+          font-weight: 800;
+          color: #00d4ff;
+          line-height: 1;
+          text-shadow: 0 0 30px rgba(0,212,255,0.3);
+        }
+        .bdm-savings-subtitle {
+          font-size: 0.85rem;
+          color: rgba(255,255,255,0.6);
+          margin-top: 0.5rem;
+        }
+        .bdm-savings-note {
+          font-family: var(--font-mono);
+          font-size: 0.6rem;
+          color: rgba(0,212,255,0.4);
+          letter-spacing: 0.1em;
+          margin-top: 0.75rem;
+        }
+        .bdm-capability-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 0;
+          margin: 2rem 0;
+          border: 1px solid rgba(255,255,255,0.06);
+          border-radius: 8px;
+          overflow: hidden;
+        }
+        .bdm-cap-header {
+          padding: 0.8rem 1rem;
+          font-family: var(--font-mono);
+          font-size: 0.6rem;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          border-bottom: 1px solid rgba(255,255,255,0.06);
+          text-align: center;
+        }
+        .bdm-cap-header:first-child { text-align: left; background: rgba(255,255,255,0.02); }
+        .bdm-cap-header.cap-bad { color: rgba(239,68,68,0.5); background: rgba(239,68,68,0.03); }
+        .bdm-cap-header.cap-good { color: rgba(0,212,255,0.6); background: rgba(0,212,255,0.03); }
+        .bdm-cap-row {
+          display: contents;
+        }
+        .bdm-cap-cell {
+          padding: 0.7rem 1rem;
+          font-size: 0.82rem;
+          border-bottom: 1px solid rgba(255,255,255,0.03);
+          display: flex;
+          align-items: center;
+        }
+        .bdm-cap-cell:first-child {
+          color: rgba(255,255,255,0.6);
+          font-weight: 500;
+          background: rgba(255,255,255,0.01);
+        }
+        .bdm-cap-cell.cell-bad {
+          color: rgba(239,68,68,0.7);
+          justify-content: center;
+          background: rgba(239,68,68,0.02);
+        }
+        .bdm-cap-cell.cell-good {
+          color: rgba(0,212,255,0.9);
+          justify-content: center;
+          background: rgba(0,212,255,0.02);
+        }
+      </style>
+
       <div class="fade-in">
-        <div class="label">Hiring the Cost of a BDM / 004</div>
+        <div class="label">The BDM Question / 004</div>
       </div>
       <div class="fade-in d1">
-        <h2>Hiring a BDM<br><span class="thin">The True Cost</span></h2>
+        <h2>Hiring a BDM<br><span class="thin">vs. AI That Sounds Like You</span></h2>
       </div>
-      
+
       <div class="fade-in d2">
         <div class="quote-block">
           <p class="quote-text">"People trust ME, not TM Tarpaulins. They know me, they trust me, and that's why they keep coming back."</p>
           <p class="quote-author">— Marcus, TM Tarpaulins</p>
         </div>
+        <p class="lead" style="margin-top:1.5rem;">That's the problem. You can't bottle 45 years of tarpaulin expertise and hand it to a new hire. But you <em>can</em> train an AI on it.</p>
       </div>
 
       <div class="fade-in d3">
-        <h3 style="font-size:1.5rem;margin:3rem 0 1.5rem;font-weight:600;">The Problem</h3>
-        <p class="lead">You can't hire a £55k/year BDM who:</p>
-        <ul class="arrow-list">
-          <li><strong>Sounds like you</strong> — takes 6-12 months (if ever) to learn your voice</li>
-          <li><strong>Has your expertise</strong> — 45 years of tarpaulin knowledge isn't teachable</li>
-          <li><strong>Builds trust like you</strong> — customers want Marcus & Gary, not "a salesperson"</li>
-          <li><strong>Works 24/7</strong> — limited capacity, sick days, holidays</li>
-        </ul>
-      </div>
+        <div class="bdm-vs">
+          <!-- Side-by-side hero comparison -->
+          <div class="bdm-hero-grid">
+            <div class="bdm-column bdm-column-bad">
+              <div class="bdm-column-header">Hiring a BDM</div>
+              <div class="bdm-big-number" style="color:rgba(239,68,68,0.6);">£65k+</div>
+              <div class="bdm-big-label">Year 1 total cost</div>
+              <div class="bdm-stat-row"><span class="bdm-stat-label">Ramp-up time</span><span class="bdm-stat-value">6-12 months</span></div>
+              <div class="bdm-stat-row"><span class="bdm-stat-label">Daily outreach</span><span class="bdm-stat-value">20-30 emails</span></div>
+              <div class="bdm-stat-row"><span class="bdm-stat-label">Year 2 cost</span><span class="bdm-stat-value">£65-70k+</span></div>
+              <div class="bdm-stat-row"><span class="bdm-stat-label">Sick days / holidays</span><span class="bdm-stat-value">28+ days</span></div>
+              <div class="bdm-stat-row"><span class="bdm-stat-label">Sounds like Marcus</span><span class="bdm-stat-value">Never</span></div>
+            </div>
 
-      <div class="fade-in d4">
-        <h3 style="font-size:1.5rem;margin:3rem 0 1.5rem;font-weight:600;">Cost Comparison</h3>
-        <table class="premium-table">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Hiring a BDM</th>
-              <th>AI System (Pilot)</th>
-              <th>AI System (Full)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Upfront Cost</strong></td>
-              <td>Recruitment fees</td>
-              <td>£10k setup</td>
-              <td>£25k setup</td>
-            </tr>
-            <tr>
-              <td><strong>Year 1 Total</strong></td>
-              <td>£65k-70k+ (salary, recruitment, NI, pension, car)</td>
-              <td>£28k (£10k + £1,500/mo)</td>
-              <td>£67k (£25k + £3,500/mo)</td>
-            </tr>
-            <tr>
-              <td><strong>Year 2 Total</strong></td>
-              <td>£65k-70k+ (same ongoing costs)</td>
-              <td>£18k (£1,500/mo only)</td>
-              <td>£42k (£3,500/mo only)</td>
-            </tr>
-            <tr>
-              <td><strong>Time to Productive</strong></td>
-              <td>6-12 months</td>
-              <td>2 weeks</td>
-              <td>2 weeks</td>
-            </tr>
-            <tr>
-              <td><strong>Daily Outreach</strong></td>
-              <td>20-30 emails</td>
-              <td>100-200 emails</td>
-              <td>300+ emails</td>
-            </tr>
-            <tr>
-              <td><strong>Sounds Like Marcus?</strong></td>
-              <td>❌ No (never will)</td>
-              <td>✅ Yes (trained on his words)</td>
-              <td>✅ Yes</td>
-            </tr>
-            <tr>
-              <td><strong>Works 24/7?</strong></td>
-              <td>❌ No</td>
-              <td>✅ Yes</td>
-              <td>✅ Yes</td>
-            </tr>
-            <tr>
-              <td><strong>Handles Follow-Ups?</strong></td>
-              <td>❌ Manual</td>
-              <td>✅ Automated</td>
-              <td>✅ Automated</td>
-            </tr>
-          </tbody>
-        </table>
-        <p style="font-family:var(--font-mono);font-size:1rem;color:#00d4ff;margin-top:2rem;text-align:center;letter-spacing:0.08em;font-weight:700;">
-          YEAR 1 SAVINGS: £42,000+ WITH PILOT SYSTEM
-        </p>
-        <p style="font-size:0.9rem;color:rgba(255,255,255,0.8);margin-top:0.5rem;text-align:center;">
-          Plus: AI keeps improving. BDM costs stay at £65k-70k+ forever.
-        </p>
+            <div class="bdm-vs-divider">
+              <div class="bdm-vs-badge">VS</div>
+            </div>
+
+            <div class="bdm-column bdm-column-good">
+              <div class="bdm-column-header">AI System (Pilot)</div>
+              <div class="bdm-big-number" style="color:#00d4ff;">£23k</div>
+              <div class="bdm-big-label">Year 1 total cost</div>
+              <div class="bdm-stat-row"><span class="bdm-stat-label">Ramp-up time</span><span class="bdm-stat-value">2 weeks</span></div>
+              <div class="bdm-stat-row"><span class="bdm-stat-label">Daily outreach</span><span class="bdm-stat-value">100-200 emails</span></div>
+              <div class="bdm-stat-row"><span class="bdm-stat-label">Year 2 cost</span><span class="bdm-stat-value">£18k</span></div>
+              <div class="bdm-stat-row"><span class="bdm-stat-label">Sick days / holidays</span><span class="bdm-stat-value">Zero</span></div>
+              <div class="bdm-stat-row"><span class="bdm-stat-label">Sounds like Marcus</span><span class="bdm-stat-value">From day 1</span></div>
+            </div>
+          </div>
+
+          <!-- Capability comparison grid -->
+          <div class="bdm-capability-grid">
+            <div class="bdm-cap-header">Capability</div>
+            <div class="bdm-cap-header cap-bad">BDM</div>
+            <div class="bdm-cap-header cap-good">AI System</div>
+
+            <div class="bdm-cap-cell">Learns Marcus's voice</div>
+            <div class="bdm-cap-cell cell-bad">❌ 6-12 months (if ever)</div>
+            <div class="bdm-cap-cell cell-good">✅ Trained from day 1</div>
+
+            <div class="bdm-cap-cell">45 years expertise</div>
+            <div class="bdm-cap-cell cell-bad">❌ Not teachable</div>
+            <div class="bdm-cap-cell cell-good">✅ Embedded in AI</div>
+
+            <div class="bdm-cap-cell">Works 24/7</div>
+            <div class="bdm-cap-cell cell-bad">❌ 40hrs/week max</div>
+            <div class="bdm-cap-cell cell-good">✅ Never stops</div>
+
+            <div class="bdm-cap-cell">Automated follow-ups</div>
+            <div class="bdm-cap-cell cell-bad">❌ Manual, inconsistent</div>
+            <div class="bdm-cap-cell cell-good">✅ Every lead, every time</div>
+
+            <div class="bdm-cap-cell">Multi-channel outreach</div>
+            <div class="bdm-cap-cell cell-bad">❌ Email only (mostly)</div>
+            <div class="bdm-cap-cell cell-good">✅ Email, LinkedIn, SMS, WhatsApp</div>
+
+            <div class="bdm-cap-cell">Scales with demand</div>
+            <div class="bdm-cap-cell cell-bad">❌ Hire another BDM</div>
+            <div class="bdm-cap-cell cell-good">✅ Instant, no extra cost</div>
+
+            <div class="bdm-cap-cell">Builds trust like Marcus</div>
+            <div class="bdm-cap-cell cell-bad">❌ "Just a salesperson"</div>
+            <div class="bdm-cap-cell cell-good">✅ IS Marcus (to them)</div>
+          </div>
+
+          <!-- Savings callout -->
+          <div class="bdm-savings-bar">
+            <div class="bdm-savings-amount">£42,000+</div>
+            <div class="bdm-savings-subtitle">Year 1 savings with the Pilot system vs. hiring a BDM</div>
+            <div class="bdm-savings-note">AI KEEPS IMPROVING · BDM COSTS STAY AT £65K+ FOREVER</div>
+          </div>
+
+          <!-- Bottom verdict cards -->
+          <div class="bdm-verdict">
+            <div class="bdm-verdict-card bdm-verdict-bad">
+              <div class="bdm-verdict-number">£130k+</div>
+              <div class="bdm-verdict-label">BDM cost over 2 years<br>Still won't sound like Marcus</div>
+            </div>
+            <div class="bdm-verdict-card bdm-verdict-good">
+              <div class="bdm-verdict-number">£41k</div>
+              <div class="bdm-verdict-label">AI system over 2 years<br>Sounds like Marcus from week 1</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
