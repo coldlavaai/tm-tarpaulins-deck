@@ -26,6 +26,17 @@ html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-fo
   --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Light mode */
+:root[data-theme="light"] {
+  --color-bg: #FFFFFF;
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #333333;
+  --color-text-muted: rgba(0,0,0,0.6);
+  --color-accent: #0086b3;
+  --color-accent-rgb: 0,134,179;
+  --color-border: rgba(0,134,179,0.15);
+}
+
 body {
   font-family: var(--font-primary);
   background: var(--color-bg);
@@ -92,6 +103,11 @@ body {
   flex-direction: column;
   padding: 2rem 0;
   overflow-y: auto;
+}
+
+:root[data-theme="light"] .sidebar-nav {
+  background: #f5f5f5;
+  border-right-color: rgba(0,134,179,0.1);
 }
 
 .sidebar-brand {
@@ -766,6 +782,114 @@ h2 {
 ::-webkit-scrollbar-thumb { background: rgba(var(--color-accent-rgb),0.15); }
 ::-webkit-scrollbar-thumb:hover { background: rgba(var(--color-accent-rgb),0.3); }
 
+/* Light mode overrides */
+:root[data-theme="light"] .light-stream {
+  display: none;
+}
+
+:root[data-theme="light"] .sidebar-brand-text {
+  color: rgba(0,134,179,0.6);
+}
+
+:root[data-theme="light"] .sidebar-links a {
+  color: rgba(0,0,0,0.7);
+}
+
+:root[data-theme="light"] .sidebar-links a:hover {
+  color: rgba(0,0,0,0.4);
+  background: rgba(0,134,179,0.08);
+}
+
+:root[data-theme="light"] .sidebar-links a.active {
+  color: #0086b3;
+  border-left-color: #0086b3;
+  background: rgba(0,134,179,0.08);
+}
+
+:root[data-theme="light"] .hud-coords .val {
+  color: rgba(0,134,179,0.7);
+}
+
+:root[data-theme="light"] .hud-coords {
+  color: rgba(0,0,0,0.4);
+}
+
+:root[data-theme="light"] .hud-time .clock,
+:root[data-theme="light"] .hud-time .location {
+  color: rgba(0,0,0,0.5);
+}
+
+:root[data-theme="light"] .hud-time .date {
+  color: rgba(0,0,0,0.4);
+}
+
+:root[data-theme="light"] .label {
+  color: rgba(0,134,179,0.5);
+}
+
+:root[data-theme="light"] .label::before {
+  background: rgba(0,134,179,0.3);
+}
+
+:root[data-theme="light"] .thin {
+  color: rgba(0,0,0,0.5);
+}
+
+:root[data-theme="light"] .card {
+  background: rgba(0,134,179,0.04);
+  border-color: rgba(0,134,179,0.15);
+}
+
+:root[data-theme="light"] .quote-block {
+  border-left-color: rgba(0,134,179,0.5);
+  background: rgba(0,134,179,0.05);
+}
+
+:root[data-theme="light"] .quote-text {
+  color: rgba(0,0,0,0.8);
+}
+
+:root[data-theme="light"] .quote-author {
+  color: #0086b3;
+}
+
+:root[data-theme="light"] .section-divider {
+  background: linear-gradient(90deg, transparent, rgba(0,134,179,0.1), transparent);
+}
+
+:root[data-theme="light"] .premium-table {
+  background: rgba(0,134,179,0.02);
+  border-color: rgba(0,134,179,0.15);
+}
+
+:root[data-theme="light"] .premium-table thead th {
+  background: rgba(0,134,179,0.08);
+  color: #0086b3;
+  border-bottom-color: rgba(0,134,179,0.3);
+}
+
+:root[data-theme="light"] .premium-table tbody td {
+  color: rgba(0,0,0,0.85);
+  border-bottom-color: rgba(0,0,0,0.08);
+}
+
+:root[data-theme="light"] .pill {
+  background: rgba(0,134,179,0.05);
+  border-color: rgba(0,134,179,0.15);
+  color: rgba(0,0,0,0.5);
+}
+
+:root[data-theme="light"] .cta-link {
+  background: #0086b3;
+  color: white;
+  border-color: #0086b3;
+}
+
+:root[data-theme="light"] .cta-link:hover {
+  background: transparent;
+  color: #0086b3;
+}
+
 /* ===== GENERIC SERVICE PRICING CARD ===== */
 .service-pricing-card {
   background: rgba(255,255,255,0.02);
@@ -860,6 +984,7 @@ h2 {
   <span class="dot">·</span>
   <span class="clock" id="clock">--:--:--</span>
   <div class="date" id="dateText"></div>
+  <button id="themeToggle" style="position:absolute;top:2rem;right:2rem;background:transparent;border:1px solid rgba(var(--color-accent-rgb),0.3);color:var(--color-accent);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all 0.3s;" title="Toggle light/dark mode">☀️</button>
 </div>
 
 <!-- Mobile Sidebar Toggle -->
@@ -1076,24 +1201,35 @@ h2 {
             margin-bottom: 1rem;
           }
           .crm-panel h3 {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: #fff;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
           }
           .crm-panel p, .crm-panel li {
-            font-size: 0.88rem;
-            color: rgba(255,255,255,0.75);
-            line-height: 1.65;
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.75;
+            margin-bottom: 0.6rem;
+          }
+          .crm-panel ul {
+            list-style: none;
+            margin: 1rem 0;
+          }
+          .crm-panel li::before {
+            content: '→ ';
+            color: #00d4ff;
+            font-weight: 700;
+            margin-right: 0.5rem;
           }
           .crm-prospect-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0.55rem 0.8rem;
+            padding: 0.8rem 1rem;
             border-bottom: 1px solid rgba(255,255,255,0.04);
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.7);
+            font-size: 1rem;
+            color: rgba(255,255,255,0.8);
             animation: rowFadeIn 0.4s ease backwards;
           }
           .crm-prospect-row:nth-child(2) { animation-delay: 0.15s; }
@@ -1120,11 +1256,11 @@ h2 {
             background: rgba(0,0,0,0.35);
             border: 1px solid rgba(0,212,255,0.12);
             border-radius: 6px;
-            padding: 1rem;
-            margin-top: 0.75rem;
-            font-size: 0.82rem;
-            color: rgba(255,255,255,0.7);
-            line-height: 1.55;
+            padding: 1.2rem;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.65;
           }
           .crm-email-preview strong { color: rgba(255,255,255,0.9); }
           .crm-appt-card {
@@ -1156,15 +1292,15 @@ h2 {
             color: rgba(255,255,255,0.5);
           }
           .crm-appt-card h4 {
-            font-size: 1rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: #fff;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.5rem;
           }
           .crm-appt-card .appt-detail {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.6);
-            line-height: 1.5;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.6;
           }
           .crm-appt-card .appt-notes {
             margin-top: 0.75rem;
@@ -1220,7 +1356,12 @@ h2 {
               <div class="crm-panel panel-active" data-crm-panel="0">
                 <div class="crm-panel-title">Stage 1 — Prospect Discovery</div>
                 <h3>Finding Aquaculture Decision Makers</h3>
-                <p style="margin-bottom:0.8rem;">AI scanning industry databases, LinkedIn, Companies House...</p>
+                <ul style="margin-bottom:1.2rem;">
+                  <li>AI scans industry databases, LinkedIn, Companies House</li>
+                  <li>Identifies aquaculture farms by size and location</li>
+                  <li>Pulls decision-maker contact info automatically</li>
+                </ul>
+                <p style="margin-bottom:0.8rem;"><strong style="color:#00d4ff;">Prospects Found (This Week):</strong></p>
                 <div class="crm-prospect-row"><span>🏭 Highland Fish Farm — James Mitchell</span> <span class="crm-tag tag-found">FOUND</span></div>
                 <div class="crm-prospect-row"><span>🏭 Loch Seafood Ltd — Sarah Campbell</span> <span class="crm-tag tag-found">FOUND</span></div>
                 <div class="crm-prospect-row"><span>🏭 North Atlantic Aqua — David Ross</span> <span class="crm-tag tag-found">FOUND</span></div>
@@ -1233,12 +1374,17 @@ h2 {
               <div class="crm-panel" data-crm-panel="1">
                 <div class="crm-panel-title">Stage 2 — Data Enrichment</div>
                 <h3>Building Prospect Intelligence</h3>
-                <p style="margin-bottom:0.8rem;">Pulling company size, pain points, buying signals, and decision-maker details...</p>
+                <ul style="margin-bottom:1.2rem;">
+                  <li>Pulls company size, revenue, staff numbers</li>
+                  <li>Finds buying pain signals (social posts, news mentions)</li>
+                  <li>Identifies current vendors and replacement cycles</li>
+                </ul>
+                <p style="margin-bottom:0.8rem;"><strong style="color:#a855f7;">Enriched Profiles:</strong></p>
                 <div class="crm-prospect-row"><span>Highland Fish Farm — <strong>Operations Manager</strong></span> <span class="crm-tag tag-enriched">ENRICHED</span></div>
-                <div class="crm-prospect-row" style="flex-direction:column;align-items:flex-start;gap:0.3rem;">
-                  <span style="font-size:0.75rem;color:rgba(255,255,255,0.45);">▸ 12 ponds, 45 staff, £3.2M revenue</span>
-                  <span style="font-size:0.75rem;color:rgba(255,255,255,0.45);">▸ Current covers: competitor brand, due for replacement</span>
-                  <span style="font-size:0.75rem;color:rgba(255,255,255,0.45);">▸ Pain signal: posted about lice treatment costs on LinkedIn</span>
+                <div class="crm-prospect-row" style="flex-direction:column;align-items:flex-start;gap:0.5rem;">
+                  <span style="font-size:0.9rem;color:rgba(255,255,255,0.6);">▸ 12 ponds, 45 staff, £3.2M revenue</span>
+                  <span style="font-size:0.9rem;color:rgba(255,255,255,0.6);">▸ Current covers: competitor brand, due for replacement</span>
+                  <span style="font-size:0.9rem;color:rgba(255,255,255,0.6);">▸ Pain signal: posted about lice treatment costs on LinkedIn</span>
                 </div>
                 <div class="crm-prospect-row"><span>Loch Seafood Ltd — <strong>Procurement Lead</strong></span> <span class="crm-tag tag-enriched">ENRICHED</span></div>
                 <div class="crm-prospect-row"><span>North Atlantic Aqua — <strong>Site Director</strong></span> <span class="crm-tag tag-enriched">ENRICHED</span></div>
@@ -1248,39 +1394,55 @@ h2 {
               <!-- PANEL 3: OUTREACH -->
               <div class="crm-panel" data-crm-panel="2">
                 <div class="crm-panel-title">Stage 3 — Personalised Outreach</div>
-                <h3>Sending as Marcus</h3>
-                <p style="margin-bottom:0.6rem;">AI writes in Marcus's voice, sends from his email address:</p>
+                <h3>Sending Emails as Marcus</h3>
+                <ul style="margin-bottom:1.2rem;">
+                  <li>AI writes in Marcus's voice using his speaking style</li>
+                  <li>Personalises each email using company/pain point info</li>
+                  <li>Sends from Marcus's email address (marcus@tmtarpaulins.co.uk)</li>
+                </ul>
+                <p style="margin-bottom:0.6rem;"><strong style="color:#fbbf24;">Example Email:</strong></p>
                 <div class="crm-email-preview">
                   <strong>From:</strong> marcus@tmtarpaulins.co.uk<br>
                   <strong>To:</strong> james.mitchell@highlandfishfarm.co.uk<br>
                   <strong>Subject:</strong> Quick thought on your lice screen setup<br><br>
                   "Hi James, I noticed Highland has been expanding — congratulations. We work with fish farms across Scotland on custom lice screen covers that cut treatment costs by up to 40%. Would love a quick 15-min chat if that's of interest? No pressure at all. Cheers, Marcus"
                 </div>
-                <div style="font-family:var(--font-mono);font-size:0.65rem;color:rgba(0,212,255,0.5);margin-top:0.6rem;letter-spacing:0.06em;">SENT TO 47 PROSPECTS · FOLLOW-UP QUEUED IN 3 DAYS</div>
+                <div style="font-family:var(--font-mono);font-size:0.8rem;color:rgba(0,212,255,0.6);margin-top:0.8rem;letter-spacing:0.06em;"><strong>SENT TO 47 PROSPECTS</strong> · Auto follow-up in 3 days</div>
                 <div class="crm-progress"><div class="crm-progress-step done"></div><div class="crm-progress-step done"></div><div class="crm-progress-step done"></div><div class="crm-progress-step"></div><div class="crm-progress-step"></div></div>
               </div>
 
               <!-- PANEL 4: ENGAGE -->
               <div class="crm-panel" data-crm-panel="3">
-                <div class="crm-panel-title">Stage 4 — AI Conversation</div>
-                <h3>James Mitchell is Responding</h3>
-                <div class="crm-email-preview" style="border-left:2px solid #22c55e;">
-                  <strong>James:</strong> "This actually sounds interesting — we've been looking at replacing our covers. What's the turnaround like?"<br><br>
-                  <strong>Marcus (AI):</strong> "Great to hear, James. Typical turnaround is 2-3 weeks from measurement to install — we handle everything on-site. Happy to run through some options on a quick call?"<br><br>
-                  <strong>James:</strong> "Yeah, Thursday afternoon works for me."<br><br>
-                  <strong>Marcus (AI):</strong> "Perfect — I've just sent you a calendar invite for Thursday 2pm. Looking forward to it."
+                <div class="crm-panel-title">Stage 4 — AI Conversation & Follow-up</div>
+                <h3>James Replies & AI Engages</h3>
+                <ul style="margin-bottom:1.2rem;">
+                  <li>AI monitors for replies and auto-responds as Marcus</li>
+                  <li>Keeps tone warm and personal (not robotic)</li>
+                  <li>Books meeting when prospect is interested</li>
+                </ul>
+                <p style="margin-bottom:0.6rem;"><strong style="color:#22c55e;">Live Conversation:</strong></p>
+                <div class="crm-email-preview" style="border-left:3px solid #22c55e;">
+                  <strong style="color:#fff;">James:</strong> "This actually sounds interesting — we've been looking at replacing our covers. What's the turnaround like?"<br><br>
+                  <strong style="color:#00d4ff;">Marcus (AI):</strong> "Great to hear, James. Typical turnaround is 2-3 weeks from measurement to install — we handle everything on-site. Happy to run through some options on a quick call?"<br><br>
+                  <strong style="color:#fff;">James:</strong> "Yeah, Thursday afternoon works for me."<br><br>
+                  <strong style="color:#00d4ff;">Marcus (AI):</strong> "Perfect — I've just sent you a calendar invite for Thursday 2pm. Looking forward to it."
                 </div>
-                <div style="display:flex;gap:0.5rem;margin-top:0.6rem;">
+                <div style="display:flex;gap:0.5rem;margin-top:0.8rem;">
                   <span class="crm-tag tag-engaged">WARM LEAD</span>
-                  <span class="crm-tag" style="background:rgba(34,197,94,0.15);color:#22c55e;">MEETING REQUESTED</span>
+                  <span class="crm-tag" style="background:rgba(34,197,94,0.15);color:#22c55e;">MEETING BOOKED</span>
                 </div>
                 <div class="crm-progress"><div class="crm-progress-step done"></div><div class="crm-progress-step done"></div><div class="crm-progress-step done"></div><div class="crm-progress-step done"></div><div class="crm-progress-step"></div></div>
               </div>
 
               <!-- PANEL 5: BOOK — CRM APPOINTMENT -->
               <div class="crm-panel" data-crm-panel="4">
-                <div class="crm-panel-title">Stage 5 — Appointment Booked</div>
-                <h3>New Appointment in Your Pipeline</h3>
+                <div class="crm-panel-title">Stage 5 — Appointment Ready to Close</div>
+                <h3>Warm Lead Now in Your Calendar</h3>
+                <ul style="margin-bottom:1.2rem;">
+                  <li>Appointment shows up in Marcus's CRM calendar</li>
+                  <li>AI generates pre-call notes (company intel, pain points, talking points)</li>
+                  <li>Marcus just talks — lead is already warm & interested</li>
+                </ul>
                 <div class="crm-appt-card">
                   <div class="appt-header">
                     <span class="appt-badge">CONFIRMED</span>
@@ -1292,15 +1454,15 @@ h2 {
                     📋 Lice Screen Cover Solutions — Custom Quote Discussion
                   </div>
                   <div class="appt-notes">
-                    <div class="appt-notes-label">AI-Generated Call Notes</div>
-                    <p>• Prospect has 12 ponds, current covers from competitor due replacement<br>
-                    • Key pain point: lice treatment costs — mentioned 40% reduction got his attention<br>
+                    <div class="appt-notes-label">AI-Generated Call Prep Notes</div>
+                    <p>• Prospect has 12 ponds, current covers from competitor due for replacement<br>
+                    • Key pain point: lice treatment costs — 40% reduction got his attention<br>
                     • Decision maker confirmed — can approve up to £15k without board<br>
                     • Warm tone throughout, very receptive — high close probability<br>
                     • Suggested talking point: offer site visit + free measurement</p>
                   </div>
                 </div>
-                <div style="text-align:center;margin-top:1rem;font-family:var(--font-mono);font-size:0.65rem;color:rgba(0,212,255,0.6);letter-spacing:0.1em;">MARCUS SPENDS 30 MINS CLOSING · AI SPENT 7 DAYS NURTURING</div>
+                <div style="text-align:center;margin-top:1.2rem;font-family:var(--font-mono);font-size:0.9rem;color:rgba(0,212,255,0.7);letter-spacing:0.1em;"><strong>AI spent 7 days nurturing this lead</strong> | Marcus spends 30 mins closing it</div>
                 <div class="crm-progress"><div class="crm-progress-step done"></div><div class="crm-progress-step done"></div><div class="crm-progress-step done"></div><div class="crm-progress-step done"></div><div class="crm-progress-step done"></div></div>
               </div>
 
@@ -1457,20 +1619,20 @@ h2 {
         }
         .ec-email-header-left { flex: 1; }
         .ec-from-line {
-          font-size: 0.78rem;
-          color: rgba(255,255,255,0.5);
+          font-size: 0.95rem;
+          color: rgba(255,255,255,0.65);
         }
         .ec-from-line strong { color: #fff; }
         .ec-to-line {
-          font-size: 0.7rem;
-          color: rgba(255,255,255,0.3);
-          margin-top: 0.2rem;
+          font-size: 0.85rem;
+          color: rgba(255,255,255,0.5);
+          margin-top: 0.3rem;
         }
         .ec-subject-line {
-          font-size: 1rem;
+          font-size: 1.25rem;
           font-weight: 700;
           color: #fff;
-          margin-top: 0.4rem;
+          margin-top: 0.6rem;
         }
         .ec-date-stamp {
           font-family: var(--font-mono);
@@ -1479,9 +1641,9 @@ h2 {
           white-space: nowrap;
         }
         .ec-email-body {
-          font-size: 0.88rem;
-          color: rgba(255,255,255,0.75);
-          line-height: 1.7;
+          font-size: 1.05rem;
+          color: rgba(255,255,255,0.85);
+          line-height: 1.8;
         }
         .ec-email-body p { margin-bottom: 0.8rem; }
         .ec-email-body .signature {
@@ -1574,6 +1736,14 @@ h2 {
 
             <!-- VIEW 1: Initial Email -->
             <div class="ec-view view-active" data-ec-view="0">
+              <div style="margin-bottom:1.2rem;padding:1rem;background:rgba(251,191,36,0.08);border-radius:6px;border-left:3px solid #fbbf24;">
+                <div style="font-size:0.95rem;font-weight:600;color:#fbbf24;margin-bottom:0.5rem;">Day 1: Initial Outreach</div>
+                <ul style="list-style:none;margin:0;">
+                  <li style="font-size:0.95rem;color:rgba(255,255,255,0.7);margin-bottom:0.3rem;">→ AI writes as Marcus (personalised to James)</li>
+                  <li style="font-size:0.95rem;color:rgba(255,255,255,0.7);margin-bottom:0.3rem;">→ References company research (Highland expanding)</li>
+                  <li style="font-size:0.95rem;color:rgba(255,255,255,0.7);">→ Mentions 40% cost savings benefit</li>
+                </ul>
+              </div>
               <div class="ec-email-header">
                 <div class="ec-email-header-left">
                   <div class="ec-from-line"><strong>Marcus</strong> (marcus@tmtarpaulins.co.uk)</div>
@@ -1586,7 +1756,7 @@ h2 {
                 <p>Hi James,</p>
                 <p>I noticed Highland has been expanding — congratulations on the new ponds. We work with fish farms across Scotland on custom lice screen covers that cut treatment costs by up to 40%.</p>
                 <p>I've got a quick case study from a farm similar to yours if you'd be interested. Just a 15-min chat — no pressure at all.</p>
-                <div class="signature">Cheers,<br>Marcus<br>TM Tarpaulins · 01onal custom fabrication</div>
+                <div class="signature">Cheers,<br>Marcus<br>TM Tarpaulins</div>
               </div>
               <div class="ec-status-bar">
                 <div class="ec-status-dot" style="background:#fbbf24;"></div>
@@ -1597,6 +1767,14 @@ h2 {
 
             <!-- VIEW 2: Follow-up Email -->
             <div class="ec-view" data-ec-view="1">
+              <div style="margin-bottom:1.2rem;padding:1rem;background:rgba(251,191,36,0.08);border-radius:6px;border-left:3px solid #fbbf24;">
+                <div style="font-size:0.95rem;font-weight:600;color:#fbbf24;margin-bottom:0.5rem;">Day 4: Follow-up (No Reply)</div>
+                <ul style="list-style:none;margin:0;">
+                  <li style="font-size:0.95rem;color:rgba(255,255,255,0.7);margin-bottom:0.3rem;">→ AI automatically sends follow-up 3 days later</li>
+                  <li style="font-size:0.95rem;color:rgba(255,255,255,0.7);margin-bottom:0.3rem;">→ Tone: friendly, low-pressure, respects their time</li>
+                  <li style="font-size:0.95rem;color:rgba(255,255,255,0.7);">→ Adds case study reference to build credibility</li>
+                </ul>
+              </div>
               <div class="ec-email-header">
                 <div class="ec-email-header-left">
                   <div class="ec-from-line"><strong>Marcus</strong> (AI Auto Follow-up)</div>
@@ -1614,13 +1792,21 @@ h2 {
               </div>
               <div class="ec-status-bar">
                 <div class="ec-status-dot" style="background:#fbbf24;"></div>
-                <span style="color:#fbbf24;">FOLLOW-UP #1 SENT — 3 DAYS AFTER INITIAL</span>
+                <span style="color:#fbbf24;">AUTO FOLLOW-UP SENT — 3 DAYS AFTER INITIAL</span>
               </div>
               <div class="ec-nurture-progress"><div class="ec-nurture-step step-done"></div><div class="ec-nurture-step step-done"></div><div class="ec-nurture-step"></div><div class="ec-nurture-step"></div></div>
             </div>
 
             <!-- VIEW 3: They Reply + AI Responds -->
             <div class="ec-view" data-ec-view="2">
+              <div style="margin-bottom:1.2rem;padding:1rem;background:rgba(34,197,94,0.08);border-radius:6px;border-left:3px solid #22c55e;">
+                <div style="font-size:0.95rem;font-weight:600;color:#22c55e;margin-bottom:0.5rem;">Day 5: James Replies!</div>
+                <ul style="list-style:none;margin:0;">
+                  <li style="font-size:0.95rem;color:rgba(255,255,255,0.7);margin-bottom:0.3rem;">→ AI detects incoming reply automatically</li>
+                  <li style="font-size:0.95rem;color:rgba(255,255,255,0.7);margin-bottom:0.3rem;">→ AI responds as Marcus (in his voice) — addresses James's questions</li>
+                  <li style="font-size:0.95rem;color:rgba(255,255,255,0.7);">→ Suggests next step: quick call to discuss</li>
+                </ul>
+              </div>
               <div class="ec-email-header">
                 <div class="ec-email-header-left">
                   <div class="ec-from-line"><strong>James Mitchell</strong> (highlandfishfarm.co.uk)</div>
@@ -1636,20 +1822,28 @@ h2 {
                 <p>James</p>
               </div>
               <div class="ec-reply-box">
-                <div class="ec-reply-label">AI AUTO-REPLY (Marcus's voice)</div>
-                <div class="ec-reply-body">
-                  "Great to hear, James. Typical turnaround is 2-3 weeks from measurement to install — we handle everything on-site, no disruption to your stock. 5 ponds is no problem at all. Happy to jump on a quick call to run through the options? I'm free Thursday afternoon if that works?"
+                <div class="ec-reply-label">AI AUTO-RESPONSE (as Marcus)</div>
+                <div class="ec-reply-body" style="font-size:1rem;color:rgba(255,255,255,0.8);">
+                  "Great to hear, James. Typical turnaround is 2-3 weeks from measurement to install — we handle everything on-site, no disruption to your stock. 5 ponds is no problem at all. Happy to jump on a quick call to run through options? I'm free Thursday afternoon if that works?"
                 </div>
               </div>
               <div class="ec-status-bar">
                 <div class="ec-status-dot" style="background:#22c55e;"></div>
-                <span style="color:#22c55e;">PROSPECT REPLIED — AI ENGAGING AUTOMATICALLY</span>
+                <span style="color:#22c55e;">WARM LEAD — AI ENGAGED AUTOMATICALLY</span>
               </div>
               <div class="ec-nurture-progress"><div class="ec-nurture-step step-done"></div><div class="ec-nurture-step step-done"></div><div class="ec-nurture-step step-done"></div><div class="ec-nurture-step"></div></div>
             </div>
 
             <!-- VIEW 4: Appointment Booked -->
             <div class="ec-view" data-ec-view="3">
+              <div style="margin-bottom:1.2rem;padding:1rem;background:rgba(0,212,255,0.08);border-radius:6px;border-left:3px solid #00d4ff;">
+                <div style="font-size:0.95rem;font-weight:600;color:#00d4ff;margin-bottom:0.5rem;">Day 7: Appointment Booked!</div>
+                <ul style="list-style:none;margin:0;">
+                  <li style="font-size:0.95rem;color:rgba(255,255,255,0.7);margin-bottom:0.3rem;">→ Calendar invite auto-sent and confirmed</li>
+                  <li style="font-size:0.95rem;color:rgba(255,255,255,0.7);margin-bottom:0.3rem;">→ AI generates call prep notes for Marcus (company intel, pain points)</li>
+                  <li style="font-size:0.95rem;color:rgba(255,255,255,0.7);">→ Marcus just talks — lead is warm, qualified, ready to close</li>
+                </ul>
+              </div>
               <div class="ec-email-header">
                 <div class="ec-email-header-left">
                   <div class="ec-from-line"><strong>System</strong> — Calendar Notification</div>
@@ -1669,7 +1863,7 @@ h2 {
                   📋 Lice Screen Covers — 5 ponds, quote discussion
                 </div>
                 <div class="appt-notes">
-                  <div class="appt-notes-label">AI-Generated Call Prep</div>
+                  <div class="appt-notes-label">AI-Generated Call Prep Notes</div>
                   <p>• 5 ponds need new covers (ponds 3-7), current ones from competitor<br>
                   • Main pain: lice treatment costs rising sharply this year<br>
                   • Responded to 40% cost reduction stat — lead with case study<br>
@@ -1677,7 +1871,7 @@ h2 {
                   • Tone: friendly, pragmatic, wants fast turnaround</p>
                 </div>
               </div>
-              <div style="text-align:center;margin-top:1rem;font-family:var(--font-mono);font-size:0.65rem;color:rgba(0,212,255,0.6);letter-spacing:0.1em;">AI NURTURED FOR 7 DAYS · MARCUS STEPS IN TO CLOSE</div>
+              <div style="text-align:center;margin-top:1.2rem;font-family:var(--font-mono);font-size:0.9rem;color:rgba(0,212,255,0.7);letter-spacing:0.1em;"><strong>AI spent 7 days nurturing</strong> | Marcus spends 30 mins closing</div>
               <div class="ec-nurture-progress"><div class="ec-nurture-step step-done"></div><div class="ec-nurture-step step-done"></div><div class="ec-nurture-step step-done"></div><div class="ec-nurture-step step-done"></div></div>
             </div>
 
@@ -2548,6 +2742,20 @@ h2 {
 </div><!-- /main-content -->
 
 <script>
+// ===== THEME TOGGLE =====
+const themeToggle = document.getElementById('themeToggle');
+const root = document.documentElement;
+const currentTheme = localStorage.getItem('theme') || 'dark';
+root.setAttribute('data-theme', currentTheme);
+themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+
+themeToggle.addEventListener('click', () => {
+  const newTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+  themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+});
+
 // ===== CLOCK =====
 function updateClock() {
   const now = new Date();
