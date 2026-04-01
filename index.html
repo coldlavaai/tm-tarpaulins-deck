@@ -992,321 +992,71 @@ h2 {
           <li>Warm, appointment-ready leads delivered in real time</li>
         </ul>
       </div>
-      <div class="fade-in d3">
-        <!-- BOS Platform Sidebar Animation — self-contained div -->
-<div id="bos-sidebar" style="width:100%;display:flex;justify-content:center;padding:2rem 1rem;box-sizing:border-box;">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
-
-    /* ── Scoped variables ── */
-    #bos-sidebar {
-      --bos-font-sans: 'Inter', system-ui, sans-serif;
-      --bos-font-mono: 'JetBrains Mono', monospace;
-      --bos-cyan: #00e5c7;
-      --bos-cyan-dim: rgba(0, 229, 199, 0.25);
-      --bos-cyan-glow: 0 0 18px rgba(0, 229, 199, 0.35);
-      --bos-locked-opacity: 0.35;
-      --bos-transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    /* ── Panel ── */
-    #bos-sidebar .bos-panel {
-      width: 100%;
-      max-width: 500px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      padding: 28px 24px;
-      font-family: var(--bos-font-sans);
-      opacity: 0;
-      transform: translateY(12px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    #bos-sidebar .bos-panel.bos-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── Header ── */
-    #bos-sidebar .bos-header {
-      font-size: 11px;
-      font-family: var(--bos-font-mono);
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-      margin-bottom: 20px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-
-    /* ── Row ── */
-    #bos-sidebar .bos-row {
-      display: flex;
-      align-items: center;
-      padding: 13px 14px;
-      border-radius: 10px;
-      margin-bottom: 6px;
-      transition: background var(--bos-transition), opacity var(--bos-transition);
-      opacity: var(--bos-locked-opacity);
-      background: transparent;
-    }
-    #bos-sidebar .bos-row:last-child { margin-bottom: 0; }
-
-    #bos-sidebar .bos-row.bos-active {
-      opacity: 1;
-      background: rgba(0, 229, 199, 0.06);
-    }
-
-    /* ── Icon ── */
-    #bos-sidebar .bos-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 14px;
-      transition: background var(--bos-transition), box-shadow var(--bos-transition), transform 0.4s ease;
-      background: rgba(255,255,255,0.06);
-      box-shadow: none;
-    }
-    #bos-sidebar .bos-row.bos-active .bos-icon {
-      background: rgba(0, 229, 199, 0.15);
-      box-shadow: var(--bos-cyan-glow);
-    }
-
-    /* Icon inner SVGs */
-    #bos-sidebar .bos-icon-check,
-    #bos-sidebar .bos-icon-lock {
-      transition: opacity 0.35s ease, transform 0.35s ease;
-      position: absolute;
-    }
-    #bos-sidebar .bos-icon-wrap {
-      position: relative;
-      width: 16px;
-      height: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Locked: show lock, hide check */
-    #bos-sidebar .bos-row .bos-icon-check { opacity: 0; transform: scale(0.5); }
-    #bos-sidebar .bos-row .bos-icon-lock  { opacity: 1; transform: scale(1); }
-
-    /* Active: show check, hide lock */
-    #bos-sidebar .bos-row.bos-active .bos-icon-check { opacity: 1; transform: scale(1); }
-    #bos-sidebar .bos-row.bos-active .bos-icon-lock  { opacity: 0; transform: scale(0.5); }
-
-    /* Pulse on unlock */
-    #bos-sidebar .bos-icon.bos-pulse {
-      transform: scale(1.25);
-    }
-
-    /* ── Name ── */
-    #bos-sidebar .bos-name {
-      flex: 1;
-      margin-left: 14px;
-      font-size: 14px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.55);
-      transition: color var(--bos-transition);
-    }
-    #bos-sidebar .bos-row.bos-active .bos-name {
-      color: rgba(255,255,255,0.92);
-    }
-
-    /* ── Status label ── */
-    #bos-sidebar .bos-status {
-      font-family: var(--bos-font-mono);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      padding: 3px 10px;
-      border-radius: 6px;
-      flex-shrink: 0;
-      transition: color var(--bos-transition), background var(--bos-transition);
-      color: rgba(255,255,255,0.3);
-      background: rgba(255,255,255,0.04);
-    }
-    #bos-sidebar .bos-row.bos-active .bos-status {
-      color: var(--bos-cyan);
-      background: rgba(0, 229, 199, 0.1);
-    }
-
-    /* ── Responsive ── */
-    @media (max-width: 520px) {
-      #bos-sidebar .bos-panel { padding: 20px 14px; }
-      #bos-sidebar .bos-name { font-size: 13px; }
-      #bos-sidebar .bos-status { font-size: 10px; padding: 2px 8px; }
-    }
-  </style>
-
-  <div class="bos-panel">
-    <div class="bos-header">Service Modules</div>
-
-    <!-- 1. Google Reviews — starts active -->
-    <div class="bos-row bos-active" data-bos-index="0">
-      <div class="bos-icon">
-        <div class="bos-icon-wrap">
-          <svg class="bos-icon-check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4" stroke="#00e5c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <svg class="bos-icon-lock" width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="6" width="10" height="7" rx="1.5" stroke="rgba(255,255,255,0.4)" stroke-width="1.4"/><path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="rgba(255,255,255,0.4)" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <div class="fade-in d3" style="margin-top:3rem;">
+        <!-- Lead Generation 5-Stage Timeline -->
+        <style>
+          .lg-timeline { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 2rem; }
+          .lg-stage { display: flex; align-items: flex-start; gap: 2rem; padding: 1.5rem; border-left: 3px solid rgba(0, 212, 255, 0.2); opacity: 0.6; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+          .lg-stage.active { opacity: 1; border-left-color: #00d4ff; background: rgba(0, 212, 255, 0.05); }
+          .lg-icon { font-size: 2rem; min-width: 50px; text-align: center; }
+          .lg-content h4 { font-size: 1.2rem; font-weight: 600; color: #fff; margin-bottom: 0.3rem; }
+          .lg-stage.active .lg-content h4 { color: #00d4ff; }
+          .lg-desc { font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); line-height: 1.5; }
+        </style>
+        <div class="lg-timeline">
+          <div class="lg-stage active">
+            <div class="lg-icon">🎯</div>
+            <div class="lg-content">
+              <h4>1. Find</h4>
+              <div class="lg-desc">Identify prospects matching your ICP (Ideal Customer Profile) with industry, size, and location filters</div>
+            </div>
+          </div>
+          <div class="lg-stage">
+            <div class="lg-icon">📊</div>
+            <div class="lg-content">
+              <h4>2. Enrich</h4>
+              <div class="lg-desc">Research decision makers, extract company data, and identify pain points and buying signals</div>
+            </div>
+          </div>
+          <div class="lg-stage">
+            <div class="lg-icon">✉️</div>
+            <div class="lg-content">
+              <h4>3. Outreach</h4>
+              <div class="lg-desc">Send personalized first-touch messages in your voice across email, SMS, LinkedIn, and WhatsApp</div>
+            </div>
+          </div>
+          <div class="lg-stage">
+            <div class="lg-icon">💬</div>
+            <div class="lg-content">
+              <h4>4. Engage</h4>
+              <div class="lg-desc">AI handles multi-touch nurture sequences, auto-responds to inquiries, and scores leads automatically</div>
+            </div>
+          </div>
+          <div class="lg-stage">
+            <div class="lg-icon">📅</div>
+            <div class="lg-content">
+              <h4>5. Book</h4>
+              <div class="lg-desc">Only warm, qualified prospects reach your calendar — you focus on closing, not prospecting</div>
+            </div>
+          </div>
         </div>
-      </div>
-      <span class="bos-name">Google Reviews</span>
-      <span class="bos-status">active</span>
-    </div>
-
-    <!-- 2. Database Reactivation — starts active -->
-    <div class="bos-row bos-active" data-bos-index="1">
-      <div class="bos-icon">
-        <div class="bos-icon-wrap">
-          <svg class="bos-icon-check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4" stroke="#00e5c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <svg class="bos-icon-lock" width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="6" width="10" height="7" rx="1.5" stroke="rgba(255,255,255,0.4)" stroke-width="1.4"/><path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="rgba(255,255,255,0.4)" stroke-width="1.4" stroke-linecap="round"/></svg>
-        </div>
-      </div>
-      <span class="bos-name">Database Reactivation</span>
-      <span class="bos-status">active</span>
-    </div>
-
-    <!-- 3. Lead Nurture — starts locked, unlocks at 3s -->
-    <div class="bos-row" data-bos-index="2" data-bos-unlock="3000">
-      <div class="bos-icon">
-        <div class="bos-icon-wrap">
-          <svg class="bos-icon-check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4" stroke="#00e5c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <svg class="bos-icon-lock" width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="6" width="10" height="7" rx="1.5" stroke="rgba(255,255,255,0.4)" stroke-width="1.4"/><path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="rgba(255,255,255,0.4)" stroke-width="1.4" stroke-linecap="round"/></svg>
-        </div>
-      </div>
-      <span class="bos-name">Lead Nurture</span>
-      <span class="bos-status">locked</span>
-    </div>
-
-    <!-- 4. Chatbot — starts locked, unlocks at 5s -->
-    <div class="bos-row" data-bos-index="3" data-bos-unlock="5000">
-      <div class="bos-icon">
-        <div class="bos-icon-wrap">
-          <svg class="bos-icon-check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4" stroke="#00e5c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <svg class="bos-icon-lock" width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="6" width="10" height="7" rx="1.5" stroke="rgba(255,255,255,0.4)" stroke-width="1.4"/><path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="rgba(255,255,255,0.4)" stroke-width="1.4" stroke-linecap="round"/></svg>
-        </div>
-      </div>
-      <span class="bos-name">Chatbot</span>
-      <span class="bos-status">locked</span>
-    </div>
-
-    <!-- 5. Missed Call Recovery — starts locked, unlocks at 7s -->
-    <div class="bos-row" data-bos-index="4" data-bos-unlock="7000">
-      <div class="bos-icon">
-        <div class="bos-icon-wrap">
-          <svg class="bos-icon-check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4" stroke="#00e5c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <svg class="bos-icon-lock" width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="6" width="10" height="7" rx="1.5" stroke="rgba(255,255,255,0.4)" stroke-width="1.4"/><path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="rgba(255,255,255,0.4)" stroke-width="1.4" stroke-linecap="round"/></svg>
-        </div>
-      </div>
-      <span class="bos-name">Missed Call Recovery</span>
-      <span class="bos-status">locked</span>
-    </div>
-
-    <!-- 6. Analytics Dashboard — stays locked (upsell) -->
-    <div class="bos-row" data-bos-index="5">
-      <div class="bos-icon">
-        <div class="bos-icon-wrap">
-          <svg class="bos-icon-check" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4" stroke="#00e5c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <svg class="bos-icon-lock" width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="6" width="10" height="7" rx="1.5" stroke="rgba(255,255,255,0.4)" stroke-width="1.4"/><path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="rgba(255,255,255,0.4)" stroke-width="1.4" stroke-linecap="round"/></svg>
-        </div>
-      </div>
-      <span class="bos-name">Analytics Dashboard</span>
-      <span class="bos-status">locked</span>
-    </div>
-  </div>
-
-  <script>
-    (function() {
-      const root = document.getElementById('bos-sidebar');
-      if (!root) return;
-
-      const panel = root.querySelector('.bos-panel');
-      const rows = root.querySelectorAll('.bos-row');
-      let timers = [];
-      let loopTimer = null;
-      let running = false;
-
-      function unlockRow(row) {
-        row.classList.add('bos-active');
-        row.querySelector('.bos-status').textContent = 'active';
-        const icon = row.querySelector('.bos-icon');
-        icon.classList.add('bos-pulse');
-        setTimeout(() => icon.classList.remove('bos-pulse'), 400);
-      }
-
-      function resetAll() {
-        timers.forEach(t => clearTimeout(t));
-        timers = [];
-        if (loopTimer) clearTimeout(loopTimer);
-
-        rows.forEach(row => {
-          const idx = parseInt(row.dataset.bosIndex);
-          if (idx >= 2) {
-            row.classList.remove('bos-active');
-            row.querySelector('.bos-status').textContent = 'locked';
-            row.querySelector('.bos-icon').classList.remove('bos-pulse');
-          }
-        });
-      }
-
-      function startSequence() {
-        if (running) return;
-        running = true;
-        resetAll();
-        panel.classList.add('bos-visible');
-
-        // Schedule unlocks for rows with data-bos-unlock
-        rows.forEach(row => {
-          const delay = row.dataset.bosUnlock;
-          if (delay) {
-            timers.push(setTimeout(() => unlockRow(row), parseInt(delay)));
-          }
-        });
-
-        // Loop: reset at 15s, restart at 16s (brief fade)
-        loopTimer = setTimeout(() => {
-          panel.classList.remove('bos-visible');
-          setTimeout(() => {
-            resetAll();
-            running = false;
-            startSequence();
-          }, 600);
-        }, 15000);
-      }
-
-      function stopSequence() {
-        running = false;
-        resetAll();
-        panel.classList.remove('bos-visible');
-      }
-
-      // IntersectionObserver — 20% threshold, loops
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            startSequence();
-          } else {
-            stopSequence();
-          }
-        });
-      }, { threshold: 0.2 });
-
-      observer.observe(root);
-    })();
-  </script>
-</div>
-
-
+        <script>
+          (function() {
+            const stages = document.querySelectorAll('.lg-stage');
+            let current = 0;
+            function cycle() {
+              stages.forEach((s, i) => s.classList.toggle('active', i === current));
+              current = (current + 1) % stages.length;
+            }
+            setInterval(cycle, 4000);
+          })();
+        </script>
       </div>
     </div>
   </section>
 
   <div class="section-divider"></div>
+
 
   <!-- ==================== 006 / NURTURE SEQUENCES ==================== -->
   <!-- ==================== 003 / NURTURE SEQUENCES — ANIMATED DEMO ==================== -->
