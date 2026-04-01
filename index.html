@@ -1175,392 +1175,255 @@ h2 {
         <div class="label">AI Lead Generation Engine / 002</div>
       </div>
       <div class="fade-in d1">
-        <h2>One Dashboard.<br><span class="thin">Modular Intelligence.</span></h2>
+        <h2>How It Works:<br><span class="thin">5 Simple Stages</span></h2>
+        <p class="lead" style="margin-top:1rem;">Click through each stage to see exactly how the AI finds, nurtures, and books appointments for you.</p>
       </div>
-      <div class="fade-in d2">
-        <ul class="arrow-list">
-          <li>Real-time lead pipeline with all conversations visible</li>
-          <li>AI manages outreach across email, SMS, LinkedIn & WhatsApp 24/7</li>
-          <li>Automated lead scoring and qualification in your inbox</li>
-          <li>Warm, appointment-ready leads delivered in real time</li>
-        </ul>
-      </div>
-      <div class="fade-in d3" style="margin-top:3rem;">
-        <!-- Lead Generation CRM Walkthrough -->
+      <div class="fade-in d3" style="margin-top:2rem;">
+        <!-- Lead Generation Walkthrough — Click Through -->
         <style>
-          .crm-screen {
-            max-width: 100%;
-            width: 100%;
-            margin: 0 auto;
-            background: #0a0e17;
+          .lead-gen-container {
+            background: rgba(0,0,0,0.3);
             border: 1px solid rgba(0,212,255,0.15);
             border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 25px 80px rgba(0,0,0,0.6), 0 0 40px rgba(0,212,255,0.08);
-          }
-          .crm-titlebar {
+            padding: 3rem 2.5rem;
+            min-height: 600px;
             display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.25rem;
-            background: rgba(0,212,255,0.04);
-            border-bottom: 1px solid rgba(0,212,255,0.1);
+            flex-direction: column;
+            justify-content: space-between;
           }
-          .crm-dot { width: 10px; height: 10px; border-radius: 50%; }
-          .crm-dot.red { background: #ff5f57; }
-          .crm-dot.yellow { background: #febc2e; }
-          .crm-dot.green { background: #28c840; }
-          .crm-titlebar-text {
-            margin-left: 1rem;
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: rgba(255,255,255,0.35);
-            letter-spacing: 0.08em;
-          }
-          .crm-body {
-            display: grid;
-            grid-template-columns: 150px 1fr;
-            min-height: 380px;
-          }
-          .crm-sidebar {
-            background: rgba(0,0,0,0.4);
-            border-right: 1px solid rgba(0,212,255,0.08);
-            padding: 1rem 0;
-          }
-          .crm-nav-item {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.55rem 0.8rem;
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            color: rgba(255,255,255,0.3);
-            letter-spacing: 0.04em;
-            transition: all 0.5s ease;
-            cursor: default;
-          }
-          .crm-nav-item.nav-active {
-            color: #00d4ff;
-            background: rgba(0,212,255,0.08);
-            border-right: 2px solid #00d4ff;
-          }
-          .crm-nav-icon { font-size: 0.9rem; width: 1.2rem; text-align: center; }
-          .crm-main {
-            padding: 1.2rem;
-            position: relative;
-            overflow: hidden;
-          }
-          .crm-panel {
-            position: absolute;
-            inset: 1.2rem;
+          .lead-gen-stage {
             opacity: 0;
-            transform: translateY(12px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
             pointer-events: none;
+            position: absolute;
+            width: 100%;
+            padding: 3rem 2.5rem;
           }
-          .crm-panel.panel-active {
+          .lead-gen-stage.active {
             opacity: 1;
             transform: translateY(0);
             pointer-events: auto;
+            position: relative;
+            width: auto;
+            padding: 0;
           }
-          .crm-panel-title {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            color: rgba(0,212,255,0.5);
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
+          .stage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2rem;
           }
-          .crm-panel h3 {
-            font-size: 1.5rem;
+          .stage-title {
+            font-size: 2.2rem;
             font-weight: 700;
             color: #fff;
-            margin-bottom: 1rem;
           }
-          .crm-panel p, .crm-panel li {
-            font-size: 1.05rem;
+          .stage-counter {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: rgba(0,212,255,0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+          }
+          .stage-content {
+            font-size: 1.1rem;
             color: rgba(255,255,255,0.85);
-            line-height: 1.75;
-            margin-bottom: 0.6rem;
+            line-height: 1.8;
           }
-          .crm-panel ul {
+          .stage-content ul {
             list-style: none;
-            margin: 1rem 0;
+            margin: 1.5rem 0;
           }
-          .crm-panel li::before {
-            content: '→ ';
+          .stage-content li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+          }
+          .stage-content li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
             color: #00d4ff;
             font-weight: 700;
-            margin-right: 0.5rem;
-          }
-          .crm-prospect-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.8rem 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-            font-size: 1rem;
-            color: rgba(255,255,255,0.8);
-            animation: rowFadeIn 0.4s ease backwards;
-          }
-          .crm-prospect-row:nth-child(2) { animation-delay: 0.15s; }
-          .crm-prospect-row:nth-child(3) { animation-delay: 0.3s; }
-          .crm-prospect-row:nth-child(4) { animation-delay: 0.45s; }
-          .crm-prospect-row:nth-child(5) { animation-delay: 0.6s; }
-          @keyframes rowFadeIn {
-            from { opacity: 0; transform: translateX(-8px); }
-            to { opacity: 1; transform: translateX(0); }
-          }
-          .crm-tag {
-            font-family: var(--font-mono);
-            font-size: 0.6rem;
-            padding: 0.2rem 0.5rem;
-            border-radius: 3px;
-            letter-spacing: 0.05em;
-          }
-          .tag-found { background: rgba(0,212,255,0.15); color: #00d4ff; }
-          .tag-enriched { background: rgba(168,85,247,0.15); color: #a855f7; }
-          .tag-sent { background: rgba(251,191,36,0.15); color: #fbbf24; }
-          .tag-engaged { background: rgba(34,197,94,0.15); color: #22c55e; }
-          .tag-booked { background: rgba(0,212,255,0.3); color: #fff; }
-          .crm-email-preview {
-            background: rgba(0,0,0,0.35);
-            border: 1px solid rgba(0,212,255,0.12);
-            border-radius: 6px;
-            padding: 1.2rem;
-            margin-top: 1rem;
-            font-size: 0.95rem;
-            color: rgba(255,255,255,0.8);
-            line-height: 1.65;
-          }
-          .crm-email-preview strong { color: rgba(255,255,255,0.9); }
-          .crm-appt-card {
-            background: linear-gradient(135deg, rgba(0,212,255,0.12), rgba(0,212,255,0.04));
-            border: 1px solid rgba(0,212,255,0.25);
-            border-radius: 8px;
-            padding: 1.25rem;
-            margin-top: 0.75rem;
-          }
-          .crm-appt-card .appt-header {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            margin-bottom: 0.8rem;
-          }
-          .crm-appt-card .appt-badge {
-            background: #00d4ff;
-            color: #000;
-            font-family: var(--font-mono);
-            font-size: 0.6rem;
-            font-weight: 700;
-            padding: 0.2rem 0.6rem;
-            border-radius: 3px;
-            letter-spacing: 0.06em;
-          }
-          .crm-appt-card .appt-time {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: rgba(255,255,255,0.5);
-          }
-          .crm-appt-card h4 {
             font-size: 1.2rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 0.5rem;
           }
-          .crm-appt-card .appt-detail {
+          .stage-highlight {
+            background: rgba(0,212,255,0.08);
+            border-left: 3px solid #00d4ff;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 6px;
             font-size: 1rem;
-            color: rgba(255,255,255,0.75);
-            line-height: 1.6;
+            line-height: 1.8;
           }
-          .crm-appt-card .appt-notes {
-            margin-top: 0.75rem;
-            padding-top: 0.75rem;
-            border-top: 1px solid rgba(0,212,255,0.15);
-          }
-          .crm-appt-card .appt-notes-label {
-            font-family: var(--font-mono);
-            font-size: 0.6rem;
-            color: rgba(0,212,255,0.6);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-bottom: 0.4rem;
-          }
-          .crm-appt-card .appt-notes p {
-            font-size: 0.78rem;
-            color: rgba(255,255,255,0.65);
-            line-height: 1.5;
-          }
-          .crm-progress {
+          .nav-buttons {
             display: flex;
-            gap: 0.25rem;
-            margin-top: 1.25rem;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 3rem;
           }
-          .crm-progress-step {
-            flex: 1;
-            height: 3px;
-            background: rgba(255,255,255,0.08);
-            border-radius: 2px;
-            transition: background 0.5s ease;
+          .nav-btn {
+            background: transparent;
+            border: 1px solid rgba(0,212,255,0.4);
+            color: #00d4ff;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
           }
-          .crm-progress-step.done { background: #00d4ff; }
+          .nav-btn:hover {
+            background: rgba(0,212,255,0.1);
+            border-color: #00d4ff;
+          }
+          .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+          }
+          .nav-btn:disabled:hover {
+            background: transparent;
+          }
         </style>
 
-        <div class="crm-screen">
-          <div class="crm-titlebar">
-            <div class="crm-dot red"></div>
-            <div class="crm-dot yellow"></div>
-            <div class="crm-dot green"></div>
-            <div class="crm-titlebar-text">COLD LAVA CRM — TM TARPAULINS PIPELINE</div>
+        <div class="lead-gen-container">
+          <div style="position: relative; min-height: 450px;">
+
+            <!-- STAGE 1: FIND -->
+            <div class="lead-gen-stage active">
+              <div class="stage-header">
+                <div class="stage-title">Stage 1: Finding The Right Companies</div>
+                <div class="stage-counter">1 / 5</div>
+              </div>
+              <div class="stage-content">
+                <p>The AI starts by finding aquaculture farms that match your ideal customer profile.</p>
+                <ul>
+                  <li>Scans LinkedIn, industry databases, and Companies House records</li>
+                  <li>Identifies decision-makers (Operations Managers, Procurement Leads)</li>
+                  <li>Automatically pulls their contact information</li>
+                </ul>
+                <div class="stage-highlight">
+                  <strong>Example:</strong> Highland Fish Farm · James Mitchell · Operations Manager
+                  <br>12 ponds, 45 staff, £3.2M revenue
+                </div>
+              </div>
+            </div>
+
+            <!-- STAGE 2: ENRICH -->
+            <div class="lead-gen-stage">
+              <div class="stage-header">
+                <div class="stage-title">Stage 2: Understanding Their Needs</div>
+                <div class="stage-counter">2 / 5</div>
+              </div>
+              <div class="stage-content">
+                <p>The AI digs deeper and learns everything important about each company.</p>
+                <ul>
+                  <li>Finds their pain points (e.g., recent LinkedIn posts about lice treatment costs)</li>
+                  <li>Discovers what competitors they're currently using</li>
+                  <li>Identifies when their current suppliers' contracts are expiring</li>
+                </ul>
+                <div class="stage-highlight">
+                  <strong>What We Learn:</strong> Highland Fish Farm posted about rising lice costs. Their current covers are from a competitor. They're likely due for replacement.
+                </div>
+              </div>
+            </div>
+
+            <!-- STAGE 3: OUTREACH -->
+            <div class="lead-gen-stage">
+              <div class="stage-header">
+                <div class="stage-title">Stage 3: Sending The First Email</div>
+                <div class="stage-counter">3 / 5</div>
+              </div>
+              <div class="stage-content">
+                <p>The AI writes and sends an email that sounds exactly like Marcus.</p>
+                <ul>
+                  <li>Uses Marcus's speaking style and personality</li>
+                  <li>References what it learned (no generic "Hi there")</li>
+                  <li>Sends from Marcus's email address — they think it's from Marcus</li>
+                </ul>
+                <div class="stage-highlight">
+                  <strong>The Email:</strong> "Hi James, I noticed Highland has been expanding — congratulations. We work with fish farms on custom lice screen covers that cut treatment costs by up to 40%. Would love a 15-minute chat if that's of interest? No pressure. Cheers, Marcus"
+                </div>
+              </div>
+            </div>
+
+            <!-- STAGE 4: ENGAGE -->
+            <div class="lead-gen-stage">
+              <div class="stage-header">
+                <div class="stage-title">Stage 4: When They Reply</div>
+                <div class="stage-counter">4 / 5</div>
+              </div>
+              <div class="stage-content">
+                <p>The AI monitors for replies and keeps the conversation going — as Marcus.</p>
+                <ul>
+                  <li>Detects when James replies to the email</li>
+                  <li>Responds with a warm, natural message (not robotic)</li>
+                  <li>Suggests a time to talk and gets James to commit</li>
+                </ul>
+                <div class="stage-highlight">
+                  <strong>James replies:</strong> "Your timing is spot on. We've been looking at replacing our covers."
+                  <br><strong>AI (as Marcus):</strong> "Great! Typical turnaround is 2-3 weeks. Happy to jump on a call Thursday afternoon?"
+                  <br><strong>James:</strong> "Perfect, Thursday works."
+                </div>
+              </div>
+            </div>
+
+            <!-- STAGE 5: BOOK -->
+            <div class="lead-gen-stage">
+              <div class="stage-header">
+                <div class="stage-title">Stage 5: Appointment Booked</div>
+                <div class="stage-counter">5 / 5</div>
+              </div>
+              <div class="stage-content">
+                <p>The appointment lands in your calendar with everything Marcus needs to know.</p>
+                <ul>
+                  <li>Calendar invite goes out automatically</li>
+                  <li>AI prepares call notes: company info, their pain points, suggested talking points</li>
+                  <li>Marcus jumps on the call — the lead is already warm and interested</li>
+                </ul>
+                <div class="stage-highlight">
+                  <strong>Call Notes For Marcus:</strong> Highland Fish Farm, 12 ponds needing new covers. Lice treatment costs are killing them (40% savings would be huge). Decision-maker can approve up to £15k. They sound receptive.
+                  <br><br><em>AI spent 7 days finding and nurturing this lead. Marcus spends 30 minutes closing it.</em>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="crm-body">
-            <div class="crm-sidebar">
-              <div class="crm-nav-item nav-active" data-crm-nav="0"><span class="crm-nav-icon">🎯</span> Find</div>
-              <div class="crm-nav-item" data-crm-nav="1"><span class="crm-nav-icon">📊</span> Enrich</div>
-              <div class="crm-nav-item" data-crm-nav="2"><span class="crm-nav-icon">✉️</span> Outreach</div>
-              <div class="crm-nav-item" data-crm-nav="3"><span class="crm-nav-icon">💬</span> Engage</div>
-              <div class="crm-nav-item" data-crm-nav="4"><span class="crm-nav-icon">📅</span> Book</div>
-            </div>
-            <div class="crm-main">
 
-              <!-- PANEL 1: FIND -->
-              <div class="crm-panel panel-active" data-crm-panel="0">
-                <div class="crm-panel-title">Stage 1 — Prospect Discovery</div>
-                <h3>Finding Aquaculture Decision Makers</h3>
-                <ul style="margin-bottom:1.2rem;">
-                  <li>AI scans industry databases, LinkedIn, Companies House</li>
-                  <li>Identifies aquaculture farms by size and location</li>
-                  <li>Pulls decision-maker contact info automatically</li>
-                </ul>
-                <p style="margin-bottom:0.8rem;"><strong style="color:#00d4ff;">Prospects Found (This Week):</strong></p>
-                <div class="crm-prospect-row"><span>🏭 Highland Fish Farm — James Mitchell</span> <span class="crm-tag tag-found">FOUND</span></div>
-                <div class="crm-prospect-row"><span>🏭 Loch Seafood Ltd — Sarah Campbell</span> <span class="crm-tag tag-found">FOUND</span></div>
-                <div class="crm-prospect-row"><span>🏭 North Atlantic Aqua — David Ross</span> <span class="crm-tag tag-found">FOUND</span></div>
-                <div class="crm-prospect-row"><span>🏭 ScotPond Solutions — Karen Fraser</span> <span class="crm-tag tag-found">FOUND</span></div>
-                <div class="crm-prospect-row"><span>🏭 Orkney Marine Farms — Paul Henderson</span> <span class="crm-tag tag-found">FOUND</span></div>
-                <div class="crm-progress"><div class="crm-progress-step done"></div><div class="crm-progress-step"></div><div class="crm-progress-step"></div><div class="crm-progress-step"></div><div class="crm-progress-step"></div></div>
-              </div>
-
-              <!-- PANEL 2: ENRICH -->
-              <div class="crm-panel" data-crm-panel="1">
-                <div class="crm-panel-title">Stage 2 — Data Enrichment</div>
-                <h3>Building Prospect Intelligence</h3>
-                <ul style="margin-bottom:1.2rem;">
-                  <li>Pulls company size, revenue, staff numbers</li>
-                  <li>Finds buying pain signals (social posts, news mentions)</li>
-                  <li>Identifies current vendors and replacement cycles</li>
-                </ul>
-                <p style="margin-bottom:0.8rem;"><strong style="color:#a855f7;">Enriched Profiles:</strong></p>
-                <div class="crm-prospect-row"><span>Highland Fish Farm — <strong>Operations Manager</strong></span> <span class="crm-tag tag-enriched">ENRICHED</span></div>
-                <div class="crm-prospect-row" style="flex-direction:column;align-items:flex-start;gap:0.5rem;">
-                  <span style="font-size:0.9rem;color:rgba(255,255,255,0.6);">▸ 12 ponds, 45 staff, £3.2M revenue</span>
-                  <span style="font-size:0.9rem;color:rgba(255,255,255,0.6);">▸ Current covers: competitor brand, due for replacement</span>
-                  <span style="font-size:0.9rem;color:rgba(255,255,255,0.6);">▸ Pain signal: posted about lice treatment costs on LinkedIn</span>
-                </div>
-                <div class="crm-prospect-row"><span>Loch Seafood Ltd — <strong>Procurement Lead</strong></span> <span class="crm-tag tag-enriched">ENRICHED</span></div>
-                <div class="crm-prospect-row"><span>North Atlantic Aqua — <strong>Site Director</strong></span> <span class="crm-tag tag-enriched">ENRICHED</span></div>
-                <div class="crm-progress"><div class="crm-progress-step done"></div><div class="crm-progress-step done"></div><div class="crm-progress-step"></div><div class="crm-progress-step"></div><div class="crm-progress-step"></div></div>
-              </div>
-
-              <!-- PANEL 3: OUTREACH -->
-              <div class="crm-panel" data-crm-panel="2">
-                <div class="crm-panel-title">Stage 3 — Personalised Outreach</div>
-                <h3>Sending Emails as Marcus</h3>
-                <ul style="margin-bottom:1.2rem;">
-                  <li>AI writes in Marcus's voice using his speaking style</li>
-                  <li>Personalises each email using company/pain point info</li>
-                  <li>Sends from Marcus's email address (marcus@tmtarpaulins.co.uk)</li>
-                </ul>
-                <p style="margin-bottom:0.6rem;"><strong style="color:#fbbf24;">Example Email:</strong></p>
-                <div class="crm-email-preview">
-                  <strong>From:</strong> marcus@tmtarpaulins.co.uk<br>
-                  <strong>To:</strong> james.mitchell@highlandfishfarm.co.uk<br>
-                  <strong>Subject:</strong> Quick thought on your lice screen setup<br><br>
-                  "Hi James, I noticed Highland has been expanding — congratulations. We work with fish farms across Scotland on custom lice screen covers that cut treatment costs by up to 40%. Would love a quick 15-min chat if that's of interest? No pressure at all. Cheers, Marcus"
-                </div>
-                <div style="font-family:var(--font-mono);font-size:0.8rem;color:rgba(0,212,255,0.6);margin-top:0.8rem;letter-spacing:0.06em;"><strong>SENT TO 47 PROSPECTS</strong> · Auto follow-up in 3 days</div>
-                <div class="crm-progress"><div class="crm-progress-step done"></div><div class="crm-progress-step done"></div><div class="crm-progress-step done"></div><div class="crm-progress-step"></div><div class="crm-progress-step"></div></div>
-              </div>
-
-              <!-- PANEL 4: ENGAGE -->
-              <div class="crm-panel" data-crm-panel="3">
-                <div class="crm-panel-title">Stage 4 — AI Conversation & Follow-up</div>
-                <h3>James Replies & AI Engages</h3>
-                <ul style="margin-bottom:1.2rem;">
-                  <li>AI monitors for replies and auto-responds as Marcus</li>
-                  <li>Keeps tone warm and personal (not robotic)</li>
-                  <li>Books meeting when prospect is interested</li>
-                </ul>
-                <p style="margin-bottom:0.6rem;"><strong style="color:#22c55e;">Live Conversation:</strong></p>
-                <div class="crm-email-preview" style="border-left:3px solid #22c55e;">
-                  <strong style="color:#fff;">James:</strong> "This actually sounds interesting — we've been looking at replacing our covers. What's the turnaround like?"<br><br>
-                  <strong style="color:#00d4ff;">Marcus (AI):</strong> "Great to hear, James. Typical turnaround is 2-3 weeks from measurement to install — we handle everything on-site. Happy to run through some options on a quick call?"<br><br>
-                  <strong style="color:#fff;">James:</strong> "Yeah, Thursday afternoon works for me."<br><br>
-                  <strong style="color:#00d4ff;">Marcus (AI):</strong> "Perfect — I've just sent you a calendar invite for Thursday 2pm. Looking forward to it."
-                </div>
-                <div style="display:flex;gap:0.5rem;margin-top:0.8rem;">
-                  <span class="crm-tag tag-engaged">WARM LEAD</span>
-                  <span class="crm-tag" style="background:rgba(34,197,94,0.15);color:#22c55e;">MEETING BOOKED</span>
-                </div>
-                <div class="crm-progress"><div class="crm-progress-step done"></div><div class="crm-progress-step done"></div><div class="crm-progress-step done"></div><div class="crm-progress-step done"></div><div class="crm-progress-step"></div></div>
-              </div>
-
-              <!-- PANEL 5: BOOK — CRM APPOINTMENT -->
-              <div class="crm-panel" data-crm-panel="4">
-                <div class="crm-panel-title">Stage 5 — Appointment Ready to Close</div>
-                <h3>Warm Lead Now in Your Calendar</h3>
-                <ul style="margin-bottom:1.2rem;">
-                  <li>Appointment shows up in Marcus's CRM calendar</li>
-                  <li>AI generates pre-call notes (company intel, pain points, talking points)</li>
-                  <li>Marcus just talks — lead is already warm & interested</li>
-                </ul>
-                <div class="crm-appt-card">
-                  <div class="appt-header">
-                    <span class="appt-badge">CONFIRMED</span>
-                    <span class="appt-time">Thursday 10 Apr · 2:00 PM — 2:30 PM</span>
-                  </div>
-                  <h4>Highland Fish Farm — James Mitchell</h4>
-                  <div class="appt-detail">
-                    📍 Video Call (Teams link sent)<br>
-                    📋 Lice Screen Cover Solutions — Custom Quote Discussion
-                  </div>
-                  <div class="appt-notes">
-                    <div class="appt-notes-label">AI-Generated Call Prep Notes</div>
-                    <p>• Prospect has 12 ponds, current covers from competitor due for replacement<br>
-                    • Key pain point: lice treatment costs — 40% reduction got his attention<br>
-                    • Decision maker confirmed — can approve up to £15k without board<br>
-                    • Warm tone throughout, very receptive — high close probability<br>
-                    • Suggested talking point: offer site visit + free measurement</p>
-                  </div>
-                </div>
-                <div style="text-align:center;margin-top:1.2rem;font-family:var(--font-mono);font-size:0.9rem;color:rgba(0,212,255,0.7);letter-spacing:0.1em;"><strong>AI spent 7 days nurturing this lead</strong> | Marcus spends 30 mins closing it</div>
-                <div class="crm-progress"><div class="crm-progress-step done"></div><div class="crm-progress-step done"></div><div class="crm-progress-step done"></div><div class="crm-progress-step done"></div><div class="crm-progress-step done"></div></div>
-              </div>
-
-            </div>
+          <div class="nav-buttons">
+            <button class="nav-btn" id="crmPrev">← Previous</button>
+            <button class="nav-btn" id="crmNext">Next →</button>
           </div>
         </div>
 
         <script>
           (function() {
-            const navItems = document.querySelectorAll('[data-crm-nav]');
-            const panels = document.querySelectorAll('[data-crm-panel]');
-            const progressSteps = document.querySelectorAll('.crm-progress-step');
+            const stages = document.querySelectorAll('.lead-gen-stage');
+            const prevBtn = document.getElementById('crmPrev');
+            const nextBtn = document.getElementById('crmNext');
             let current = 0;
-            const total = 5;
 
-            function goTo(idx) {
-              navItems.forEach((n, i) => n.classList.toggle('nav-active', i === idx));
-              panels.forEach((p, i) => p.classList.toggle('panel-active', i === idx));
+            function showStage(idx) {
+              stages.forEach((stage, i) => {
+                stage.classList.toggle('active', i === idx);
+              });
               current = idx;
+              prevBtn.disabled = current === 0;
+              nextBtn.disabled = current === stages.length - 1;
             }
 
-            function cycle() {
-              current = (current + 1) % total;
-              goTo(current);
-            }
+            prevBtn.addEventListener('click', () => {
+              if (current > 0) showStage(current - 1);
+            });
 
-            setInterval(cycle, 5000);
+            nextBtn.addEventListener('click', () => {
+              if (current < stages.length - 1) showStage(current + 1);
+            });
+
+            showStage(0);
           })();
         </script>
       </div>
