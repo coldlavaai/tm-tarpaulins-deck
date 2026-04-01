@@ -1550,6 +1550,191 @@ h2 {
             0%, 100% { opacity: 0.5; }
             50% { opacity: 1; }
           }
+
+          /* Stage 2: Enrich - Data Fields Animation */
+          @keyframes dataReveal {
+            from {
+              opacity: 0;
+              transform: translateX(-20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+
+          .data-field {
+            background: rgba(0,212,255,0.1);
+            border-left: 3px solid #00d4ff;
+            padding: 1rem;
+            margin: 0.8rem 0;
+            border-radius: 4px;
+            animation: dataReveal 0.8s ease-out forwards;
+          }
+
+          .data-field:nth-child(1) { animation-delay: 0.2s; opacity: 0; }
+          .data-field:nth-child(2) { animation-delay: 0.6s; opacity: 0; }
+          .data-field:nth-child(3) { animation-delay: 1s; opacity: 0; }
+
+          /* Stage 3: Outreach - Email Animation */
+          @keyframes emailSlideIn {
+            from {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          @keyframes emailSend {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0.7; transform: translateY(-5px); }
+          }
+
+          .email-compose {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(0,212,255,0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            animation: emailSlideIn 0.8s ease-out;
+          }
+
+          .email-field {
+            margin-bottom: 1rem;
+          }
+
+          .email-field-label {
+            font-size: 0.8rem;
+            color: #00d4ff;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+          }
+
+          .email-field-content {
+            background: rgba(255,255,255,0.05);
+            padding: 0.8rem;
+            border-radius: 4px;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.95rem;
+          }
+
+          .send-button {
+            background: linear-gradient(135deg, #00d4ff, #0086b3);
+            color: #fff;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            animation: emailSend 1.2s ease-out;
+          }
+
+          /* Stage 4: Engage - Reply Animation */
+          @keyframes messageIn {
+            from {
+              opacity: 0;
+              transform: translateX(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+
+          .message-bubble {
+            background: rgba(0,212,255,0.15);
+            border-left: 3px solid #00d4ff;
+            padding: 1.2rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+            animation: messageIn 0.8s ease-out;
+          }
+
+          .message-sender {
+            font-size: 0.85rem;
+            color: #00d4ff;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+          }
+
+          .message-text {
+            color: rgba(255,255,255,0.85);
+            font-size: 1rem;
+            line-height: 1.6;
+          }
+
+          /* Stage 5: Book - Calendar Animation */
+          @keyframes calendarPop {
+            from {
+              opacity: 0;
+              transform: scale(0.8);
+            }
+            to {
+              opacity: 1;
+              transform: scale(1);
+            }
+          }
+
+          .calendar-event {
+            background: linear-gradient(135deg, rgba(34,197,94,0.2), rgba(34,197,94,0.05));
+            border: 2px solid #22c55e;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            animation: calendarPop 0.8s ease-out;
+          }
+
+          .calendar-time {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #22c55e;
+            margin-bottom: 0.5rem;
+          }
+
+          .calendar-title {
+            font-size: 1.1rem;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+          }
+
+          .calendar-details {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.95rem;
+            line-height: 1.7;
+          }
+
+          /* Stage Summary Box */
+          .stage-summary {
+            background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(0,212,255,0.02));
+            border: 1px solid rgba(0,212,255,0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+          }
+
+          .stage-summary-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+          }
+
+          .stage-summary-content {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.8;
+          }
         </style>
 
         <div class="lead-gen-container">
@@ -1582,15 +1767,25 @@ h2 {
                 <div class="stage-title">Stage 2: Understanding Their Needs</div>
                 <div class="stage-counter">2 / 5</div>
               </div>
-              <div class="stage-content">
-                <p>The AI digs deeper and learns everything important about each company.</p>
-                <ul>
-                  <li>Finds their pain points (e.g., recent LinkedIn posts about lice treatment costs)</li>
-                  <li>Discovers what competitors they're currently using</li>
-                  <li>Identifies when their current suppliers' contracts are expiring</li>
-                </ul>
-                <div class="stage-highlight">
-                  <strong>What We Learn:</strong> Highland Fish Farm posted about rising lice costs. Their current covers are from a competitor. They're likely due for replacement.
+              <p style="color: rgba(255,255,255,0.85); margin-bottom: 1rem;">The AI researches the company using public sources. Watch as it discovers key intelligence:</p>
+              <div style="margin: 2rem 0;">
+                <div class="data-field">
+                  <div style="color: #00d4ff; font-weight: 600; margin-bottom: 0.5rem;">📰 Recent Activity Found</div>
+                  <div style="color: rgba(255,255,255,0.85);">LinkedIn: "Investing in new equipment and expanding operations across all sites"</div>
+                </div>
+                <div class="data-field">
+                  <div style="color: #00d4ff; font-weight: 600; margin-bottom: 0.5rem;">🔍 Current Suppliers Identified</div>
+                  <div style="color: rgba(255,255,255,0.85);">Website lists current supplier partnerships; industry news mentions recent equipment upgrades</div>
+                </div>
+                <div class="data-field">
+                  <div style="color: #00d4ff; font-weight: 600; margin-bottom: 0.5rem;">💼 Business Growth Signal</div>
+                  <div style="color: rgba(255,255,255,0.85);">Press release: "Expansion plans announced; actively seeking new partners for operational improvements"</div>
+                </div>
+              </div>
+              <div class="stage-summary">
+                <div class="stage-summary-title">✓ Intelligence Gathered from Public Sources</div>
+                <div class="stage-summary-content">
+                  The AI has researched Highland Fish Farm using public information: LinkedIn posts, company website, press releases, and news articles. It identified they're expanding and investing in new equipment—the perfect time to reach out.
                 </div>
               </div>
             </div>
@@ -1601,15 +1796,30 @@ h2 {
                 <div class="stage-title">Stage 3: Sending The First Email</div>
                 <div class="stage-counter">3 / 5</div>
               </div>
-              <div class="stage-content">
-                <p>The AI writes and sends an email that sounds exactly like Marcus.</p>
-                <ul>
-                  <li>Uses Marcus's speaking style and personality</li>
-                  <li>References what it learned (no generic "Hi there")</li>
-                  <li>Sends from Marcus's email address — they think it's from Marcus</li>
-                </ul>
-                <div class="stage-highlight">
-                  <strong>The Email:</strong> "Hi James, I noticed Highland has been expanding — congratulations. We work with fish farms on custom lice screen covers that cut treatment costs by up to 40%. Would love a 15-minute chat if that's of interest? No pressure. Cheers, Marcus"
+              <p style="color: rgba(255,255,255,0.85); margin-bottom: 1rem;">The AI composes and sends a personalized email from Marcus. Watch as it appears:</p>
+              <div class="email-compose">
+                <div class="email-field">
+                  <div class="email-field-label">From:</div>
+                  <div class="email-field-content">marcus@tmtarpaulins.co.uk</div>
+                </div>
+                <div class="email-field">
+                  <div class="email-field-label">To:</div>
+                  <div class="email-field-content">james.mitchell@highlandfishfarm.co.uk</div>
+                </div>
+                <div class="email-field">
+                  <div class="email-field-label">Subject:</div>
+                  <div class="email-field-content">Quick thought on your expansion plans</div>
+                </div>
+                <div class="email-field">
+                  <div class="email-field-label">Message:</div>
+                  <div class="email-field-content">Hi James,<br><br>Saw your recent announcement about expanding operations — congratulations! We work with aquaculture operations across Scotland on custom equipment solutions that improve operational efficiency and reduce costs.<br><br>Given your expansion plans, there might be value in a quick conversation about how we've helped other farms optimize their setups. No pressure — just a 15-minute chat if it makes sense.<br><br>Cheers,<br>Marcus<br>TM Tarpaulins</div>
+                </div>
+                <button class="send-button">→ SEND</button>
+              </div>
+              <div class="stage-summary">
+                <div class="stage-summary-title">✓ Email Sent Personalized</div>
+                <div class="stage-summary-content">
+                  The AI has written and sent an email that sounds exactly like Marcus. It uses his tone, personality, and references specific intelligence from Stage 2. James receives what looks like a personal outreach—not a generic blast email. The AI now monitors for his reply automatically.
                 </div>
               </div>
             </div>
@@ -1620,17 +1830,25 @@ h2 {
                 <div class="stage-title">Stage 4: When They Reply</div>
                 <div class="stage-counter">4 / 5</div>
               </div>
-              <div class="stage-content">
-                <p>The AI monitors for replies and keeps the conversation going — as Marcus.</p>
-                <ul>
-                  <li>Detects when James replies to the email</li>
-                  <li>Responds with a warm, natural message (not robotic)</li>
-                  <li>Suggests a time to talk and gets James to commit</li>
-                </ul>
-                <div class="stage-highlight">
-                  <strong>James replies:</strong> "Your timing is spot on. We've been looking at replacing our covers."
-                  <br><strong>AI (as Marcus):</strong> "Great! Typical turnaround is 2-3 weeks. Happy to jump on a call Thursday afternoon?"
-                  <br><strong>James:</strong> "Perfect, Thursday works."
+              <p style="color: rgba(255,255,255,0.85); margin-bottom: 1rem;">The AI detects James's reply and responds as Marcus. Watch the conversation unfold:</p>
+              <div style="margin: 2rem 0;">
+                <div class="message-bubble">
+                  <div class="message-sender">🔔 New Reply from James</div>
+                  <div class="message-text">"Your timing is spot on. We've been looking at replacing our covers on ponds 3-7. The lice treatment costs are killing us this year. What's the typical turnaround?"</div>
+                </div>
+                <div class="message-bubble" style="animation-delay: 0.4s; opacity: 0;">
+                  <div class="message-sender">✉ AI Response (as Marcus)</div>
+                  <div class="message-text">"Great to hear, James! Typical turnaround is 2-3 weeks from measurement to install — we handle everything on-site, no disruption. 5 ponds is no problem. Happy to jump on a quick call to run through options? I'm free Thursday afternoon."</div>
+                </div>
+                <div class="message-bubble" style="animation-delay: 0.8s; opacity: 0;">
+                  <div class="message-sender">✓ James Confirms</div>
+                  <div class="message-text">"Perfect, Thursday at 2pm works for us. Looking forward to it."</div>
+                </div>
+              </div>
+              <div class="stage-summary">
+                <div class="stage-summary-title">✓ Conversation Engaged</div>
+                <div class="stage-summary-content">
+                  James replied with genuine interest. The AI instantly detected his reply and responded as Marcus—naturally, conversationally, without delay. The lead went from cold email to confirmed meeting in just hours. Now James is committed to a call.
                 </div>
               </div>
             </div>
@@ -1641,16 +1859,29 @@ h2 {
                 <div class="stage-title">Stage 5: Appointment Booked</div>
                 <div class="stage-counter">5 / 5</div>
               </div>
-              <div class="stage-content">
-                <p>The appointment lands in your calendar with everything Marcus needs to know.</p>
-                <ul>
-                  <li>Calendar invite goes out automatically</li>
-                  <li>AI prepares call notes: company info, their pain points, suggested talking points</li>
-                  <li>Marcus jumps on the call — the lead is already warm and interested</li>
-                </ul>
-                <div class="stage-highlight">
-                  <strong>Call Notes For Marcus:</strong> Highland Fish Farm, 12 ponds needing new covers. Lice treatment costs are killing them (40% savings would be huge). Decision-maker can approve up to £15k. They sound receptive.
-                  <br><br><em>AI spent 7 days finding and nurturing this lead. You spend 30 minutes closing it.</em>
+              <p style="color: rgba(255,255,255,0.85); margin-bottom: 1rem;">The appointment lands on your calendar with everything you need. Watch it appear:</p>
+              <div class="calendar-event">
+                <div class="calendar-time">Thursday 2:00 PM — 2:30 PM</div>
+                <div class="calendar-title">Highland Fish Farm — James Mitchell</div>
+                <div class="calendar-details">
+                  📍 Video Call (Teams link sent)<br>
+                  📋 Lice Screen Covers Discussion
+                </div>
+              </div>
+              <div style="background: rgba(0,212,255,0.08); border-left: 3px solid #00d4ff; padding: 1.5rem; border-radius: 6px; margin-top: 1.5rem;">
+                <div style="font-size: 0.9rem; color: #00d4ff; font-weight: 600; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.1em;">📋 AI-Generated Call Prep Notes</div>
+                <div style="font-size: 0.95rem; color: rgba(255,255,255,0.85); line-height: 1.8;">
+                  • <strong>Company:</strong> Highland Fish Farm (45 employees)<br>
+                  • <strong>Contact:</strong> James Mitchell, Operations Manager<br>
+                  • <strong>Pain Point:</strong> Lice treatment costs are rising sharply<br>
+                  • <strong>Buying Signal:</strong> Active equipment investment + expansion = perfect timing<br>
+                  • <strong>Talking Points:</strong> Reference their expansion news, mention cost-efficiency of our solution
+                </div>
+              </div>
+              <div class="stage-summary">
+                <div class="stage-summary-title">✓ Warm Lead On Your Calendar</div>
+                <div class="stage-summary-content">
+                  The AI has done everything. 7 days of research, personalization, follow-up, and engagement — all automated. James is now on your calendar, warm and interested. The AI has prepared everything you need. You just show up and talk.
                 </div>
               </div>
             </div>
