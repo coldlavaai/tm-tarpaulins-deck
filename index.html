@@ -2887,14 +2887,15 @@ navLinks.forEach(link => {
     const targetElement = document.getElementById(sectionId);
 
     if (targetElement) {
-      // Calculate scroll position with offset for proper viewport positioning
-      const offset = 120; // Pixels from top of viewport
-      const targetPosition = targetElement.offsetTop - offset;
-      console.log(`Scrolling to ${sectionId}: offsetTop=${targetElement.offsetTop}, offset=${offset}, targetPosition=${targetPosition}`);
+      // Scroll to element's position with offset
+      const targetPosition = Math.max(0, targetElement.offsetTop - 100);
+      console.log(`Scrolling to ${sectionId}: offsetTop=${targetElement.offsetTop}, targetPosition=${targetPosition}`);
       window.scrollTo({
         top: targetPosition,
         behavior: 'smooth'
       });
+    } else {
+      console.log(`Element not found: ${sectionId}`);
     }
 
     clickedSection = sectionId;
