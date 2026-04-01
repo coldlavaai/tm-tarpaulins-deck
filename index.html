@@ -1569,12 +1569,13 @@ h2 {
             padding: 1rem;
             margin: 0.8rem 0;
             border-radius: 4px;
-            animation: dataReveal 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateX(-20px);
           }
 
-          .data-field:nth-child(1) { animation-delay: 0.2s; opacity: 0; }
-          .data-field:nth-child(2) { animation-delay: 0.6s; opacity: 0; }
-          .data-field:nth-child(3) { animation-delay: 1s; opacity: 0; }
+          .data-field:nth-child(1) { }
+          .data-field:nth-child(2) { }
+          .data-field:nth-child(3) { }
 
           /* Stage 3: Outreach - Email Animation */
           @keyframes emailSlideIn {
@@ -1599,7 +1600,8 @@ h2 {
             border-radius: 8px;
             padding: 1.5rem;
             margin: 1.5rem 0;
-            animation: emailSlideIn 0.8s ease-out;
+            opacity: 0;
+            transform: translateY(30px);
           }
 
           .email-field {
@@ -1632,7 +1634,8 @@ h2 {
             font-weight: 600;
             cursor: pointer;
             margin-top: 1rem;
-            animation: emailSend 1.2s ease-out;
+            opacity: 0;
+            transform: translateY(-5px);
           }
 
           /* Stage 4: Engage - Reply Animation */
@@ -1653,7 +1656,8 @@ h2 {
             padding: 1.2rem;
             margin: 1rem 0;
             border-radius: 6px;
-            animation: messageIn 0.8s ease-out;
+            opacity: 0;
+            transform: translateX(30px);
           }
 
           .message-sender {
@@ -1689,7 +1693,8 @@ h2 {
             border-radius: 8px;
             padding: 1.5rem;
             margin: 1.5rem 0;
-            animation: calendarPop 0.8s ease-out;
+            opacity: 0;
+            transform: scale(0.8);
           }
 
           .calendar-time {
@@ -1756,12 +1761,8 @@ h2 {
                 <div class="scan-indicator">▼ SCANNING...</div>
               </div>
 
-              <!-- Summary -->
-              <div class="stage-summary">
-                <div class="stage-summary-title">✓ Prospects Found & Mapped</div>
-                <div class="stage-summary-content">
-                  The AI has scanned thousands of companies in minutes and identified your ideal prospects. It pulled their location, staff size, recent activity, and most importantly—the decision-makers. You now have a qualified list ready for the next step: research and outreach.
-                </div>
+              <div class="stage-highlight">
+                <strong>What Happens Next:</strong> The AI continues this process, scanning hundreds of companies in minutes. It identifies decision-makers, their contact info, and key company details automatically.
               </div>
             </div>
 
@@ -1771,30 +1772,25 @@ h2 {
                 <div class="stage-title">Stage 2: Understanding Their Needs</div>
                 <div class="stage-counter">2 / 5</div>
               </div>
-
-              <!-- Data Enrichment Animation -->
+              <p style="color: rgba(255,255,255,0.85); margin-bottom: 1rem;">The AI researches the company using public sources. Watch as it discovers key intelligence:</p>
               <div style="margin: 2rem 0;">
                 <div class="data-field">
                   <div style="color: #00d4ff; font-weight: 600; margin-bottom: 0.5rem;">📰 Recent Activity Found</div>
                   <div style="color: rgba(255,255,255,0.85);">LinkedIn: "Investing in new equipment and expanding operations across all sites"</div>
                 </div>
-
                 <div class="data-field">
                   <div style="color: #00d4ff; font-weight: 600; margin-bottom: 0.5rem;">🔍 Current Suppliers Identified</div>
                   <div style="color: rgba(255,255,255,0.85);">Website lists current supplier partnerships; industry news mentions recent equipment upgrades</div>
                 </div>
-
                 <div class="data-field">
                   <div style="color: #00d4ff; font-weight: 600; margin-bottom: 0.5rem;">💼 Business Growth Signal</div>
                   <div style="color: rgba(255,255,255,0.85);">Press release: "Expansion plans announced; actively seeking new partners for operational improvements"</div>
                 </div>
               </div>
-
-              <!-- Summary -->
               <div class="stage-summary">
                 <div class="stage-summary-title">✓ Intelligence Gathered from Public Sources</div>
                 <div class="stage-summary-content">
-                  The AI has researched Highland Fish Farm using public information: LinkedIn posts, company website, press releases, and news articles. It identified they're expanding and investing in new equipment—the perfect time to reach out. This intel guides the personalization in the next stage.
+                  The AI has researched Highland Fish Farm using public information: LinkedIn posts, company website, press releases, and news articles. It identified they're expanding and investing in new equipment—the perfect time to reach out.
                 </div>
               </div>
             </div>
@@ -1805,37 +1801,30 @@ h2 {
                 <div class="stage-title">Stage 3: Sending The First Email</div>
                 <div class="stage-counter">3 / 5</div>
               </div>
-
-              <!-- Email Composition Animation -->
+              <p style="color: rgba(255,255,255,0.85); margin-bottom: 1rem;">The AI composes and sends a personalized email from Marcus. Watch as it appears:</p>
               <div class="email-compose">
                 <div class="email-field">
                   <div class="email-field-label">From:</div>
                   <div class="email-field-content">marcus@tmtarpaulins.co.uk</div>
                 </div>
-
                 <div class="email-field">
                   <div class="email-field-label">To:</div>
                   <div class="email-field-content">james.mitchell@highlandfishfarm.co.uk</div>
                 </div>
-
                 <div class="email-field">
                   <div class="email-field-label">Subject:</div>
-                  <div class="email-field-content">Quick thought on your lice screen setup</div>
+                  <div class="email-field-content">Quick thought on your expansion plans</div>
                 </div>
-
                 <div class="email-field">
                   <div class="email-field-label">Message:</div>
                   <div class="email-field-content">Hi James,<br><br>Saw your recent announcement about expanding operations — congratulations! We work with aquaculture operations across Scotland on custom equipment solutions that improve operational efficiency and reduce costs.<br><br>Given your expansion plans, there might be value in a quick conversation about how we've helped other farms optimize their setups. No pressure — just a 15-minute chat if it makes sense.<br><br>Cheers,<br>Marcus<br>TM Tarpaulins</div>
                 </div>
-
                 <button class="send-button">→ SEND</button>
               </div>
-
-              <!-- Summary -->
               <div class="stage-summary">
                 <div class="stage-summary-title">✓ Email Sent Personalized</div>
                 <div class="stage-summary-content">
-                  The AI has written and sent an email that sounds exactly like Marcus. It uses his tone, personality, and references specific intelligence from Stage 2. James receives what looks like a personal outreach from Marcus himself—not a generic blast email. The AI monitors for his reply automatically.
+                  The AI has written and sent an email that sounds exactly like Marcus. It uses his tone, personality, and references specific intelligence from Stage 2. James receives what looks like a personal outreach—not a generic blast email. The AI now monitors for his reply automatically.
                 </div>
               </div>
             </div>
@@ -1846,30 +1835,25 @@ h2 {
                 <div class="stage-title">Stage 4: When They Reply</div>
                 <div class="stage-counter">4 / 5</div>
               </div>
-
-              <!-- Conversation Animation -->
+              <p style="color: rgba(255,255,255,0.85); margin-bottom: 1rem;">The AI detects James's reply and responds as Marcus. Watch the conversation unfold:</p>
               <div style="margin: 2rem 0;">
                 <div class="message-bubble">
                   <div class="message-sender">🔔 New Reply from James</div>
                   <div class="message-text">"Your timing is spot on. We've been looking at replacing our covers on ponds 3-7. The lice treatment costs are killing us this year. What's the typical turnaround?"</div>
                 </div>
-
                 <div class="message-bubble" style="animation-delay: 0.4s; opacity: 0;">
                   <div class="message-sender">✉ AI Response (as Marcus)</div>
                   <div class="message-text">"Great to hear, James! Typical turnaround is 2-3 weeks from measurement to install — we handle everything on-site, no disruption. 5 ponds is no problem. Happy to jump on a quick call to run through options? I'm free Thursday afternoon."</div>
                 </div>
-
                 <div class="message-bubble" style="animation-delay: 0.8s; opacity: 0;">
                   <div class="message-sender">✓ James Confirms</div>
                   <div class="message-text">"Perfect, Thursday at 2pm works for us. Looking forward to it."</div>
                 </div>
               </div>
-
-              <!-- Summary -->
               <div class="stage-summary">
                 <div class="stage-summary-title">✓ Conversation Engaged</div>
                 <div class="stage-summary-content">
-                  James replied with genuine interest. The AI instantly detected his reply and responded as Marcus—naturally, conversationally, without delay. The lead went from cold email to confirmed meeting in just hours. Now James is committed to a call. Your job is to close it.
+                  James replied with genuine interest. The AI instantly detected his reply and responded as Marcus—naturally, conversationally, without delay. The lead went from cold email to confirmed meeting in just hours. Now James is committed to a call.
                 </div>
               </div>
             </div>
@@ -1880,8 +1864,7 @@ h2 {
                 <div class="stage-title">Stage 5: Appointment Booked</div>
                 <div class="stage-counter">5 / 5</div>
               </div>
-
-              <!-- Calendar Event Animation -->
+              <p style="color: rgba(255,255,255,0.85); margin-bottom: 1rem;">The appointment lands on your calendar with everything you need. Watch it appear:</p>
               <div class="calendar-event">
                 <div class="calendar-time">Thursday 2:00 PM — 2:30 PM</div>
                 <div class="calendar-title">Highland Fish Farm — James Mitchell</div>
@@ -1890,25 +1873,20 @@ h2 {
                   📋 Lice Screen Covers Discussion
                 </div>
               </div>
-
-              <!-- AI-Generated Call Notes -->
               <div style="background: rgba(0,212,255,0.08); border-left: 3px solid #00d4ff; padding: 1.5rem; border-radius: 6px; margin-top: 1.5rem;">
                 <div style="font-size: 0.9rem; color: #00d4ff; font-weight: 600; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.1em;">📋 AI-Generated Call Prep Notes</div>
                 <div style="font-size: 0.95rem; color: rgba(255,255,255,0.85); line-height: 1.8;">
-                  • <strong>Company:</strong> Highland Fish Farm (45 employees, Isle of Skye)<br>
+                  • <strong>Company:</strong> Highland Fish Farm (45 employees)<br>
                   • <strong>Contact:</strong> James Mitchell, Operations Manager<br>
-                  • <strong>Recent Activity:</strong> Announced expansion plans and equipment investment<br>
-                  • <strong>Current Supplier:</strong> Using competitor covers (from website research)<br>
-                  • <strong>Buying Signal:</strong> Active expansion + equipment investment = likely replacement cycle<br>
+                  • <strong>Pain Point:</strong> Lice treatment costs are rising sharply<br>
+                  • <strong>Buying Signal:</strong> Active equipment investment + expansion = perfect timing<br>
                   • <strong>Talking Points:</strong> Reference their expansion news, mention cost-efficiency of our solution
                 </div>
               </div>
-
-              <!-- Summary -->
               <div class="stage-summary">
                 <div class="stage-summary-title">✓ Warm Lead On Your Calendar</div>
                 <div class="stage-summary-content">
-                  The AI has done everything. 7 days of research, personalization, follow-up, and engagement — all automated. James is now on your calendar, warm and interested. The AI has prepared everything you need to close the deal. You just show up and talk.
+                  The AI has done everything. 7 days of research, personalization, follow-up, and engagement — all automated. James is now on your calendar, warm and interested. The AI has prepared everything you need. You just show up and talk.
                 </div>
               </div>
             </div>
@@ -1921,71 +1899,69 @@ h2 {
         </div>
 
         <!-- SUMMARY SLIDE - Journey Diagram -->
-        <div style="margin-top: 4rem; padding: 3rem; background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(0,212,255,0.04)); border: 1px solid rgba(0,212,255,0.15); border-radius: 12px;">
+        <div style="margin-top: 4rem; padding: 2.5rem; background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(0,212,255,0.04)); border: 1px solid rgba(0,212,255,0.15); border-radius: 12px;">
           <h3 style="text-align: center; font-size: 1.6rem; margin-bottom: 3rem; color: #fff;">The Complete Lead Generation Journey</h3>
 
           <!-- Horizontal Journey Diagram -->
-          <div style="max-width: 1100px; margin: 0 auto 3rem;">
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+          <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; max-width: 1200px; margin: 0 auto 3rem; flex-wrap: wrap;">
 
-              <!-- Stage 1: Find -->
-              <div style="flex: 1; text-align: center;">
-                <div style="width: 70px; height: 70px; background: linear-gradient(135deg, rgba(0,212,255,0.3), rgba(0,212,255,0.1)); border: 2px solid #00d4ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #00d4ff; font-size: 1.4rem;">1</div>
-                <div style="font-weight: 600; color: #fff; margin-bottom: 0.5rem; font-size: 1rem;">Find</div>
-                <div style="font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6;">Scan databases,<br>identify decision-makers</div>
-              </div>
-
-              <!-- Arrow 1 -->
-              <div style="flex: 0.4; text-align: center; color: #00d4ff; font-size: 1.8rem; margin-bottom: 2rem;">→</div>
-
-              <!-- Stage 2: Enrich -->
-              <div style="flex: 1; text-align: center;">
-                <div style="width: 70px; height: 70px; background: linear-gradient(135deg, rgba(0,212,255,0.3), rgba(0,212,255,0.1)); border: 2px solid #00d4ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #00d4ff; font-size: 1.4rem;">2</div>
-                <div style="font-weight: 600; color: #fff; margin-bottom: 0.5rem; font-size: 1rem;">Enrich</div>
-                <div style="font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6;">Research pain points<br>& insights</div>
-              </div>
-
-              <!-- Arrow 2 -->
-              <div style="flex: 0.4; text-align: center; color: #00d4ff; font-size: 1.8rem; margin-bottom: 2rem;">→</div>
-
-              <!-- Stage 3: Outreach -->
-              <div style="flex: 1; text-align: center;">
-                <div style="width: 70px; height: 70px; background: linear-gradient(135deg, rgba(0,212,255,0.3), rgba(0,212,255,0.1)); border: 2px solid #00d4ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #00d4ff; font-size: 1.4rem;">3</div>
-                <div style="font-weight: 600; color: #fff; margin-bottom: 0.5rem; font-size: 1rem;">Outreach</div>
-                <div style="font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6;">Send personalized<br>emails</div>
-              </div>
-
-              <!-- Arrow 3 -->
-              <div style="flex: 0.4; text-align: center; color: #00d4ff; font-size: 1.8rem; margin-bottom: 2rem;">→</div>
-
-              <!-- Stage 4: Engage -->
-              <div style="flex: 1; text-align: center;">
-                <div style="width: 70px; height: 70px; background: linear-gradient(135deg, rgba(0,212,255,0.3), rgba(0,212,255,0.1)); border: 2px solid #00d4ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #00d4ff; font-size: 1.4rem;">4</div>
-                <div style="font-weight: 600; color: #fff; margin-bottom: 0.5rem; font-size: 1rem;">Engage</div>
-                <div style="font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6;">Monitor replies,<br>continue conversation</div>
-              </div>
-
-              <!-- Arrow 4 -->
-              <div style="flex: 0.4; text-align: center; color: #22c55e; font-size: 1.8rem; margin-bottom: 2rem;">→</div>
-
-              <!-- Stage 5: Book -->
-              <div style="flex: 1; text-align: center;">
-                <div style="width: 70px; height: 70px; background: linear-gradient(135deg, rgba(34,197,94,0.3), rgba(34,197,94,0.1)); border: 2px solid #22c55e; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #22c55e; font-size: 1.4rem;">✓</div>
-                <div style="font-weight: 600; color: #fff; margin-bottom: 0.5rem; font-size: 1rem;">Book</div>
-                <div style="font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6;">Appointment<br>confirmed</div>
-              </div>
-
+            <!-- Stage 1: Find -->
+            <div style="flex: 1; min-width: 140px; text-align: center;">
+              <div style="width: 70px; height: 70px; background: linear-gradient(135deg, rgba(0,212,255,0.3), rgba(0,212,255,0.1)); border: 2px solid #00d4ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #00d4ff; font-size: 1.4rem;">1</div>
+              <div style="font-weight: 600; color: #fff; margin-bottom: 0.5rem; font-size: 1rem;">Find</div>
+              <div style="font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6;">Scan databases,<br>identify decision-makers</div>
             </div>
+
+            <!-- Arrow 1 -->
+            <div style="flex: 0.4; text-align: center; color: #00d4ff; font-size: 1.8rem; margin-bottom: 2rem;">→</div>
+
+            <!-- Stage 2: Enrich -->
+            <div style="flex: 1; min-width: 140px; text-align: center;">
+              <div style="width: 70px; height: 70px; background: linear-gradient(135deg, rgba(0,212,255,0.3), rgba(0,212,255,0.1)); border: 2px solid #00d4ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #00d4ff; font-size: 1.4rem;">2</div>
+              <div style="font-weight: 600; color: #fff; margin-bottom: 0.5rem; font-size: 1rem;">Enrich</div>
+              <div style="font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6;">Research pain points<br>& insights</div>
+            </div>
+
+            <!-- Arrow 2 -->
+            <div style="flex: 0.4; text-align: center; color: #00d4ff; font-size: 1.8rem; margin-bottom: 2rem;">→</div>
+
+            <!-- Stage 3: Outreach -->
+            <div style="flex: 1; min-width: 140px; text-align: center;">
+              <div style="width: 70px; height: 70px; background: linear-gradient(135deg, rgba(0,212,255,0.3), rgba(0,212,255,0.1)); border: 2px solid #00d4ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #00d4ff; font-size: 1.4rem;">3</div>
+              <div style="font-weight: 600; color: #fff; margin-bottom: 0.5rem; font-size: 1rem;">Outreach</div>
+              <div style="font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6;">Send personalized<br>emails</div>
+            </div>
+
+            <!-- Arrow 3 -->
+            <div style="flex: 0.4; text-align: center; color: #00d4ff; font-size: 1.8rem; margin-bottom: 2rem;">→</div>
+
+            <!-- Stage 4: Engage -->
+            <div style="flex: 1; min-width: 140px; text-align: center;">
+              <div style="width: 70px; height: 70px; background: linear-gradient(135deg, rgba(0,212,255,0.3), rgba(0,212,255,0.1)); border: 2px solid #00d4ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #00d4ff; font-size: 1.4rem;">4</div>
+              <div style="font-weight: 600; color: #fff; margin-bottom: 0.5rem; font-size: 1rem;">Engage</div>
+              <div style="font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6;">Monitor replies,<br>continue conversation</div>
+            </div>
+
+            <!-- Arrow 4 -->
+            <div style="flex: 0.4; text-align: center; color: #22c55e; font-size: 1.8rem; margin-bottom: 2rem;">→</div>
+
+            <!-- Stage 5: Book -->
+            <div style="flex: 1; min-width: 140px; text-align: center;">
+              <div style="width: 70px; height: 70px; background: linear-gradient(135deg, rgba(34,197,94,0.3), rgba(34,197,94,0.1)); border: 2px solid #22c55e; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #22c55e; font-size: 1.4rem;">✓</div>
+              <div style="font-weight: 600; color: #fff; margin-bottom: 0.5rem; font-size: 1rem;">Book</div>
+              <div style="font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6;">Appointment<br>confirmed</div>
+            </div>
+
           </div>
 
           <!-- Summary bullets -->
-          <div style="max-width: 900px; margin: 0 auto;">
+          <div style="margin-top: 2.5rem; max-width: 900px; margin-left: auto; margin-right: auto;">
             <div style="background: rgba(0,0,0,0.3); border-left: 3px solid #00d4ff; padding: 2rem; border-radius: 6px;">
-              <div style="font-size: 1rem; color: rgba(255,255,255,0.85); line-height: 1.9;">
-                <div style="margin-bottom: 1rem;"><strong style="color: #00d4ff;">→</strong> All 5 stages automated and running in parallel</div>
-                <div style="margin-bottom: 1rem;"><strong style="color: #00d4ff;">→</strong> Hundreds of prospects processed simultaneously</div>
-                <div style="margin-bottom: 1rem;"><strong style="color: #00d4ff;">→</strong> Only warm, qualified leads reach your calendar</div>
-                <div style="margin-bottom: 1rem;"><strong style="color: #00d4ff;">→</strong> You spend 30 mins closing, not 25 hours finding</div>
+              <div style="font-size: 1.1rem; color: rgba(255,255,255,0.85); line-height: 2;">
+                <div style="margin-bottom: 0.8rem;"><strong style="color: #00d4ff;">→</strong> All 5 stages automated and running in parallel</div>
+                <div style="margin-bottom: 0.8rem;"><strong style="color: #00d4ff;">→</strong> Hundreds of prospects processed simultaneously</div>
+                <div style="margin-bottom: 0.8rem;"><strong style="color: #00d4ff;">→</strong> Only warm, qualified leads reach your calendar</div>
+                <div style="margin-bottom: 0.8rem;"><strong style="color: #00d4ff;">→</strong> You spend 30 mins closing, not 25 hours finding</div>
                 <div><strong style="color: #22c55e;">✓</strong> System works 24/7 while you focus on closing</div>
               </div>
             </div>
@@ -2007,11 +1983,11 @@ h2 {
 
             // Sample companies for the scanner
             const sampleCompanies = [
-              { name: 'Highland Fish Farm', industry: 'Aquaculture', location: 'Highlands, Scotland', staff: '45', activity: 'Posted about expansion plans', decision: { name: 'James Mitchell', title: 'Operations Manager' } },
-              { name: 'Loch Duart Ltd', industry: 'Fish Farming', location: 'Northwest Highlands', staff: '32', activity: 'Hiring for new roles', decision: { name: 'Sarah Robertson', title: 'Farm Manager' } },
-              { name: 'Scottish Sea Farms', industry: 'Aquaculture', location: 'Isle of Skye', staff: '58', activity: 'Infrastructure investment announced', decision: { name: 'David MacLeod', title: 'Operations Director' } },
-              { name: 'Cairn Aquaculture', industry: 'Fish Farming', location: 'Central Scotland', staff: '28', activity: 'Recent press release about growth', decision: { name: 'Emma Watson', title: 'Procurement Lead' } },
-              { name: 'Celtic Seafood', industry: 'Aquaculture', location: 'Argyll & Bute', staff: '40', activity: 'New facility development', decision: { name: 'Michael Flynn', title: 'Site Manager' } }
+              { name: 'Highland Fish Farm', industry: 'Aquaculture', ponds: '12', staff: '45', revenue: '£3.2M', decision: { name: 'James Mitchell', title: 'Operations Manager' } },
+              { name: 'Loch Duart Ltd', industry: 'Fish Farming', ponds: '8', staff: '32', revenue: '£2.1M', decision: { name: 'Sarah Robertson', title: 'Farm Manager' } },
+              { name: 'Scottish Sea Farms', industry: 'Aquaculture', ponds: '15', staff: '58', revenue: '£4.8M', decision: { name: 'David MacLeod', title: 'Operations Director' } },
+              { name: 'Cairn Aquaculture', industry: 'Fish Farms', ponds: '6', staff: '28', revenue: '£1.8M', decision: { name: 'Emma Watson', title: 'Procurement Lead' } },
+              { name: 'Celtic Seafood', industry: 'Aquaculture', ponds: '10', staff: '40', revenue: '£2.9M', decision: { name: 'Michael Flynn', title: 'Site Manager' } }
             ];
 
             function createCompanyCard(company) {
@@ -2025,16 +2001,16 @@ h2 {
                   </div>
                   <div class="company-details">
                     <div class="company-detail-row">
-                      <div class="company-detail-label">Location:</div>
-                      <div>${company.location}</div>
+                      <div class="company-detail-label">Locations:</div>
+                      <div>${company.ponds} ponds</div>
                     </div>
                     <div class="company-detail-row">
-                      <div class="company-detail-label">Employees:</div>
-                      <div>${company.staff}</div>
+                      <div class="company-detail-label">Staff:</div>
+                      <div>${company.staff} employees</div>
                     </div>
                     <div class="company-detail-row">
-                      <div class="company-detail-label">Recent Activity:</div>
-                      <div>${company.activity}</div>
+                      <div class="company-detail-label">Revenue:</div>
+                      <div>${company.revenue}</div>
                     </div>
                   </div>
                   <div class="decision-maker">
@@ -2070,6 +2046,13 @@ h2 {
               }
             }
 
+            function resetAnimation(element) {
+              // Trigger reflow to restart animation
+              if (element) {
+                void element.offsetHeight;
+              }
+            }
+
             function showStage(idx) {
               stages.forEach((stage, i) => {
                 stage.classList.toggle('active', i === idx);
@@ -2078,10 +2061,54 @@ h2 {
               prevBtn.disabled = current === 0;
               nextBtn.disabled = current === stages.length - 1;
 
-              // Start scanning animation only for stage 1
+              // Trigger animations based on stage
               if (idx === 0) {
+                // Stage 1: Start scanning animation
                 stopScanning();
                 setTimeout(startScanning, 500);
+              } else if (idx === 1) {
+                // Stage 2: Animate data fields
+                stopScanning();
+                setTimeout(() => {
+                  const dataFields = document.querySelectorAll('.lead-gen-stage.active .data-field');
+                  const delays = [0.2, 0.6, 1.0];
+                  dataFields.forEach((field, fieldIdx) => {
+                    field.style.animation = 'dataReveal 0.8s ease-out forwards';
+                    field.style.animationDelay = delays[fieldIdx] + 's';
+                  });
+                }, 550);
+              } else if (idx === 2) {
+                // Stage 3: Animate email compose
+                stopScanning();
+                setTimeout(() => {
+                  const emailCompose = document.querySelector('.lead-gen-stage.active .email-compose');
+                  const sendButton = document.querySelector('.lead-gen-stage.active .send-button');
+                  if (emailCompose) {
+                    emailCompose.style.animation = 'emailSlideIn 0.8s ease-out forwards';
+                  }
+                  if (sendButton) {
+                    sendButton.style.animation = 'emailSend 1.2s ease-out forwards';
+                  }
+                }, 550);
+              } else if (idx === 3) {
+                // Stage 4: Animate message bubbles sequentially
+                stopScanning();
+                setTimeout(() => {
+                  const messageBubbles = document.querySelectorAll('.lead-gen-stage.active .message-bubble');
+                  messageBubbles.forEach((bubble, bubbleIdx) => {
+                    bubble.style.animation = 'messageIn 0.8s ease-out forwards';
+                    bubble.style.animationDelay = (bubbleIdx * 0.4) + 's';
+                  });
+                }, 550);
+              } else if (idx === 4) {
+                // Stage 5: Animate calendar event
+                stopScanning();
+                setTimeout(() => {
+                  const calendarEvent = document.querySelector('.lead-gen-stage.active .calendar-event');
+                  if (calendarEvent) {
+                    calendarEvent.style.animation = 'calendarPop 0.8s ease-out forwards';
+                  }
+                }, 550);
               } else {
                 stopScanning();
               }
@@ -2368,43 +2395,43 @@ h2 {
         </div>
 
         <!-- SUMMARY SLIDE - Nurture Sequence Timeline -->
-        <div style="margin-top: 4rem; padding: 3rem; background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(0,212,255,0.04)); border: 1px solid rgba(0,212,255,0.15); border-radius: 12px;">
+        <div style="margin-top: 4rem; padding: 2.5rem; background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(0,212,255,0.04)); border: 1px solid rgba(0,212,255,0.15); border-radius: 12px;">
           <h3 style="text-align: center; font-size: 1.6rem; margin-bottom: 3rem; color: #fff;">7-Day Nurture Sequence Timeline</h3>
 
           <!-- Timeline -->
-          <div style="position: relative; max-width: 1000px; margin: 0 auto 3rem; padding: 0 2rem;">
+          <div style="position: relative; max-width: 900px; margin: 0 auto 3rem;">
             <!-- Timeline Line -->
-            <div style="position: absolute; top: 35px; left: 2rem; right: 2rem; height: 2px; background: linear-gradient(90deg, #fbbf24 0%, #fbbf24 25%, #00d4ff 50%, #22c55e 75%, #22c55e 100%); z-index: 0;"></div>
+            <div style="position: absolute; top: 30px; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #fbbf24, #00d4ff, #22c55e); z-index: 0;"></div>
 
             <!-- Timeline Points -->
-            <div style="display: flex; justify-content: space-between; position: relative; z-index: 1;">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; position: relative; z-index: 1;">
 
               <!-- Day 1 -->
-              <div style="text-align: center; flex: 1;">
-                <div style="width: 70px; height: 70px; background: linear-gradient(135deg, rgba(251,191,36,0.3), rgba(251,191,36,0.1)); border: 2px solid #fbbf24; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #fbbf24; font-size: 1.4rem;">📧</div>
-                <div style="font-weight: 600; color: #fff; margin-bottom: 0.3rem; font-size: 1rem;">Day 1</div>
-                <div style="font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6;">Initial Email</div>
+              <div style="text-align: center;">
+                <div style="width: 60px; height: 60px; background: #1a1a1a; border: 3px solid #fbbf24; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #fbbf24; font-size: 1.1rem;">📧</div>
+                <div style="font-weight: 600; color: #fff; margin-bottom: 0.5rem;">Day 1</div>
+                <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.5;">Initial Email Sent</div>
               </div>
 
               <!-- Day 4 -->
-              <div style="text-align: center; flex: 1;">
-                <div style="width: 70px; height: 70px; background: linear-gradient(135deg, rgba(251,191,36,0.3), rgba(251,191,36,0.1)); border: 2px solid #fbbf24; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #fbbf24; font-size: 1.4rem;">↻</div>
-                <div style="font-weight: 600; color: #fff; margin-bottom: 0.3rem; font-size: 1rem;">Day 4</div>
-                <div style="font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6;">Follow-up Email</div>
+              <div style="text-align: center;">
+                <div style="width: 60px; height: 60px; background: #1a1a1a; border: 3px solid #fbbf24; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #fbbf24; font-size: 1.1rem;">↻</div>
+                <div style="font-weight: 600; color: #fff; margin-bottom: 0.5rem;">Day 4</div>
+                <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.5;">Follow-up Email</div>
               </div>
 
               <!-- Day 5 -->
-              <div style="text-align: center; flex: 1;">
-                <div style="width: 70px; height: 70px; background: linear-gradient(135deg, rgba(0,212,255,0.3), rgba(0,212,255,0.1)); border: 2px solid #00d4ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #00d4ff; font-size: 1.4rem;">💬</div>
-                <div style="font-weight: 600; color: #fff; margin-bottom: 0.3rem; font-size: 1rem;">Day 5</div>
-                <div style="font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6;">Lead Replies!</div>
+              <div style="text-align: center;">
+                <div style="width: 60px; height: 60px; background: #1a1a1a; border: 3px solid #22c55e; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #22c55e; font-size: 1.1rem;">✓</div>
+                <div style="font-weight: 600; color: #fff; margin-bottom: 0.5rem;">Day 5</div>
+                <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.5;">Lead Replies!</div>
               </div>
 
               <!-- Day 7 -->
-              <div style="text-align: center; flex: 1;">
-                <div style="width: 70px; height: 70px; background: linear-gradient(135deg, rgba(34,197,94,0.3), rgba(34,197,94,0.1)); border: 2px solid #22c55e; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #22c55e; font-size: 1.4rem;">📅</div>
-                <div style="font-weight: 600; color: #fff; margin-bottom: 0.3rem; font-size: 1rem;">Day 7</div>
-                <div style="font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6;">Call Booked</div>
+              <div style="text-align: center;">
+                <div style="width: 60px; height: 60px; background: #1a1a1a; border: 3px solid #22c55e; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: 700; color: #22c55e; font-size: 1.1rem;">📅</div>
+                <div style="font-weight: 600; color: #fff; margin-bottom: 0.5rem;">Day 7</div>
+                <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.5;">Call Booked</div>
               </div>
 
             </div>
@@ -2413,12 +2440,12 @@ h2 {
           <!-- Summary bullets -->
           <div style="max-width: 900px; margin: 0 auto;">
             <div style="background: rgba(0,0,0,0.3); border-left: 3px solid #00d4ff; padding: 2rem; border-radius: 6px;">
-              <div style="font-size: 1rem; color: rgba(255,255,255,0.85); line-height: 1.9;">
-                <div style="margin-bottom: 1rem;"><strong style="color: #fbbf24;">→</strong> Emails sent automatically on schedule (Day 1, 4, 7)</div>
-                <div style="margin-bottom: 1rem;"><strong style="color: #fbbf24;">→</strong> AI monitors for replies and responds instantly</div>
-                <div style="margin-bottom: 1rem;"><strong style="color: #00d4ff;">→</strong> Natural, conversational tone — sounds like you</div>
-                <div style="margin-bottom: 1rem;"><strong style="color: #22c55e;">→</strong> Warm leads reach your calendar automatically</div>
-                <div><strong style="color: #22c55e;">✓</strong> Everything happens while you focus on closing</div>
+              <div style="font-size: 1.1rem; color: rgba(255,255,255,0.85); line-height: 2;">
+                <div style="margin-bottom: 0.8rem;"><strong style="color: #fbbf24;">→</strong> Emails sent automatically on schedule (Day 1, 4, 7)</div>
+                <div style="margin-bottom: 0.8rem;"><strong style="color: #fbbf24;">→</strong> AI monitors for replies and responds in real-time</div>
+                <div style="margin-bottom: 0.8rem;"><strong style="color: #fbbf24;">→</strong> Natural, conversational tone — sounds like you</div>
+                <div style="margin-bottom: 0.8rem;"><strong style="color: #22c55e;">→</strong> Warm leads reach your calendar automatically</div>
+                <div><strong style="color: #00d4ff;">✓</strong> Everything happens while you focus on closing</div>
               </div>
             </div>
           </div>
