@@ -6901,7 +6901,20 @@ updateActiveNav();
 // When clicking a nav link, force-highlight it for 1.5s then resume scroll tracking
 navLinks.forEach(link => {
   link.addEventListener('click', (e) => {
+    e.preventDefault();
     const sectionId = link.getAttribute('data-section');
+    const targetElement = document.getElementById(sectionId);
+
+    if (targetElement) {
+      // Calculate scroll position with offset for proper viewport positioning
+      const offset = 120; // Pixels from top of viewport
+      const targetPosition = targetElement.offsetTop - offset;
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
+    }
+
     clickedSection = sectionId;
     if (clickTimeout) clearTimeout(clickTimeout);
     clickTimeout = setTimeout(() => { clickedSection = null; }, 1500);
