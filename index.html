@@ -1063,1001 +1063,170 @@ h2 {
   <!-- ==================== 006 / NURTURE SEQUENCES ==================== -->
   <!-- ==================== 003 / NURTURE SEQUENCES — ANIMATED DEMO ==================== -->
 <section class="section" id="s003">
-  <style>
-    /* ===== NURTURE DEMO SCOPED STYLES ===== */
-    #s003 .nurture-demo {
-      width: 100%;
-      margin-top: 2rem;
-    }
-
-    #s003 .devices-wrapper {
-      display: flex;
-      gap: 3rem;
-      align-items: flex-start;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    /* ===== LAPTOP MOCKUP ===== */
-    #s003 .laptop-mockup {
-      flex: 1 1 520px;
-      max-width: 600px;
-      min-width: 320px;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s var(--ease-smooth), transform 0.8s var(--ease-smooth);
-    }
-    #s003 .laptop-mockup.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    #s003 .laptop-bezel {
-      background: #1a1a1e;
-      border-radius: 12px 12px 0 0;
-      padding: 8px 12px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-bottom: none;
-    }
-    #s003 .laptop-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-    }
-    #s003 .laptop-dot.red { background: #ff5f57; }
-    #s003 .laptop-dot.yellow { background: #febc2e; }
-    #s003 .laptop-dot.green { background: #28c840; }
-    #s003 .laptop-screen {
-      background: #111113;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-top: none;
-      min-height: 340px;
-      position: relative;
-      overflow: hidden;
-    }
-    #s003 .laptop-base {
-      background: #1a1a1e;
-      height: 12px;
-      border-radius: 0 0 4px 4px;
-      margin: 0 10%;
-      border: 1px solid rgba(255,255,255,0.06);
-      border-top: none;
-    }
-
-    /* ===== EMAIL VIEW ===== */
-    #s003 .email-view {
-      padding: 1.5rem;
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    #s003 .email-view.active { opacity: 1; }
-    #s003 .email-header {
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      padding-bottom: 0.75rem;
-      margin-bottom: 1rem;
-    }
-    #s003 .email-subject {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 0.25rem;
-    }
-    #s003 .email-from {
-      font-size: 0.65rem;
-      color: rgba(255,255,255,0.35);
-      font-family: var(--font-mono);
-    }
-    #s003 .email-body {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.55);
-    }
-    #s003 .email-body .email-section-title {
-      color: rgba(var(--color-accent-rgb), 0.7);
-      font-weight: 600;
-      margin-top: 0.75rem;
-      margin-bottom: 0.25rem;
-      font-size: 0.6rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-    #s003 .email-line {
-      opacity: 0;
-      transform: translateX(-8px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-    #s003 .email-line.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    /* ===== SHEET VIEW ===== */
-    #s003 .sheet-view {
-      padding: 0;
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      display: flex;
-      flex-direction: column;
-    }
-    #s003 .sheet-view.active { opacity: 1; }
-    #s003 .sheet-toolbar {
-      background: #1e7e34;
-      padding: 0.5rem 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    #s003 .sheet-icon {
-      width: 18px; height: 18px;
-      background: rgba(255,255,255,0.9);
-      border-radius: 2px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.55rem;
-      font-weight: 700;
-      color: #1e7e34;
-    }
-    #s003 .sheet-title {
-      font-size: 0.7rem;
-      color: rgba(255,255,255,0.9);
-      font-weight: 500;
-    }
-    #s003 .sheet-grid {
-      flex: 1;
-      overflow: hidden;
-    }
-    #s003 .sheet-grid table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.55rem;
-      font-family: var(--font-mono);
-    }
-    #s003 .sheet-grid th {
-      background: rgba(255,255,255,0.04);
-      padding: 0.4rem 0.5rem;
-      text-align: left;
-      color: rgba(255,255,255,0.45);
-      font-weight: 600;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      font-size: 0.5rem;
-      white-space: nowrap;
-    }
-    #s003 .sheet-grid td {
-      padding: 0.35rem 0.5rem;
-      color: rgba(255,255,255,0.55);
-      border-bottom: 1px solid rgba(255,255,255,0.03);
-      white-space: nowrap;
-    }
-    #s003 .sheet-row {
-      opacity: 0;
-      transform: translateY(6px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    #s003 .sheet-row.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    #s003 .sheet-row.highlight td {
-      background: rgba(var(--color-accent-rgb), 0.08);
-      color: rgba(255,255,255,0.8);
-    }
-
-    /* ===== ARROW ANIMATION (email → sheet) ===== */
-    #s003 .transfer-arrow {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      z-index: 5;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-    #s003 .transfer-arrow.active { opacity: 1; }
-    #s003 .transfer-arrow-inner {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      background: rgba(0,0,0,0.85);
-      backdrop-filter: blur(8px);
-      padding: 1rem 2rem;
-      border: 1px solid rgba(var(--color-accent-rgb), 0.3);
-      border-radius: 8px;
-    }
-    #s003 .transfer-arrow svg {
-      width: 32px; height: 32px;
-      color: var(--color-accent);
-    }
-    @keyframes arrowPulse {
-      0%, 100% { transform: translateX(0); opacity: 0.6; }
-      50% { transform: translateX(6px); opacity: 1; }
-    }
-    #s003 .transfer-arrow.active svg {
-      animation: arrowPulse 0.6s ease-in-out 3;
-    }
-    #s003 .transfer-label {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: rgba(255,255,255,0.7);
-      letter-spacing: 0.05em;
-    }
-
-    /* ===== OLD WAY / NEW WAY ===== */
-    #s003 .way-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      z-index: 6;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
-      background: rgba(0,0,0,0.9);
-    }
-    #s003 .way-overlay.active { opacity: 1; }
-    #s003 .old-way {
-      text-align: center;
-    }
-    #s003 .old-way-title {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: #ff4444;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      margin-bottom: 1rem;
-    }
-    #s003 .old-way-steps {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    #s003 .old-step {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      color: rgba(255,255,255,0.35);
-      text-decoration: line-through;
-      padding: 0.4rem 0.8rem;
-      border: 1px solid rgba(255,68,68,0.2);
-      background: rgba(255,68,68,0.05);
-    }
-    #s003 .old-x {
-      font-size: 1.5rem;
-      color: #ff4444;
-      font-weight: 700;
-      margin-top: 0.75rem;
-    }
-
-    /* ===== NEW WAY ===== */
-    #s003 .new-way {
-      text-align: center;
-    }
-    #s003 .new-way-title {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: #00d4ff;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      margin-bottom: 1rem;
-    }
-    #s003 .new-way-flow {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 1.25rem;
-    }
-    #s003 .new-step {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      color: rgba(255,255,255,0.7);
-      padding: 0.4rem 0.7rem;
-      border: 1px solid rgba(var(--color-accent-rgb), 0.25);
-      background: rgba(var(--color-accent-rgb), 0.05);
-    }
-    #s003 .new-arrow {
-      color: rgba(var(--color-accent-rgb), 0.4);
-      font-size: 0.8rem;
-    }
-    #s003 .clock-anim {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      margin: 1rem 0;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    #s003 .clock-anim.visible { opacity: 1; }
-    #s003 .clock-icon {
-      font-size: 1.5rem;
-    }
-    @keyframes clockTick {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    #s003 .clock-anim.visible .clock-icon {
-      animation: clockTick 1.5s linear 1;
-    }
-    #s003 .clock-text {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.5);
-      letter-spacing: 0.05em;
-    }
-    #s003 .reply-check {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 0.75rem;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    #s003 .reply-check.visible { opacity: 1; }
-    #s003 .reply-question {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: rgba(255,255,255,0.5);
-    }
-    #s003 .reply-btn {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      padding: 0.35rem 1rem;
-      border: 1px solid rgba(255,255,255,0.15);
-      background: transparent;
-      cursor: default;
-      transition: all 0.3s ease;
-    }
-    #s003 .reply-btn.yes { color: rgba(40,200,80,0.5); border-color: rgba(40,200,80,0.15); }
-    #s003 .reply-btn.no { color: rgba(255,100,100,0.5); border-color: rgba(255,100,100,0.15); }
-    @keyframes noPulse {
-      0%, 100% { border-color: rgba(255,100,100,0.3); background: rgba(255,100,100,0.05); box-shadow: none; }
-      50% { border-color: rgba(255,100,100,0.6); background: rgba(255,100,100,0.12); box-shadow: 0 0 12px rgba(255,100,100,0.2); }
-    }
-    #s003 .reply-btn.no.pulse {
-      animation: noPulse 0.8s ease-in-out 3;
-      color: #ff6464;
-      border-color: rgba(255,100,100,0.5);
-      background: rgba(255,100,100,0.08);
-    }
-
-    /* ===== PHONE MOCKUP ===== */
-    #s003 .phone-mockup {
-      flex: 0 0 300px;
-      max-width: 320px;
-      min-width: 260px;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s var(--ease-smooth), transform 0.8s var(--ease-smooth);
-    }
-    #s003 .phone-mockup.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    #s003 .phone-frame {
-      background: #000;
-      border-radius: 32px;
-      border: 3px solid #2a2a2e;
-      overflow: hidden;
-      box-shadow: 0 0 40px rgba(0,0,0,0.5), inset 0 0 1px rgba(255,255,255,0.05);
-      position: relative;
-    }
-    #s003 .phone-notch {
-      width: 100px;
-      height: 22px;
-      background: #000;
-      border-radius: 0 0 14px 14px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 2;
-    }
-    #s003 .phone-screen {
-      background: #0b141a;
-      height: 500px;
-      max-height: 500px;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    /* ===== WHATSAPP HEADER ===== */
-    #s003 .wa-header {
-      background: #1f2c34;
-      padding: 0.6rem 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-    #s003 .wa-back {
-      color: rgba(255,255,255,0.5);
-      font-size: 0.9rem;
-    }
-    #s003 .wa-avatar {
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #25d366, #128c7e);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      color: #fff;
-      font-weight: 700;
-    }
-    #s003 .wa-contact-info {
-      flex: 1;
-    }
-    #s003 .wa-contact-name {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #e9edef;
-    }
-    #s003 .wa-contact-status {
-      font-size: 0.6rem;
-      color: #8696a0;
-    }
-    #s003 .wa-header-icons {
-      display: flex;
-      gap: 1rem;
-      color: #aebac1;
-      font-size: 0.85rem;
-    }
-
-    /* ===== WHATSAPP MESSAGES ===== */
-    #s003 .wa-messages {
-      flex: 1;
-      padding: 0.75rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-      overflow-y: auto;
-      background: #0b141a;
-      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    }
-    #s003 .wa-date-badge {
-      align-self: center;
-      background: #182229;
-      border-radius: 6px;
-      padding: 0.25rem 0.75rem;
-      font-size: 0.6rem;
-      color: #8696a0;
-      margin-bottom: 0.5rem;
-    }
-    #s003 .wa-bubble {
-      max-width: 85%;
-      padding: 0.45rem 0.6rem 0.2rem;
-      border-radius: 8px;
-      position: relative;
-      font-size: 0.75rem;
-      line-height: 1.45;
-      opacity: 0;
-      transform: translateY(10px) scale(0.95);
-      transition: opacity 0.35s ease, transform 0.35s ease;
-    }
-    #s003 .wa-bubble.visible {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-    #s003 .wa-bubble.outgoing {
-      align-self: flex-end;
-      background: #005c4b;
-      color: #e9edef;
-      border-radius: 8px 0 8px 8px;
-    }
-    #s003 .wa-bubble.incoming {
-      align-self: flex-start;
-      background: #1f2c34;
-      color: #e9edef;
-      border-radius: 0 8px 8px 8px;
-    }
-    #s003 .wa-bubble-text {
-      margin-bottom: 0.15rem;
-    }
-    #s003 .wa-bubble-meta {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 0.25rem;
-      font-size: 0.5rem;
-      color: rgba(255,255,255,0.4);
-    }
-    #s003 .wa-ticks {
-      color: #53bdeb;
-      font-size: 0.6rem;
-      letter-spacing: -1px;
-    }
-
-    /* ===== TYPING INDICATOR ===== */
-    #s003 .wa-typing {
-      align-self: flex-start;
-      background: #1f2c34;
-      border-radius: 0 8px 8px 8px;
-      padding: 0.55rem 0.8rem;
-      display: flex;
-      gap: 3px;
-      align-items: center;
-      opacity: 0;
-      transform: translateY(6px);
-      transition: opacity 0.25s ease, transform 0.25s ease;
-    }
-    #s003 .wa-typing.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    #s003 .wa-typing.outgoing-typing {
-      align-self: flex-end;
-      background: #005c4b;
-      border-radius: 8px 0 8px 8px;
-    }
-    @keyframes typingBounce {
-      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-      30% { transform: translateY(-4px); opacity: 1; }
-    }
-    #s003 .typing-dot {
-      width: 5px; height: 5px;
-      background: #8696a0;
-      border-radius: 50%;
-      animation: typingBounce 1.2s ease-in-out infinite;
-    }
-    #s003 .typing-dot:nth-child(2) { animation-delay: 0.15s; }
-    #s003 .typing-dot:nth-child(3) { animation-delay: 0.3s; }
-
-    /* ===== APPOINTMENT BOOKED BANNER ===== */
-    #s003 .appointment-banner {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(135deg, #128c7e, #25d366);
-      padding: 1rem;
-      text-align: center;
-      transform: translateY(100%);
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 10;
-    }
-    #s003 .appointment-banner.active {
-      transform: translateY(0);
-    }
-    @keyframes bannerGlow {
-      0%, 100% { box-shadow: 0 -4px 20px rgba(37,211,102,0.2); }
-      50% { box-shadow: 0 -4px 30px rgba(37,211,102,0.45); }
-    }
-    #s003 .appointment-banner.active {
-      animation: bannerGlow 1.5s ease-in-out 3;
-    }
-    #s003 .appointment-banner-text {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #fff;
-    }
-    #s003 .appointment-banner-sub {
-      font-size: 0.65rem;
-      color: rgba(255,255,255,0.8);
-      margin-top: 0.2rem;
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 900px) {
-      #s003 .devices-wrapper {
-        flex-direction: column;
-        align-items: center;
-      }
-      #s003 .laptop-mockup {
-        flex: 1 1 auto;
-        max-width: 100%;
-      }
-      #s003 .phone-mockup {
-        flex: 0 0 auto;
-        width: 280px;
-      }
-    }
-    @media (max-width: 480px) {
-      #s003 .laptop-mockup {
-        min-width: 0;
-      }
-      #s003 .phone-mockup {
-        width: 260px;
-        min-width: 0;
-      }
-      #s003 .phone-screen {
-        height: 440px;
-        max-height: 440px;
-      }
-      #s003 .wa-bubble {
-        font-size: 0.7rem;
-      }
-    }
-  </style>
-
   <div class="section-inner">
     <div class="fade-in">
       <div class="label">Nurture Sequences / 003</div>
     </div>
     <div class="fade-in d1">
-      <h2>Automated Follow-Up<br><span class="thin">That Converts</span></h2>
+      <h2>Email Automation That<br><span class="thin">Actually Converts</span></h2>
+    </div>
+    <div class="fade-in d2">
+      <p class="lead">Watch how TM Tarpaulins reaches a fish farm prospect — email 1, email 2, they respond, conversation starts, and boom: appointment on your calendar.</p>
     </div>
 
-    <div class="fade-in d2 nurture-demo" id="nurture-demo">
-      <div class="devices-wrapper">
+    <div class="fade-in d3" style="margin-top:3rem;">
+      <style>
+        #email-sequence {
+          display: flex;
+          flex-direction: column;
+          gap: 2.5rem;
+          max-width: 700px;
+          margin: 0 auto;
+        }
 
-        <!-- ===== LAPTOP ===== -->
-        <div class="laptop-mockup" id="laptop-mockup">
-          <div class="laptop-bezel">
-            <div class="laptop-dot red"></div>
-            <div class="laptop-dot yellow"></div>
-            <div class="laptop-dot green"></div>
-          </div>
-          <div class="laptop-screen" id="laptop-screen">
+        .email-step {
+          display: flex;
+          gap: 2rem;
+          align-items: flex-start;
+          opacity: 0.5;
+          transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+          padding: 1.5rem;
+          border-left: 3px solid rgba(0, 212, 255, 0.2);
+        }
 
-            <!-- Email View -->
-            <div class="email-view" id="email-view">
-              <div class="email-header">
-                <div class="email-subject">📩 New Solar Lead — Matthew King</div>
-                <div class="email-from">From: LeadGen System &lt;leads@system.io&gt;</div>
-              </div>
-              <div class="email-body" id="email-body">
-                <div class="email-line" data-delay="0"><span class="email-section-title">Solar Lead Details</span></div>
-                <div class="email-line" data-delay="80">Name: Matthew King</div>
-                <div class="email-line" data-delay="160">Phone: 07359 821 794</div>
-                <div class="email-line" data-delay="240">Email: mattking@test.com</div>
-                <div class="email-line" data-delay="320">Address: Test Avenue, West Sussex</div>
-                <div class="email-line" data-delay="400">Postcode: XX6 2XX</div>
-                <div class="email-line" data-delay="480">Interested in: Solar PV + Battery Storage</div>
-                <div class="email-line" data-delay="560">How soon: Within 3 Months</div>
-                <div class="email-line" data-delay="680"><span class="email-section-title">Property Details</span></div>
-                <div class="email-line" data-delay="760">Type: Semi-Detached</div>
-                <div class="email-line" data-delay="840">Roof: Flat</div>
-                <div class="email-line" data-delay="920">Material: Unsure</div>
-                <div class="email-line" data-delay="1000">Built: 1900-1949</div>
-                <div class="email-line" data-delay="1080">Bedrooms: 3-4</div>
-              </div>
+        .email-step.active {
+          opacity: 1;
+          border-left-color: #00d4ff;
+          background: rgba(0, 212, 255, 0.05);
+        }
+
+        .step-num {
+          font-size: 1.8rem;
+          font-weight: 800;
+          color: rgba(0, 212, 255, 0.3);
+          min-width: 50px;
+          transition: color 0.6s ease;
+        }
+
+        .email-step.active .step-num {
+          color: #00d4ff;
+          text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+
+        .email-content h4 {
+          font-size: 1.2rem;
+          font-weight: 600;
+          color: #fff;
+          margin-bottom: 0.5rem;
+        }
+
+        .email-step.active .email-content h4 {
+          color: #00d4ff;
+        }
+
+        .email-text {
+          font-size: 1rem;
+          color: rgba(255, 255, 255, 0.85);
+          line-height: 1.6;
+          background: rgba(0, 0, 0, 0.3);
+          padding: 1rem;
+          border-radius: 6px;
+          border-left: 2px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .email-step.active .email-text {
+          border-left-color: #00d4ff;
+          background: rgba(0, 212, 255, 0.08);
+        }
+
+        .email-status {
+          font-size: 0.9rem;
+          color: rgba(255, 255, 255, 0.6);
+          margin-top: 0.5rem;
+          font-style: italic;
+        }
+
+        .email-step.active .email-status {
+          color: rgba(255, 255, 255, 0.8);
+        }
+      </style>
+
+      <div id="email-sequence">
+        <!-- Step 1: Initial Email -->
+        <div class="email-step active">
+          <div class="step-num">1</div>
+          <div class="email-content">
+            <h4>📧 Initial Email</h4>
+            <div class="email-text">
+              <strong>To:</strong> James Mitchell, Highland Fish Farm<br><br>
+              "Hi James,<br><br>We work with fish farms across the UK helping reduce costs on maintenance covers. I noticed Highland has several ponds that could benefit from our lice screen solutions.<br><br>Would love to chat about it — no pressure, just a 15-min call?<br><br>Cheers,<br>Marcus"
             </div>
-
-            <!-- Transfer Arrow Overlay -->
-            <div class="transfer-arrow" id="transfer-arrow">
-              <div class="transfer-arrow-inner">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                <span class="transfer-label">What happens next?</span>
-              </div>
-            </div>
-
-            <!-- Sheet View -->
-            <div class="sheet-view" id="sheet-view">
-              <div class="sheet-toolbar">
-                <div class="sheet-icon">S</div>
-                <div class="sheet-title">Solar Leads — CRM</div>
-              </div>
-              <div class="sheet-grid">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Phone</th>
-                      <th>Interest</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody id="sheet-body">
-                    <tr class="sheet-row" style="opacity:0.3"><td>Highland Fish Farm</td>
-              <td>01463 XXX XXX</td>
-              <td>Lice Screens</td><td style="color:#8696a0;">Emailed</td></tr>
-                    <tr class="sheet-row" style="opacity:0.3"><td>Moray Salmon Co</td>
-              <td>01343 XXX XXX</td>
-              <td>Pond Covers</td><td style="color:#8696a0;">Contacted</td></tr>
-                    <tr class="sheet-row highlight" data-new="true"><td>James Morrison</td>
-              <td>07891 234 567</td>
-              <td>Full System</td><td style="color:#25d366;">● New</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <!-- Old Way Overlay -->
-            <div class="way-overlay" id="old-way-overlay">
-              <div class="old-way">
-                <div class="old-way-title">❌ The Old Way</div>
-                <div class="old-way-steps">
-                  <span class="old-step">Manually type lead into CRM</span>
-                  <span style="color:rgba(255,255,255,0.15);">→</span>
-                  <span class="old-step">Manually write &amp; send emails</span>
-                  <span style="color:rgba(255,255,255,0.15);">→</span>
-                  <span class="old-step">Remember to follow up</span>
-                  <span class="old-step">Chase manually, repeat</span>
-                  <span class="old-step">Leads fall through cracks</span>
-                </div>
-                <div class="old-x">✕</div>
-              </div>
-            </div>
-
-            <!-- New Way Overlay -->
-            <div class="way-overlay" id="new-way-overlay">
-              <div class="new-way">
-                <div class="new-way-title">✨ The New Way</div>
-                <div class="new-way-flow">
-                  <span class="new-step">Lead</span>
-                  <span class="new-arrow">→</span>
-                  <span class="new-step">Auto-enters CRM</span>
-                  <span class="new-arrow">→</span>
-                  <span class="new-step">Welcome email sent</span>
-                </div>
-                <div class="clock-anim" id="clock-anim">
-                  <span class="clock-icon">⏱️</span>
-                  <span class="clock-text">2 hours later...</span>
-                </div>
-                <div class="reply-check" id="reply-check">
-                  <span class="reply-question">Has the customer replied?</span>
-                  <span class="reply-btn yes">YES</span>
-                  <span class="reply-btn no" id="no-btn">NO</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-          <div class="laptop-base"></div>
-        </div>
-
-        <!-- ===== PHONE ===== -->
-        <div class="phone-mockup" id="phone-mockup">
-          <div class="phone-frame">
-            <div class="phone-notch"></div>
-            <div class="phone-screen">
-              <!-- WA Header -->
-              <div class="wa-header">
-                <span class="wa-back">‹</span>
-                <div class="wa-avatar">☀</div>
-                <div class="wa-contact-info">
-                  <div class="wa-contact-name">Solar Enquiries</div>
-                  <div class="wa-contact-status">online</div>
-                </div>
-                <div class="wa-header-icons">
-                  <span>📹</span>
-                  <span>📞</span>
-                </div>
-              </div>
-
-              <!-- WA Messages -->
-              <div class="wa-messages" id="wa-messages">
-                <div class="wa-date-badge">TODAY</div>
-
-                <!-- Typing indicator (reusable) -->
-                <div class="wa-typing" id="wa-typing">
-                  <div class="typing-dot"></div>
-                  <div class="typing-dot"></div>
-                  <div class="typing-dot"></div>
-                </div>
-              </div>
-
-              <!-- Appointment Banner -->
-              <div class="appointment-banner" id="appointment-banner">
-                <div class="appointment-banner-text">✅ Appointment Booked</div>
-                <div class="appointment-banner-sub">2:00 PM Today</div>
-              </div>
-            </div>
+            <div class="email-status">❌ No response (waiting 3 days...)</div>
           </div>
         </div>
 
+        <!-- Step 2: Follow-up Email -->
+        <div class="email-step">
+          <div class="step-num">2</div>
+          <div class="email-content">
+            <h4>📧 Follow-Up Email</h4>
+            <div class="email-text">
+              <strong>To:</strong> James Mitchell, Highland Fish Farm<br><br>
+              "James,<br><br>Just checking in — did you get my last email? I know you're busy managing the farm.<br><br>I've got a quick case study from another farm in your region that cut their lice treatment costs by 40%.<br><br>Worth a 15-min chat?<br><br>Marcus"
+            </div>
+            <div class="email-status">✅ They respond: "Actually, this sounds interesting!"</div>
+          </div>
+        </div>
+
+        <!-- Step 3: Conversation -->
+        <div class="email-step">
+          <div class="step-num">3</div>
+          <div class="email-content">
+            <h4>💬 Conversation Starts</h4>
+            <div class="email-text">
+              <strong>James:</strong> "What's the timeline for implementation?"<br><br>
+              <strong>Marcus (AI):</strong> "We can have lice screens installed within 2 weeks. No downtime for your ponds. Which sections are most critical?"<br><br>
+              <strong>James:</strong> "Can we discuss pricing?"<br><br>
+              <strong>Marcus (AI):</strong> "Absolutely. Let's jump on a call Thursday — I'll have a custom quote ready based on your setup."
+            </div>
+            <div class="email-status">🔥 Engagement building — they're clearly interested</div>
+          </div>
+        </div>
+
+        <!-- Step 4: Appointment Booked -->
+        <div class="email-step">
+          <div class="step-num">4</div>
+          <div class="email-content">
+            <h4>📅 Appointment Booked</h4>
+            <div class="email-text">
+              <strong>Your Calendar:</strong><br><br>
+              🗓️ Thursday, 2:00 PM - 2:30 PM<br>
+              <strong>Highland Fish Farm — James Mitchell</strong><br>
+              Lice Screen Solution Discussion<br><br>
+              Status: ✅ <strong>WARM LEAD - Ready to close</strong>
+            </div>
+            <div class="email-status">You spend 30 mins closing. AI spent the last 7 days nurturing.</div>
+          </div>
+        </div>
       </div>
-    </div>
 
-  </div>
+      <script>
+        (function() {
+          const steps = document.querySelectorAll('.email-step');
+          let current = 0;
 
-  <script>
-  (function() {
-    // ===== NURTURE SEQUENCE ANIMATION =====
-    let played = false;
-
-    const messages = [
-      { type: 'outgoing', text: 'Hi Matt 👋 Just following up on your solar enquiry — wanted to make sure you received my welcome email this morning. Is now a good time for a quick chat?', time: '09:14' },
-      { type: 'incoming', text: "Hi, sorry I'm extremely busy at the moment. Haven't had a chance to check my emails.", time: '09:16' },
-      { type: 'outgoing', text: "No problem at all, Matt. I'm just looking to book an initial conversation to get an understanding of your requirements and the property. When would suit you best?", time: '09:18' },
-      { type: 'incoming', text: 'Sure, no problem. I can do today at 2:00?', time: '09:21' },
-      { type: 'outgoing', text: "Great, we can make that work. I've booked you in for 2:00 today. Is this the best number to contact you on?", time: '09:22' },
-      { type: 'incoming', text: "Yes, that's fine 👍", time: '09:23' },
-      { type: 'outgoing', text: 'Great Matt, thanks so much. I look forward to speaking with you then! 😊', time: '09:24' }
-    ];
-
-    function createBubble(msg) {
-      const bubble = document.createElement('div');
-      bubble.className = 'wa-bubble ' + msg.type;
-      bubble.innerHTML = '<div class="wa-bubble-text">' + msg.text + '</div>' +
-        '<div class="wa-bubble-meta">' +
-        '<span>' + msg.time + '</span>' +
-        (msg.type === 'outgoing' ? '<span class="wa-ticks">✓✓</span>' : '') +
-        '</div>';
-      return bubble;
-    }
-
-    function showTyping(container, isOutgoing) {
-      const typing = document.getElementById('wa-typing');
-      if (isOutgoing) {
-        typing.classList.add('outgoing-typing');
-      } else {
-        typing.classList.remove('outgoing-typing');
-      }
-      // Move typing to end of messages
-      container.appendChild(typing);
-      typing.classList.add('visible');
-      container.scrollTop = container.scrollHeight;
-    }
-
-    function hideTyping() {
-      const typing = document.getElementById('wa-typing');
-      typing.classList.remove('visible');
-    }
-
-    function runSequence() {
-      const laptop = document.getElementById('laptop-mockup');
-      const phone = document.getElementById('phone-mockup');
-      const emailView = document.getElementById('email-view');
-      const emailLines = document.querySelectorAll('#email-body .email-line');
-      const transferArrow = document.getElementById('transfer-arrow');
-      const sheetView = document.getElementById('sheet-view');
-      const sheetRows = document.querySelectorAll('#sheet-body .sheet-row');
-      const oldWay = document.getElementById('old-way-overlay');
-      const newWay = document.getElementById('new-way-overlay');
-      const clockAnim = document.getElementById('clock-anim');
-      const replyCheck = document.getElementById('reply-check');
-      const noBtn = document.getElementById('no-btn');
-      const waMessages = document.getElementById('wa-messages');
-      const banner = document.getElementById('appointment-banner');
-
-      function startAnimation() {
-      let t = 0;
-
-
-      // === PART 1: Laptop sequence ===
-
-      // Show laptop
-      setTimeout(() => { laptop.classList.add('active'); }, t);
-      t += 600;
-
-      // Show email view
-      setTimeout(() => { emailView.classList.add('active'); }, t);
-      t += 300;
-
-      // Animate email lines one by one
-      emailLines.forEach((line, i) => {
-        setTimeout(() => {
-          line.classList.add('visible');
-        }, t + (i * 120));
-      });
-      t += emailLines.length * 120 + 600;
-
-      // Show transfer arrow
-      setTimeout(() => {
-        emailView.classList.remove('active');
-        transferArrow.classList.add('active');
-      }, t);
-      t += 1800;
-
-      // Show "The Old Way" (skip sheet, go straight from arrow)
-      setTimeout(() => {
-        transferArrow.classList.remove('active');
-        oldWay.classList.add('active');
-      }, t);
-      t += 6000;
-
-      // Show "The New Way"
-      setTimeout(() => {
-        oldWay.classList.remove('active');
-        newWay.classList.add('active');
-      }, t);
-      t += 1200;
-
-      // Show clock
-      setTimeout(() => {
-        clockAnim.classList.add('visible');
-      }, t);
-      t += 1800;
-
-      // Show reply check + NO pulse
-      setTimeout(() => {
-        replyCheck.classList.add('visible');
-      }, t);
-      t += 800;
-      setTimeout(() => {
-        noBtn.classList.add('pulse');
-      }, t);
-      t += 2600;
-
-      // === PART 2: Phone WhatsApp sequence ===
-
-      // Fade out new way, show phone
-      setTimeout(() => {
-        newWay.classList.remove('active');
-        phone.classList.add('active');
-      }, t);
-      t += 1000;
-
-      // Send messages one by one with typing indicators
-      messages.forEach((msg, i) => {
-        // Show typing
-        setTimeout(() => {
-          showTyping(waMessages, msg.type === 'outgoing');
-        }, t);
-        t += 1200 + Math.random() * 400;
-
-        // Hide typing, show message
-        setTimeout(() => {
-          hideTyping();
-          const bubble = createBubble(msg);
-          // Insert before typing indicator
-          const typing = document.getElementById('wa-typing');
-          waMessages.insertBefore(bubble, typing);
-          // Trigger animation
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              bubble.classList.add('visible');
-              waMessages.scrollTop = waMessages.scrollHeight;
-            });
-          });
-        }, t);
-        t += 400;
-      });
-
-      // Show appointment banner
-      t += 600;
-      setTimeout(() => {
-        banner.classList.add('active');
-      }, t);
-      // === LOOP: Reset and replay after 3 seconds ===
-      setTimeout(() => {
-        // Reset all states
-        laptop.classList.remove('active');
-        phone.classList.remove('active');
-        emailView.classList.remove('active');
-        emailLines.forEach(l => l.classList.remove('visible'));
-        transferArrow.classList.remove('active');
-        if (sheetView) sheetView.classList.remove('active');
-        sheetRows.forEach(r => { r.classList.remove('visible'); });
-        oldWay.classList.remove('active');
-        newWay.classList.remove('active');
-        if (clockAnim) clockAnim.classList.remove('visible');
-        if (replyCheck) replyCheck.classList.remove('visible');
-        if (noBtn) noBtn.classList.remove('pulse');
-        waMessages.querySelectorAll('.wa-msg').forEach(m => m.style.display = 'none');
-        waMessages.querySelectorAll('.typing-indicator').forEach(t => t.style.display = 'none');
-        banner.classList.remove('active');
-        
-        // Replay after brief pause
-        setTimeout(() => { startAnimation(); }, 1000);
-      }, t + 3000);
-    }
-    
-    startAnimation();
-    }
-    
-    // IntersectionObserver — play when scrolled into view
-    const demoEl = document.getElementById('nurture-demo');
-    if (demoEl) {
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            runSequence();
-            obs.unobserve(entry.target);
+          function cycle() {
+            steps.forEach((s, i) => s.classList.toggle('active', i === current));
+            current = (current + 1) % steps.length;
           }
-        });
-      }, { threshold: 0.15 });
-      obs.observe(demoEl);
-    }
-  })();
-  </script>
+
+          setInterval(cycle, 4000);
+        })();
+      </script>
+    </div>
+  </div>
 </section>
+
 
 
   <div class="section-divider"></div>
