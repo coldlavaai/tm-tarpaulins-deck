@@ -2075,7 +2075,7 @@ h2 {
                       field.style.animationDelay = delays[fieldIdx] + 's';
                     }, 5);
                   });
-                }, 50);
+                }, 550);
               } else if (idx === 2) {
                 // Stage 3: Animate email compose
                 stopScanning();
@@ -2096,7 +2096,7 @@ h2 {
                       sendButton.style.animation = 'emailSend 1.2s ease-out forwards';
                     }, 805);
                   }
-                }, 50);
+                }, 550);
               } else if (idx === 3) {
                 // Stage 4: Animate message bubbles sequentially
                 stopScanning();
@@ -2110,7 +2110,7 @@ h2 {
                       bubble.style.animationDelay = (bubbleIdx * 0.4) + 's';
                     }, 5 + (bubbleIdx * 50));
                   });
-                }, 50);
+                }, 550);
               } else if (idx === 4) {
                 // Stage 5: Animate calendar event
                 stopScanning();
@@ -2123,7 +2123,7 @@ h2 {
                       calendarEvent.style.animation = 'calendarPop 0.8s ease-out forwards';
                     }, 5);
                   }
-                }, 50);
+                }, 550);
               } else {
                 stopScanning();
               }
