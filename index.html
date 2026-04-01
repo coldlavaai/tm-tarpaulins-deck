@@ -3790,14 +3790,16 @@ modal.innerHTML = `
 `;
 document.body.appendChild(modal);
 
-let enlargeableItems = [];
 let currentEnlargedIndex = -1;
+let currentGroup = [];
+let currentGroupType = null;
 
 function initEnlargeables() {
   // Add class to stage demo boxes
   document.querySelectorAll('.lead-gen-stage.active').forEach(el => {
     if (!el.classList.contains('enlarge-trigger')) {
       el.classList.add('enlarge-trigger');
+      el.dataset.enlargeGroup = 'stage';
     }
   });
 
@@ -3805,28 +3807,27 @@ function initEnlargeables() {
   document.querySelectorAll('.email-viewer').forEach(el => {
     if (!el.classList.contains('enlarge-trigger')) {
       el.classList.add('enlarge-trigger');
+      el.dataset.enlargeGroup = 'email';
     }
   });
 
-  // Add class to comparison cards
-  document.querySelectorAll('.bdm-column, .bdm-cap-row').forEach(el => {
-    if (!el.closest('.enlarge-trigger') && !el.classList.contains('enlarge-trigger')) {
+  // Add class to comparison cards (both columns and rows)
+  document.querySelectorAll('.bdm-column').forEach(el => {
+    if (!el.classList.contains('enlarge-trigger')) {
       el.classList.add('enlarge-trigger');
+      el.dataset.enlargeGroup = 'comparison';
     }
-  });
-
-  enlargeableItems = document.querySelectorAll('.enlarge-trigger');
-
-  enlargeableItems.forEach((item, index) => {
-    item.addEventListener('click', (e) => {
-      if (e.target.closest('button') || e.target.closest('a')) return;
-      enlargeContent(item, index);
-    });
   });
 }
 
 function enlargeContent(item, index) {
-  currentEnlargedIndex = index;
+  const groupType = item.dataset.enlargeGroup || 'other';
+
+  // Get all items of the same type
+  currentGroup = Array.from(document.querySelectorAll(`.enlarge-trigger[data-enlarge-group="${groupType}"]`));
+  currentGroupType = groupType;
+  currentEnlargedIndex = currentGroup.indexOf(item);
+
   const clone = item.cloneNode(true);
   clone.classList.remove('enlarge-trigger');
   clone.style.maxWidth = '100%';
@@ -3841,7 +3842,7 @@ function enlargeContent(item, index) {
 
 function updateNavButtons() {
   document.getElementById('modalPrev').disabled = currentEnlargedIndex <= 0;
-  document.getElementById('modalNext').disabled = currentEnlargedIndex >= enlargeableItems.length - 1;
+  document.getElementById('modalNext').disabled = currentEnlargedIndex >= currentGroup.length - 1;
 }
 
 document.querySelector('.enlarge-modal-close').addEventListener('click', () => {
@@ -3858,19 +3859,36 @@ modal.addEventListener('click', (e) => {
 
 document.getElementById('modalPrev').addEventListener('click', () => {
   if (currentEnlargedIndex > 0) {
-    enlargeContent(enlargeableItems[currentEnlargedIndex - 1], currentEnlargedIndex - 1);
+    enlargeContent(currentGroup[currentEnlargedIndex - 1], currentEnlargedIndex - 1);
   }
 });
 
 document.getElementById('modalNext').addEventListener('click', () => {
-  if (currentEnlargedIndex < enlargeableItems.length - 1) {
-    enlargeContent(enlargeableItems[currentEnlargedIndex + 1], currentEnlargedIndex + 1);
+  if (currentEnlargedIndex < currentGroup.length - 1) {
+    enlargeContent(currentGroup[currentEnlargedIndex + 1], currentEnlargedIndex + 1);
   }
 });
 
-// Initialize on load and when stages change
+// Initialize and setup click handlers
+function setupClickHandlers() {
+  document.querySelectorAll('.enlarge-trigger').forEach((item) => {
+    item.removeEventListener('click', handleEnlargeClick);
+    item.addEventListener('click', handleEnlargeClick);
+  });
+}
+
+function handleEnlargeClick(e) {
+  if (e.target.closest('button') || e.target.closest('a')) return;
+  enlargeContent(this, -1);
+}
+
 initEnlargeables();
-const observer = new MutationObserver(() => initEnlargeables());
+setupClickHandlers();
+
+const observer = new MutationObserver(() => {
+  initEnlargeables();
+  setupClickHandlers();
+});
 observer.observe(document.body, { subtree: true, attributes: true, attributeFilter: ['class'] });
 
 // Keyboard navigation
@@ -3878,12 +3896,13 @@ document.addEventListener('keydown', (e) => {
   if (!modal.classList.contains('active')) return;
   if (e.key === 'ArrowLeft' && currentEnlargedIndex > 0) {
     document.getElementById('modalPrev').click();
-  } else if (e.key === 'ArrowRight' && currentEnlargedIndex < enlargeableItems.length - 1) {
+  } else if (e.key === 'ArrowRight' && currentEnlargedIndex < currentGroup.length - 1) {
     document.getElementById('modalNext').click();
   } else if (e.key === 'Escape') {
     modal.classList.remove('active');
   }
 });
+
 </script>
 </body>
 </html>
