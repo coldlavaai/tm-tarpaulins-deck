@@ -2064,71 +2064,66 @@ h2 {
               } else if (idx === 1) {
                 // Stage 2: Animate data fields
                 stopScanning();
-                const dataFields = document.querySelectorAll('.lead-gen-stage.active .data-field');
-                dataFields.forEach((field, fieldIdx) => {
-                  field.style.opacity = '0';
-                  field.style.transform = 'translateX(-20px)';
-                  field.style.animation = 'none';
-                  resetAnimation(field);
-                  setTimeout(() => {
-                    field.style.animation = '';
-                    field.style.opacity = '';
-                    field.style.transform = '';
-                  }, 10 + (fieldIdx * 50));
-                });
+                setTimeout(() => {
+                  const dataFields = document.querySelectorAll('.lead-gen-stage.active .data-field');
+                  const delays = [0.2, 0.6, 1.0];
+                  dataFields.forEach((field, fieldIdx) => {
+                    field.style.animation = 'none';
+                    resetAnimation(field);
+                    setTimeout(() => {
+                      field.style.animation = 'dataReveal 0.8s ease-out forwards';
+                      field.style.animationDelay = delays[fieldIdx] + 's';
+                    }, 5);
+                  });
+                }, 50);
               } else if (idx === 2) {
                 // Stage 3: Animate email compose
                 stopScanning();
-                const emailCompose = document.querySelector('.lead-gen-stage.active .email-compose');
-                const sendButton = document.querySelector('.lead-gen-stage.active .send-button');
-                if (emailCompose) {
-                  emailCompose.style.opacity = '0';
-                  emailCompose.style.transform = 'translateY(30px)';
-                  emailCompose.style.animation = 'none';
-                  resetAnimation(emailCompose);
-                  setTimeout(() => {
-                    emailCompose.style.animation = '';
-                    emailCompose.style.opacity = '';
-                    emailCompose.style.transform = '';
-                  }, 10);
-                }
-                if (sendButton) {
-                  sendButton.style.animation = 'none';
-                  resetAnimation(sendButton);
-                  setTimeout(() => {
-                    sendButton.style.animation = '';
-                  }, 810);
-                }
+                setTimeout(() => {
+                  const emailCompose = document.querySelector('.lead-gen-stage.active .email-compose');
+                  const sendButton = document.querySelector('.lead-gen-stage.active .send-button');
+                  if (emailCompose) {
+                    emailCompose.style.animation = 'none';
+                    resetAnimation(emailCompose);
+                    setTimeout(() => {
+                      emailCompose.style.animation = 'emailSlideIn 0.8s ease-out forwards';
+                    }, 5);
+                  }
+                  if (sendButton) {
+                    sendButton.style.animation = 'none';
+                    resetAnimation(sendButton);
+                    setTimeout(() => {
+                      sendButton.style.animation = 'emailSend 1.2s ease-out forwards';
+                    }, 805);
+                  }
+                }, 50);
               } else if (idx === 3) {
                 // Stage 4: Animate message bubbles sequentially
                 stopScanning();
-                const messageBubbles = document.querySelectorAll('.lead-gen-stage.active .message-bubble');
-                messageBubbles.forEach((bubble, bubbleIdx) => {
-                  bubble.style.opacity = '0';
-                  bubble.style.transform = 'translateX(30px)';
-                  bubble.style.animation = 'none';
-                  resetAnimation(bubble);
-                  setTimeout(() => {
-                    bubble.style.animation = '';
-                    bubble.style.opacity = '';
-                    bubble.style.transform = '';
-                  }, 10 + (bubbleIdx * 400));
-                });
+                setTimeout(() => {
+                  const messageBubbles = document.querySelectorAll('.lead-gen-stage.active .message-bubble');
+                  messageBubbles.forEach((bubble, bubbleIdx) => {
+                    bubble.style.animation = 'none';
+                    resetAnimation(bubble);
+                    setTimeout(() => {
+                      bubble.style.animation = 'messageIn 0.8s ease-out forwards';
+                      bubble.style.animationDelay = (bubbleIdx * 0.4) + 's';
+                    }, 5 + (bubbleIdx * 50));
+                  });
+                }, 50);
               } else if (idx === 4) {
                 // Stage 5: Animate calendar event
                 stopScanning();
-                const calendarEvent = document.querySelector('.lead-gen-stage.active .calendar-event');
-                if (calendarEvent) {
-                  calendarEvent.style.opacity = '0';
-                  calendarEvent.style.transform = 'scale(0.8)';
-                  calendarEvent.style.animation = 'none';
-                  resetAnimation(calendarEvent);
-                  setTimeout(() => {
-                    calendarEvent.style.animation = '';
-                    calendarEvent.style.opacity = '';
-                    calendarEvent.style.transform = '';
-                  }, 10);
-                }
+                setTimeout(() => {
+                  const calendarEvent = document.querySelector('.lead-gen-stage.active .calendar-event');
+                  if (calendarEvent) {
+                    calendarEvent.style.animation = 'none';
+                    resetAnimation(calendarEvent);
+                    setTimeout(() => {
+                      calendarEvent.style.animation = 'calendarPop 0.8s ease-out forwards';
+                    }, 5);
+                  }
+                }, 50);
               } else {
                 stopScanning();
               }
