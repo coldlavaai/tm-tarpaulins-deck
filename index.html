@@ -73,7 +73,7 @@ body {
 .grain-overlay {
   position: fixed;
   inset: 0;
-  background-image: url('data:image/svg+xml,<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23n)" opacity="0.04"/></svg>');
+  background-image: url('data:image/svg+xml,<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23n)" opacity="0"/></svg>');
   pointer-events: none;
   z-index: 0;
 }
@@ -139,14 +139,15 @@ body {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.6rem 1.5rem;
+  padding: 1.8rem 1.5rem;
   text-decoration: none;
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 1.15rem;
+  font-weight: 700;
   letter-spacing: 0.05em;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.98);
   transition: all 0.3s var(--ease-smooth);
-  border-left: 2px solid transparent;
+  border-left: 3px solid transparent;
 }
 
 .sidebar-links a:hover {
@@ -272,7 +273,7 @@ h1 {
 }
 
 h2 {
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.02em;
@@ -280,10 +281,10 @@ h2 {
 }
 
 .lead {
-  font-size: 1.1rem;
-  font-weight: 300;
-  color: rgba(255,255,255,0.7);
-  line-height: 1.7;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.95);
+  line-height: 1.8;
   max-width: 650px;
 }
 
@@ -368,8 +369,8 @@ h2 {
 .arrow-list li {
   padding: 0.9rem 0 0.9rem 2rem;
   position: relative;
-  color: rgba(255,255,255,0.6);
-  font-size: 0.95rem;
+  color: rgba(255,255,255,0.75);
+  font-size: 1.35rem;
   line-height: 1.6;
   border-bottom: 1px solid rgba(255,255,255,0.04);
 }
