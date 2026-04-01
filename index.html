@@ -753,15 +753,27 @@ h2 {
 }
 .fade-in.d1 { transition-delay: 0.1s; }
 .fade-in.d2 { transition-delay: 0.2s; }
-.fade-in.d3 {
-  transition-delay: 0.3s;
+.fade-in.d3 { transition-delay: 0.3s; }
+.fade-in.d4 { transition-delay: 0.4s; }
+
+/* Center sections 3-8 */
+#s003 .fade-in.d3,
+#s004 .fade-in.d3,
+#s005 .fade-in.d3,
+#s006 .fade-in.d3,
+#s007 .fade-in.d3,
+#s008 .fade-in.d3 {
   display: flex;
   justify-content: center;
   width: 100%;
 }
-.fade-in.d4 { transition-delay: 0.4s; }
 
-.fade-in.d3 > * {
+#s003 .fade-in.d3 > *,
+#s004 .fade-in.d3 > *,
+#s005 .fade-in.d3 > *,
+#s006 .fade-in.d3 > *,
+#s007 .fade-in.d3 > *,
+#s008 .fade-in.d3 > * {
   max-width: 960px;
 }
 
