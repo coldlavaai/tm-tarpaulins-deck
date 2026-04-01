@@ -2884,6 +2884,7 @@ navLinks.forEach(link => {
       // Calculate scroll position with offset for proper viewport positioning
       const offset = 120; // Pixels from top of viewport
       const targetPosition = targetElement.offsetTop - offset;
+      console.log(`Scrolling to ${sectionId}: offsetTop=${targetElement.offsetTop}, offset=${offset}, targetPosition=${targetPosition}`);
       window.scrollTo({
         top: targetPosition,
         behavior: 'smooth'
