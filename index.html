@@ -43,6 +43,7 @@ body {
   color: var(--color-text-primary);
   line-height: 1.6;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ===== SCROLL PROGRESS ===== */
@@ -98,6 +99,7 @@ body {
   background: rgba(3,3,5,0.95);
   border-right: 1px solid rgba(var(--color-accent-rgb),0.1);
   backdrop-filter: blur(20px);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
   z-index: 900;
   display: flex;
   flex-direction: column;
@@ -958,6 +960,12 @@ h2 {
 :root[data-theme="light"] #themeToggle {
   border-color: rgba(0,134,179,0.4);
   color: #0086b3;
+  background: rgba(0,134,179,0.05);
+}
+
+:root[data-theme="light"] #themeToggle:hover {
+  border-color: #0086b3;
+  background: rgba(0,134,179,0.15);
 }
 
 :root[data-theme="light"] .email-viewer {
@@ -1109,6 +1117,37 @@ h2 {
   font-size: 0.6rem;
 }
 
+/* ===== THEME TOGGLE BUTTON ===== */
+#themeToggle {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 950;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid rgba(var(--color-accent-rgb), 0.3);
+  color: var(--color-accent);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  padding: 0;
+}
+
+#themeToggle:hover {
+  border-color: var(--color-accent);
+  background: rgba(var(--color-accent-rgb), 0.05);
+}
+
+#themeToggle:active {
+  transform: scale(0.95);
+}
+
 </style>
 </head>
 <body>
@@ -1137,7 +1176,7 @@ h2 {
   <span class="dot">·</span>
   <span class="clock" id="clock">--:--:--</span>
   <div class="date" id="dateText"></div>
-  <button id="themeToggle" style="position:fixed;top:2rem;right:2rem;z-index:950;background:transparent;border:1px solid rgba(var(--color-accent-rgb),0.3);color:var(--color-accent);width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;transition:all 0.3s;" title="Toggle light/dark mode">☀️</button>
+  <button id="themeToggle" title="Toggle light/dark mode">☀️</button>
 </div>
 
 <!-- Mobile Sidebar Toggle -->
