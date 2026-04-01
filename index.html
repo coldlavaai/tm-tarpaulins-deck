@@ -1749,11 +1749,11 @@ h2 {
 
             // Sample companies for the scanner
             const sampleCompanies = [
-              { name: 'Highland Fish Farm', industry: 'Aquaculture', ponds: '12', staff: '45', revenue: '£3.2M', decision: { name: 'James Mitchell', title: 'Operations Manager' } },
-              { name: 'Loch Duart Ltd', industry: 'Fish Farming', ponds: '8', staff: '32', revenue: '£2.1M', decision: { name: 'Sarah Robertson', title: 'Farm Manager' } },
-              { name: 'Scottish Sea Farms', industry: 'Aquaculture', ponds: '15', staff: '58', revenue: '£4.8M', decision: { name: 'David MacLeod', title: 'Operations Director' } },
-              { name: 'Cairn Aquaculture', industry: 'Fish Farms', ponds: '6', staff: '28', revenue: '£1.8M', decision: { name: 'Emma Watson', title: 'Procurement Lead' } },
-              { name: 'Celtic Seafood', industry: 'Aquaculture', ponds: '10', staff: '40', revenue: '£2.9M', decision: { name: 'Michael Flynn', title: 'Site Manager' } }
+              { name: 'Highland Fish Farm', industry: 'Aquaculture', location: 'Highlands, Scotland', staff: '45', activity: 'Posted about expansion plans', decision: { name: 'James Mitchell', title: 'Operations Manager' } },
+              { name: 'Loch Duart Ltd', industry: 'Fish Farming', location: 'Northwest Highlands', staff: '32', activity: 'Hiring for new roles', decision: { name: 'Sarah Robertson', title: 'Farm Manager' } },
+              { name: 'Scottish Sea Farms', industry: 'Aquaculture', location: 'Isle of Skye', staff: '58', activity: 'Infrastructure investment announced', decision: { name: 'David MacLeod', title: 'Operations Director' } },
+              { name: 'Cairn Aquaculture', industry: 'Fish Farming', location: 'Central Scotland', staff: '28', activity: 'Recent press release about growth', decision: { name: 'Emma Watson', title: 'Procurement Lead' } },
+              { name: 'Celtic Seafood', industry: 'Aquaculture', location: 'Argyll & Bute', staff: '40', activity: 'New facility development', decision: { name: 'Michael Flynn', title: 'Site Manager' } }
             ];
 
             function createCompanyCard(company) {
@@ -1767,16 +1767,16 @@ h2 {
                   </div>
                   <div class="company-details">
                     <div class="company-detail-row">
-                      <div class="company-detail-label">Locations:</div>
-                      <div>${company.ponds} ponds</div>
+                      <div class="company-detail-label">Location:</div>
+                      <div>${company.location}</div>
                     </div>
                     <div class="company-detail-row">
-                      <div class="company-detail-label">Staff:</div>
-                      <div>${company.staff} employees</div>
+                      <div class="company-detail-label">Employees:</div>
+                      <div>${company.staff}</div>
                     </div>
                     <div class="company-detail-row">
-                      <div class="company-detail-label">Revenue:</div>
-                      <div>${company.revenue}</div>
+                      <div class="company-detail-label">Recent Activity:</div>
+                      <div>${company.activity}</div>
                     </div>
                   </div>
                   <div class="decision-maker">
