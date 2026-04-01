@@ -1569,12 +1569,13 @@ h2 {
             padding: 1rem;
             margin: 0.8rem 0;
             border-radius: 4px;
-            animation: dataReveal 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateX(-20px);
           }
 
-          .data-field:nth-child(1) { animation-delay: 0.2s; opacity: 0; }
-          .data-field:nth-child(2) { animation-delay: 0.6s; opacity: 0; }
-          .data-field:nth-child(3) { animation-delay: 1s; opacity: 0; }
+          .data-field:nth-child(1) { }
+          .data-field:nth-child(2) { }
+          .data-field:nth-child(3) { }
 
           /* Stage 3: Outreach - Email Animation */
           @keyframes emailSlideIn {
@@ -1599,7 +1600,8 @@ h2 {
             border-radius: 8px;
             padding: 1.5rem;
             margin: 1.5rem 0;
-            animation: emailSlideIn 0.8s ease-out;
+            opacity: 0;
+            transform: translateY(30px);
           }
 
           .email-field {
@@ -1632,7 +1634,8 @@ h2 {
             font-weight: 600;
             cursor: pointer;
             margin-top: 1rem;
-            animation: emailSend 1.2s ease-out;
+            opacity: 0;
+            transform: translateY(-5px);
           }
 
           /* Stage 4: Engage - Reply Animation */
@@ -1653,7 +1656,8 @@ h2 {
             padding: 1.2rem;
             margin: 1rem 0;
             border-radius: 6px;
-            animation: messageIn 0.8s ease-out;
+            opacity: 0;
+            transform: translateX(30px);
           }
 
           .message-sender {
@@ -1689,7 +1693,8 @@ h2 {
             border-radius: 8px;
             padding: 1.5rem;
             margin: 1.5rem 0;
-            animation: calendarPop 0.8s ease-out;
+            opacity: 0;
+            transform: scale(0.8);
           }
 
           .calendar-time {
@@ -2068,12 +2073,8 @@ h2 {
                   const dataFields = document.querySelectorAll('.lead-gen-stage.active .data-field');
                   const delays = [0.2, 0.6, 1.0];
                   dataFields.forEach((field, fieldIdx) => {
-                    field.style.animation = 'none';
-                    resetAnimation(field);
-                    setTimeout(() => {
-                      field.style.animation = 'dataReveal 0.8s ease-out forwards';
-                      field.style.animationDelay = delays[fieldIdx] + 's';
-                    }, 5);
+                    field.style.animation = 'dataReveal 0.8s ease-out forwards';
+                    field.style.animationDelay = delays[fieldIdx] + 's';
                   });
                 }, 550);
               } else if (idx === 2) {
@@ -2083,18 +2084,10 @@ h2 {
                   const emailCompose = document.querySelector('.lead-gen-stage.active .email-compose');
                   const sendButton = document.querySelector('.lead-gen-stage.active .send-button');
                   if (emailCompose) {
-                    emailCompose.style.animation = 'none';
-                    resetAnimation(emailCompose);
-                    setTimeout(() => {
-                      emailCompose.style.animation = 'emailSlideIn 0.8s ease-out forwards';
-                    }, 5);
+                    emailCompose.style.animation = 'emailSlideIn 0.8s ease-out forwards';
                   }
                   if (sendButton) {
-                    sendButton.style.animation = 'none';
-                    resetAnimation(sendButton);
-                    setTimeout(() => {
-                      sendButton.style.animation = 'emailSend 1.2s ease-out forwards';
-                    }, 805);
+                    sendButton.style.animation = 'emailSend 1.2s ease-out forwards';
                   }
                 }, 550);
               } else if (idx === 3) {
@@ -2103,12 +2096,8 @@ h2 {
                 setTimeout(() => {
                   const messageBubbles = document.querySelectorAll('.lead-gen-stage.active .message-bubble');
                   messageBubbles.forEach((bubble, bubbleIdx) => {
-                    bubble.style.animation = 'none';
-                    resetAnimation(bubble);
-                    setTimeout(() => {
-                      bubble.style.animation = 'messageIn 0.8s ease-out forwards';
-                      bubble.style.animationDelay = (bubbleIdx * 0.4) + 's';
-                    }, 5 + (bubbleIdx * 50));
+                    bubble.style.animation = 'messageIn 0.8s ease-out forwards';
+                    bubble.style.animationDelay = (bubbleIdx * 0.4) + 's';
                   });
                 }, 550);
               } else if (idx === 4) {
@@ -2117,11 +2106,7 @@ h2 {
                 setTimeout(() => {
                   const calendarEvent = document.querySelector('.lead-gen-stage.active .calendar-event');
                   if (calendarEvent) {
-                    calendarEvent.style.animation = 'none';
-                    resetAnimation(calendarEvent);
-                    setTimeout(() => {
-                      calendarEvent.style.animation = 'calendarPop 0.8s ease-out forwards';
-                    }, 5);
+                    calendarEvent.style.animation = 'calendarPop 0.8s ease-out forwards';
                   }
                 }, 550);
               } else {
