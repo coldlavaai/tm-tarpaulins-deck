@@ -219,6 +219,65 @@ body {
   justify-content: center;
 }
 
+/* ===== SIDEBAR COLLAPSE TOGGLE ===== */
+.sidebar-collapse-toggle {
+  position: absolute;
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 48px;
+  background: rgba(var(--color-accent-rgb),0.15);
+  border: 1px solid rgba(var(--color-accent-rgb),0.3);
+  border-left: none;
+  border-radius: 0 8px 8px 0;
+  color: var(--color-accent);
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s var(--ease-smooth);
+  z-index: 950;
+  padding: 0;
+}
+
+.sidebar-collapse-toggle:hover {
+  background: rgba(var(--color-accent-rgb),0.25);
+  border-color: rgba(var(--color-accent-rgb),0.5);
+}
+
+.sidebar-collapse-toggle::before {
+  content: '«';
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.sidebar-nav.collapsed .sidebar-collapse-toggle::before {
+  content: '»';
+}
+
+/* Collapsed sidebar state */
+.sidebar-nav.collapsed {
+  transform: translateX(calc(-100% + 24px));
+}
+
+body.sidebar-collapsed .main-content {
+  margin-left: 24px;
+}
+
+/* Light mode toggle styling */
+:root[data-theme="light"] .sidebar-collapse-toggle {
+  background: rgba(0,134,179,0.1);
+  border-color: rgba(0,134,179,0.25);
+  color: #0086b3;
+}
+
+:root[data-theme="light"] .sidebar-collapse-toggle:hover {
+  background: rgba(0,134,179,0.2);
+  border-color: rgba(0,134,179,0.4);
+}
+
 /* ===== HUD OVERLAYS ===== */
 .hud-coords {
   position: fixed;
@@ -1336,6 +1395,7 @@ h2 {
         <li><a href="#s015" data-section="s015"><span class="nav-num">011</span>Next Steps</a></li>
       </ul>
   <div class="sidebar-footer">Cold Lava × Highland</div>
+  <button class="sidebar-collapse-toggle" id="sidebarCollapseBtn" title="Toggle sidebar"></button>
 </nav>
 
 <!-- ===== MAIN CONTENT ===== -->
@@ -3667,6 +3727,22 @@ themeToggle.addEventListener('click', () => {
   root.setAttribute('data-theme', newTheme);
   localStorage.setItem('theme', newTheme);
   themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+});
+
+// ===== SIDEBAR COLLAPSE TOGGLE =====
+const sidebarNav = document.getElementById('sidebarNav');
+const sidebarCollapseBtn = document.getElementById('sidebarCollapseBtn');
+const savedSidebarState = localStorage.getItem('sidebarCollapsed') === 'true';
+
+if (savedSidebarState) {
+  sidebarNav.classList.add('collapsed');
+  document.body.classList.add('sidebar-collapsed');
+}
+
+sidebarCollapseBtn.addEventListener('click', () => {
+  sidebarNav.classList.toggle('collapsed');
+  document.body.classList.toggle('sidebar-collapsed');
+  localStorage.setItem('sidebarCollapsed', sidebarNav.classList.contains('collapsed'));
 });
 
 // ===== CLOCK =====
