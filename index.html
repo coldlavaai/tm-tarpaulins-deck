@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Cold Lava × TM Tarpaulins — Partnership Deck</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -248,28 +251,17 @@ body {
   margin-left: var(--sidebar-width);
   position: relative;
   z-index: 1;
-  width: calc(100% - var(--sidebar-width));
-  max-width: calc(100% - var(--sidebar-width));
-  overflow-x: hidden;
 }
 
 /* ===== SECTIONS ===== */
 .section {
   position: relative;
-  padding-top: 6rem;
-  padding-bottom: 6rem;
-  padding-left: 5%;
-  padding-right: 5%;
-  width: 100%;
-  box-sizing: border-box;
+  padding: 6rem 5%;
 }
 
 .section-inner {
   max-width: 960px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  box-sizing: border-box;
+  margin: 0 auto;
 }
 
 .label {
@@ -793,12 +785,12 @@ h2 {
   .sidebar-nav { display: none; }
   .sidebar-nav.open { display: flex; z-index: 1001; }
   .sidebar-toggle { display: flex; }
-  .main-content { margin-left: 0; width: 100%; max-width: 100%; }
+  .main-content { margin-left: 0; }
   .hud-coords { left: 2rem; }
 }
 
 @media (max-width: 768px) {
-  .section { padding-top: 4rem; padding-bottom: 4rem; padding-left: 4%; padding-right: 4%; }
+  .section { padding: 4rem 4%; }
   .hud-coords, .hud-time { display: none; }
   .flow { flex-direction: column; gap: 0; }
   .flow-arrow svg { transform: rotate(90deg); }
@@ -1371,7 +1363,7 @@ h2 {
         <p class="lead" style="margin-bottom:3rem;">Custom-built systems to streamline your operations and unlock new revenue for your clients.</p>
       </div>
       <div class="fade-in d3">
-        <a href="#s001" style="display:inline-flex;align-items:center;gap:0.75rem;background:white;color:black;padding:0.9rem 2rem;text-decoration:none;font-weight:600;font-size:0.9rem;border:2px solid white;transition:all 0.3s var(--ease-smooth);" onmouseover="this.style.background='transparent';this.style.color='white'" onmouseout="this.style.background='white';this.style.color='black'">
+        <a href="#s011" style="display:inline-flex;align-items:center;gap:0.75rem;background:white;color:black;padding:0.9rem 2rem;text-decoration:none;font-weight:600;font-size:0.9rem;border:2px solid white;transition:all 0.3s var(--ease-smooth);" onmouseover="this.style.background='transparent';this.style.color='white'" onmouseout="this.style.background='white';this.style.color='black'">
           Explore the Partnership <span style="font-size:1.1rem;">→</span>
         </a>
       </div>
